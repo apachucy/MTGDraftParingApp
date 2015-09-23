@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="G:\Workspace AS\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\MTGDraftParingApp\showCaseLibrary\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d5dee70b85672819ccb47e43dabf052a4cab4ca6">
+        <dex dex="G:\Workspace AS\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\classes-64fecbf2ae9d51a63a757d5499179ae6acb0c78a.jar" />
+    </item>
+
+</items>

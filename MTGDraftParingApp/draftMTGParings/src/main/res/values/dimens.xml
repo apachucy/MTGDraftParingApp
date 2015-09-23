@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- EditText dimen -->
+    <dimen name="edit_text_width">150dp</dimen>
+    <dimen name="settings_edit_text_width">60dp</dimen>
+    <!-- defaults -->
+    <dimen name="standard_margin">15dp</dimen>
+    <dimen name="text_view_margin_settings">20dp</dimen>
+    <dimen name="text_view_margin_settings_small">5dp</dimen>
+    <dimen name="button_margin_settings">10dp</dimen>
+    <dimen name="edit_text_margin_settings">5dp</dimen>
+    <dimen name="text_view_margin_normal">10dp</dimen>
+    <dimen name="text_view_player_list">11dp</dimen>
+    <dimen name="text_view_point_padding">22dp</dimen>
+    <dimen name="text_view_margin_small">3dp</dimen>
+	<dimen name= "text_view_margin_medium">5dp</dimen>
+    <!-- Style -->
+    <dimen name="button_padding">5dp</dimen>
+    <dimen name="button_padding_small">1dp</dimen>
+    <dimen name="text_view_padding_small">1dp</dimen>
+    <dimen name="text_view_padding">5dp</dimen>
+
+    <!-- Style drawable -->
+    <dimen name="radius_big">5dp</dimen>
+    <dimen name="stroke_width_big">5dp</dimen>
+    <dimen name="radius_small">2dp</dimen>
+    <dimen name="stroke_width_small">2dp</dimen>
+
+    <!-- Spinner Style-->
+    <dimen name="spinner_padding_small">5dp</dimen>
+</resources>

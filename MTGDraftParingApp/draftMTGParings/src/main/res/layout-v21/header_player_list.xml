@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+   
+    <TextView
+        android:id="@+id/header_playerOGWTextView"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="@dimen/text_view_margin_normal"
+        android:paddingLeft="@dimen/text_view_margin_small"
+        android:paddingRight="@dimen/text_view_margin_small"
+        android:paddingTop="@dimen/text_view_margin_normal"
+        android:text="@string/header_player_position_ogw" />
+
+    <TextView
+        android:id="@+id/header_playerPGWTextView"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/header_playerOGWTextView"
+        android:paddingBottom="@dimen/text_view_margin_normal"
+        android:paddingLeft="@dimen/text_view_margin_small"
+        android:paddingRight="@dimen/text_view_margin_small"
+        android:paddingTop="@dimen/text_view_margin_normal"
+        android:text="@string/header_player_position_pgw" />
+
+    <TextView
+        android:id="@+id/header_playerOMWTextView"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/header_playerPGWTextView"
+        android:paddingBottom="@dimen/text_view_margin_normal"
+        android:paddingLeft="@dimen/text_view_margin_small"
+        android:paddingRight="@dimen/text_view_margin_small"
+        android:paddingTop="@dimen/text_view_margin_normal"
+        android:text="@string/header_player_position_omw" />
+
+    <TextView
+        android:id="@+id/header_playerPMWTextView"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/header_playerOMWTextView"
+        android:paddingBottom="@dimen/text_view_margin_normal"
+        android:paddingLeft="@dimen/text_view_margin_small"
+        android:paddingRight="@dimen/text_view_margin_small"
+        android:paddingTop="@dimen/text_view_margin_normal"
+        android:text="@string/header_player_position_pmw" />
+
+    <TextView
+        android:id="@+id/header_playerPointTextView"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/header_playerPMWTextView"
+       android:paddingBottom="@dimen/text_view_margin_normal"
+        android:paddingLeft="@dimen/text_view_margin_small"
+        android:paddingRight="@dimen/text_view_margin_medium"
+        android:paddingTop="@dimen/text_view_margin_normal"
+        android:text="@string/header_player_position_points"
+        android:textStyle="bold" />
+
+     <TextView
+        android:id="@+id/header_playerNameTextView"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="@dimen/text_view_margin_normal"
+        android:paddingLeft="@dimen/text_view_margin_small"
+        android:paddingRight="@dimen/text_view_margin_small"
+        android:paddingTop="@dimen/text_view_margin_normal"
+        android:text="@string/header_player_position_name"
+        android:layout_toLeftOf="@id/header_playerPointTextView"
+        android:textStyle="bold" />
+    
+</RelativeLayout>

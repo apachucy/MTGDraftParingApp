@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/background.dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/dialog_titleTextView"
+        style="@style/textView.dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RelativeLayout
+        android:id="@+id/dialog_body_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_divider"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:paddingBottom="@dimen/standard_margin" >
+
+        <TextView
+            android:id="@+id/dialog_bodyTextView"
+            style="@style/textView.dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="Large Text" />
+
+        <Button
+            android:id="@+id/dialog_dismissButton"
+            style="@style/buttonSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_bodyTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/dialog_start_button" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/dialog_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/stroke_width_big"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dialog_titleTextView"
+        android:layout_marginLeft="@dimen/stroke_width_big"
+        android:layout_marginRight="@dimen/stroke_width_big"
+        android:background="@color/black" />
+
+</RelativeLayout>

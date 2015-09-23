@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MTG Draft Calculator</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_info">Info</string>
+    <string name="hint_player_name">Player name:</string>
+    <string name="add_item">Add</string>
+    <string name="hint_rounds">Rounds:</string>
+    <string name="start_game">Start</string>
+    <string name="text_end_round">End</string>
+    <string name="warning_empty_field">Cannot be empty</string>
+    <string name="warning_need_players">Please add players</string>
+    <string name="title_activity_parings">ParingsActivity</string>
+    <string name="text_vs">vs</string>
+    <string name="text_win">Wins:</string>
+    <string name="text_0">0</string>
+    <string name="text_1">1</string>
+    <string name="text_2">2</string>
+    <string name="text_from">from</string>
+    <string name="text_round">Round :</string>
+    <string name="text_time">To start counter press Start</string>
+    <string name="title_activity_player_position">PlayerPositionActivity</string>
+    <string name="text_next">Next game</string>
+    <string name="text_after_game">Results after round :</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="text_winner">Winner:</string>
+    <!-- Settings -->
+    <string name="toggle_button_on">ON</string>
+    <string name="toggle_button_off">OFF</string>
+    <string name="text_display_counter">Display round time:</string>
+    <string name="text_time_round">Time per round[m]:</string>
+    <string name="text_vibration">Turn vibration:</string>
+    <string name="text_vibration_detail">Allows the vibration to inform about the ending time of round</string>
+    <string name="text_first_vibration">First vibration[m]:</string>
+    <string name="text_second_vibration">Second vibration[m]:</string>
+    <string name="text_duration_vibration">Duration[s]:</string>
+    <string name="text_save">Save</string>
+    <string name="toast_saved">Changes saved</string>
+
+    <!-- Dialog Fragment -->
+    <!-- Dialog Start -->
+    <string name="dialog_start_title">Game start</string>
+    <string name="dialog_start_message">To start parings press button</string>
+    <string name="dialog_start_button">Close</string>
+    <!-- Dialog Game End -->
+    <string name="dialog_end_title">Game ended</string>
+    <string name="dialog_end_message">Click close to close application</string>
+    <!-- Dialog Algorithm Problem -->
+    <string name="dialog_error_algorithm_title">Error</string>
+    <string name="dialog_error_algorithm__message">Cannot pair players.\nPlease reset an app.</string>
+    <!-- Dialog Warning Paring -->
+    <string name="dialog_warning_title">Warning</string>
+    <string name="dialog_warning_message">Too many rounds or too less players.\nPlease add players or decrement number of rounds.</string>
+    <!-- Dialog Info -->
+    <string name="dialog_info_title">Info</string>
+    <string name="dialog_info_message">Fansite version of the app\nfor paring players in MTG drafts</string>
+
+    <!-- Help/Showcase start screen -->
+    <string name="help_title">Help</string>
+    <string name="help_message">Tool to organize booster draft of MTG.
+Pairings are calculate with Swiss-System tournament. Check settings in menu for configuration your own draft. </string>
+    <!-- Headers -->
+    <string name="header_player_position_name">Player</string>
+    <string name="header_player_position_points">Points</string>
+    <string name="header_player_position_ogw">OGW%</string>
+    <string name="header_player_position_pgw">PGW%</string>
+    <string name="header_player_position_omw">OMW%</string>
+    <string name="header_player_position_pmw">PMW%</string>
+
+    <!-- List Draw -->
+    <string name="text_draw">Draw</string>
+
+    <!-- Help/Showcase player list -->
+	<string name="help_points">Points for clashing with opponents\n1 for draw, 3 for winning</string>
+	<string name="help_pmw">Player match win %</string>
+	<string name="help_omw">Opponents match win %</string>
+	<string name="help_pgw">Player game win %</string>
+	<string name="help_ogw">Opponents game win %</string>
+
+    <!-- Create personal parings-->
+    <string name="text_personal_parings">Create manual parings:</string>
+    <string name="activity_paring_add_paring">Add Paring</string>
+    <string name="activity_paring_clean_paring">Clean Parings</string>
+    <string name="activity_paring_play_round">Play</string>
+    <string name="activity_paring_warning_empty_list">No more players for parings</string>
+    <string name="activity_paring_warning_equal_names">Wrong paring</string>
+    <string name="activity_paring_warning_paring_not_finished">Please end all possible parings for players</string>
+    <string name="activity_paring_warning_bye">Last player already has a bye</string>
+    <string name="warning_player_name_added">Provided player was previously added</string>
+    <string name="select_player1">Select 1st player:</string>
+    <string name="select_player2">Select 2nd player:</string>
+    <string name="spinner_empty_player_list">No more players</string>
+</resources>

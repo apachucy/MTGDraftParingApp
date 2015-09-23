@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".PlayerPositionActivity" >
+
+    <TextView
+        android:id="@+id/player_position_roundTextView"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/player_position_winnerTextView"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_position_roundTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:drawableLeft="@drawable/ic_cup_silver"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/player_position_nextGameButton"
+        style="@style/buttonSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player_position_winnerTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:text="@string/text_next" />
+
+    <ListView
+        android:id="@+id/player_position_playerListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/player_position_nextGameButton"
+        android:layout_marginTop="@dimen/standard_margin" >
+    </ListView>
+
+</RelativeLayout>

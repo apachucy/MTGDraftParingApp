@@ -1,0 +1,7 @@
+package unii.draft.mtg.parings.config;
+
+public interface BundleConst {
+
+	public static final String BUNDLE_KEY_ROUNDS_INT = "BUNDLE_KEY_ROUNDS_INT";
+	public static final String BUNDLE_KEY_NAMES_LIST = "BUNDLE_KEY_NAMES_LIST";
+}
