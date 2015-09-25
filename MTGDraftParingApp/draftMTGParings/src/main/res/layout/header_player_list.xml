@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-   
+
     <TextView
         android:id="@+id/header_playerOGWTextView"
         style="@style/textView"
@@ -59,14 +59,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/header_playerPMWTextView"
-       android:paddingBottom="@dimen/text_view_margin_normal"
+        android:paddingBottom="@dimen/text_view_margin_normal"
         android:paddingLeft="@dimen/text_view_margin_small"
         android:paddingRight="@dimen/text_view_margin_medium"
         android:paddingTop="@dimen/text_view_margin_normal"
         android:text="@string/header_player_position_points"
         android:textStyle="bold" />
 
-     <TextView
+    <TextView
         android:id="@+id/header_playerNameTextView"
         style="@style/textView"
         android:layout_width="wrap_content"
@@ -80,5 +80,5 @@
         android:text="@string/header_player_position_name"
         android:layout_toLeftOf="@id/header_playerPointTextView"
         android:textStyle="bold" />
-    
+
 </RelativeLayout>

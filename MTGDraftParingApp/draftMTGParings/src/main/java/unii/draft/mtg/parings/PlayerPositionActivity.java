@@ -1,39 +1,43 @@
 package unii.draft.mtg.parings;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.List;
 
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.Target;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Pointer;
+import tourguide.tourguide.Sequence;
+import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.algorithm.AlgorithmFactory;
-import unii.draft.mtg.parings.algorithm.IAlgorithmConfigure;
 import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
-import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
-import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
-import unii.draft.mtg.parings.config.BaseConfig;
 import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.view.CustomDialogFragment;
 import unii.draft.mtg.parings.view.PlayerAdapter;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+public class PlayerPositionActivity extends BaseActivity {
 
-public class PlayerPositionActivity extends Activity {
-    private TextView mRoundTextView;
-    private TextView mWinnerTextView;
-    private Button mNextGameButton;
-    private ListView mPlayerListView;
+    @Bind(R.id.player_position_roundTextView)
+    TextView mRoundTextView;
+    @Bind(R.id.player_position_winnerTextView)
+    TextView mWinnerTextView;
+    @Bind(R.id.player_position_nextGameButton)
+    Button mNextGameButton;
+    @Bind(R.id.player_position_playerListView)
+    ListView mPlayerListView;
+    @Bind(R.id.toolbar)
+    Toolbar mToolBar;
+
     private IParingAlgorithm mAlgorithm;
     private PlayerAdapter mAdapter;
     private CustomDialogFragment mCustomDialogFragment;
@@ -41,18 +45,14 @@ public class PlayerPositionActivity extends Activity {
             .getName() + "TAG_DIALOG";
 
     // help library
-    private ShowcaseView mShowcaseView;
-    private int mShowCaseID = 169;
+    private TourGuide mTutorialHandler = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_position);
-
-        mWinnerTextView = (TextView) findViewById(R.id.player_position_winnerTextView);
-        mRoundTextView = (TextView) findViewById(R.id.player_position_roundTextView);
-        mNextGameButton = (Button) findViewById(R.id.player_position_nextGameButton);
-        mPlayerListView = (ListView) findViewById(R.id.player_position_playerListView);
+        ButterKnife.bind(this);
 
         mAlgorithm = AlgorithmFactory.getInstance();
         List<Player> playerList = mAlgorithm.getSortedPlayerList();
@@ -69,6 +69,12 @@ public class PlayerPositionActivity extends Activity {
                 + +mAlgorithm.getMaxRound());
         mNextGameButton.setOnClickListener(mOnButtonClick);
 
+
+        setSupportActionBar(mToolBar);
+        mToolBar.setLogo(R.drawable.ic_launcher);
+        mToolBar.setLogoDescription(R.string.app_name);
+        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
+        mToolBar.setTitle(R.string.app_name);
         // when there was last game change button name
         // show winner
         if (mAlgorithm.getCurrentRound() == mAlgorithm.getMaxRound()) {
@@ -85,25 +91,11 @@ public class PlayerPositionActivity extends Activity {
                 getString(R.string.dialog_end_message),
                 getString(R.string.dialog_start_button), mOnDialogButtonClick);
 
-        // hints for users
-        ViewTarget target = new ViewTarget(R.id.header_playerPointTextView,
-                this);
-        mShowcaseView = new ShowcaseView.Builder(this, true).setTarget(target)
-                .setContentTitle(getString(R.string.help_title))
-                .setStyle(R.style.showcaseThem)
-                .setOnClickListener(mOnHelpClick)
-                .setContentText(getString(R.string.help_points))
-                .singleShot(mShowCaseID).build();
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            RelativeLayout.LayoutParams buttonBottomLeft = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView), (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView));
 
-            buttonBottomLeft.setMargins(BaseConfig.MARGIN_NOT_SET, BaseConfig.MARGIN_NOT_SET, BaseConfig.MARGIN_NOT_SET, BaseConfig.MARGIN_BOTTOM);
-            buttonBottomLeft.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            buttonBottomLeft.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            mShowcaseView.setButtonPosition(buttonBottomLeft);
-        }
     }
+
 
     private OnClickListener mOnButtonClick = new OnClickListener() {
 
@@ -113,23 +105,19 @@ public class PlayerPositionActivity extends Activity {
                 case R.id.player_position_nextGameButton:
                     if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
                         mCustomDialogFragment
-                                .show(getFragmentManager(), TAG_DIALOG);
+                                .show(getSupportFragmentManager(), TAG_DIALOG);
                     } else {
-
                         Intent intent = null;
                         if (SettingsPreferencesFactory.getInstance().areManualParings()) {
                             intent = new Intent(PlayerPositionActivity.this,
                                     MatchPlayerActivity.class);
                         } else {
-
                             intent = new Intent(PlayerPositionActivity.this,
                                     ParingsActivity.class);
-
                         }
                         startActivity(intent);
                         finish();
-                  }
-
+                    }
                     break;
                 default:
                     break;
@@ -148,51 +136,35 @@ public class PlayerPositionActivity extends Activity {
         }
     };
 
-    private OnClickListener mOnHelpClick = new OnClickListener() {
-        private int mCounter = 0;
 
-        @Override
-        public void onClick(View v) {
-            switch (mCounter) {
-                // PMW
-                case 0:
+    private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView) {
 
-                    mShowcaseView.setShowcase(new ViewTarget(
-                            findViewById(R.id.header_playerPMWTextView)), true);
 
-                    mShowcaseView.setContentText(getString(R.string.help_pmw));
-                    break;
-                // OMW
-                case 1:
-                    // mShowcaseView.setTarget(Target.NONE);
-                    mShowcaseView.setShowcase(new ViewTarget(
-                            findViewById(R.id.header_playerOMWTextView)), true);
+        // just adding some padding to look better
+        /*int padding = MenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
+        pmwTextView.setPadding(padding,padding,padding, padding);
+        omwTextView.setPadding(padding,padding,padding, padding);
+        pgwTextView.setPadding(padding,padding,padding, padding);
+        ogwTextView.setPadding(padding,padding,padding, padding);*/
 
-                    mShowcaseView.setContentText(getString(R.string.help_omw));
-                    break;
-                // PGW
-                case 2:
-                    mShowcaseView.setShowcase(new ViewTarget(
-                            findViewById(R.id.header_playerPGWTextView)), true);
-
-                    mShowcaseView.setContentText(getString(R.string.help_pgw));
-
-                    break;
-                // OGW
-                case 3:
-                    mShowcaseView.setShowcase(new ViewTarget(
-                            findViewById(R.id.header_playerOGWTextView)), true);
-
-                    mShowcaseView.setContentText(getString(R.string.help_ogw));
-                    break;
-                default:
-                    mShowcaseView.hide();
-                    break;
-            }
-            mCounter++;
-
+        if (SettingsPreferencesFactory.getInstance().isFirstRun()) {
+            SettingsPreferencesFactory.getInstance().setFirstRun(false);
+            Sequence sequence = null;
+            sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.help_pmw), pmwTextView, Gravity.LEFT | Gravity.BOTTOM),
+                    bindTourGuideButton(getString(R.string.help_omw), omwTextView, Gravity.LEFT | Gravity.BOTTOM),
+                    bindTourGuideButton(getString(R.string.help_pgw), pgwTextView, Gravity.LEFT | Gravity.BOTTOM),
+                    bindTourGuideButton(getString(R.string.help_ogw), ogwTextView, Gravity.LEFT | Gravity.BOTTOM)
+            ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mTutorialHandler.next();
+                }
+            })).setContinueMethod(Sequence.ContinueMethod.OverlayListener).setDefaultPointer(new Pointer()).build();
+            mTutorialHandler = TourGuide.init(this).playInSequence(sequence);
         }
-    };
+
+
+    }
 
     @Override
     public void onBackPressed() {

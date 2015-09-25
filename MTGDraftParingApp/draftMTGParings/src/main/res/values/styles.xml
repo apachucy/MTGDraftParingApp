@@ -7,16 +7,24 @@
 
 
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
-
-
-
         -->
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/colorPrimary</item>
 
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated,
+             which is used to tint widgets -->
+        <item name="colorAccent">@color/accent</item>
+
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <!-- Application theme. -->
@@ -25,17 +33,14 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
 
 
-
     </style>
 
 
     <!-- Background for all views -->
-    <style name="background" parent="AppTheme">
-        <item name="android:background">@drawable/layout_background</item>
-    </style>
+    <style name="background" parent="AppTheme"></style>
 
     <style name="background.dialog">
-        <item name="android:background">@drawable/dialog_background</item>
+        <item name="android:background">@color/windowBackground</item>
     </style>
     <!-- Small Button -->
     <style name="buttonSmall" parent="@android:style/Widget.Button.Small">
@@ -49,14 +54,13 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:padding">@dimen/button_padding</item>
     </style>
-
     <!-- Small Button for settings -->
     <style name="buttonSmall.settings">
         <item name="android:padding">0dp</item>
     </style>
     <!-- Text View -->
     <style name="textView" parent="@android:style/Widget.TextView">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="textView.dialog">
@@ -65,7 +69,7 @@
     </style>
     <!-- Edit Text -->
     <style name="editText" parent="@android:style/Widget.EditText">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <!-- Edit Text for settings -->
     <style name="editText.settings">
@@ -77,9 +81,9 @@
         <item name="android:textColor">@drawable/toggle_button_text_color</item>
     </style>
 
-    <style name="showcaseThem" parent="ShowcaseView.Light">
-        <item name="sv_backgroundColor">#A533B5E5</item>
+    <style name="toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
-
 
 </resources>

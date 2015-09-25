@@ -34,7 +34,7 @@ public class AppConfig extends Application  implements IAlgorithmConfigure{
 	private void defaultSharedPreferencesConfig() {
 		SettingsPreferencesFactory.getInstance().setDisplayCounterRound(
 				BaseConfig.DEFAULT_DISPLAY_COUNTER_ROUND);
-		SettingsPreferencesFactory.getInstance().setFirstRun(false);
+		//SettingsPreferencesFactory.getInstance().setFirstRun(false);
 		SettingsPreferencesFactory.getInstance().setFirstVibration(
 				BaseConfig.DEFAULT_FIRST_VIBRATION);
 		SettingsPreferencesFactory.getInstance().setSecondVibration(

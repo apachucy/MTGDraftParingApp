@@ -58,9 +58,9 @@
 
     <!-- Help/Showcase start screen -->
     <string name="help_title">Help</string>
-    <string name="help_message">Tool to organize booster draft of MTG.
-Pairings are calculate with Swiss-System tournament. Check settings in menu for configuration your own draft. </string>
-    <!-- Headers -->
+    <string name="tutorial_info">Info about used libraries</string>
+    <string name="tutorial_settings">Configure your draft before play </string>
+ <!-- Headers -->
     <string name="header_player_position_name">Player</string>
     <string name="header_player_position_points">Points</string>
     <string name="header_player_position_ogw">OGW%</string>

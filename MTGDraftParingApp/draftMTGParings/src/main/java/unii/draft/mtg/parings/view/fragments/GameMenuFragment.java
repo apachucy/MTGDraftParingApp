@@ -1,0 +1,201 @@
+package unii.draft.mtg.parings.view.fragments;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import unii.draft.mtg.parings.MatchPlayerActivity;
+import unii.draft.mtg.parings.ParingsActivity;
+import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.algorithm.IAlgorithmConfigure;
+import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
+import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
+import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
+import unii.draft.mtg.parings.validation.ValidationHelper;
+import unii.draft.mtg.parings.view.CustomDialogFragment;
+
+/**
+ * Created by apachucy on 2015-09-25.
+ */
+public class GameMenuFragment extends BaseFragment {
+    private static final String TAG_DIALOG_START_GAME = GameMenuFragment.class
+            .getName() + "TAG_DIALOG_START_GAME";
+    private static final String TAG_DIALOG_WARNING = GameMenuFragment.class
+            .getName() + "TAG_DIALOG_WARNING";
+
+    private CustomDialogFragment mStartGameDialogFragment;
+    private CustomDialogFragment mWarningDialogFragment;
+    private ArrayList<String> mPlayerNameList;
+    private ArrayAdapter<String> mListAdapter;
+
+    @Bind(R.id.init_playerNameEditText)
+    EditText mPlayerNameEditText;
+    @Bind(R.id.init_roundsEditText)
+    EditText mRoundsEditText;
+    @Bind(R.id.init_playerList)
+    ListView mPlayerList;
+    @Bind(R.id.init_addPlayerButton)
+    Button mAddPlayer;
+    @Bind(R.id.init_roundsButton)
+    Button mStartGame;
+
+    private Drawable mWarningDrawable;
+
+    private Activity mActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_game_menu, container, false);
+        ButterKnife.bind(this, view);
+        mWarningDrawable = getResources().getDrawable(R.drawable.ic_warning);
+        mWarningDrawable.setBounds(new Rect(0, 0, mWarningDrawable
+                .getIntrinsicWidth(), mWarningDrawable.getIntrinsicHeight()));
+
+
+        mPlayerNameList = new ArrayList<String>();
+        mListAdapter = new ArrayAdapter<String>(mActivity, R.layout.row_player_name,
+                mPlayerNameList);
+
+
+        mAddPlayer.setOnClickListener(mButtonsOnClickListener);
+        mStartGame.setOnClickListener(mButtonsOnClickListener);
+        View header = inflater.inflate(R.layout.header_names, null);
+
+        mPlayerList.addHeaderView(header);
+        mPlayerList.setAdapter(mListAdapter);
+        mStartGameDialogFragment = CustomDialogFragment.newInstance(
+                getString(R.string.dialog_start_title),
+                getString(R.string.dialog_start_message),
+                getString(R.string.start_game));
+        return view;
+    }
+
+
+    private android.view.View.OnClickListener mButtonsOnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.init_addPlayerButton:
+
+                    // add new player
+                    if (!ValidationHelper.isEditTextEmpty(mPlayerNameEditText,
+                            getString(R.string.warning_empty_field),
+                            mWarningDrawable) && !isNameAddedBefore(mPlayerNameEditText.getText()
+                            .toString())) {
+                        mPlayerNameList.add(mPlayerNameEditText.getText()
+                                .toString());
+                        mPlayerNameEditText.setText("");
+                        mListAdapter.notifyDataSetChanged();
+
+                    } else if (isNameAddedBefore(mPlayerNameEditText.getText()
+                            .toString())) {
+                        mPlayerNameEditText.setError(getResources().getString(R.string.warning_player_name_added), mWarningDrawable);
+                    }
+                    break;
+                case R.id.init_roundsButton:
+                    if (!ValidationHelper.isEditTextEmpty(mRoundsEditText,
+                            getString(R.string.warning_empty_field),
+                            mWarningDrawable)) {
+                        if (mPlayerNameList.isEmpty() || mPlayerNameList.size() < 2) {
+                            Toast.makeText(mActivity,
+                                    getString(R.string.warning_need_players),
+                                    Toast.LENGTH_LONG).show();
+                            // if number of player where bigger than
+                            // round ask user to change it
+                        } else if (Integer.parseInt(mRoundsEditText.getText()
+                                .toString()) >= mPlayerNameList.size()) {
+                            if (mWarningDialogFragment == null) {
+                                mWarningDialogFragment = CustomDialogFragment
+                                        .newInstance(
+                                                getString(R.string.dialog_warning_title),
+                                                getString(R.string.dialog_warning_message),
+                                                getString(R.string.dialog_start_button));
+                            }
+                            mWarningDialogFragment.show(getFragmentManager(),
+                                    TAG_DIALOG_WARNING,
+                                    mWarningDialogOnClickListener);
+                        } else {
+                            mStartGameDialogFragment.show(getFragmentManager(),
+                                    TAG_DIALOG_START_GAME,
+                                    mStartGameDialogOnClickListener);
+
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    };
+
+    private View.OnClickListener mStartGameDialogOnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            if (mStartGameDialogFragment != null) {
+                mStartGameDialogFragment.dismiss();
+                Intent intent = null;
+                IAlgorithmConfigure algorithmConfigure = (IAlgorithmConfigure) mActivity.getApplication();
+                if (SettingsPreferencesFactory.getInstance().areManualParings()) {
+                    algorithmConfigure.setAlgorithm(new ManualParingAlgorithm(mPlayerNameList, Integer.parseInt(mRoundsEditText.getText().toString())));
+                    intent = new Intent(mActivity,
+                            MatchPlayerActivity.class);
+                } else {
+                    algorithmConfigure.setAlgorithm(new ParingAlgorithm(mPlayerNameList, Integer.parseInt(mRoundsEditText.getText().toString())));
+                    intent = new Intent(mActivity,
+                            ParingsActivity.class);
+
+                }
+                startActivity(intent);
+                mActivity.finish();
+            }
+
+        }
+    };
+
+    private View.OnClickListener mWarningDialogOnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            if (mWarningDialogFragment != null) {
+                mWarningDialogFragment.dismiss();
+            }
+        }
+    };
+
+    private boolean isNameAddedBefore(String playerName) {
+        boolean isAddedBefore = false;
+
+        for (String name : mPlayerNameList) {
+            if (playerName.equals(name)) {
+                isAddedBefore = true;
+                break;
+            }
+
+        }
+        return isAddedBefore;
+    }
+}

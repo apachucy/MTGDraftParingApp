@@ -1,86 +1,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/background"
-    android:background="@drawable/layout_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".GameMenuActivity" >
+    tools:context=".GameMenuActivity">
 
-    <TextView
-        android:id="@+id/init_playerNameTextView"
-        style="@style/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/init_playerNameEditText"
-        android:layout_alignParentLeft="true"
-        android:text="@string/hint_player_name" />
-
-    <EditText
-        android:id="@id/init_playerNameEditText"
-        style="@style/editText"
-        android:layout_width="@dimen/edit_text_width"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/text_view_margin_settings_small"
-        android:layout_marginRight="@dimen/text_view_margin_settings_small"
-        android:layout_toRightOf="@id/init_playerNameTextView"
-        android:inputType="text" />
-
-    <Button
-        android:id="@+id/init_addPlayerButton"
-        style="@style/buttonSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/init_playerNameEditText"
-        android:layout_alignBottom="@id/init_playerNameEditText"
-        android:layout_toRightOf="@id/init_playerNameEditText"
-        android:text="@string/add_item" />
-
-    <TextView
-        android:id="@+id/init_roundsTextView"
-        style="@style/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/init_roundsEditText"
-        android:layout_alignParentLeft="true"
-        android:text="@string/hint_rounds" />
-
-    <EditText
-        android:id="@id/init_roundsEditText"
-        style="@style/editText"
-        android:layout_width="@dimen/edit_text_width"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/init_playerNameEditText"
-        android:layout_marginLeft="@dimen/text_view_margin_settings_small"
-        android:layout_marginRight="@dimen/text_view_margin_settings_small"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:maxLength="3"
-        android:layout_toRightOf="@id/init_playerNameTextView"
-        android:inputType="number" />
-
-    <Button
-        android:id="@+id/init_roundsButton"
-        style="@style/buttonSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/init_roundsEditText"
-        android:layout_alignBottom="@id/init_roundsEditText"
-        android:layout_toRightOf="@id/init_roundsEditText"
-        android:text="@string/start_game" />
-
-    <ListView
-        android:id="@+id/init_playerList"
+    <view
+        android:id="@+id/toolbar"
+        style="@style/toolbar"
+        class="android.support.v7.widget.Toolbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/init_roundsEditText"
-        android:layout_marginTop="@dimen/standard_margin" >
-    </ListView>
+        android:layout_alignParentTop="true" />
 
-
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/content_frame"
+        android:layout_below="@id/toolbar"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"/>
 
 </RelativeLayout>

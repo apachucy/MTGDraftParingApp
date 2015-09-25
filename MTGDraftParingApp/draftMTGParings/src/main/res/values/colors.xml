@@ -7,12 +7,20 @@
     <color name="orange_light_dark">#BA7A54</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-	<color name="grey_light">#847069</color>
-	<color name="grey_dark">#806E62</color>
-	<color name="blue_dark">#2C2F56</color>
-	<color name="brown_light">#D2D2A0</color>
-	<color name="navy_blue_dark">#004F81</color>
-    <!-- Material design additions-->
+    <color name="grey_light">#847069</color>
+    <color name="grey_dark">#806E62</color>
+    <color name="blue_dark">#2C2F56</color>
+    <color name="brown_light">#D2D2A0</color>
+    <color name="navy_blue_dark">#004F81</color>
+
+
+    <!--Button colors -->
     <color name="green">#007F00</color>
     <color name="green_dark">#004c00</color>
+    <!-- Material colors-->
+    <color name="colorPrimaryDark">#1b5e20</color>
+    <color name="colorPrimary">#4caf50</color>
+    <color name="accent">#66bb6a</color>
+    <color name="windowBackground">#c8e6c9</color>
+    <color name="navigationBarColor">#1b5e20</color>
 </resources>

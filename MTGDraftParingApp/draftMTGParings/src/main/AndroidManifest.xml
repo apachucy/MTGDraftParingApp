@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="unii.draft.mtg.parings"
-    android:versionCode="10"
-    android:versionName="0.7.3">
+    android:versionCode="11"
+    android:versionName="0.8.0">
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="21"
-        />
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -21,7 +20,8 @@
         <activity
             android:name=".GameMenuActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,16 +29,13 @@
         </activity>
         <activity
             android:name=".ParingsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PlayerPositionActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MatchPlayerActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
