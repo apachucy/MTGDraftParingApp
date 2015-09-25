@@ -34,7 +34,6 @@
             style="@style/buttonSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/init_playerNameEditText"
             android:layout_alignBottom="@id/init_playerNameEditText"
             android:layout_toRightOf="@id/init_playerNameEditText"
             android:text="@string/add_item" />
@@ -68,7 +67,6 @@
             style="@style/buttonSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/init_roundsEditText"
             android:layout_alignBottom="@id/init_roundsEditText"
             android:layout_toRightOf="@id/init_roundsEditText"
             android:text="@string/start_game" />
