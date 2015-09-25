@@ -84,38 +84,45 @@
             android:paddingRight="@dimen/spinner_padding_small"
             android:paddingTop="@dimen/spinner_padding_small" />
 
-        <Button
-            android:id="@+id/matchPlayer_ParingButton"
-            style="@style/button"
+        <RelativeLayout
+            android:id="@+id/matchPlayer_buttonHolder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/matchPlayer_secondPlayerSpinner"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/button_padding"
-            android:layout_marginTop="@dimen/button_padding"
-            android:text="@string/activity_paring_add_paring" />
+            android:layout_marginTop="@dimen/button_padding">
 
-        <Button
-            android:id="@+id/matchPlayer_CleanButton"
-            style="@style/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/matchPlayer_secondPlayerSpinner"
-            android:layout_marginBottom="@dimen/button_padding"
-            android:layout_marginTop="@dimen/button_padding"
-            android:layout_toLeftOf="@id/matchPlayer_ParingButton"
-            android:text="@string/activity_paring_clean_paring" />
 
-        <Button
-            android:id="@+id/matchPlayer_PlayButton"
-            style="@style/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/matchPlayer_secondPlayerSpinner"
-            android:layout_marginBottom="@dimen/button_padding"
-            android:layout_marginTop="@dimen/button_padding"
-            android:layout_toRightOf="@id/matchPlayer_ParingButton"
-            android:text="@string/activity_paring_play_round" />
+
+            <Button
+                android:id="@+id/matchPlayer_CleanButton"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_padding"
+                android:layout_marginTop="@dimen/button_padding"
+                android:text="@string/activity_paring_clean_paring" />
+            <Button
+                android:id="@+id/matchPlayer_ParingButton"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_padding"
+                android:layout_marginTop="@dimen/button_padding"
+                android:text="@string/activity_paring_add_paring"
+                android:layout_toRightOf="@id/matchPlayer_CleanButton"
+                />
+            <Button
+                android:id="@+id/matchPlayer_PlayButton"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_padding"
+                android:layout_marginTop="@dimen/button_padding"
+                android:layout_toRightOf="@id/matchPlayer_ParingButton"
+                android:text="@string/activity_paring_play_round" />
+        </RelativeLayout>
 
         <ListView
             android:id="@+id/matchPlayer_PlayersList"
@@ -125,7 +132,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignStart="@+id/matchPlayer_secondPlayerSpinner"
-            android:layout_below="@id/matchPlayer_ParingButton"
+            android:layout_below="@id/matchPlayer_buttonHolder"
             android:layout_marginTop="@dimen/standard_margin" />
 
     </RelativeLayout>

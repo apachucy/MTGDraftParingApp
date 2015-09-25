@@ -63,6 +63,9 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="textView.item">
+        <item name="android:background">@color/windowBackground</item>
+    </style>
     <style name="textView.dialog">
         <item name="android:padding">@dimen/text_view_padding</item>
         <item name="android:textColor">@color/blue_dark</item>

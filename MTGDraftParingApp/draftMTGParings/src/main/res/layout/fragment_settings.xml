@@ -22,7 +22,8 @@
         android:layout_alignBottom="@+id/settings_counterInfoTextView"
         android:layout_alignLeft="@+id/settings_timeButton"
         android:layout_marginTop="@dimen/button_margin_settings"
-        android:textOff="@string/toggle_button_off" />
+        android:textOff="@string/toggle_button_off"
+        android:checked="false" />
 
     <TextView
         android:id="@+id/settings_timeInfoTextView"

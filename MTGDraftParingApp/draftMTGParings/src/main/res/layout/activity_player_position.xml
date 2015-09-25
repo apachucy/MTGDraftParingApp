@@ -40,7 +40,7 @@
             android:layout_below="@+id/player_position_roundTextView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/standard_margin"
-            android:drawableLeft="@drawable/ic_cup_silver"
+            android:drawableLeft="@drawable/ic_cup"
             android:text="TextView" />
 
         <Button
