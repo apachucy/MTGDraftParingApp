@@ -1,4 +1,4 @@
-package unii.draft.mtg.parings.view;
+package unii.draft.mtg.parings.view.adapters;
 
 import android.content.Context;
 import android.os.Build;
@@ -19,8 +19,9 @@ import unii.draft.mtg.parings.pojo.Player;
 public class MatchPlayerCustomSpinnerAdapter extends BaseAdapter {
     private List<Player> mPlayerList;
     private Context mContext;
+
     public MatchPlayerCustomSpinnerAdapter(Context context, List<Player> playerList
-    ){
+    ) {
         mContext = context;
         mPlayerList = playerList;
     }
@@ -48,7 +49,7 @@ public class MatchPlayerCustomSpinnerAdapter extends BaseAdapter {
         convertView = layoutInflater
                 .inflate(R.layout.row_player_name, null);
 
-        TextView textView = (TextView)convertView.findViewById(R.id.row_player);
+        TextView textView = (TextView) convertView.findViewById(R.id.row_player);
         textView.setText(mPlayerList.get(position).getPlayerName());
         return convertView;
     }
@@ -60,16 +61,9 @@ public class MatchPlayerCustomSpinnerAdapter extends BaseAdapter {
         convertView = layoutInflater
                 .inflate(R.layout.row_player_name, null);
 
-        TextView textView = (TextView)convertView.findViewById(R.id.row_player);
+        TextView textView = (TextView) convertView.findViewById(R.id.row_player);
         textView.setText(mPlayerList.get(position).getPlayerName());
-        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            textView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
-        }
-            else{
-            textView.setTextColor(mContext.getResources().getColor(R.color.black));
 
-        }
         return convertView;
-   //return super.getDropDownView(position,convertView,parent);
     }
 }

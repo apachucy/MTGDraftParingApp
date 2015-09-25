@@ -6,13 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.config.BaseConfig;
 import unii.draft.mtg.parings.sharedprefrences.ISettings;
@@ -27,18 +28,125 @@ import unii.draft.mtg.parings.view.CustomTextWatcher;
 public class SettingsFragment extends BaseFragment {
     @Bind(R.id.settings_counterToggleButton)
     ToggleButton mCounterToggle;
+
+    @OnCheckedChanged(R.id.settings_counterToggleButton)
+    void onCounterToggleChecked(boolean checked) {
+        // can only disable buttons
+        // button can be enable only from editTexts
+        if (!checked) {
+            mCounterSaveButton.setEnabled(checked);
+        }
+        mCounterEditText.setEnabled(checked);
+        mSettingsSharedPreferences.setDisplayCounterRound(checked);
+        // if counter is not displayed
+        // disable vibration
+        if (!checked && mVibrationToggle.isChecked()) {
+            setVibrationWidgetState(checked);
+            mVibrationToggle.toggle();
+        }
+        mVibrationToggle.setEnabled(checked);
+    }
+
     @Bind(R.id.settings_vibrationToggleButton)
     ToggleButton mVibrationToggle;
+
+    @OnCheckedChanged(R.id.settings_vibrationToggleButton)
+    void onVibrationToggleChecked(boolean checked) {
+        setVibrationWidgetState(checked);
+    }
+
     @Bind(R.id.settings_createParingsManualToggleButton)
     ToggleButton mManualParingToggle;
+
+    @OnCheckedChanged(R.id.settings_createParingsManualToggleButton)
+    void onManualParringToggleChecked(boolean checked) {
+        mSettingsSharedPreferences.setManualParings(checked);
+    }
+
     @Bind(R.id.settings_timeButton)
     Button mCounterSaveButton;
+
+    @OnClick(R.id.settings_timeButton)
+    void onCounterSaveButtonClicked(View view) {
+        if (!ValidationHelper.isTextEmpty(mCounterEditText.getText()
+                .toString())) {
+            long value = longAsMinuts(convertStringToLong(mCounterEditText
+                    .getText().toString()));
+            // save only if value is different from previous
+            if (value != mSettingsSharedPreferences.getTimePerRound()) {
+                mSettingsSharedPreferences.setTimePerRound(value);
+                Toast.makeText(mActivity,
+                        getString(R.string.toast_saved),
+                        Toast.LENGTH_SHORT).show();
+                mCounterSaveButton.setEnabled(false);
+            }
+        }
+    }
+
     @Bind(R.id.settings_durationVibrationButton)
     Button mVibrationDurationSaveButton;
+
+    @OnClick(R.id.settings_durationVibrationButton)
+    void onVibrationDurationButtonClicked(View view) {
+        if (!ValidationHelper.isTextEmpty(mVibrationDurationEditText
+                .getText().toString())) {
+            long value = longAsSec(convertStringToLong(mVibrationDurationEditText
+                    .getText().toString()));
+            // save only if value is different from previous
+            if (value != mSettingsSharedPreferences
+                    .getVibrationDuration()) {
+                mSettingsSharedPreferences
+                        .setVibrationDuration(longAsSec(convertStringToLong(mVibrationDurationEditText
+                                .getText().toString())));
+                Toast.makeText(mActivity,
+                        getString(R.string.toast_saved),
+                        Toast.LENGTH_SHORT).show();
+                mVibrationDurationSaveButton.setEnabled(false);
+            }
+        }
+    }
+
     @Bind(R.id.settings_fistrVibrationButton)
     Button mFirstVibrationSaveButton;
+
+    @OnClick(R.id.settings_fistrVibrationButton)
+    void onFirstVibrationButtonClicked(View view) {
+        if (!ValidationHelper.isTextEmpty(mFirstVibrationEditText
+                .getText().toString())) {
+            long value = longAsMinuts(convertStringToLong(mFirstVibrationEditText
+                    .getText().toString()));
+            // save only if value is different from previous
+            if (value != mSettingsSharedPreferences.getFirstVibration()) {
+                mSettingsSharedPreferences.setFirstVibration(value);
+                Toast.makeText(mActivity,
+                        getString(R.string.toast_saved),
+                        Toast.LENGTH_SHORT).show();
+                mFirstVibrationSaveButton.setEnabled(false);
+            }
+        }
+    }
+
     @Bind(R.id.settings_secondVibrationButton)
     Button mSecondVibrationSaveButton;
+
+    @OnClick(R.id.settings_secondVibrationButton)
+    void onSecondVibrationButtonClicked(View view) {
+        if (!ValidationHelper.isTextEmpty(mSecondVibrationEditText
+                .getText().toString())) {
+            long value = longAsMinuts(convertStringToLong(mSecondVibrationEditText
+                    .getText().toString()));
+            // save only if value is different from previous
+            if (value != mSettingsSharedPreferences
+                    .getSecondVibration()) {
+                mSettingsSharedPreferences.setSecondVibration(value);
+                Toast.makeText(mActivity,
+                        getString(R.string.toast_saved),
+                        Toast.LENGTH_SHORT).show();
+                mSecondVibrationSaveButton.setEnabled(false);
+            }
+        }
+    }
+
     @Bind(R.id.settings_timeEditText)
     EditText mCounterEditText;
     @Bind(R.id.settings_durationVibrationEditText)
@@ -91,14 +199,6 @@ public class SettingsFragment extends BaseFragment {
 
         mManualParingToggle.setChecked(mSettingsSharedPreferences.areManualParings());
 
-        mCounterToggle.setOnCheckedChangeListener(mToggleListener);
-        mVibrationToggle.setOnCheckedChangeListener(mToggleListener);
-        mManualParingToggle.setOnCheckedChangeListener(mToggleListener);
-
-        mCounterSaveButton.setOnClickListener(mOnButtonClickListener);
-        mFirstVibrationSaveButton.setOnClickListener(mOnButtonClickListener);
-        mSecondVibrationSaveButton.setOnClickListener(mOnButtonClickListener);
-        mVibrationDurationSaveButton.setOnClickListener(mOnButtonClickListener);
 
         mCounterEditText.addTextChangedListener(mCounterTextWatcher);
         mVibrationDurationEditText
@@ -110,133 +210,6 @@ public class SettingsFragment extends BaseFragment {
         return view;
     }
 
-
-    private View.OnClickListener mOnButtonClickListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.settings_timeButton:
-                    if (!ValidationHelper.isTextEmpty(mCounterEditText.getText()
-                            .toString())) {
-                        long value = longAsMinuts(convertStringToLong(mCounterEditText
-                                .getText().toString()));
-                        // save only if value is different from previous
-                        if (value != mSettingsSharedPreferences.getTimePerRound()) {
-                            mSettingsSharedPreferences.setTimePerRound(value);
-                            Toast.makeText(mActivity,
-                                    getString(R.string.toast_saved),
-                                    Toast.LENGTH_SHORT).show();
-                            mCounterSaveButton.setEnabled(false);
-                        }
-                    }
-                    break;
-                case R.id.settings_fistrVibrationButton:
-                    if (!ValidationHelper.isTextEmpty(mFirstVibrationEditText
-                            .getText().toString())) {
-                        long value = longAsMinuts(convertStringToLong(mFirstVibrationEditText
-                                .getText().toString()));
-                        // save only if value is different from previous
-                        if (value != mSettingsSharedPreferences.getFirstVibration()) {
-                            mSettingsSharedPreferences.setFirstVibration(value);
-                            Toast.makeText(mActivity,
-                                    getString(R.string.toast_saved),
-                                    Toast.LENGTH_SHORT).show();
-                            mFirstVibrationSaveButton.setEnabled(false);
-                        }
-                    }
-
-                    break;
-                case R.id.settings_secondVibrationButton:
-                    if (!ValidationHelper.isTextEmpty(mSecondVibrationEditText
-                            .getText().toString())) {
-                        long value = longAsMinuts(convertStringToLong(mSecondVibrationEditText
-                                .getText().toString()));
-                        // save only if value is different from previous
-                        if (value != mSettingsSharedPreferences
-                                .getSecondVibration()) {
-                            mSettingsSharedPreferences.setSecondVibration(value);
-                            Toast.makeText(mActivity,
-                                    getString(R.string.toast_saved),
-                                    Toast.LENGTH_SHORT).show();
-                            mSecondVibrationSaveButton.setEnabled(false);
-                        }
-                    }
-                    break;
-
-                case R.id.settings_durationVibrationButton:
-                    if (!ValidationHelper.isTextEmpty(mVibrationDurationEditText
-                            .getText().toString())) {
-                        long value = longAsSec(convertStringToLong(mVibrationDurationEditText
-                                .getText().toString()));
-                        // save only if value is different from previous
-                        if (value != mSettingsSharedPreferences
-                                .getVibrationDuration()) {
-                            mSettingsSharedPreferences
-                                    .setVibrationDuration(longAsSec(convertStringToLong(mVibrationDurationEditText
-                                            .getText().toString())));
-                            Toast.makeText(mActivity,
-                                    getString(R.string.toast_saved),
-                                    Toast.LENGTH_SHORT).show();
-                            mVibrationDurationSaveButton.setEnabled(false);
-                        }
-                    }
-                    break;
-
-            }
-
-        }
-    };
-    /***
-     * Change state of widgets depending on state of <br>
-     * ToggleButtons<br>
-     * if ToggleButton <br>
-     * is enable then all depending widgets are enable <br>
-     */
-    private CompoundButton.OnCheckedChangeListener mToggleListener = new CompoundButton.OnCheckedChangeListener() {
-
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,
-                                     boolean isChecked) {
-
-            switch (buttonView.getId()) {
-                case R.id.settings_counterToggleButton:
-                    // can only disable buttons
-                    // button can be enable only from editTexts
-                    if (!isChecked) {
-                        mCounterSaveButton.setEnabled(isChecked);
-                    }
-                    mCounterEditText.setEnabled(isChecked);
-                    mSettingsSharedPreferences.setDisplayCounterRound(isChecked);
-                    // if counter is not displayed
-                    // disable vibration
-                    if (!isChecked && mVibrationToggle.isChecked()) {
-                        setVibrationWidgetState(isChecked);
-                        mVibrationToggle.toggle();
-
-                    }
-                    mVibrationToggle.setEnabled(isChecked);
-                    Toast.makeText(mActivity,
-                            getString(R.string.toast_saved), Toast.LENGTH_SHORT)
-                            .show();
-
-                    break;
-
-                case R.id.settings_vibrationToggleButton:
-                    setVibrationWidgetState(isChecked);
-                    Toast.makeText(mActivity,
-                            getString(R.string.toast_saved), Toast.LENGTH_SHORT)
-                            .show();
-
-                    break;
-
-                case R.id.settings_createParingsManualToggleButton:
-                    mSettingsSharedPreferences.setManualParings(isChecked);
-                    break;
-            }
-
-        }
-    };
 
     private void setVibrationWidgetState(boolean useVibration) {
 
@@ -339,4 +312,9 @@ public class SettingsFragment extends BaseFragment {
         }
     };
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
 }

@@ -1,4 +1,4 @@
-package unii.draft.mtg.parings.view;
+package unii.draft.mtg.parings.view.fragments;
 
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.validation.ValidationHelper;

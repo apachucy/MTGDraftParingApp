@@ -1,7 +1,6 @@
 package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -27,7 +26,7 @@ import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
 import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.validation.ValidationHelper;
-import unii.draft.mtg.parings.view.CustomDialogFragment;
+import unii.draft.mtg.parings.view.IPlayerList;
 
 /**
  * Created by apachucy on 2015-09-25.
@@ -40,7 +39,7 @@ public class GameMenuFragment extends BaseFragment {
 
     private CustomDialogFragment mStartGameDialogFragment;
     private CustomDialogFragment mWarningDialogFragment;
-    private ArrayList<String> mPlayerNameList;
+    private IPlayerList mPlayerNameList;
     private ArrayAdapter<String> mListAdapter;
 
     @Bind(R.id.init_playerNameEditText)
@@ -62,6 +61,7 @@ public class GameMenuFragment extends BaseFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
+        mPlayerNameList = (IPlayerList) mActivity;
     }
 
     @Override
@@ -73,9 +73,8 @@ public class GameMenuFragment extends BaseFragment {
                 .getIntrinsicWidth(), mWarningDrawable.getIntrinsicHeight()));
 
 
-        mPlayerNameList = new ArrayList<String>();
         mListAdapter = new ArrayAdapter<String>(mActivity, R.layout.row_player_name,
-                mPlayerNameList);
+                mPlayerNameList.getPlayerList());
 
 
         mAddPlayer.setOnClickListener(mButtonsOnClickListener);
@@ -104,7 +103,7 @@ public class GameMenuFragment extends BaseFragment {
                             getString(R.string.warning_empty_field),
                             mWarningDrawable) && !isNameAddedBefore(mPlayerNameEditText.getText()
                             .toString())) {
-                        mPlayerNameList.add(mPlayerNameEditText.getText()
+                        mPlayerNameList.getPlayerList().add(mPlayerNameEditText.getText()
                                 .toString());
                         mPlayerNameEditText.setText("");
                         mListAdapter.notifyDataSetChanged();
@@ -118,14 +117,14 @@ public class GameMenuFragment extends BaseFragment {
                     if (!ValidationHelper.isEditTextEmpty(mRoundsEditText,
                             getString(R.string.warning_empty_field),
                             mWarningDrawable)) {
-                        if (mPlayerNameList.isEmpty() || mPlayerNameList.size() < 2) {
+                        if (mPlayerNameList.getPlayerList().isEmpty() || mPlayerNameList.getPlayerList().size() < 2) {
                             Toast.makeText(mActivity,
                                     getString(R.string.warning_need_players),
                                     Toast.LENGTH_LONG).show();
                             // if number of player where bigger than
                             // round ask user to change it
                         } else if (Integer.parseInt(mRoundsEditText.getText()
-                                .toString()) >= mPlayerNameList.size()) {
+                                .toString()) >= mPlayerNameList.getPlayerList().size()) {
                             if (mWarningDialogFragment == null) {
                                 mWarningDialogFragment = CustomDialogFragment
                                         .newInstance(
@@ -160,11 +159,11 @@ public class GameMenuFragment extends BaseFragment {
                 Intent intent = null;
                 IAlgorithmConfigure algorithmConfigure = (IAlgorithmConfigure) mActivity.getApplication();
                 if (SettingsPreferencesFactory.getInstance().areManualParings()) {
-                    algorithmConfigure.setAlgorithm(new ManualParingAlgorithm(mPlayerNameList, Integer.parseInt(mRoundsEditText.getText().toString())));
+                    algorithmConfigure.setAlgorithm(new ManualParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsEditText.getText().toString())));
                     intent = new Intent(mActivity,
                             MatchPlayerActivity.class);
                 } else {
-                    algorithmConfigure.setAlgorithm(new ParingAlgorithm(mPlayerNameList, Integer.parseInt(mRoundsEditText.getText().toString())));
+                    algorithmConfigure.setAlgorithm(new ParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsEditText.getText().toString())));
                     intent = new Intent(mActivity,
                             ParingsActivity.class);
 
@@ -189,7 +188,7 @@ public class GameMenuFragment extends BaseFragment {
     private boolean isNameAddedBefore(String playerName) {
         boolean isAddedBefore = false;
 
-        for (String name : mPlayerNameList) {
+        for (String name : mPlayerNameList.getPlayerList()) {
             if (playerName.equals(name)) {
                 isAddedBefore = true;
                 break;
@@ -197,5 +196,11 @@ public class GameMenuFragment extends BaseFragment {
 
         }
         return isAddedBefore;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }

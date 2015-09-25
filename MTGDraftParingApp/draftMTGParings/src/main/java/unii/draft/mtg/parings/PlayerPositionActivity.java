@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
@@ -22,8 +23,8 @@ import unii.draft.mtg.parings.algorithm.AlgorithmFactory;
 import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
 import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.view.CustomDialogFragment;
-import unii.draft.mtg.parings.view.PlayerAdapter;
+import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
+import unii.draft.mtg.parings.view.adapters.PlayerAdapter;
 
 public class PlayerPositionActivity extends BaseActivity {
 
@@ -33,6 +34,26 @@ public class PlayerPositionActivity extends BaseActivity {
     TextView mWinnerTextView;
     @Bind(R.id.player_position_nextGameButton)
     Button mNextGameButton;
+
+    @OnClick(R.id.player_position_nextGameButton)
+    void onNextGameButtonClicked(View view) {
+        if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
+            mCustomDialogFragment
+                    .show(getSupportFragmentManager(), TAG_DIALOG);
+        } else {
+            Intent intent = null;
+            if (SettingsPreferencesFactory.getInstance().areManualParings()) {
+                intent = new Intent(PlayerPositionActivity.this,
+                        MatchPlayerActivity.class);
+            } else {
+                intent = new Intent(PlayerPositionActivity.this,
+                        ParingsActivity.class);
+            }
+            startActivity(intent);
+            finish();
+        }
+    }
+
     @Bind(R.id.player_position_playerListView)
     ListView mPlayerListView;
     @Bind(R.id.toolbar)
@@ -67,7 +88,7 @@ public class PlayerPositionActivity extends BaseActivity {
                 + mAlgorithm.getCurrentRound() + " "
                 + getString(R.string.text_from) + " "
                 + +mAlgorithm.getMaxRound());
-        mNextGameButton.setOnClickListener(mOnButtonClick);
+
 
 
         setSupportActionBar(mToolBar);
@@ -95,36 +116,6 @@ public class PlayerPositionActivity extends BaseActivity {
         setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView), (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView));
 
     }
-
-
-    private OnClickListener mOnButtonClick = new OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.player_position_nextGameButton:
-                    if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
-                        mCustomDialogFragment
-                                .show(getSupportFragmentManager(), TAG_DIALOG);
-                    } else {
-                        Intent intent = null;
-                        if (SettingsPreferencesFactory.getInstance().areManualParings()) {
-                            intent = new Intent(PlayerPositionActivity.this,
-                                    MatchPlayerActivity.class);
-                        } else {
-                            intent = new Intent(PlayerPositionActivity.this,
-                                    ParingsActivity.class);
-                        }
-                        startActivity(intent);
-                        finish();
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
     private OnClickListener mOnDialogButtonClick = new OnClickListener() {
 
         @Override
@@ -138,14 +129,6 @@ public class PlayerPositionActivity extends BaseActivity {
 
 
     private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView) {
-
-
-        // just adding some padding to look better
-        /*int padding = MenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
-        pmwTextView.setPadding(padding,padding,padding, padding);
-        omwTextView.setPadding(padding,padding,padding, padding);
-        pgwTextView.setPadding(padding,padding,padding, padding);
-        ogwTextView.setPadding(padding,padding,padding, padding);*/
 
         if (SettingsPreferencesFactory.getInstance().isFirstRun()) {
             SettingsPreferencesFactory.getInstance().setFirstRun(false);

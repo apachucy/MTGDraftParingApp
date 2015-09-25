@@ -1,4 +1,4 @@
-package unii.draft.mtg.parings.view;
+package unii.draft.mtg.parings.view.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

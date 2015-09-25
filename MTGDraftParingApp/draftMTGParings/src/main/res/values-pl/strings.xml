@@ -91,5 +91,7 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="select_player1">Wybierz 1szego gracza:</string>
     <string name="select_player2">Wybierz 2giego gracza:</string>
     <string name="spinner_empty_player_list">Koniec zawodników</string>
+    <string name="tutorial_info">Infromacje na temat wykorzystanych bibliotek</string>
+    <string name="tutorial_settings">Konfiguracja ustawień draftu</string>
 
 </resources>

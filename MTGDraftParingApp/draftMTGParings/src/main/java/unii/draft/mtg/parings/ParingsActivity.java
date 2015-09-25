@@ -13,6 +13,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import unii.draft.mtg.parings.algorithm.AlgorithmFactory;
 import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
 import unii.draft.mtg.parings.algorithm.IStatisticCalculation;
@@ -22,8 +23,8 @@ import unii.draft.mtg.parings.pojo.Game;
 import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.view.CounterClass;
-import unii.draft.mtg.parings.view.CustomDialogFragment;
-import unii.draft.mtg.parings.view.ParingAdapter;
+import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
+import unii.draft.mtg.parings.view.adapters.ParingAdapter;
 
 public class ParingsActivity extends BaseActivity {
 
@@ -36,8 +37,30 @@ public class ParingsActivity extends BaseActivity {
 
     @Bind(R.id.paring_startCounterButton)
     Button mStartButton;
+
+    @OnClick(R.id.paring_startCounterButton)
+    void onStartButtonClicked(View view) {
+        if (!isCountStarted) {
+            isCountStarted = true;
+            mCounterClass.start();
+        }
+    }
+
     @Bind(R.id.paring_endRoundButon)
     Button mEndRoundButton;
+
+    @OnClick(R.id.paring_endRoundButon)
+    void onEndRoundClicked(View view) {
+        updateGameResults();
+        updatePlayerPoints();
+        mStatisticCalculation = new StatisticCalculation(mParingAlgorithm);
+        mStatisticCalculation.calculateAll();
+        Intent intent = new Intent(ParingsActivity.this,
+                PlayerPositionActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
@@ -106,8 +129,7 @@ public class ParingsActivity extends BaseActivity {
         }
 
         isCountStarted = false;
-        mStartButton.setOnClickListener(mButtonOnClickListener);
-        mEndRoundButton.setOnClickListener(mButtonOnClickListener);
+
         mParingAlgorithm = AlgorithmFactory.getInstance();
         mGameList = mParingAlgorithm.getParings();
         if (mGameList == null || mGameList.isEmpty()) {
@@ -126,37 +148,6 @@ public class ParingsActivity extends BaseActivity {
 
     }
 
-    /**
-     * Start counter when clicking on button
-     */
-    private OnClickListener mButtonOnClickListener = new OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-
-            switch (v.getId()) {
-                case R.id.paring_startCounterButton:
-                    if (!isCountStarted) {
-                        isCountStarted = true;
-                        mCounterClass.start();
-                    }
-                    break;
-                case R.id.paring_endRoundButon:
-                    updateGameResults();
-                    updatePlayerPoints();
-                    mStatisticCalculation = new StatisticCalculation(mParingAlgorithm);
-                    mStatisticCalculation.calculateAll();
-                    Intent intent = new Intent(ParingsActivity.this,
-                            PlayerPositionActivity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-                default:
-                    break;
-            }
-
-        }
-    };
 
     private void updateGameResults() {
         for (Game g : mGameList) {

@@ -58,9 +58,11 @@
 
     <!-- Help/Showcase start screen -->
     <string name="help_title">Help</string>
+     <string name="help_message">Tool to organize booster draft of MTG.
+Pairings are calculate with Swiss-System tournament. Check settings in menu for configuration your own draft. </string>
     <string name="tutorial_info">Info about used libraries</string>
     <string name="tutorial_settings">Configure your draft before play </string>
- <!-- Headers -->
+    <!-- Headers -->
     <string name="header_player_position_name">Player</string>
     <string name="header_player_position_points">Points</string>
     <string name="header_player_position_ogw">OGW%</string>
@@ -72,11 +74,11 @@
     <string name="text_draw">Draw</string>
 
     <!-- Help/Showcase player list -->
-	<string name="help_points">Points for clashing with opponents\n1 for draw, 3 for winning</string>
-	<string name="help_pmw">Player match win %</string>
-	<string name="help_omw">Opponents match win %</string>
-	<string name="help_pgw">Player game win %</string>
-	<string name="help_ogw">Opponents game win %</string>
+    <string name="help_points">Points for clashing with opponents\n1 for draw, 3 for winning</string>
+    <string name="help_pmw">Player match win %</string>
+    <string name="help_omw">Opponents match win %</string>
+    <string name="help_pgw">Player game win %</string>
+    <string name="help_ogw">Opponents game win %</string>
 
     <!-- Create personal parings-->
     <string name="text_personal_parings">Create manual parings:</string>

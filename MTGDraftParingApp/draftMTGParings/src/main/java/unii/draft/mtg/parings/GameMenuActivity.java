@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tourguide.tourguide.Overlay;
@@ -17,29 +19,35 @@ import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.helper.MenuHelper;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.view.CustomDialogFragment;
+import unii.draft.mtg.parings.view.IPlayerList;
+import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
 import unii.draft.mtg.parings.view.fragments.GameMenuFragment;
 import unii.draft.mtg.parings.view.fragments.SettingsFragment;
 
 
-public class GameMenuActivity extends BaseActivity {
-    @Bind(R.id.toolbar)
-    Toolbar mToolBar;
+public class GameMenuActivity extends BaseActivity implements IPlayerList{
+
     private static final String TAG_FRAGMENT_GAME = GameMenuActivity.class
             .getName() + "TAG_FRAGMENT_GAME";
     private static final String TAG_FRAGMENT_SETTINGS = GameMenuActivity.class.getName() + "TAG_FRAGMENT_SETTINGS";
-    private CustomDialogFragment mInfoDialogFragment;
     private static final String TAG_DIALOG_INFO = GameMenuActivity.class
             .getName() + "TAG_DIALOG_INFO";
+
+    private CustomDialogFragment mInfoDialogFragment;
+
+
     // help library
     private TourGuide mTutorialHandler = null;
+    private ArrayList<String> mPlayerNameList;
 
+    @Bind(R.id.toolbar)
+    Toolbar mToolBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamers_initial);
         ButterKnife.bind(this);
-
+        mPlayerNameList = new ArrayList<String>();
         setSupportActionBar(mToolBar);
         mToolBar.setLogo(R.drawable.ic_launcher);
         mToolBar.setLogoDescription(R.string.app_name);
@@ -54,6 +62,7 @@ public class GameMenuActivity extends BaseActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.settings, menu);
         setMenuActions((ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView());
+
         return true;
     }
 
@@ -116,4 +125,8 @@ public class GameMenuActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public ArrayList<String> getPlayerList() {
+        return mPlayerNameList;
+    }
 }
