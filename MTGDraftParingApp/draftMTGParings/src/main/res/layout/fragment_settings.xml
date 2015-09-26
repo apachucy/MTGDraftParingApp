@@ -23,6 +23,7 @@
         android:layout_alignLeft="@+id/settings_timeButton"
         android:layout_marginTop="@dimen/button_margin_settings"
         android:textOff="@string/toggle_button_off"
+        android:textOn="@string/toggle_button_on"
         android:checked="false" />
 
     <TextView
@@ -69,6 +70,7 @@
         android:layout_marginTop="@dimen/text_view_margin_settings"
         android:text="@string/text_vibration"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
 
     <ToggleButton
         android:id="@+id/settings_vibrationToggleButton"
