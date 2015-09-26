@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="brown_light_dark">#8D6F31</color>
-    <color name="brown_dark">#614832</color>
-    <color name="orange_dark">#AF6643</color>
-    <color name="orange_light_dark">#BA7A54</color>
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="grey_light">#847069</color>
     <color name="grey_dark">#806E62</color>
     <color name="blue_dark">#2C2F56</color>
-    <color name="brown_light">#D2D2A0</color>
     <color name="navy_blue_dark">#004F81</color>
-
 
     <!--Button colors -->
     <color name="green">#007F00</color>
