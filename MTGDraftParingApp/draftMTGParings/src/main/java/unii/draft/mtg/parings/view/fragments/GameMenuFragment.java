@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import unii.draft.mtg.parings.MatchPlayerActivity;
 import unii.draft.mtg.parings.ParingsActivity;
 import unii.draft.mtg.parings.R;
@@ -48,10 +49,61 @@ public class GameMenuFragment extends BaseFragment {
     EditText mRoundsEditText;
     @Bind(R.id.init_playerList)
     ListView mPlayerList;
-    @Bind(R.id.init_addPlayerButton)
-    Button mAddPlayer;
-    @Bind(R.id.init_roundsButton)
-    Button mStartGame;
+
+    @OnClick(R.id.init_addPlayerButton)
+    void onAddPlayerClick(View view) {
+        // add new player
+        if (!ValidationHelper.isEditTextEmpty(mPlayerNameEditText,
+                getString(R.string.warning_empty_field),
+                mWarningDrawable) && !isNameAddedBefore(mPlayerNameEditText.getText()
+                .toString())) {
+            mPlayerNameList.getPlayerList().add(mPlayerNameEditText.getText()
+                    .toString());
+            mPlayerNameEditText.setText("");
+            mListAdapter.notifyDataSetChanged();
+
+        } else if (isNameAddedBefore(mPlayerNameEditText.getText()
+                .toString())) {
+            mPlayerNameEditText.setError(getResources().getString(R.string.warning_player_name_added), mWarningDrawable);
+        }
+    }
+
+    @OnClick(R.id.init_roundsButton)
+    void onStartGameClick(View view) {
+        if (!ValidationHelper.isEditTextEmpty(mRoundsEditText,
+                getString(R.string.warning_empty_field),
+                mWarningDrawable)) {
+            if (mPlayerNameList.getPlayerList().isEmpty() || mPlayerNameList.getPlayerList().size() < 2) {
+                Toast.makeText(mActivity,
+                        getString(R.string.warning_need_players),
+                        Toast.LENGTH_LONG).show();
+                // if number of player where bigger than
+                // round ask user to change it
+            } else if (Integer.parseInt(mRoundsEditText.getText()
+                    .toString()) >= mPlayerNameList.getPlayerList().size()) {
+                if (mWarningDialogFragment == null) {
+                    mWarningDialogFragment = CustomDialogFragment
+                            .newInstance(
+                                    getString(R.string.dialog_warning_title),
+                                    getString(R.string.dialog_warning_message),
+                                    getString(R.string.dialog_start_button));
+                }
+                mWarningDialogFragment.show(getFragmentManager(),
+                        TAG_DIALOG_WARNING,
+                        mWarningDialogOnClickListener);
+            } else {
+                mStartGameDialogFragment = CustomDialogFragment.newInstance(
+                        getString(R.string.dialog_start_title),
+                        getString(R.string.dialog_start_message, mPlayerNameList.getPlayerList().size(), Integer.parseInt(mRoundsEditText.getText().toString())),
+                        getString(R.string.start_game));
+
+                mStartGameDialogFragment.show(getFragmentManager(),
+                        TAG_DIALOG_START_GAME,
+                        mStartGameDialogOnClickListener);
+
+            }
+        }
+    }
 
     private Drawable mWarningDrawable;
 
@@ -77,78 +129,14 @@ public class GameMenuFragment extends BaseFragment {
                 mPlayerNameList.getPlayerList());
 
 
-        mAddPlayer.setOnClickListener(mButtonsOnClickListener);
-        mStartGame.setOnClickListener(mButtonsOnClickListener);
         View header = inflater.inflate(R.layout.header_names, null);
 
         mPlayerList.addHeaderView(header);
         mPlayerList.setAdapter(mListAdapter);
-        mStartGameDialogFragment = CustomDialogFragment.newInstance(
-                getString(R.string.dialog_start_title),
-                getString(R.string.dialog_start_message),
-                getString(R.string.start_game));
+
         return view;
     }
 
-
-    private android.view.View.OnClickListener mButtonsOnClickListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.init_addPlayerButton:
-
-                    // add new player
-                    if (!ValidationHelper.isEditTextEmpty(mPlayerNameEditText,
-                            getString(R.string.warning_empty_field),
-                            mWarningDrawable) && !isNameAddedBefore(mPlayerNameEditText.getText()
-                            .toString())) {
-                        mPlayerNameList.getPlayerList().add(mPlayerNameEditText.getText()
-                                .toString());
-                        mPlayerNameEditText.setText("");
-                        mListAdapter.notifyDataSetChanged();
-
-                    } else if (isNameAddedBefore(mPlayerNameEditText.getText()
-                            .toString())) {
-                        mPlayerNameEditText.setError(getResources().getString(R.string.warning_player_name_added), mWarningDrawable);
-                    }
-                    break;
-                case R.id.init_roundsButton:
-                    if (!ValidationHelper.isEditTextEmpty(mRoundsEditText,
-                            getString(R.string.warning_empty_field),
-                            mWarningDrawable)) {
-                        if (mPlayerNameList.getPlayerList().isEmpty() || mPlayerNameList.getPlayerList().size() < 2) {
-                            Toast.makeText(mActivity,
-                                    getString(R.string.warning_need_players),
-                                    Toast.LENGTH_LONG).show();
-                            // if number of player where bigger than
-                            // round ask user to change it
-                        } else if (Integer.parseInt(mRoundsEditText.getText()
-                                .toString()) >= mPlayerNameList.getPlayerList().size()) {
-                            if (mWarningDialogFragment == null) {
-                                mWarningDialogFragment = CustomDialogFragment
-                                        .newInstance(
-                                                getString(R.string.dialog_warning_title),
-                                                getString(R.string.dialog_warning_message),
-                                                getString(R.string.dialog_start_button));
-                            }
-                            mWarningDialogFragment.show(getFragmentManager(),
-                                    TAG_DIALOG_WARNING,
-                                    mWarningDialogOnClickListener);
-                        } else {
-                            mStartGameDialogFragment.show(getFragmentManager(),
-                                    TAG_DIALOG_START_GAME,
-                                    mStartGameDialogOnClickListener);
-
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-        }
-    };
 
     private View.OnClickListener mStartGameDialogOnClickListener = new View.OnClickListener() {
 

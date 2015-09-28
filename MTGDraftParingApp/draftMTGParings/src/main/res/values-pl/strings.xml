@@ -41,7 +41,7 @@
     <!-- Dialog Fragment -->
     <!-- Dialog Start -->
     <string name="dialog_start_title">Rozpoczęcie gry</string>
-    <string name="dialog_start_message">Aby zacząć naciśnij przycisk</string>
+    <string name="dialog_start_message">Aby zacząć naciśnij przycisk\nLiczba graczy: %1$d\nLiczba rund: %2$d</string>
     <string name="dialog_start_button">Zamknij</string>
     <!-- Dialog Game End -->
     <string name="dialog_end_title">Gra zakończona</string>

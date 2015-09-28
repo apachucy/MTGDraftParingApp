@@ -41,7 +41,7 @@
     <!-- Dialog Fragment -->
     <!-- Dialog Start -->
     <string name="dialog_start_title">Game start</string>
-    <string name="dialog_start_message">To start parings press button</string>
+    <string name="dialog_start_message">To start parings press button\nNumber of players: %1$d\nNumber of rounds: %2$d</string>
     <string name="dialog_start_button">Close</string>
     <!-- Dialog Game End -->
     <string name="dialog_end_title">Game ended</string>
