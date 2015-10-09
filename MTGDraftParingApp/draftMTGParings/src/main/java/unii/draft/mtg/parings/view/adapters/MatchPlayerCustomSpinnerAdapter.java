@@ -59,7 +59,7 @@ public class MatchPlayerCustomSpinnerAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = layoutInflater
-                .inflate(R.layout.row_player_name, null);
+                .inflate(R.layout.row_player_name_spinner, null);
 
         TextView textView = (TextView) convertView.findViewById(R.id.row_player);
         textView.setText(mPlayerList.get(position).getPlayerName());

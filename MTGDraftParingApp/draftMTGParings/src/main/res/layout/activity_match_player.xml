@@ -94,7 +94,6 @@
             android:layout_marginTop="@dimen/button_padding">
 
 
-
             <Button
                 android:id="@+id/matchPlayer_CleanButton"
                 style="@style/button"
@@ -103,6 +102,7 @@
                 android:layout_marginBottom="@dimen/button_padding"
                 android:layout_marginTop="@dimen/button_padding"
                 android:text="@string/activity_paring_clean_paring" />
+
             <Button
                 android:id="@+id/matchPlayer_ParingButton"
                 style="@style/button"
@@ -110,9 +110,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/button_padding"
                 android:layout_marginTop="@dimen/button_padding"
-                android:text="@string/activity_paring_add_paring"
                 android:layout_toRightOf="@id/matchPlayer_CleanButton"
-                />
+                android:text="@string/activity_paring_add_paring" />
+
             <Button
                 android:id="@+id/matchPlayer_PlayButton"
                 style="@style/button"
