@@ -15,7 +15,6 @@ public class ParingAlgorithm implements IParingAlgorithm {
     private int mMaxRounds;
     private int mCurrentRound;
     private Player mPlayerWithBye;
-    private List<Player> mPlayersWithoutBye;
 
     /**
      * @param players list of players
@@ -100,55 +99,18 @@ public class ParingAlgorithm implements IParingAlgorithm {
             // game should end so return null
             return gameList;
         }
-        //List<Player> addedPlayers = new ArrayList<Player>();
-        //addedPlayers.addAll(mPlayers);
-        mPlayersWithoutBye = new ArrayList<>();
-        mPlayersWithoutBye.addAll(mPlayers);
+        List<Player> addedPlayers = new ArrayList<Player>();
+        addedPlayers.addAll(mPlayers);
         // someone needs bye
         if (mPlayers.size() % 2 == 1) {
 
             movePlayerWithByeOnLastPosition();
             mPlayerWithBye = mPlayers.get(mPlayers.size() - 1);
-            mPlayersWithoutBye.remove(mPlayerWithBye);
+            addedPlayers.remove(mPlayerWithBye);
 
         }
-        gameList = createCorrectParings(0, 0);
-
-        mCurrentRound++;
-
-        return gameList;
-    }
-
-    private List<Game> createCorrectParings(int i, int j) {
-        List<Player> addedPlayers = new ArrayList<>(mPlayersWithoutBye);
-        if (i != 0 && j != 0 && i != j) {
-            swap(i, j, addedPlayers);
-        }
-        List<Game> gameList = createGameParings(addedPlayers);
-        if (gameList.size() != mPlayersWithoutBye.size() / 2) {
-            if (j < addedPlayers.size() - 1) {
-                j++;
-            } else {
-                i++;
-                j = 0;
-            }
-            return createCorrectParings(i, j);
-        } else {
-            return gameList;
-        }
-    }
-
-    private void swap(int i, int j, List<Player> swapList) {
-        Player player = swapList.get(i);
-        swapList.set(i, swapList.get(j));
-        swapList.set(j, player);
-    }
-
-
-    private List<Game> createGameParings(List<Player> addedPlayers) {
-
         // Game list should have size players/2
-        List<Game> gameList = new ArrayList<Game>();
+        gameList = new ArrayList<Game>(mPlayers.size() / 2);
 
         for (int i = 0; i < mPlayers.size(); i++) {
             // get only two players name
@@ -172,10 +134,22 @@ public class ParingAlgorithm implements IParingAlgorithm {
                     addedPlayers.remove(player1);
                     addedPlayers.remove(player2);
                     paringPartner = null;
+                } else {
+                    if (addedPlayers.size() % 2 == 0) {
+                        Player player1 = mPlayers.get(i);
+                        addedPlayers.remove(player1);
+                        Player player2 = addedPlayers.get(0);//get first element
+                        addedPlayers.remove(player2);
+                        Game game = new Game(player1.getPlayerName(), player2.getPlayerName());
+                        gameList.add(game);
+                    }
                 }
             }
 
         }
+
+        mCurrentRound++;
+
         return gameList;
     }
 
