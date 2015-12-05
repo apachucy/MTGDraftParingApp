@@ -24,7 +24,8 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile ('com.github.worker8:tourguide:1.0.14-SNAPSHOT@aar'){
-        transitive=true
+    compile('com.github.worker8:tourguide:1.0.14-SNAPSHOT@aar') {
+        transitive = true
     }
+    compile files('libs/greendao-2.1.0.jar')
 }

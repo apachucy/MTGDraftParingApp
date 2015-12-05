@@ -14,7 +14,7 @@ public class Player {
 	 */
 	private String mPlayerName;
 	/**
-	 * How many match points player has
+	 * How many match points player has - main points
 	 */
 	private int mMatchPoints;
 	/**

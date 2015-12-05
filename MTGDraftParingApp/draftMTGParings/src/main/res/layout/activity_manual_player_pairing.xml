@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true"
 
-    tools:context="unii.draft.mtg.parings.MatchPlayerActivity">
+    tools:context="unii.draft.mtg.parings.ManualPlayerPairingActivity">
 
     <view
         android:id="@+id/toolbar"

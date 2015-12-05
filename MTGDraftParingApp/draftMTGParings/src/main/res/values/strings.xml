@@ -93,4 +93,12 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="select_player1">Select 1st player:</string>
     <string name="select_player2">Select 2nd player:</string>
     <string name="spinner_empty_player_list">No more players</string>
+
+    <!--Save Score Board-->
+    <string name="activity_save_score_board_info_text">Name played game:</string>
+    <string name="activity_save_score_board_info_small_text">You can watch saved scoreboard using settings</string>
+    <string name="activity_save_score_board_save">Save</string>
+    <string name="action_save">Save dashboard</string>
+    <string name="help_save_dashboard">After Game you can save score board</string>
+    <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
 </resources>

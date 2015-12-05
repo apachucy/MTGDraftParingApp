@@ -25,12 +25,12 @@ import unii.draft.mtg.parings.view.fragments.GameMenuFragment;
 import unii.draft.mtg.parings.view.fragments.SettingsFragment;
 
 
-public class GameMenuActivity extends BaseActivity implements IPlayerList{
+public class MainActivity extends BaseActivity implements IPlayerList{
 
-    private static final String TAG_FRAGMENT_GAME = GameMenuActivity.class
+    private static final String TAG_FRAGMENT_GAME = MainActivity.class
             .getName() + "TAG_FRAGMENT_GAME";
-    private static final String TAG_FRAGMENT_SETTINGS = GameMenuActivity.class.getName() + "TAG_FRAGMENT_SETTINGS";
-    private static final String TAG_DIALOG_INFO = GameMenuActivity.class
+    private static final String TAG_FRAGMENT_SETTINGS = MainActivity.class.getName() + "TAG_FRAGMENT_SETTINGS";
+    private static final String TAG_DIALOG_INFO = MainActivity.class
             .getName() + "TAG_DIALOG_INFO";
 
     private CustomDialogFragment mInfoDialogFragment;
@@ -45,7 +45,7 @@ public class GameMenuActivity extends BaseActivity implements IPlayerList{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gamers_initial);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mPlayerNameList = new ArrayList<String>();
         setSupportActionBar(mToolBar);

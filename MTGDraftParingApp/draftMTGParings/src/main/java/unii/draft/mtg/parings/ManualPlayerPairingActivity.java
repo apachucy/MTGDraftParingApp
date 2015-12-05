@@ -22,7 +22,7 @@ import unii.draft.mtg.parings.view.adapters.MatchPlayerCustomListAdapter;
 import unii.draft.mtg.parings.view.adapters.MatchPlayerCustomSpinnerAdapter;
 
 
-public class MatchPlayerActivity extends BaseActivity {
+public class ManualPlayerPairingActivity extends BaseActivity {
 
     @Bind(R.id.matchPlayer_firstPlayerSpinner)
     Spinner mPlayer1Spinner;
@@ -64,9 +64,9 @@ public class MatchPlayerActivity extends BaseActivity {
             mPlayerListAdapter.notifyDataSetChanged();
 
         } else if (mPlayerList == null || mPlayerList.isEmpty() || mPlayerList.get(0).getPlayerName().equals(getString(R.string.spinner_empty_player_list))) {
-            Toast.makeText(MatchPlayerActivity.this, getString(R.string.activity_paring_warning_empty_list), Toast.LENGTH_LONG).show();
+            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_empty_list), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(MatchPlayerActivity.this, getString(R.string.activity_paring_warning_equal_names), Toast.LENGTH_LONG).show();
+            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_equal_names), Toast.LENGTH_LONG).show();
 
         }
     }
@@ -76,16 +76,16 @@ public class MatchPlayerActivity extends BaseActivity {
     @OnClick(R.id.matchPlayer_PlayButton)
     void onStartGameButtonClicked(View view) {
         if (!mPlayerList.isEmpty() && mPlayerList.size() > 1) {
-            Toast.makeText(MatchPlayerActivity.this, getString(R.string.activity_paring_warning_paring_not_finished), Toast.LENGTH_LONG).show();
+            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_paring_not_finished), Toast.LENGTH_LONG).show();
         } else if (mPlayerList.size() > 1 && mPlayerList.get(0).hasBye()) {
-            Toast.makeText(MatchPlayerActivity.this, getString(R.string.activity_paring_warning_bye), Toast.LENGTH_LONG).show();
+            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_bye), Toast.LENGTH_LONG).show();
         } else {
             AlgorithmFactory.getInstance().setPlayerGameList(mGameList);
             //someone has a bye
             if (mPlayerList.size() == 1 && !mPlayerList.get(0).getPlayerName().equals(getString(R.string.spinner_empty_player_list))) {
                 AlgorithmFactory.getInstance().setPlayerWithBye(mPlayerList.get(0));
             }
-            Intent intent = new Intent(MatchPlayerActivity.this, ParingsActivity.class);
+            Intent intent = new Intent(ManualPlayerPairingActivity.this, ParingDashboardActivity.class);
             startActivity(intent);
             finish();
         }
@@ -103,7 +103,7 @@ public class MatchPlayerActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_match_player);
+        setContentView(R.layout.activity_manual_player_pairing);
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolBar);
