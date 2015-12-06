@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import unii.draft.mtg.parings.HistoryScoreBoardActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.config.BaseConfig;
+import unii.draft.mtg.parings.database.model.Draft;
+import unii.draft.mtg.parings.database.model.DraftDao;
+import unii.draft.mtg.parings.database.model.IDatabaseHelper;
+import unii.draft.mtg.parings.database.model.PlayerDao;
 import unii.draft.mtg.parings.sharedprefrences.ISettings;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.validation.ValidationHelper;
@@ -25,6 +33,7 @@ import unii.draft.mtg.parings.view.CustomTextWatcher;
 /**
  * Created by apachucy on 2015-09-25.
  */
+
 public class SettingsFragment extends BaseFragment {
     @Bind(R.id.settings_counterToggleButton)
     ToggleButton mCounterToggle;
@@ -155,6 +164,27 @@ public class SettingsFragment extends BaseFragment {
     EditText mFirstVibrationEditText;
     @Bind(R.id.settings_secondVibrationEditText)
     EditText mSecondVibrationEditText;
+
+    @OnClick(R.id.settings_removeScoreBoardsButton)
+    void onRemoveScoreBoardClicked(View view) {
+        PlayerDao playerDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getPlayerDao();
+        DraftDao draftDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getDraftDao();
+        playerDao.deleteAll();
+        draftDao.deleteAll();
+        Toast.makeText(mActivity, getString(R.string.message_score_boards_removed), Toast.LENGTH_LONG).show();
+    }
+
+    @OnClick(R.id.settings_displayScoreBoardsInfoTextView)
+    void onDisplayScoreBoardsClicked(View view) {
+        DraftDao draftDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getDraftDao();
+        List<Draft> draftList = draftDao.loadAll();
+        if (draftList == null || draftList.size() == 0) {
+            Toast.makeText(mActivity, getString(R.string.message_score_board_not_exists), Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent(mActivity, HistoryScoreBoardActivity.class);
+            startActivity(intent);
+        }
+    }
 
     private ISettings mSettingsSharedPreferences;
 

@@ -9,18 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import unii.draft.mtg.parings.MatchPlayerActivity;
-import unii.draft.mtg.parings.ParingsActivity;
+import unii.draft.mtg.parings.ManualPlayerPairingActivity;
+import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.algorithm.IAlgorithmConfigure;
 import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
@@ -149,11 +146,11 @@ public class GameMenuFragment extends BaseFragment {
                 if (SettingsPreferencesFactory.getInstance().areManualParings()) {
                     algorithmConfigure.setAlgorithm(new ManualParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsEditText.getText().toString())));
                     intent = new Intent(mActivity,
-                            MatchPlayerActivity.class);
+                            ManualPlayerPairingActivity.class);
                 } else {
                     algorithmConfigure.setAlgorithm(new ParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsEditText.getText().toString())));
                     intent = new Intent(mActivity,
-                            ParingsActivity.class);
+                            ParingDashboardActivity.class);
 
                 }
                 startActivity(intent);

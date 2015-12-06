@@ -4,12 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -21,12 +27,17 @@ import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.algorithm.AlgorithmFactory;
 import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
+import unii.draft.mtg.parings.config.BaseConfig;
+import unii.draft.mtg.parings.config.BundleConst;
+import unii.draft.mtg.parings.database.model.IDatabaseHelper;
+import unii.draft.mtg.parings.helper.ConverterToDataBase;
+import unii.draft.mtg.parings.helper.MenuHelper;
 import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
 import unii.draft.mtg.parings.view.adapters.PlayerAdapter;
+import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
 
-public class PlayerPositionActivity extends BaseActivity {
+public class ScoreBoardActivity extends BaseActivity {
 
     @Bind(R.id.player_position_roundTextView)
     TextView mRoundTextView;
@@ -41,13 +52,14 @@ public class PlayerPositionActivity extends BaseActivity {
             mCustomDialogFragment
                     .show(getSupportFragmentManager(), TAG_DIALOG);
         } else {
+
             Intent intent = null;
             if (SettingsPreferencesFactory.getInstance().areManualParings()) {
-                intent = new Intent(PlayerPositionActivity.this,
-                        MatchPlayerActivity.class);
+                intent = new Intent(ScoreBoardActivity.this,
+                        ManualPlayerPairingActivity.class);
             } else {
-                intent = new Intent(PlayerPositionActivity.this,
-                        ParingsActivity.class);
+                intent = new Intent(ScoreBoardActivity.this,
+                        ParingDashboardActivity.class);
             }
             startActivity(intent);
             finish();
@@ -62,22 +74,24 @@ public class PlayerPositionActivity extends BaseActivity {
     private IParingAlgorithm mAlgorithm;
     private PlayerAdapter mAdapter;
     private CustomDialogFragment mCustomDialogFragment;
-    private static final String TAG_DIALOG = PlayerPositionActivity.class
+    private static final String TAG_DIALOG = ScoreBoardActivity.class
             .getName() + "TAG_DIALOG";
 
     // help library
     private TourGuide mTutorialHandler = null;
 
+    List<Player> mPlayerList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player_position);
+        setContentView(R.layout.activity_scoreboard);
         ButterKnife.bind(this);
 
         mAlgorithm = AlgorithmFactory.getInstance();
-        List<Player> playerList = mAlgorithm.getSortedPlayerList();
-        mAdapter = new PlayerAdapter(this, playerList);
+        mPlayerList = mAlgorithm.getSortedPlayerList();
+        mAdapter = new PlayerAdapter(this, mPlayerList);
         View header = getLayoutInflater().inflate(R.layout.header_player_list,
                 null);
 
@@ -88,7 +102,6 @@ public class PlayerPositionActivity extends BaseActivity {
                 + mAlgorithm.getCurrentRound() + " "
                 + getString(R.string.text_from) + " "
                 + +mAlgorithm.getMaxRound());
-
 
 
         setSupportActionBar(mToolBar);
@@ -102,7 +115,7 @@ public class PlayerPositionActivity extends BaseActivity {
             mNextGameButton.setText(getString(R.string.text_end_round));
             mWinnerTextView.setVisibility(View.VISIBLE);
             mWinnerTextView.setText(getString(R.string.text_winner) + " "
-                    + playerList.get(0).getPlayerName());
+                    + mPlayerList.get(0).getPlayerName());
         } else {
             mWinnerTextView.setVisibility(View.INVISIBLE);
 
@@ -113,9 +126,23 @@ public class PlayerPositionActivity extends BaseActivity {
                 getString(R.string.dialog_start_button), mOnDialogButtonClick);
 
 
-        setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView), (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView));
-
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.dashboard, menu);
+        setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView), (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView), (ImageView) menu.getItem(0).getActionView());
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
     private OnClickListener mOnDialogButtonClick = new OnClickListener() {
 
         @Override
@@ -128,15 +155,22 @@ public class PlayerPositionActivity extends BaseActivity {
     };
 
 
-    private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView) {
+    private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView, ImageView saveButton) {
+        // just adding some padding to look better
+        int padding = MenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
+
+        saveButton.setPadding(padding, padding, padding, padding);
+
+        // set an image
+        saveButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_save));
 
         if (SettingsPreferencesFactory.getInstance().isFirstRun()) {
             SettingsPreferencesFactory.getInstance().setFirstRun(false);
-            Sequence sequence = null;
-            sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.help_pmw), pmwTextView, Gravity.LEFT | Gravity.BOTTOM),
+            Sequence sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.help_pmw), pmwTextView, Gravity.LEFT | Gravity.BOTTOM),
                     bindTourGuideButton(getString(R.string.help_omw), omwTextView, Gravity.LEFT | Gravity.BOTTOM),
                     bindTourGuideButton(getString(R.string.help_pgw), pgwTextView, Gravity.LEFT | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_ogw), ogwTextView, Gravity.LEFT | Gravity.BOTTOM)
+                    bindTourGuideButton(getString(R.string.help_ogw), ogwTextView, Gravity.LEFT | Gravity.BOTTOM),
+                    bindTourGuideButton(getString(R.string.help_save_dashboard), saveButton)
             ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -145,6 +179,18 @@ public class PlayerPositionActivity extends BaseActivity {
             })).setContinueMethod(Sequence.ContinueMethod.OverlayListener).setDefaultPointer(new Pointer()).build();
             mTutorialHandler = TourGuide.init(this).playInSequence(sequence);
         }
+        saveButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
+                    Intent intent = null;
+                    intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
+                    startActivityForResult(intent, BaseConfig.DRAFT_NAME_SET);
+                } else {
+                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
     }
@@ -155,5 +201,22 @@ public class PlayerPositionActivity extends BaseActivity {
         setIntent.addCategory(Intent.CATEGORY_HOME);
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(setIntent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+        if (resultCode == RESULT_OK && requestCode == BaseConfig.DRAFT_NAME_SET) {
+            if (data.getExtras().containsKey(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME)) {
+                String savedGameName = data.getExtras().getString(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME);
+
+                SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
+                String currentDateandTime = sdf.format(new Date());
+                ConverterToDataBase.saveToDd(((IDatabaseHelper) getApplication()).getDaoSession(), mPlayerList, savedGameName, currentDateandTime);
+                Toast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), Toast.LENGTH_LONG).show();
+            }
+        }
+
     }
 }

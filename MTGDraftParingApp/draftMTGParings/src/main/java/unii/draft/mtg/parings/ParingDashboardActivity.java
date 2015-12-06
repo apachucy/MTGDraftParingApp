@@ -26,7 +26,7 @@ import unii.draft.mtg.parings.view.CounterClass;
 import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
 import unii.draft.mtg.parings.view.adapters.ParingAdapter;
 
-public class ParingsActivity extends BaseActivity {
+public class ParingDashboardActivity extends BaseActivity {
 
     @Bind(R.id.paring_counterTextView)
     TextView mCounterTextView;
@@ -55,8 +55,8 @@ public class ParingsActivity extends BaseActivity {
         updatePlayerPoints();
         mStatisticCalculation = new StatisticCalculation(mParingAlgorithm);
         mStatisticCalculation.calculateAll();
-        Intent intent = new Intent(ParingsActivity.this,
-                PlayerPositionActivity.class);
+        Intent intent = new Intent(ParingDashboardActivity.this,
+                ScoreBoardActivity.class);
         startActivity(intent);
         finish();
     }
@@ -79,7 +79,7 @@ public class ParingsActivity extends BaseActivity {
     private long mVibrationDuration;
 
     private CustomDialogFragment mCustomDialogFragment;
-    private static final String TAG_DIALOG = GameMenuActivity.class.getName()
+    private static final String TAG_DIALOG = MainActivity.class.getName()
             + "TAG_DIALOG";
     private IStatisticCalculation mStatisticCalculation;
 
@@ -87,7 +87,7 @@ public class ParingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parings);
+        setContentView(R.layout.activity_paring_dashboard);
         ButterKnife.bind(this);
 
 

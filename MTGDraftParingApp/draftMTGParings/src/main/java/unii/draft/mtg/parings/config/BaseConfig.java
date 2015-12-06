@@ -34,4 +34,12 @@ public interface BaseConfig {
 	//Temporary solution for showcase library
 	public static final int MARGIN_NOT_SET = 0;
 	public static final int MARGIN_BOTTOM = 200;
+
+	//Database Name
+	public static final String DATABASE_NAME = "DRAFT_SCOREBOARD";
+	//Activity result
+	public static final int DRAFT_NAME_SET = 1;
+	//pattern for current date
+	public static final String DATE_PATTERN = "yyyy-MM-dd";
+
 }

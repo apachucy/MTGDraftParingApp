@@ -1,0 +1,9 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+//Main class of the module
+mainClassName = "unii.draft.mtg.parings.DatabaseDaoGenerator"
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

@@ -93,4 +93,23 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="select_player1">Select 1st player:</string>
     <string name="select_player2">Select 2nd player:</string>
     <string name="spinner_empty_player_list">No more players</string>
+
+    <!--Save Score Board-->
+    <string name="activity_save_score_board_info_text">Score board name:</string>
+    <string name="activity_save_score_board_info_small_text">You can watch saved score board using settings</string>
+    <string name="activity_save_score_board_save">Save</string>
+    <string name="action_save">Save dashboard</string>
+    <string name="help_save_dashboard">After Game you can save score board</string>
+    <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
+    <string name="settings_remove_scoreboards">Remove all score boards</string>
+    <string name="settings_remove_text">Remove</string>
+    <string name="settings_other">Other settings</string>
+    <string name="settings_display_scoreboards">Display score boards</string>
+    <string name="history_score_board_row_draft_date">Date: %1$s</string>
+    <string name="history_score_board_row_draft_best_player">Won: %1$s</string>
+    <string name="title_activity_history_score_board" translatable="false">HistoryScoreBoardActivity</string>
+    <string name="message_score_boards_removed">All score boards were removed</string>
+    <string name="message_score_board_not_exists">No score board to display</string>
+    <string name="message_score_board_saved">Score board successful saved</string>
+    <string name="action_show_list">Show score board list</string>
 </resources>

@@ -93,5 +93,21 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="spinner_empty_player_list">Koniec zawodników</string>
     <string name="tutorial_info">Infromacje na temat wykorzystanych bibliotek</string>
     <string name="tutorial_settings">Konfiguracja ustawień draftu</string>
+    <string name="action_save">Zapisz draft</string>
+    <string name="action_show_list">Wyświetl listę draftów</string>
+    <string name="activity_save_score_board_info_small_text">Lista rozegranych draftów znajduje się w ustawieniach</string>
+    <string name="activity_save_score_board_info_text">Nazwa draftu:</string>
+    <string name="activity_save_score_board_save">Zapisz</string>
+    <string name="help_save_dashboard">Dopiero po skończonym drafcie możesz go zapisać</string>
+    <string name="history_score_board_row_draft_best_player">Wygrał: %1$s</string>
+    <string name="history_score_board_row_draft_date">Data: %1$s</string>
+    <string name="message_score_board_not_exists">Brak list draftów</string>
+    <string name="message_score_board_saved">Draft zapisany</string>
+    <string name="message_score_boards_removed">Wszystkie drafty zostały usunięte</string>
+    <string name="settings_other">Pozostałe ustawienia</string>
+    <string name="settings_display_scoreboards">Wyświetl listę draftów</string>
+    <string name="settings_remove_scoreboards">Usuń wszystkie drafty</string>
+    <string name="settings_remove_text">Usuń</string>
+    <string name="warning_save_dashboard">Dopiero po wszystkich rozgrywkach możesz zapisać draft</string>
 
 </resources>

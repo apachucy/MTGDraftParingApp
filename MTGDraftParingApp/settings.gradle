@@ -1,1 +1,1 @@
-include ':draftMTGParings'
+include ':draftMTGParings', ':greendaogenerator'

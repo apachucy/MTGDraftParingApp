@@ -6,14 +6,21 @@ import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
 import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
 import unii.draft.mtg.parings.config.BaseConfig;
 import unii.draft.mtg.parings.config.SettingsPreferencesConst;
+import unii.draft.mtg.parings.database.model.DaoMaster;
+import unii.draft.mtg.parings.database.model.DaoSession;
+import unii.draft.mtg.parings.database.model.IDatabaseHelper;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.sharedprefrences.SettingsSharedPreferences;
 import unii.draft.mtg.parings.sharedprefrences.SharedPreferencesManager;
 import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
 
-public class AppConfig extends Application  implements IAlgorithmConfigure{
+public class AppConfig extends Application  implements IAlgorithmConfigure, IDatabaseHelper{
 
-	
+	DaoMaster.DevOpenHelper mHelper;
+	SQLiteDatabase mDb;
+	DaoMaster mDaoMaster;
+	DaoSession mDaoSession;
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -26,7 +33,12 @@ public class AppConfig extends Application  implements IAlgorithmConfigure{
 		if (SettingsPreferencesFactory.getInstance().isFirstRun()) {
 			defaultSharedPreferencesConfig();
 		}
-		
+		if (mHelper == null) {
+			mHelper = new DaoMaster.DevOpenHelper(this, BaseConfig.DATABASE_NAME, null);
+			mDb = mHelper.getWritableDatabase();
+			mDaoMaster = new DaoMaster(mDb);
+			mDaoSession = mDaoMaster.newSession();
+		}
 		
 	}
 	
@@ -56,5 +68,10 @@ public class AppConfig extends Application  implements IAlgorithmConfigure{
 	@Override
 	public IParingAlgorithm getInstance() {
 		return AlgorithmFactory.getInstance();
+	}
+
+	@Override
+	public DaoSession getDaoSession() {
+		return mDaoSession;
 	}
 }
