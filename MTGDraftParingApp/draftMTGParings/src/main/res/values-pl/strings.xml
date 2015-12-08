@@ -4,9 +4,9 @@
     <string name="app_name">MTG Draft Calculator</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_info">Informacje</string>
-    <string name="hint_player_name">Imię gracza:</string>
+    <string name="hint_player_name">Nazwa gracza</string>
     <string name="add_item">Dodaj</string>
-    <string name="hint_rounds">Rundy:</string>
+    <string name="hint_rounds">Liczba Rund</string>
     <string name="start_game">Start</string>
     <string name="text_end_round">Koniec</string>
     <string name="warning_empty_field">Pole nie może być puste</string>

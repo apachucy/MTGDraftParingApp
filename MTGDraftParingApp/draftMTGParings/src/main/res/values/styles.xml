@@ -7,7 +7,7 @@
 
 
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -18,13 +18,13 @@
 
         <!-- colorPrimaryDark is used for the status bar -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="windowActionBar">false</item>
 
         <!-- colorAccent is used as the default value for colorControlActivated,
              which is used to tint widgets -->
         <item name="colorAccent">@color/accent</item>
 
         <item name="android:windowBackground">@color/windowBackground</item>
-        <item name="windowActionBar">false</item>
     </style>
 
     <!-- Application theme. -->

@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="unii.draft.mtg.parings"
-    android:versionCode="15"
-    android:versionName="0.9.0" >
-
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+    android:versionCode="16"
+    android:versionName="0.9.1">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-
-
-
     <application
         android:name=".AppConfig"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,8 +35,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".HistoryScoreBoardActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

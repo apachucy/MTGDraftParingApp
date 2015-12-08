@@ -8,74 +8,95 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/init_playerNameTextView"
-            style="@style/textView"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/init_playerContainer"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/init_playerNameEditText"
             android:layout_alignParentLeft="true"
-            android:text="@string/hint_player_name" />
+            android:layout_alignParentStart="true"
+            android:gravity="center">
 
-        <EditText
-            android:id="@id/init_playerNameEditText"
-            style="@style/editText"
-            android:layout_width="@dimen/edit_text_width"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/init_playerNameTextInput"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/standard_margin">
+
+                <EditText
+                    style="@style/editText"
+                    android:layout_width="@dimen/edit_text_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="@dimen/text_view_margin_settings_small"
+                    android:layout_marginLeft="@dimen/text_view_margin_settings_small"
+                    android:layout_marginRight="@dimen/text_view_margin_settings_small"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:hint="@string/hint_player_name"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/init_addPlayerButton"
+                style="@style/buttonSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_view_margin_settings_small"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_toEndOf="@id/init_playerNameTextInput"
+                android:layout_toRightOf="@id/init_playerNameTextInput"
+                android:text="@string/add_item" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/init_roundsContainer"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/text_view_margin_settings_small"
-            android:layout_marginLeft="@dimen/text_view_margin_settings_small"
-            android:layout_marginRight="@dimen/text_view_margin_settings_small"
-            android:layout_toRightOf="@id/init_playerNameTextView"
-            android:inputType="text" />
+            android:layout_below="@id/init_playerContainer"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/init_addPlayerButton"
-            style="@style/buttonSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/init_playerNameEditText"
-            android:layout_toRightOf="@id/init_playerNameEditText"
-            android:text="@string/add_item" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/init_roundsTextInput"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
+                <EditText
+                    style="@style/editText"
+                    android:layout_width="@dimen/edit_text_width"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/init_playerNameTextInput"
+                    android:layout_marginBottom="@dimen/text_view_margin_settings_small"
+                    android:layout_marginLeft="@dimen/text_view_margin_settings_small"
+                    android:layout_marginRight="@dimen/text_view_margin_settings_small"
+                    android:hint="@string/hint_rounds"
+                    android:inputType="number"
+                    android:maxLength="3" />
+            </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/init_roundsTextView"
-            style="@style/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/init_roundsEditText"
-            android:layout_alignParentLeft="true"
-            android:text="@string/hint_rounds" />
+            <Button
+                android:id="@+id/init_roundsButton"
+                style="@style/buttonSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_view_margin_settings_small"
+                android:layout_toEndOf="@id/init_roundsTextInput"
+                android:layout_toRightOf="@id/init_roundsTextInput"
+                android:text="@string/start_game" />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@id/init_roundsEditText"
-            style="@style/editText"
-            android:layout_width="@dimen/edit_text_width"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/init_playerNameEditText"
-            android:layout_marginBottom="@dimen/text_view_margin_settings_small"
-            android:layout_marginLeft="@dimen/text_view_margin_settings_small"
-            android:layout_marginRight="@dimen/text_view_margin_settings_small"
-            android:layout_marginTop="@dimen/standard_margin"
-            android:layout_toRightOf="@id/init_playerNameTextView"
-            android:inputType="number"
-            android:maxLength="3" />
-
-        <Button
-            android:id="@+id/init_roundsButton"
-            style="@style/buttonSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/init_roundsEditText"
-            android:layout_toRightOf="@id/init_roundsEditText"
-            android:text="@string/start_game" />
     </RelativeLayout>
+
 
     <ListView
         android:id="@+id/init_playerList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/init_mainContainer"
         android:layout_marginTop="@dimen/standard_margin" />
