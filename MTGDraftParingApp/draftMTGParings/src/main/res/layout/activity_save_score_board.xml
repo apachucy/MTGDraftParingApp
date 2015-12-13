@@ -21,38 +21,31 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <TextView
-            android:id="@+id/save_score_boardInfoTextView"
-            style="@style/textView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="@dimen/standard_margin"
-            android:layout_marginRight="@dimen/standard_margin"
-            android:text="@string/activity_save_score_board_info_text"
-            android:textStyle="bold" />
 
-
-        <EditText
-            android:id="@+id/save_score_boardNameEditText"
-            style="@style/editText"
-            android:layout_width="@dimen/edit_text_width"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/save_score_boardTextInputLayout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/save_score_boardInfoTextView"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/text_view_margin_settings_small"
             android:layout_marginLeft="@dimen/text_view_margin_settings_small"
             android:layout_marginRight="@dimen/text_view_margin_settings_small"
-            android:layout_marginTop="@dimen/standard_margin" />
+            android:layout_marginTop="@dimen/standard_margin">
+
+            <EditText
+                style="@style/editText"
+                android:layout_width="@dimen/edit_text_width_big"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/save_score_boardInfoTextView"
+                android:hint="@string/activity_save_score_board_info_text" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/save_score_board_acceptButton"
             style="@style/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/save_score_boardNameEditText"
+            android:layout_below="@+id/save_score_boardTextInputLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/text_view_margin_settings_small"
             android:layout_marginTop="@dimen/text_view_margin_settings_small"

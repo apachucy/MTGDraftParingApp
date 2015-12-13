@@ -95,7 +95,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="spinner_empty_player_list">No more players</string>
 
     <!--Save Score Board-->
-    <string name="activity_save_score_board_info_text">Score board name:</string>
+    <string name="activity_save_score_board_info_text">Score board name</string>
     <string name="activity_save_score_board_info_small_text">You can watch saved score board using settings</string>
     <string name="activity_save_score_board_save">Save</string>
     <string name="action_save">Save dashboard</string>
@@ -107,9 +107,12 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="settings_display_scoreboards">Display score boards</string>
     <string name="history_score_board_row_draft_date">Date: %1$s</string>
     <string name="history_score_board_row_draft_best_player">Won: %1$s</string>
-    <string name="title_activity_history_score_board" translatable="false">HistoryScoreBoardActivity</string>
     <string name="message_score_boards_removed">All score boards were removed</string>
     <string name="message_score_board_not_exists">No score board to display</string>
     <string name="message_score_board_saved">Score board successful saved</string>
     <string name="action_show_list">Show score board list</string>
+    <!--Modify App UI -->
+    <string name="action_countdown">Countdown</string>
+    <string name="message_action_countdown_started">Countdown...</string>
+    <string name="message_action_countdown_cancel">Cancelled countdown</string>
 </resources>

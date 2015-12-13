@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_content"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/toolbar"
@@ -23,42 +24,52 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <TextView
-            android:id="@+id/player_position_roundTextView"
-            style="@style/textView"
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/player_position_roundTextView"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/standard_margin" />
+
+            <TextView
+                android:id="@+id/player_position_winnerTextView"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/player_position_roundTextView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:drawableLeft="@drawable/ic_cup"
+                android:drawableStart="@drawable/ic_cup" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/player_position_playerListView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/player_position_winnerTextView"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:scrollbars="vertical" />
+
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/paring_nextRound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/standard_margin"
-            android:text="TextView" />
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/floating_button_margin"
+            android:layout_marginRight="@dimen/floating_button_margin"
+            android:src="@drawable/ic_navigate_next"
+            app:layout_anchor="@id/player_position_playerListView"
+            app:layout_anchorGravity="bottom|right|end" />
 
-        <TextView
-            android:id="@+id/player_position_winnerTextView"
-            style="@style/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/player_position_roundTextView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/standard_margin"
-            android:drawableLeft="@drawable/ic_cup"
-            android:text="TextView" />
 
-        <Button
-            android:id="@+id/player_position_nextGameButton"
-            style="@style/buttonSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/player_position_winnerTextView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/standard_margin"
-            android:text="@string/text_next" />
+    </android.support.design.widget.CoordinatorLayout>
 
-        <ListView
-            android:id="@+id/player_position_playerListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/player_position_nextGameButton"
-            android:layout_marginTop="@dimen/standard_margin"/>
-    </RelativeLayout>
 </RelativeLayout>

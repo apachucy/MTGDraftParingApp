@@ -6,6 +6,8 @@
 
     <!-- EditText dimen -->
     <dimen name="edit_text_width">150dp</dimen>
+    <dimen name="edit_text_width_big">180dp</dimen>
+
     <dimen name="settings_edit_text_width">60dp</dimen>
     <!-- defaults -->
     <dimen name="standard_margin">15dp</dimen>
@@ -32,4 +34,7 @@
 
     <!-- Spinner Style-->
     <dimen name="spinner_padding_small">5dp</dimen>
+    <!-- Empty Footer -->
+    <dimen name="footer_height">64dp</dimen>
+    <dimen name="floating_button_margin">4dp</dimen>
 </resources>

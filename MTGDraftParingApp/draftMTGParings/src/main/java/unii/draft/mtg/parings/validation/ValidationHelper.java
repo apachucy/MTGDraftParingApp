@@ -77,6 +77,7 @@ public class ValidationHelper {
             }
             return true;
         }
+        textInputLayout.setError(null);
         return false;
     }
 

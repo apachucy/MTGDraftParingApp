@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unii.draft.mtg.parings.config.BaseConfig;
+import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 
-public class Player {
+public class Player  implements IAdapterItem{
 
     private List<Game> mPlayedGame;
 
@@ -44,7 +45,6 @@ public class Player {
      * Overall game win by oponents %
      */
     private float mOponentsGamesOverallWin;
-
 
     public Player(unii.draft.mtg.parings.database.model.Player player) {
         mPlayerName = player.getPlayerName();
@@ -157,5 +157,12 @@ public class Player {
 
     public void setOponentsGamesOverallWin(float mOponentsGamesOverallWin) {
         this.mOponentsGamesOverallWin = mOponentsGamesOverallWin;
+    }
+
+
+
+    @Override
+    public int getItemType() {
+        return ItemType.ITEM;
     }
 }

@@ -120,7 +120,7 @@ public class CustomDialogFragment extends DialogFragment {
 
 				@Override
 				public void onClick(View v) {
-					dismiss();
+					dismissAllowingStateLoss();
 				}
 			};
 		}

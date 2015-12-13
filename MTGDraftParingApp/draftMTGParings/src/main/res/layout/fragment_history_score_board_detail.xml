@@ -4,11 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/player_position_playerListView"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/player_position_nextGameButton"
-        android:layout_marginTop="@dimen/standard_margin" />
+        android:layout_marginTop="@dimen/standard_margin"
+        android:scrollbars="vertical" />
 </RelativeLayout>

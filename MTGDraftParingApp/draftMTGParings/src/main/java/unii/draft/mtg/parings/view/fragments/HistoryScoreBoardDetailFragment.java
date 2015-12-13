@@ -2,10 +2,11 @@ package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +18,11 @@ import unii.draft.mtg.parings.config.BundleConst;
 import unii.draft.mtg.parings.database.model.Draft;
 import unii.draft.mtg.parings.database.model.DraftDao;
 import unii.draft.mtg.parings.database.model.IDatabaseHelper;
+import unii.draft.mtg.parings.pojo.ItemFooter;
+import unii.draft.mtg.parings.pojo.ItemHeader;
 import unii.draft.mtg.parings.pojo.Player;
-import unii.draft.mtg.parings.view.adapters.PlayerAdapter;
+import unii.draft.mtg.parings.view.adapters.IAdapterItem;
+import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 
 /**
  * Created by Unii on 2015-12-06.
@@ -26,13 +30,13 @@ import unii.draft.mtg.parings.view.adapters.PlayerAdapter;
 public class HistoryScoreBoardDetailFragment extends BaseFragment {
 
     private Activity mContext;
-    private PlayerAdapter mAdapter;
-    List<Player> mPlayerList;
-
     @Bind(R.id.player_position_playerListView)
-    ListView mPlayerListView;
+    RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     private long mDraftKey;
+    List<IAdapterItem> mPlayerScoreBoardList;
 
 
     @Override
@@ -54,17 +58,22 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         DraftDao draftDao = ((IDatabaseHelper) mContext.getApplication()).getDaoSession().getDraftDao();
 
         Draft draft = draftDao.load(mDraftKey);
-        mPlayerList = new ArrayList<>();
+        List<Player> playerList = new ArrayList<>();
         for (unii.draft.mtg.parings.database.model.Player player : draft.getPlayers()) {
-            mPlayerList.add(new Player(player));
+            playerList.add(new Player(player));
         }
 
-        mAdapter = new PlayerAdapter(mContext, mPlayerList);
-        View header = mContext.getLayoutInflater().inflate(R.layout.header_player_list,
-                null);
+        mPlayerScoreBoardList = new ArrayList<>();
+        mPlayerScoreBoardList.add(new ItemHeader());
+        mPlayerScoreBoardList.addAll(playerList);
+        mPlayerScoreBoardList.add(new ItemFooter());
+        mAdapter = new PlayerScoreboardAdapter(mContext, mPlayerScoreBoardList);
 
-        mPlayerListView.addHeaderView(header);
-        mPlayerListView.setAdapter(mAdapter);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(mContext);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
         return view;
     }
 

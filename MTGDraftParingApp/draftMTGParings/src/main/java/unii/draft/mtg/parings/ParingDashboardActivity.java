@@ -2,12 +2,17 @@ package unii.draft.mtg.parings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -19,12 +24,13 @@ import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
 import unii.draft.mtg.parings.algorithm.IStatisticCalculation;
 import unii.draft.mtg.parings.algorithm.StatisticCalculation;
 import unii.draft.mtg.parings.config.BaseConfig;
+import unii.draft.mtg.parings.helper.MenuHelper;
 import unii.draft.mtg.parings.pojo.Game;
 import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.view.CounterClass;
+import unii.draft.mtg.parings.view.adapters.PlayerMatchParingAdapter;
 import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
-import unii.draft.mtg.parings.view.adapters.ParingAdapter;
 
 public class ParingDashboardActivity extends BaseActivity {
 
@@ -33,23 +39,14 @@ public class ParingDashboardActivity extends BaseActivity {
     @Bind(R.id.paring_roundTextView)
     TextView mRoundTextView;
     @Bind(R.id.paring_paringListView)
-    ListView mParingListView;
+    RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
-    @Bind(R.id.paring_startCounterButton)
-    Button mStartButton;
+    @Bind(R.id.paring_nextRound)
+    FloatingActionButton mFloatingActionButton;
 
-    @OnClick(R.id.paring_startCounterButton)
-    void onStartButtonClicked(View view) {
-        if (!isCountStarted) {
-            isCountStarted = true;
-            mCounterClass.start();
-        }
-    }
-
-    @Bind(R.id.paring_endRoundButon)
-    Button mEndRoundButton;
-
-    @OnClick(R.id.paring_endRoundButon)
+    @OnClick(R.id.paring_nextRound)
     void onEndRoundClicked(View view) {
         updateGameResults();
         updatePlayerPoints();
@@ -64,7 +61,6 @@ public class ParingDashboardActivity extends BaseActivity {
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
-    private ParingAdapter mParingAdapter;
 
     private List<Game> mGameList;
     // setting time and count down
@@ -118,13 +114,11 @@ public class ParingDashboardActivity extends BaseActivity {
 
             mTimePerRound = SettingsPreferencesFactory.getInstance()
                     .getTimePerRound();
-            mStartButton.setVisibility(View.VISIBLE);
             mCounterClass = new CounterClass(this, mTimePerRound,
                     BaseConfig.DEFAULT_COUNTER_INTERVAL, mCounterTextView,
                     mFirstVibration, mSecondVibration, mVibrationDuration);
         } else {
             mTimePerRound = 0;
-            mStartButton.setVisibility(View.GONE);
             mCounterTextView.setVisibility(View.INVISIBLE);
         }
 
@@ -140,14 +134,56 @@ public class ParingDashboardActivity extends BaseActivity {
                     mDialogButtonClickListener);
             mCustomDialogFragment.show(getSupportFragmentManager(), TAG_DIALOG);
         }
-        mParingAdapter = new ParingAdapter(this, mGameList);
+        mAdapter = new PlayerMatchParingAdapter(this, mGameList);
         mRoundTextView.setText(getString(R.string.text_round) + " "
                 + mParingAlgorithm.getCurrentRound());
-        mParingListView.setAdapter(mParingAdapter);
-
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.paring_dashboard, menu);
+        setMenuActions((ImageView) menu.getItem(0).getActionView());
+
+        return true;
+    }
+
+    private void setMenuActions(ImageView hourGlassButton) {
+        // just adding some padding to look better
+        int padding = MenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
+
+        hourGlassButton.setPadding(padding, padding, padding, padding);
+
+        // set an image
+        hourGlassButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_hourglass));
+
+
+        hourGlassButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isCountStarted) {
+                    isCountStarted = true;
+                    mCounterClass.start();
+                    Toast.makeText(ParingDashboardActivity.this, getString(R.string.message_action_countdown_started), Toast.LENGTH_SHORT).show();
+                } else {
+                    isCountStarted = false;
+                    mCounterClass.cancel();
+                    Toast.makeText(ParingDashboardActivity.this, getString(R.string.message_action_countdown_cancel), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     private void updateGameResults() {
         for (Game g : mGameList) {
@@ -165,6 +201,10 @@ public class ParingDashboardActivity extends BaseActivity {
 
     private void updatePlayerPoints() {
         List<Player> playerList = mParingAlgorithm.getSortedPlayerList();
+        //Remove dummy decorator, unused element
+        if (mGameList.get(mGameList.size() - 1).getPlayerNameA().equals("") && mGameList.get(mGameList.size() - 1).getPlayerNameB().equals("")) {
+            mGameList.remove(mGameList.size() - 1);
+        }
         for (Player p : playerList) {
 
             // player has bye

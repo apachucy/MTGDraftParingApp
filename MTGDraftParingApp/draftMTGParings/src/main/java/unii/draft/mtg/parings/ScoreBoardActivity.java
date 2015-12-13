@@ -2,19 +2,20 @@ package unii.draft.mtg.parings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,9 +33,12 @@ import unii.draft.mtg.parings.config.BundleConst;
 import unii.draft.mtg.parings.database.model.IDatabaseHelper;
 import unii.draft.mtg.parings.helper.ConverterToDataBase;
 import unii.draft.mtg.parings.helper.MenuHelper;
+import unii.draft.mtg.parings.pojo.ItemFooter;
+import unii.draft.mtg.parings.pojo.ItemHeader;
 import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.view.adapters.PlayerAdapter;
+import unii.draft.mtg.parings.view.adapters.IAdapterItem;
+import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
 
 public class ScoreBoardActivity extends BaseActivity {
@@ -43,10 +47,8 @@ public class ScoreBoardActivity extends BaseActivity {
     TextView mRoundTextView;
     @Bind(R.id.player_position_winnerTextView)
     TextView mWinnerTextView;
-    @Bind(R.id.player_position_nextGameButton)
-    Button mNextGameButton;
 
-    @OnClick(R.id.player_position_nextGameButton)
+    @OnClick(R.id.paring_nextRound)
     void onNextGameButtonClicked(View view) {
         if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
             mCustomDialogFragment
@@ -66,13 +68,16 @@ public class ScoreBoardActivity extends BaseActivity {
         }
     }
 
+
     @Bind(R.id.player_position_playerListView)
-    ListView mPlayerListView;
+    RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
     private IParingAlgorithm mAlgorithm;
-    private PlayerAdapter mAdapter;
     private CustomDialogFragment mCustomDialogFragment;
     private static final String TAG_DIALOG = ScoreBoardActivity.class
             .getName() + "TAG_DIALOG";
@@ -81,7 +86,7 @@ public class ScoreBoardActivity extends BaseActivity {
     private TourGuide mTutorialHandler = null;
 
     List<Player> mPlayerList;
-
+    List<IAdapterItem> mPlayerScoreBoardList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +96,16 @@ public class ScoreBoardActivity extends BaseActivity {
 
         mAlgorithm = AlgorithmFactory.getInstance();
         mPlayerList = mAlgorithm.getSortedPlayerList();
-        mAdapter = new PlayerAdapter(this, mPlayerList);
-        View header = getLayoutInflater().inflate(R.layout.header_player_list,
-                null);
+        mPlayerScoreBoardList = new ArrayList<>();
+        mPlayerScoreBoardList.add(new ItemHeader());
+        mPlayerScoreBoardList.addAll(mPlayerList);
+        mPlayerScoreBoardList.add(new ItemFooter());
+        mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
 
-        mPlayerListView.addHeaderView(header);
-        mPlayerListView.setAdapter(mAdapter);
-
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
         mRoundTextView.setText(getString(R.string.text_after_game) + " "
                 + mAlgorithm.getCurrentRound() + " "
                 + getString(R.string.text_from) + " "
@@ -112,7 +120,6 @@ public class ScoreBoardActivity extends BaseActivity {
         // when there was last game change button name
         // show winner
         if (mAlgorithm.getCurrentRound() == mAlgorithm.getMaxRound()) {
-            mNextGameButton.setText(getString(R.string.text_end_round));
             mWinnerTextView.setVisibility(View.VISIBLE);
             mWinnerTextView.setText(getString(R.string.text_winner) + " "
                     + mPlayerList.get(0).getPlayerName());
@@ -134,7 +141,6 @@ public class ScoreBoardActivity extends BaseActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
         setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView), (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView), (ImageView) menu.getItem(0).getActionView());
-
         return true;
     }
 
