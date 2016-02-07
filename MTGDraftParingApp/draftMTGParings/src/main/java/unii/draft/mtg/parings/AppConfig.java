@@ -34,12 +34,12 @@ public class AppConfig extends Application  implements IAlgorithmConfigure, IDat
 			defaultSharedPreferencesConfig();
 		}
 		if (mHelper == null) {
+			//OpenSession
 			mHelper = new DaoMaster.DevOpenHelper(this, BaseConfig.DATABASE_NAME, null);
 			mDb = mHelper.getWritableDatabase();
 			mDaoMaster = new DaoMaster(mDb);
 			mDaoSession = mDaoMaster.newSession();
 		}
-		
 	}
 	
 

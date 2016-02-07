@@ -125,14 +125,12 @@ public class ParingDashboardActivity extends BaseActivity {
         isCountStarted = false;
 
         mParingAlgorithm = AlgorithmFactory.getInstance();
+        if (mParingAlgorithm == null) {
+            displayErrorDialog();
+        }
         mGameList = mParingAlgorithm.getParings();
         if (mGameList == null || mGameList.isEmpty()) {
-            mCustomDialogFragment = CustomDialogFragment.newInstance(
-                    getString(R.string.dialog_error_algorithm_title),
-                    getString(R.string.dialog_error_algorithm__message),
-                    getString(R.string.dialog_start_button),
-                    mDialogButtonClickListener);
-            mCustomDialogFragment.show(getSupportFragmentManager(), TAG_DIALOG);
+            displayErrorDialog();
         }
         mAdapter = new PlayerMatchParingAdapter(this, mGameList);
         mRoundTextView.setText(getString(R.string.text_round) + " "
@@ -151,6 +149,15 @@ public class ParingDashboardActivity extends BaseActivity {
         setMenuActions((ImageView) menu.getItem(0).getActionView());
 
         return true;
+    }
+
+    private void displayErrorDialog() {
+        mCustomDialogFragment = CustomDialogFragment.newInstance(
+                getString(R.string.dialog_error_algorithm_title),
+                getString(R.string.dialog_error_algorithm__message),
+                getString(R.string.dialog_start_button),
+                mDialogButtonClickListener);
+        mCustomDialogFragment.show(getSupportFragmentManager(), TAG_DIALOG);
     }
 
     private void setMenuActions(ImageView hourGlassButton) {

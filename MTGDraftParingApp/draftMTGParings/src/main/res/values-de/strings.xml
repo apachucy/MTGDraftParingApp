@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MTG Draft Calculator</string>
+    <string name="action_settings">Konfigurationen</string>
+    <string name="action_info">Informationen</string>
+    <string name="hint_player_name">Spielername</string>
+    <string name="add_item">Add</string>
+    <string name="hint_rounds">Anzahl der Runden</string>
+    <string name="start_game">Start</string>
+    <string name="text_end_round">Ende</string>
+    <string name="warning_empty_field">Das Feld darf nicht leer sein</string>
+    <string name="warning_need_players">Spieler hinzufügen</string>
+    <string name="title_activity_parings">ParingsActivity</string>
+    <string name="text_vs">gegen</string>
+    <string name="text_win">Gewinne:</string>
+    <string name="text_0">0</string>
+    <string name="text_1">1</string>
+    <string name="text_2">2</string>
+    <string name="text_from">mit</string>
+    <string name="text_round">Runde :</string>
+    <string name="text_time">Um den Countdown zu starten, drücken Sie Start</string>
+    <string name="title_activity_player_position">PlayerPositionActivity</string>
+    <string name="text_next">Weiter</string>
+    <string name="text_after_game">Ergebnisse nach Runde :</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="text_winner">Gewinner:</string>
+    <!-- Settings -->
+    <string name="toggle_button_on">ON</string>
+    <string name="toggle_button_off">OFF</string>
+    <string name="text_display_counter">Vorstellungszeiten:</string>
+    <string name="text_time_round">Zeit pro Runde[m]:</string>
+    <string name="text_vibration">Vibration-switch:</string>
+    <string name="text_vibration_detail">Informieren der Benutzer über die Endzeit des Spiels</string>
+    <string name="text_first_vibration">Erste Vibration[m]:</string>
+    <string name="text_second_vibration">Zweite Vibration[m]:</string>
+    <string name="text_duration_vibration">Die Dauer der Vibrationen[s]:</string>
+    <string name="text_save">Speichern</string>
+    <string name="toast_saved">Änderungen wurden gespeichert</string>
+
+    <!-- Dialog Fragment -->
+    <!-- Dialog Start -->
+    <string name="dialog_start_title">Starten Sie das Spiel</string>
+    <string name="dialog_start_message">Presse zu starten\nAnzahl der Spieler: %1$d\nAnzahl der Runden: %2$d</string>
+    <string name="dialog_start_button">Enden</string>
+    <!-- Dialog Game End -->
+    <string name="dialog_end_title">Das Spiel endete</string>
+    <string name="dialog_end_message">Drücken Sie Enden, um App zu beenden</string>
+    <!-- Dialog Algorithm Problem -->
+    <string name="dialog_error_algorithm_title">Fehler</string>
+    <string name="dialog_error_algorithm__message">Spieler können nicht in Paaren kombiniert werden.\n Bitte noch Mal die App starten.</string>
+    <!-- Dialog Warning Paring -->
+    <string name="dialog_warning_title">Warnung</string>
+    <string name="dialog_warning_message">Zu viele Runden oder nicht genügend Spieler vorgelegt.\n Hinzufügen von Spielern oder reduzieren Sie die Anzahl der Runden.</string>
+
+    <!-- Dialog Info -->
+    <string name="dialog_info_title">Informationen</string>
+    <string name="dialog_info_message">Fanowska wersja aplikacji do liczenia paringów podczas draftowania w MTG</string>
+
+    <!-- Help/Showcase -->
+    <string name="help_title">Hilfe</string>
+    <string name="help_message">Die App zur Unterstützung des Spiels MTG.
+Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Optionen um die Appskonfiguration zu bessern.</string>
+    <!-- Headers -->
+    <string name="header_player_position_name">Spieler</string>
+    <string name="header_player_position_points">Punkte</string>
+    <string name="header_player_position_ogw">OGW%</string>
+    <string name="header_player_position_pgw">PGW%</string>
+    <string name="header_player_position_omw">OMW%</string>
+    <string name="header_player_position_pmw">PMW%</string>
+
+    <!-- List Draw -->
+    <string name="text_draw">Unentschieden</string>
+    <!-- Help/Showcase player list -->
+    <string name="help_points">Punkt für den Kampf mit dem Feind\n1 für ein Unentschieden, 3 für den Sieg</string>
+    <string name="help_pmw">% Anzahl der gewonnenen Matche</string>
+    <string name="help_omw">% Anzahl der Matche, die von den Gegnern gewonnen</string>
+    <string name="help_pgw">% Anzahl der gewonnenen Spiele</string>
+    <string name="help_ogw">% Anzahl der Spiele, die von den Gegnern gewonnen</string>
+
+    <!-- Create personal parings-->
+    <string name="text_personal_parings">Erstellen Sie Ihre eigenem Paring:</string>
+    <string name="activity_paring_add_paring">Hinzufügen Paring</string>
+    <string name="activity_paring_clean_paring">Löschen Paring</string>
+    <string name="activity_paring_play_round">Spielen</string>
+    <string name="activity_paring_warning_empty_list">Es gibt keine weitere Spieler zu Paring durchführen</string>
+    <string name="activity_paring_warning_equal_names">Schlecht Paring</string>
+    <string name="activity_paring_warning_paring_not_finished">Bitte beenden Sie Paarung Spieler</string>
+    <string name="activity_paring_warning_bye">Der letzte Spieler hat bereits ein bye</string>
+    <string name="warning_player_name_added">Der Spieler wurde bereits hinzugefügt</string>
+    <string name="select_player1">Den ersten Spieler auswählen:</string>
+    <string name="select_player2">Den zweiten Spieler auswählen:</string>
+    <string name="spinner_empty_player_list">Das Ende der Spieler</string>
+    <string name="tutorial_info">Informationen zu den verwendeten Bibliotheken</string>
+    <string name="tutorial_settings">Draftskonfigurationseinstellungen</string>
+    <string name="action_save">Speichern Draft</string>##
+    <string name="action_show_list">Anzeigen einer Draftliste</string>
+    <string name="activity_save_score_board_info_small_text">Liste der letzten Draft befindet sich in Konfigurationen</string>
+    <string name="activity_save_score_board_info_text">Draftname</string>
+    <string name="activity_save_score_board_save">Speichern</string>
+    <string name="help_save_dashboard">Nachdem Sie fertig werden, können Sie Draft speichern</string>
+    <string name="history_score_board_row_draft_best_player">Gewonnen: %1$s</string>
+    <string name="history_score_board_row_draft_date">Date: %1$s</string>
+    <string name="message_score_board_not_exists">Keine Draftliste</string>
+    <string name="message_score_board_saved">Draft gespeichert</string>
+    <string name="message_score_boards_removed">Alle Draft würden gelöscht</string>
+    <string name="settings_other">Anderen Konfigurationen</string>
+    <string name="settings_display_scoreboards">Draftliste</string>
+    <string name="settings_remove_scoreboards">Löschen alle Draft</string>
+    <string name="settings_remove_text">Löschen</string>
+    <string name="warning_save_dashboard">Nach allen Wettbewerben können einen Entwurf zu speichern.</string>
+    <string name="action_countdown">Countdown</string>
+    <string name="message_action_countdown_cancel">Countdown wurde annulieren</string>
+    <string name="message_action_countdown_started">Countdown...</string>
+
+</resources>

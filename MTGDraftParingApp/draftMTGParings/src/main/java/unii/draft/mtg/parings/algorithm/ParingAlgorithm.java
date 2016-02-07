@@ -118,6 +118,7 @@ public class ParingAlgorithm implements IParingAlgorithm {
             if (addedPlayers.contains(mPlayers.get(i))) {
                 Integer paringPartner = null;
                 for (int j = 0; j < addedPlayers.size(); j++) {
+                    //this player did not play a game yet!
                     if (!addedPlayers.get(j).playedGameWith()
                             .contains(mPlayers.get(i).getPlayerName())
                             && mPlayers.get(i) != addedPlayers.get(j)) {
@@ -135,6 +136,7 @@ public class ParingAlgorithm implements IParingAlgorithm {
                     addedPlayers.remove(player2);
                     paringPartner = null;
                 } else {
+                    //someone played a game before
                     if (addedPlayers.size() % 2 == 0) {
                         Player player1 = mPlayers.get(i);
                         addedPlayers.remove(player1);
@@ -142,6 +144,7 @@ public class ParingAlgorithm implements IParingAlgorithm {
                         addedPlayers.remove(player2);
                         Game game = new Game(player1.getPlayerName(), player2.getPlayerName());
                         gameList.add(game);
+
                     }
                 }
             }

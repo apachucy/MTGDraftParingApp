@@ -56,7 +56,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         }
         mDraftKey = bundle.getLong(BundleConst.BUNDLE_KEY_HISTORY_DRAFT_DETAIL);
         DraftDao draftDao = ((IDatabaseHelper) mContext.getApplication()).getDaoSession().getDraftDao();
-
+            //get entity with provided Id
         Draft draft = draftDao.load(mDraftKey);
         List<Player> playerList = new ArrayList<>();
         for (unii.draft.mtg.parings.database.model.Player player : draft.getPlayers()) {
