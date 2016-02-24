@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -24,6 +26,7 @@ import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
 import unii.draft.mtg.parings.algorithm.IStatisticCalculation;
 import unii.draft.mtg.parings.algorithm.StatisticCalculation;
 import unii.draft.mtg.parings.config.BaseConfig;
+import unii.draft.mtg.parings.config.BundleConst;
 import unii.draft.mtg.parings.helper.MenuHelper;
 import unii.draft.mtg.parings.pojo.Game;
 import unii.draft.mtg.parings.pojo.Player;
@@ -43,8 +46,34 @@ public class ParingDashboardActivity extends BaseActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private CustomDialogFragment mDownloadLifeCounterApp;
+    private final static String TAG_DIALOG_DOWNLOAD_LIFE_COUNTER_APP = "TAG_DIALOG_DOWNLOAD_LIFE_COUNTER_APP";
     @Bind(R.id.paring_nextRound)
     FloatingActionButton mFloatingActionButton;
+
+    @OnClick(R.id.paring_openCounterApplication)
+    void onOpenCounterClicked(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putStringArray(BundleConst.BUNDLE_KEY_PLAYERS_NAMES, getPlayerNameList());
+        bundle.putInt(BundleConst.BUNDLE_KEY_ROUND_TIME, (int) (SettingsPreferencesFactory.getInstance()
+                .getTimePerRound() / BaseConfig.DEFAULT_TIME_MINUT));
+        Intent sendIntent = new Intent(BaseConfig.INTENT_PACKAGE_LIFE_COUNTER_APP);
+        sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        sendIntent.setType("text/plain");
+        sendIntent.putExtras(bundle);
+
+        Intent chooser = Intent.createChooser(sendIntent, getString(R.string.chooser_intent_title));
+
+        // Verify that the intent will resolve to an activity
+        if (sendIntent.resolveActivity(getPackageManager()) != null) {
+            //open app
+            startActivity(chooser);
+        } else {
+            //display information about possibility of downloading new app
+            mDownloadLifeCounterApp = CustomDialogFragment.newInstance(getString(R.string.chooser_dialog_title), getString(R.string.chooser_dialog_body), getString(R.string.chooser_dialog_button_name));
+            mDownloadLifeCounterApp.show(getSupportFragmentManager(), TAG_DIALOG_DOWNLOAD_LIFE_COUNTER_APP, mDownloadMTGCounterAppListener);
+        }
+    }
 
     @OnClick(R.id.paring_nextRound)
     void onEndRoundClicked(View view) {
@@ -147,7 +176,6 @@ public class ParingDashboardActivity extends BaseActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.paring_dashboard, menu);
         setMenuActions((ImageView) menu.getItem(0).getActionView());
-
         return true;
     }
 
@@ -209,7 +237,7 @@ public class ParingDashboardActivity extends BaseActivity {
     private void updatePlayerPoints() {
         List<Player> playerList = mParingAlgorithm.getSortedPlayerList();
         //Remove dummy decorator, unused element
-        if (mGameList.get(mGameList.size() - 1).getPlayerNameA().equals("") && mGameList.get(mGameList.size() - 1).getPlayerNameB().equals("")) {
+        if (mGameList.get(mGameList.size() - 1).getPlayerNameA().equals(getString(R.string.dummy_player)) && mGameList.get(mGameList.size() - 1).getPlayerNameB().equals(getString(R.string.dummy_player))) {
             mGameList.remove(mGameList.size() - 1);
         }
         for (Player p : playerList) {
@@ -284,5 +312,35 @@ public class ParingDashboardActivity extends BaseActivity {
         setIntent.addCategory(Intent.CATEGORY_HOME);
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(setIntent);
+    }
+
+
+    private String[] getPlayerNameList() {
+        List<String> playerNameList = new ArrayList<>();
+        for (Game game : mGameList) {
+            //do not add dummy players!
+            if (!game.getPlayerNameA().equals(getString(R.string.dummy_player)) && !game.getPlayerNameB().equals(getString(R.string.dummy_player))) {
+                playerNameList.add(game.getPlayerNameA());
+                playerNameList.add(game.getPlayerNameB());
+            }
+        }
+        String[] playerArray = new String[playerNameList.size()];
+        playerArray = playerNameList.toArray(playerArray);
+        return playerArray;
+    }
+
+    private OnClickListener mDownloadMTGCounterAppListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openGooglePlayMTGCounterApp();
+        }
+    };
+
+    private void openGooglePlayMTGCounterApp() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BaseConfig.INTENT_OPEN_GOOGLE_PLAY + BaseConfig.INTENT_PACKAGE_LIFE_COUNTER_APP_UNII)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BaseConfig.INTENT_OPEN_GOOGLE_PLAY_WWW + BaseConfig.INTENT_PACKAGE_LIFE_COUNTER_APP_UNII)));
+        }
     }
 }

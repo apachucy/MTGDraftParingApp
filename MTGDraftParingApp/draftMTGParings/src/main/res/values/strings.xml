@@ -115,4 +115,11 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="action_countdown">Countdown</string>
     <string name="message_action_countdown_started">Countdown...</string>
     <string name="message_action_countdown_cancel">Cancelled countdown</string>
+    <!--Open Intent -->
+    <string name="chooser_intent_title">Choose life counter application</string>
+    <string name="chooser_dialog_title">Download LifeCounterApp</string>
+    <string name="chooser_dialog_body">To handle this action\nplease download application for counting life</string>
+    <string name="chooser_dialog_button_name">Download</string>
+
+    <string name="dummy_player" translatable="false"></string>
 </resources>

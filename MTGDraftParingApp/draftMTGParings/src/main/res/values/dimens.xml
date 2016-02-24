@@ -37,4 +37,7 @@
     <!-- Empty Footer -->
     <dimen name="footer_height">64dp</dimen>
     <dimen name="floating_button_margin">4dp</dimen>
+    <!--Empty Footer 2 icons-->
+    <dimen name="footer_height_two_icons">128dp</dimen>
+
 </resources>

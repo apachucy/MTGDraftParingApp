@@ -79,7 +79,7 @@ public class SettingsFragment extends BaseFragment {
     void onCounterSaveButtonClicked(View view) {
         if (!ValidationHelper.isTextEmpty(mCounterEditText.getText()
                 .toString())) {
-            long value = longAsMinuts(convertStringToLong(mCounterEditText
+            long value = longAsMinutes(convertStringToLong(mCounterEditText
                     .getText().toString()));
             // save only if value is different from previous
             if (value != mSettingsSharedPreferences.getTimePerRound()) {
@@ -122,7 +122,7 @@ public class SettingsFragment extends BaseFragment {
     void onFirstVibrationButtonClicked(View view) {
         if (!ValidationHelper.isTextEmpty(mFirstVibrationEditText
                 .getText().toString())) {
-            long value = longAsMinuts(convertStringToLong(mFirstVibrationEditText
+            long value = longAsMinutes(convertStringToLong(mFirstVibrationEditText
                     .getText().toString()));
             // save only if value is different from previous
             if (value != mSettingsSharedPreferences.getFirstVibration()) {
@@ -142,7 +142,7 @@ public class SettingsFragment extends BaseFragment {
     void onSecondVibrationButtonClicked(View view) {
         if (!ValidationHelper.isTextEmpty(mSecondVibrationEditText
                 .getText().toString())) {
-            long value = longAsMinuts(convertStringToLong(mSecondVibrationEditText
+            long value = longAsMinutes(convertStringToLong(mSecondVibrationEditText
                     .getText().toString()));
             // save only if value is different from previous
             if (value != mSettingsSharedPreferences
@@ -271,7 +271,7 @@ public class SettingsFragment extends BaseFragment {
         return Long.parseLong(text);
     }
 
-    private long longAsMinuts(long timeInMs) {
+    private long longAsMinutes(long timeInMs) {
         return timeInMs * BaseConfig.DEFAULT_TIME_MINUT;
     }
 

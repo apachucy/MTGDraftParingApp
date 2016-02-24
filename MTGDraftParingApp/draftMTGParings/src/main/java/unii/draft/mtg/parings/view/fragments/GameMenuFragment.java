@@ -103,7 +103,6 @@ public class GameMenuFragment extends BaseFragment {
         }
     }
 
-    private Drawable mWarningDrawable;
 
     private Activity mActivity;
 
@@ -118,9 +117,6 @@ public class GameMenuFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game_menu, container, false);
         ButterKnife.bind(this, view);
-        mWarningDrawable = getResources().getDrawable(R.drawable.ic_warning);
-        mWarningDrawable.setBounds(new Rect(0, 0, mWarningDrawable
-                .getIntrinsicWidth(), mWarningDrawable.getIntrinsicHeight()));
 
 
         mListAdapter = new ArrayAdapter<String>(mActivity, R.layout.row_player_name,

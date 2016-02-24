@@ -112,5 +112,9 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="action_countdown">Countdown</string>
     <string name="message_action_countdown_cancel">Countdown wurde annulieren</string>
     <string name="message_action_countdown_started">Countdown...</string>
+    <string name="chooser_dialog_button_name">Herunterladen</string>
+    <string name="chooser_dialog_title">Herunterladen LifeCounterApp</string>
+    <string name="chooser_dialog_body">Downloaden Sie bitte die App zum Punkt des Lebens zählen, damit diese Aktion ausführen</string>
+    <string name="chooser_intent_title">Wählen Sie bitte die App zum Punkt des Lebens zählen</string>
 
 </resources>

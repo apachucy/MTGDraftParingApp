@@ -63,15 +63,31 @@
 
         </RelativeLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/paring_nextRound"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:layout_marginBottom="@dimen/floating_button_margin"
+            android:layout_marginEnd="@dimen/floating_button_margin"
             android:layout_marginRight="@dimen/floating_button_margin"
-            android:src="@drawable/ic_navigate_next"
-            app:layout_anchor="@id/paring_paringListView"
-            app:layout_anchorGravity="bottom|right|end" />
+            android:orientation="vertical"
+            app:layout_anchorGravity="bottom|right|end">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/paring_openCounterApplication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_life_small"
+                app:layout_anchor="@id/paring_paringListView" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/paring_nextRound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_navigate_next"
+                app:layout_anchor="@id/paring_paringListView" />
+
+
+        </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -112,5 +112,9 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="action_countdown">Odliczanie</string>
     <string name="message_action_countdown_cancel">Odwołano odliczanie</string>
     <string name="message_action_countdown_started">Odliczanie...</string>
+    <string name="chooser_dialog_button_name">Pobierz</string>
+    <string name="chooser_dialog_title">Pobierz LifeCounterApp</string>
+    <string name="chooser_intent_title">Wybierz aplikację do liczenia pkt życia</string>
+    <string name="chooser_dialog_body">Żeby wykonać tę akcję\npobierz aplikację do liczenia pkt życia</string>
 
 </resources>
