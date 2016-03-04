@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -15,8 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.pojo.Game;
-import unii.draft.mtg.parings.view.CustomOnCheckedChangeListener;
-import unii.draft.mtg.parings.view.CustomRadioButtonOnClick;
+import unii.draft.mtg.parings.view.custom.CustomOnCheckedChangeListener;
 
 /**
  * Created by Unii on 2015-12-09.
@@ -28,8 +26,8 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public PlayerMatchParingAdapter(Context context, List<Game> games) {
         mGameList = games;
-        mGameList.add(new Game(context.getString(R.string.dummy_player), context.getString(R.string.dummy_player)));//add empty element
-        notifyDataSetChanged();
+        // mGameList.add(new Game(context.getString(R.string.dummy_player), context.getString(R.string.dummy_player)));//add empty element
+        //  notifyDataSetChanged();
         mContext = context;
     }
 
@@ -71,7 +69,7 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         // remove listeners
         ((ViewHolder) holder).playerLeftRadioGroup.setOnCheckedChangeListener(null);
         ((ViewHolder) holder).playerRightRadioGroup.setOnCheckedChangeListener(null);
-        ((ViewHolder) holder).playerDraw.setOnClickListener(null);
+        ((ViewHolder) holder).drawRadioGroup.setOnClickListener(null);
         // set points in RadioGroup
         setCheckBoxes(position, ((ViewHolder) holder));
         // setting player names
@@ -88,7 +86,7 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         ((ViewHolder) holder).playerRightRadioGroup
                 .setOnCheckedChangeListener(new CustomOnCheckedChangeListener(
                         mGameList.get(position)));
-        ((ViewHolder) holder).playerDraw.setOnClickListener(new CustomRadioButtonOnClick(
+        ((ViewHolder) holder).drawRadioGroup.setOnCheckedChangeListener(new CustomOnCheckedChangeListener(
                 mGameList.get(position)));
     }
 
@@ -122,12 +120,19 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
                 break;
         }
 
-        if (mGameList.get(position).getDraw()) {
-            viewHolder.playerDraw.setChecked(true);
-        } else {
-            viewHolder.playerDraw.setChecked(false);
+        switch (mGameList.get(position).getDraws()) {
+            case 0:
+                viewHolder.drawRadioGroup.check(R.id.row_drawRadio0);
+                break;
+            case 1:
+                viewHolder.drawRadioGroup.check(R.id.row_drawRadio1);
+                break;
+            case 2:
+                viewHolder.drawRadioGroup.check(R.id.row_drawRadio2);
+                break;
 
         }
+
     }
 
     public class EmptyViewHolder extends RecyclerView.ViewHolder {
@@ -146,8 +151,9 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         RadioGroup playerLeftRadioGroup;
         @Bind(R.id.row_rightPlayerRadioGroup)
         RadioGroup playerRightRadioGroup;
-        @Bind(R.id.row_draw)
-        CheckBox playerDraw;
+        @Bind(R.id.row_drawRadioGroup)
+        RadioGroup drawRadioGroup;
+
 
 
         public ViewHolder(View itemView) {

@@ -33,15 +33,15 @@ public class Game implements IAdapterItem {
      */
     private int mPlayerBPoints;
 
+
     /**
-     * In case of a draw
+     * In case of a draw 0/1/2
      */
-    private boolean isDraw;
+    private int mMatchDraws;
 
     public Game(String playerA, String playerB) {
         mPlayerAName = playerA;
         mPlayerBName = playerB;
-        isDraw = false;
     }
 
     public String getWinner() {
@@ -84,16 +84,29 @@ public class Game implements IAdapterItem {
         this.mPlayerBPoints = mPlayerBPoints;
     }
 
-    public boolean getDraw() {
-        return isDraw;
-    }
-
-    public void setDraw(boolean isDraw) {
-        this.isDraw = isDraw;
-    }
 
     @Override
     public int getItemType() {
         return ItemType.ITEM;
+    }
+
+    public int getDraws() {
+        return mMatchDraws;
+    }
+
+    public void setDraws(int mDraws) {
+        this.mMatchDraws = mDraws;
+    }
+
+    public boolean isGameADraw() {
+        return (mMatchDraws >= maxPoints(mPlayerAPoints, mPlayerBPoints));
+    }
+
+    private int maxPoints(int pointsA, int pointsB) {
+        if (pointsA >= pointsB) {
+            return pointsA;
+        } else {
+            return pointsB;
+        }
     }
 }

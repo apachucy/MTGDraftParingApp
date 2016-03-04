@@ -2,8 +2,6 @@ package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
@@ -24,7 +22,7 @@ import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
 import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.validation.ValidationHelper;
-import unii.draft.mtg.parings.view.IPlayerList;
+import unii.draft.mtg.parings.view.custom.IPlayerList;
 
 /**
  * Created by apachucy on 2015-09-25.
@@ -139,7 +137,7 @@ public class GameMenuFragment extends BaseFragment {
 
         @Override
         public void onClick(View v) {
-            if (mStartGameDialogFragment != null) {
+            if (mStartGameDialogFragment != null && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
                 mStartGameDialogFragment.dismiss();
                 Intent intent = null;
                 IAlgorithmConfigure algorithmConfigure = (IAlgorithmConfigure) mActivity.getApplication();

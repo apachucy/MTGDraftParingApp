@@ -21,7 +21,7 @@ public class CustomDialogFragment extends DialogFragment {
             .getName() + "BUNDLE_MESSAGE";
     private final static String BUNDLE_BUTTON_NAME = CustomDialogFragment.class
             .getName() + "BUNDLE_BUTTON_NAME";
-    private static OnClickListener mOnClickListener;
+    private OnClickListener mOnClickListener;
 
     private String mTitle;
     private String mMessage;
@@ -47,12 +47,11 @@ public class CustomDialogFragment extends DialogFragment {
                 || ValidationHelper.isTextEmpty(buttonName)) {
             return dialogFragment;
         }
+        dialogFragment = new CustomDialogFragment();
 
         if (buttonOnClick != null) {
-            mOnClickListener = buttonOnClick;
             dialogFragment.setOnClickListener(buttonOnClick);
         }
-        dialogFragment = new CustomDialogFragment();
 
         // Supply num input as an argument.
         Bundle args = new Bundle();
@@ -88,7 +87,7 @@ public class CustomDialogFragment extends DialogFragment {
         mButtonName = getArguments().getString(BUNDLE_BUTTON_NAME);
     }
 
-    public static void setOnClickListener(OnClickListener onClickListener) {
+    public  void setOnClickListener(OnClickListener onClickListener) {
         mOnClickListener = onClickListener;
     }
 

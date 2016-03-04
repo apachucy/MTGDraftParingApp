@@ -1,4 +1,4 @@
-package unii.draft.mtg.parings.view;
+package unii.draft.mtg.parings.view.custom;
 
 import java.util.concurrent.TimeUnit;
 

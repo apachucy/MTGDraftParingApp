@@ -122,4 +122,9 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="chooser_dialog_button_name">Download</string>
 
     <string name="dummy_player" translatable="false"></string>
+    <!-- Show validation dialog-->
+    <string name="validation_dialog_title">Validation</string>
+    <string name="validation_dialog_body">Please set all game results</string>
+    <string name="validation_dialog_button_name">Ok</string>
+
 </resources>

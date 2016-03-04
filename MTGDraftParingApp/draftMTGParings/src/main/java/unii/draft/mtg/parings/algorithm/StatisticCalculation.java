@@ -8,162 +8,161 @@ import unii.draft.mtg.parings.pojo.Player;
 
 /**
  * TODO: change list to hash map?
- * 
+ *
  * @author Arkadiusz Pachucy
- * 
  */
 public class StatisticCalculation implements IStatisticCalculation {
 
-	private IParingAlgorithm mParingAlgorithm;
-	private List<Player> mPlayerList;
+    private IParingAlgorithm mParingAlgorithm;
+    private List<Player> mPlayerList;
 
-	public StatisticCalculation(IParingAlgorithm algorithm) {
-		mParingAlgorithm =  algorithm;
-		mPlayerList = mParingAlgorithm.getSortedPlayerList();
-	}
+    public StatisticCalculation(IParingAlgorithm algorithm) {
+        mParingAlgorithm = algorithm;
+        mPlayerList = mParingAlgorithm.getSortedPlayerList();
+    }
 
-	@Override
-	public void calculatePMW() {
-		for (Player p : mPlayerList) {
-			calculatePMW(p);
-		}
+    @Override
+    public void calculatePMW() {
+        for (Player p : mPlayerList) {
+            calculatePMW(p);
+        }
 
-	}
+    }
 
-	@Override
-	public void calculateOMW() {
-		for (Player p : mPlayerList) {
-			calculateOMW(p);
-		}
-	}
+    @Override
+    public void calculateOMW() {
+        for (Player p : mPlayerList) {
+            calculateOMW(p);
+        }
+    }
 
-	@Override
-	public void calculatePGW() {
-		for (Player p : mPlayerList) {
-			calculatePGW(p);
-		}
+    @Override
+    public void calculatePGW() {
+        for (Player p : mPlayerList) {
+            calculatePGW(p);
+        }
 
-	}
+    }
 
-	@Override
-	public void calculateOGW() {
-		for (Player p : mPlayerList) {
-			calculateOGW(p);
-		}
+    @Override
+    public void calculateOGW() {
+        for (Player p : mPlayerList) {
+            calculateOGW(p);
+        }
 
-	}
+    }
 
-	/**
-	 * Calculate Player overall match % win
-	 */
-	private void calculatePMW(Player player) {
-		float pmw = player.getMatchPoints()
-				/ (float) (mParingAlgorithm.getCurrentRound() * BaseConfig.MAX_MATCH);
+    /**
+     * Calculate Player overall match % win
+     */
+    private void calculatePMW(Player player) {
+        float pmw = player.getMatchPoints()
+                / (float) (mParingAlgorithm.getCurrentRound() * BaseConfig.MAX_MATCH);
 
-		if (pmw < BaseConfig.MIN_OVERALL_VALUE) {
-			pmw = BaseConfig.MIN_OVERALL_VALUE;
-		}
-		player.setPlayerMatchOverallWin(pmw);
-	}
+        if (pmw < BaseConfig.MIN_OVERALL_VALUE) {
+            pmw = BaseConfig.MIN_OVERALL_VALUE;
+        }
+        player.setPlayerMatchOverallWin(pmw);
+    }
 
-	/**
-	 * Calculate Oponents overall match % win based on:
-	 * https://www.wizards.com/dci/downloads/tiebreakers.pdf
-	 * 
-	 * @param player
-	 */
-	private void calculateOMW(Player player) {
-		float omw = 0f;
-		for (Game g : player.getPlayedGame()) {
-			if (g.getPlayerNameA().equals(player.getPlayerName())) {
-				omw += findPlayer(g.getPlayerNameB())
-						.getPlayerMatchOverallWin();
-			} else {
-				omw += findPlayer(g.getPlayerNameA())
-						.getPlayerMatchOverallWin();
+    /**
+     * Calculate Oponents overall match % win based on:
+     * https://www.wizards.com/dci/downloads/tiebreakers.pdf
+     *
+     * @param player
+     */
+    private void calculateOMW(Player player) {
+        float omw = 0f;
+        for (Game g : player.getPlayedGame()) {
+            if (g.getPlayerNameA().equals(player.getPlayerName())) {
+                omw += findPlayer(g.getPlayerNameB())
+                        .getPlayerMatchOverallWin();
+            } else {
+                omw += findPlayer(g.getPlayerNameA())
+                        .getPlayerMatchOverallWin();
 
-			}
+            }
 
-		}
-		// in case of bye
-		if (omw != 0) {
-			omw /= (float) player.getPlayedGame().size();
-		}
+        }
+        // in case of bye
+        if (omw != 0) {
+            omw /= (float) player.getPlayedGame().size();
+        }
 
-		player.setOponentsMatchOveralWins(omw);
-	}
+        player.setOponentsMatchOveralWins(omw);
+    }
 
-	private void calculatePGW(Player player) {
-		float pgw = 0f;
-		int gamesPlayed = gamesPlayed(player);
-		// in case of bye
-		if (!(gamesPlayed == 0)) {
-			pgw = player.getGamePoints()
-					/ ((float) (gamesPlayed * BaseConfig.MAX_MATCH));
-			if (pgw < BaseConfig.MIN_OVERALL_VALUE) {
-				pgw = BaseConfig.MIN_OVERALL_VALUE;
-			}
-		}
-		player.setPlayerGamesOverallWin(pgw);
-	}
+    private void calculatePGW(Player player) {
+        float pgw = 0f;
+        int gamesPlayed = gamesPlayed(player);
+        // in case of bye
+        if (!(gamesPlayed == 0)) {
+            pgw = player.getGamePoints()
+                    / ((float) (gamesPlayed * BaseConfig.MAX_MATCH));
+            if (pgw < BaseConfig.MIN_OVERALL_VALUE) {
+                pgw = BaseConfig.MIN_OVERALL_VALUE;
+            }
+        }
+        player.setPlayerGamesOverallWin(pgw);
+    }
 
-	private void calculateOGW(Player player) {
-		float ogw = 0f;
-		for (Game g : player.getPlayedGame()) {
-			if (!g.getPlayerNameA().equals(player.getPlayerName())) {
-				ogw += findPlayer(g.getPlayerNameA())
-						.getPlayerGamesOverallWin();
-			} else {
-				ogw += findPlayer(g.getPlayerNameB())
-						.getPlayerGamesOverallWin();
-			}
+    private void calculateOGW(Player player) {
+        float ogw = 0f;
+        for (Game g : player.getPlayedGame()) {
+            if (!g.getPlayerNameA().equals(player.getPlayerName())) {
+                ogw += findPlayer(g.getPlayerNameA())
+                        .getPlayerGamesOverallWin();
+            } else {
+                ogw += findPlayer(g.getPlayerNameB())
+                        .getPlayerGamesOverallWin();
+            }
 
-		}
-		// in case of bye
-		if (ogw != 0) {
-			ogw /= (float) player.getPlayedGame().size();
-		}
-		player.setOponentsGamesOverallWin(ogw);
-	}
+        }
+        // in case of bye
+        if (ogw != 0) {
+            ogw /= (float) player.getPlayedGame().size();
+        }
+        player.setOponentsGamesOverallWin(ogw);
+    }
 
-	/**
-	 * Find player by name
-	 * 
-	 * @param name
-	 * @return
-	 */
-	private Player findPlayer(String name) {
-		for (Player p : mPlayerList) {
-			if (p.getPlayerName().equals(name)) {
-				return p;
-			}
-		}
-		return null;
+    /**
+     * Find player by name
+     *
+     * @param name
+     * @return
+     */
+    private Player findPlayer(String name) {
+        for (Player p : mPlayerList) {
+            if (p.getPlayerName().equals(name)) {
+                return p;
+            }
+        }
+        return null;
 
-	}
+    }
 
-	private int gamesPlayed(Player player) {
-		int gamesPlayed = 0;
-		for (Game g : player.getPlayedGame()) {
-			gamesPlayed += g.getPlayerAPoints() + g.getPlayerBPoints();
-			if (g.getDraw()) {
-				gamesPlayed += 1;
-			}
-		}
-		return gamesPlayed;
-	}
+    private int gamesPlayed(Player player) {
+        int gamesPlayed = 0;
+        for (Game g : player.getPlayedGame()) {
+            gamesPlayed += g.getPlayerAPoints() + g.getPlayerBPoints();
+            if (g.isGameADraw()) {
+                gamesPlayed += 1;
+            }
+        }
+        return gamesPlayed;
+    }
 
-	@Override
-	public void calculateAll() {
-		for (Player player : mPlayerList) {
-			calculatePMW(player);
-			calculatePGW(player);
-		}
+    @Override
+    public void calculateAll() {
+        for (Player player : mPlayerList) {
+            calculatePMW(player);
+            calculatePGW(player);
+        }
 
-		for (Player player : mPlayerList) {
-			calculateOMW(player);
-			calculateOGW(player);
-		}
-	}
+        for (Player player : mPlayerList) {
+            calculateOMW(player);
+            calculateOGW(player);
+        }
+    }
 
 }

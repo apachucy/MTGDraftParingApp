@@ -19,7 +19,7 @@ import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.helper.MenuHelper;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.view.IPlayerList;
+import unii.draft.mtg.parings.view.custom.IPlayerList;
 import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
 import unii.draft.mtg.parings.view.fragments.GameMenuFragment;
 import unii.draft.mtg.parings.view.fragments.SettingsFragment;

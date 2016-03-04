@@ -27,8 +27,8 @@ import unii.draft.mtg.parings.database.model.PlayerDao;
 import unii.draft.mtg.parings.sharedprefrences.ISettings;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.validation.ValidationHelper;
-import unii.draft.mtg.parings.view.CheckValueListener;
-import unii.draft.mtg.parings.view.CustomTextWatcher;
+import unii.draft.mtg.parings.view.custom.CheckValueListener;
+import unii.draft.mtg.parings.view.custom.CustomTextWatcher;
 
 /**
  * Created by apachucy on 2015-09-25.
