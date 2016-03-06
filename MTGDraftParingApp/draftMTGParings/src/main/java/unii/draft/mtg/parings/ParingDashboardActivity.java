@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.util.List;
 
 import butterknife.Bind;
@@ -28,21 +31,15 @@ import unii.draft.mtg.parings.config.BundleConst;
 import unii.draft.mtg.parings.helper.MenuHelper;
 import unii.draft.mtg.parings.pojo.Game;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
-import unii.draft.mtg.parings.view.custom.CounterClass;
 import unii.draft.mtg.parings.view.adapters.PlayerMatchParingAdapter;
-import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
+import unii.draft.mtg.parings.view.custom.CounterClass;
+import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
 
 public class ParingDashboardActivity extends BaseActivity {
 
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
-    private CustomDialogFragment mDownloadLifeCounterApp;
-    private CustomDialogFragment mValidationDialog;
-    private final static String TAG_DIALOG_DOWNLOAD_LIFE_COUNTER_APP = "TAG_DIALOG_DOWNLOAD_LIFE_COUNTER_APP";
-    private final static String TAG_DIALOG_VALIDATION = "TAG_DIALOG_VALIDATION";
 
 
     private List<Game> mGameList;
@@ -53,9 +50,6 @@ public class ParingDashboardActivity extends BaseActivity {
     private IParingAlgorithm mParingAlgorithm;
 
 
-    private CustomDialogFragment mCustomDialogFragment;
-    private static final String TAG_DIALOG = MainActivity.class.getName()
-            + "TAG_DIALOG";
     private IStatisticCalculation mStatisticCalculation;
     private ParingDashboardLogic mParingDashboardLogic;
 
@@ -88,8 +82,7 @@ public class ParingDashboardActivity extends BaseActivity {
             startActivity(chooser);
         } else {
             //display information about possibility of downloading new app
-            mDownloadLifeCounterApp = CustomDialogFragment.newInstance(getString(R.string.chooser_dialog_title), getString(R.string.chooser_dialog_body), getString(R.string.chooser_dialog_button_name));
-            mDownloadLifeCounterApp.show(getSupportFragmentManager(), TAG_DIALOG_DOWNLOAD_LIFE_COUNTER_APP, mDownloadMTGCounterAppListener);
+            showInfoDialog(getString(R.string.chooser_dialog_title), getString(R.string.chooser_dialog_body), getString(R.string.chooser_dialog_button_name), mDownloadMTGCounterAppListener);
         }
     }
 
@@ -97,8 +90,7 @@ public class ParingDashboardActivity extends BaseActivity {
     void onEndRoundClicked(View view) {
         //Validate Points
         if (!mParingDashboardLogic.validateDataSet(mGameList)) {
-            mValidationDialog = CustomDialogFragment.newInstance(getString(R.string.validation_dialog_title), getString(R.string.validation_dialog_body), getString(R.string.validation_dialog_button_name));
-            mValidationDialog.show(getSupportFragmentManager(), TAG_DIALOG_VALIDATION);
+            showInfoDialog(getString(R.string.validation_dialog_title), getString(R.string.validation_dialog_body), getString(R.string.validation_dialog_button_name));
         } else {
             moveToScoreBoard();
         }
@@ -207,25 +199,12 @@ public class ParingDashboardActivity extends BaseActivity {
         mAdapter = new PlayerMatchParingAdapter(this, mGameList);
         mRoundTextView.setText(getString(R.string.text_round) + " "
                 + mParingAlgorithm.getCurrentRound());
-        mRecyclerView.setHasFixedSize(true);
+        //mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
     }
-
-    private OnClickListener mDialogButtonClickListener = new OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            if (mCustomDialogFragment != null) {
-                mCustomDialogFragment.dismiss();
-                mCounterClass.cancel();
-                finish();
-            }
-
-        }
-    };
 
     @Override
     public void onBackPressed() {
@@ -235,22 +214,29 @@ public class ParingDashboardActivity extends BaseActivity {
         startActivity(setIntent);
     }
 
-
-    private OnClickListener mDownloadMTGCounterAppListener = new OnClickListener() {
+    private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onClick(View v) {
+        public void onClick(MaterialDialog dialog, DialogAction which) {
+            dialog.dismiss();
+            mCounterClass.cancel();
+            finish();
+        }
+    };
+
+
+    private MaterialDialog.SingleButtonCallback mDownloadMTGCounterAppListener = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(MaterialDialog dialog, DialogAction which) {
             mParingDashboardLogic.openGooglePlayMTGCounterApp();
-            mDownloadLifeCounterApp.dismissAllowingStateLoss();
+            dialog.dismiss();
         }
     };
 
     private void displayErrorDialog() {
-        mCustomDialogFragment = CustomDialogFragment.newInstance(
-                getString(R.string.dialog_error_algorithm_title),
+        showInfoDialog(getString(R.string.dialog_error_algorithm_title),
                 getString(R.string.dialog_error_algorithm__message),
-                getString(R.string.dialog_start_button),
-                mDialogButtonClickListener);
-        mCustomDialogFragment.show(getSupportFragmentManager(), TAG_DIALOG);
+                getString(R.string.dialog_start_button), mDialogButtonClickListener);
+
     }
 
     private void moveToScoreBoard() {
@@ -262,4 +248,5 @@ public class ParingDashboardActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
+
 }

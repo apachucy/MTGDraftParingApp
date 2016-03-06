@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +42,6 @@ import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
-import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
 
 public class ScoreBoardActivity extends BaseActivity {
 
@@ -51,9 +53,10 @@ public class ScoreBoardActivity extends BaseActivity {
     @OnClick(R.id.paring_nextRound)
     void onNextGameButtonClicked(View view) {
         if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
-            mCustomDialogFragment
-                    .show(getSupportFragmentManager(), TAG_DIALOG);
-        } else {
+            showInfoDialog(getString(R.string.dialog_end_title),
+                    getString(R.string.dialog_end_message),
+                    getString(R.string.dialog_start_button), mOnDialogButtonClick);
+               } else {
 
             Intent intent = null;
             if (SettingsPreferencesFactory.getInstance().areManualParings()) {
@@ -78,9 +81,9 @@ public class ScoreBoardActivity extends BaseActivity {
     Toolbar mToolBar;
 
     private IParingAlgorithm mAlgorithm;
-    private CustomDialogFragment mCustomDialogFragment;
-    private static final String TAG_DIALOG = ScoreBoardActivity.class
-            .getName() + "TAG_DIALOG";
+    //private CustomDialogFragment mCustomDialogFragment;
+    // private static final String TAG_DIALOG = ScoreBoardActivity.class
+    //        .getName() + "TAG_DIALOG";
 
     // help library
     private TourGuide mTutorialHandler = null;
@@ -127,10 +130,6 @@ public class ScoreBoardActivity extends BaseActivity {
             mWinnerTextView.setVisibility(View.INVISIBLE);
 
         }
-        mCustomDialogFragment = CustomDialogFragment.newInstance(
-                getString(R.string.dialog_end_title),
-                getString(R.string.dialog_end_message),
-                getString(R.string.dialog_start_button), mOnDialogButtonClick);
 
 
     }
@@ -149,13 +148,10 @@ public class ScoreBoardActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private OnClickListener mOnDialogButtonClick = new OnClickListener() {
-
+    private MaterialDialog.SingleButtonCallback mOnDialogButtonClick = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onClick(View v) {
-            if (mCustomDialogFragment != null) {
-                mCustomDialogFragment.dismiss();
-            }
+        public void onClick(MaterialDialog dialog, DialogAction which) {
+            dialog.dismiss();
             finish();
         }
     };

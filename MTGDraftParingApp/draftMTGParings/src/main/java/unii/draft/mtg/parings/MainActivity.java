@@ -20,20 +20,15 @@ import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.helper.MenuHelper;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.view.custom.IPlayerList;
-import unii.draft.mtg.parings.view.fragments.CustomDialogFragment;
 import unii.draft.mtg.parings.view.fragments.GameMenuFragment;
 import unii.draft.mtg.parings.view.fragments.SettingsFragment;
 
 
-public class MainActivity extends BaseActivity implements IPlayerList{
+public class MainActivity extends BaseActivity implements IPlayerList {
 
     private static final String TAG_FRAGMENT_GAME = MainActivity.class
             .getName() + "TAG_FRAGMENT_GAME";
     private static final String TAG_FRAGMENT_SETTINGS = MainActivity.class.getName() + "TAG_FRAGMENT_SETTINGS";
-    private static final String TAG_DIALOG_INFO = MainActivity.class
-            .getName() + "TAG_DIALOG_INFO";
-
-    private CustomDialogFragment mInfoDialogFragment;
 
 
     // help library
@@ -42,6 +37,7 @@ public class MainActivity extends BaseActivity implements IPlayerList{
 
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,13 +97,10 @@ public class MainActivity extends BaseActivity implements IPlayerList{
         aboutButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mInfoDialogFragment == null) {
-                    mInfoDialogFragment = CustomDialogFragment.newInstance(
-                            getString(R.string.dialog_info_title),
-                            getString(R.string.dialog_info_message),
-                            getString(R.string.dialog_start_button));
-                }
-                mInfoDialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_INFO);
+
+                showInfoDialog(getString(R.string.dialog_info_title),
+                        getString(R.string.dialog_info_message),
+                        getString(R.string.dialog_start_button));
             }
         });
 
@@ -129,4 +122,6 @@ public class MainActivity extends BaseActivity implements IPlayerList{
     public ArrayList<String> getPlayerList() {
         return mPlayerNameList;
     }
+
+
 }

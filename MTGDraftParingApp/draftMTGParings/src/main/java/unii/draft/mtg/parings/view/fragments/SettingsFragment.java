@@ -29,12 +29,14 @@ import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.validation.ValidationHelper;
 import unii.draft.mtg.parings.view.custom.CheckValueListener;
 import unii.draft.mtg.parings.view.custom.CustomTextWatcher;
+import unii.draft.mtg.parings.view.custom.IActivityHandler;
 
 /**
  * Created by apachucy on 2015-09-25.
  */
 
 public class SettingsFragment extends BaseFragment {
+
     @Bind(R.id.settings_counterToggleButton)
     ToggleButton mCounterToggle;
 
@@ -198,6 +200,7 @@ public class SettingsFragment extends BaseFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
+
     }
 
     @Override

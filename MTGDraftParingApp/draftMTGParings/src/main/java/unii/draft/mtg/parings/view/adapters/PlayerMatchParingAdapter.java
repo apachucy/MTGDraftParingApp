@@ -51,6 +51,7 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
     public int getItemViewType(int position) {
         // Just as an example, return 0 or 2 depending on position
         // Note that unlike in ListView adapters, types don't have to be contiguous
+        //TODO: refactor make it more generic!
         if (position ==
                 mGameList.size() - 1) {
             return FOOTER;

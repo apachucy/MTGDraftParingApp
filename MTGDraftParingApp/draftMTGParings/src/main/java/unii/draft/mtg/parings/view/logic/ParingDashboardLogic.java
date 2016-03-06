@@ -29,14 +29,24 @@ public class ParingDashboardLogic {
     }
 
     public void removeDummyPlayer(List<Game> gameList) {
-        Iterator<Game> gameIterator = gameList.iterator();
+     /*   Game dummyGame = null;
+        for (Game game : gameList) {
+            if (game.getPlayerNameA().equals(mContext.getString(R.string.dummy_player)) && game.getPlayerNameB().equals(mContext.getString(R.string.dummy_player))) {
+                dummyGame = game;
+            }*/
+         Iterator<Game> gameIterator = gameList.iterator();
         while (gameIterator.hasNext()) {
             Game dummyGame = gameIterator.next();
             if (dummyGame.getPlayerNameA().equals(mContext.getString(R.string.dummy_player)) && dummyGame.getPlayerNameB().equals(mContext.getString(R.string.dummy_player))) {
                 gameIterator.remove();
             }
         }
-    }
+
+        }
+      /*  if (dummyGame != null) {
+            gameList.remove(dummyGame);
+        }*/
+
 
 
     public void addGameResult(IParingAlgorithm paringAlgorithm, List<Game> gameList) {

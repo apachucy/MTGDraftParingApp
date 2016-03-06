@@ -67,7 +67,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
             }
             mPlayerSpinnerAdapter.notifyDataSetChanged();
             mRecyclerMatchPlayerAdapter.notifyDataSetChanged();
-            //If Spinner contain only one element and footer not extist add footer
+            //If Spinner contain only one element and footer not exist add footer
             if ((mPlayerList.isEmpty() || mPlayerList.size() <= 1) && !(mGameList.get(mGameList.size() - 1) instanceof ItemFooter)) {
                 mGameList.add(new ItemFooter());
             }

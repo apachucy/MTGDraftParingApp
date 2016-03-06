@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,21 +25,18 @@ import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
 import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.validation.ValidationHelper;
+import unii.draft.mtg.parings.view.custom.IActivityHandler;
 import unii.draft.mtg.parings.view.custom.IPlayerList;
 
 /**
  * Created by apachucy on 2015-09-25.
  */
 public class GameMenuFragment extends BaseFragment {
-    private static final String TAG_DIALOG_START_GAME = GameMenuFragment.class
-            .getName() + "TAG_DIALOG_START_GAME";
-    private static final String TAG_DIALOG_WARNING = GameMenuFragment.class
-            .getName() + "TAG_DIALOG_WARNING";
 
-    private CustomDialogFragment mStartGameDialogFragment;
-    private CustomDialogFragment mWarningDialogFragment;
     private IPlayerList mPlayerNameList;
+    private IActivityHandler mActivityHandler;
     private ArrayAdapter<String> mListAdapter;
+    private Activity mActivity;
 
 
     @Bind(R.id.init_playerList)
@@ -77,42 +77,32 @@ public class GameMenuFragment extends BaseFragment {
                 // round ask user to change it
             } else if (Integer.parseInt(mRoundsTextInput.getEditText().getText()
                     .toString()) >= mPlayerNameList.getPlayerList().size()) {
-                if (mWarningDialogFragment == null) {
-                    mWarningDialogFragment = CustomDialogFragment
-                            .newInstance(
-                                    getString(R.string.dialog_warning_title),
-                                    getString(R.string.dialog_warning_message),
-                                    getString(R.string.dialog_start_button));
-                }
-                mWarningDialogFragment.show(getFragmentManager(),
-                        TAG_DIALOG_WARNING,
-                        mWarningDialogOnClickListener);
+                mActivityHandler.showInfoDialog(getString(R.string.dialog_warning_title),
+                        getString(R.string.dialog_warning_message),
+                        getString(R.string.dialog_start_button));
             } else {
-                mStartGameDialogFragment = CustomDialogFragment.newInstance(
-                        getString(R.string.dialog_start_title),
+                mActivityHandler.showInfoDialog(getString(R.string.dialog_start_title),
                         getString(R.string.dialog_start_message, mPlayerNameList.getPlayerList().size(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString())),
-                        getString(R.string.start_game));
-
-                mStartGameDialogFragment.show(getFragmentManager(),
-                        TAG_DIALOG_START_GAME,
-                        mStartGameDialogOnClickListener);
+                        getString(R.string.start_game), mStartGameDialogOnClickListener);
 
             }
         }
     }
-
-
-    private Activity mActivity;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
         mPlayerNameList = (IPlayerList) mActivity;
+        if (!(mActivity instanceof IActivityHandler)) {
+            throw new RuntimeException("Activity should implement IActivityHandler");
+        }
+        mActivityHandler = (IActivityHandler) mActivity;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game_menu, container, false);
         ButterKnife.bind(this, view);
 
@@ -132,13 +122,11 @@ public class GameMenuFragment extends BaseFragment {
         return view;
     }
 
-
-    private View.OnClickListener mStartGameDialogOnClickListener = new View.OnClickListener() {
-
+    private MaterialDialog.SingleButtonCallback mStartGameDialogOnClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onClick(View v) {
-            if (mStartGameDialogFragment != null && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
-                mStartGameDialogFragment.dismiss();
+        public void onClick(MaterialDialog dialog, DialogAction which) {
+            if (dialog != null && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
+                dialog.dismiss();
                 Intent intent = null;
                 IAlgorithmConfigure algorithmConfigure = (IAlgorithmConfigure) mActivity.getApplication();
                 if (SettingsPreferencesFactory.getInstance().areManualParings()) {
@@ -154,19 +142,9 @@ public class GameMenuFragment extends BaseFragment {
                 startActivity(intent);
                 mActivity.finish();
             }
-
         }
     };
 
-    private View.OnClickListener mWarningDialogOnClickListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            if (mWarningDialogFragment != null) {
-                mWarningDialogFragment.dismiss();
-            }
-        }
-    };
 
     private boolean isNameAddedBefore(String playerName) {
         boolean isAddedBefore = false;

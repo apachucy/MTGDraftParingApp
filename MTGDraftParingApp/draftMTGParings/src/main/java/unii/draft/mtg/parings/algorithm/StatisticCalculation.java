@@ -61,6 +61,8 @@ public class StatisticCalculation implements IStatisticCalculation {
 
         if (pmw < BaseConfig.MIN_OVERALL_VALUE) {
             pmw = BaseConfig.MIN_OVERALL_VALUE;
+        }else if(pmw > BaseConfig.MAX_OVERALL_VALUE){
+            pmw = BaseConfig.MAX_OVERALL_VALUE;
         }
         player.setPlayerMatchOverallWin(pmw);
     }
@@ -101,6 +103,8 @@ public class StatisticCalculation implements IStatisticCalculation {
                     / ((float) (gamesPlayed * BaseConfig.MAX_MATCH));
             if (pgw < BaseConfig.MIN_OVERALL_VALUE) {
                 pgw = BaseConfig.MIN_OVERALL_VALUE;
+            }else if(pgw > BaseConfig.MAX_OVERALL_VALUE){
+                pgw = BaseConfig.MAX_OVERALL_VALUE;
             }
         }
         player.setPlayerGamesOverallWin(pgw);

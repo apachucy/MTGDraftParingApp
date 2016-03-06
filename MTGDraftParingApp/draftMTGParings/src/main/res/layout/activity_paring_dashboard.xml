@@ -55,10 +55,12 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/paring_paringListView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/paring_textContainer"
                 android:layout_marginTop="@dimen/standard_margin"
+                android:paddingBottom="@dimen/footer_height"
+                android:clipToPadding="false"
                 android:scrollbars="vertical" />
 
         </RelativeLayout>
@@ -70,7 +72,7 @@
             android:layout_marginBottom="@dimen/floating_button_margin"
             android:layout_marginEnd="@dimen/floating_button_margin"
             android:layout_marginRight="@dimen/floating_button_margin"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             app:layout_anchorGravity="bottom|right|end">
 
             <android.support.design.widget.FloatingActionButton

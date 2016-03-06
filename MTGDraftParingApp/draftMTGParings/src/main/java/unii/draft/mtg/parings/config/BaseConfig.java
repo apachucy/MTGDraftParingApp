@@ -32,6 +32,7 @@ public final class BaseConfig {
 
     //Additional statistic for player
     public static final float MIN_OVERALL_VALUE = 0.33f;
+    public static final float MAX_OVERALL_VALUE = 1f;
     public static final int MAX_MATCH = 3;
 
     //Temporary solution for showcase library

@@ -125,14 +125,16 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/matchPlayer_PlayersList"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignLeft="@+id/matchPlayer_secondPlayerSpinner"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignStart="@+id/matchPlayer_secondPlayerSpinner"
                 android:layout_below="@id/matchPlayer_buttonHolder"
                 android:layout_marginTop="@dimen/standard_margin"
+                android:paddingBottom="@dimen/footer_height"
+                android:clipToPadding="false"
                 android:scrollbars="vertical" />
         </RelativeLayout>
 

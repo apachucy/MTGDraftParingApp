@@ -8,13 +8,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import tourguide.tourguide.ToolTip;
 import tourguide.tourguide.TourGuide;
+import unii.draft.mtg.parings.view.custom.IActivityHandler;
 
 /**
  * Created by apachucy on 2015-09-25.
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends ActionBarActivity implements IActivityHandler {
 
     protected void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -50,4 +53,24 @@ public class BaseActivity extends ActionBarActivity {
         return TourGuide.init(this)
                 .setToolTip(toolTip).playLater(textView);
     }
+
+
+    @Override
+    public void showInfoDialog(String title, String body, String positiveText) {
+        new MaterialDialog.Builder(this)
+                .title(title)
+                .content(body)
+                .positiveText(positiveText)
+                .show();
+    }
+
+    @Override
+    public void showInfoDialog(String title, String body, String positiveText, MaterialDialog.SingleButtonCallback positiveAction) {
+        new MaterialDialog.Builder(this)
+                .title(title)
+                .content(body)
+                .positiveText(positiveText).onPositive(positiveAction)
+                .show();
+    }
+
 }
