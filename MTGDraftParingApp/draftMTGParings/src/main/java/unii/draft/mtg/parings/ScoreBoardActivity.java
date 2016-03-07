@@ -102,7 +102,6 @@ public class ScoreBoardActivity extends BaseActivity {
         mPlayerScoreBoardList = new ArrayList<>();
         mPlayerScoreBoardList.add(new ItemHeader());
         mPlayerScoreBoardList.addAll(mPlayerList);
-        mPlayerScoreBoardList.add(new ItemFooter());
         mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
 
         mRecyclerView.setHasFixedSize(true);

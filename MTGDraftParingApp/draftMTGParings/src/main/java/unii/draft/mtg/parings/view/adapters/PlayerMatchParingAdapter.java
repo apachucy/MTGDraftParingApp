@@ -20,45 +20,23 @@ import unii.draft.mtg.parings.view.custom.CustomOnCheckedChangeListener;
  * Created by Unii on 2015-12-09.
  */
 public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int FOOTER = 1000;
     private List<Game> mGameList;
     private Context mContext;
 
     public PlayerMatchParingAdapter(Context context, List<Game> games) {
         mGameList = games;
-        // mGameList.add(new Game(context.getString(R.string.dummy_player), context.getString(R.string.dummy_player)));//add empty element
-        //  notifyDataSetChanged();
-        mContext = context;
+           mContext = context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 
-       // if (getItemViewType(viewType) != FOOTER) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_paring_list, parent, false);
             ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
-      /*  } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_empty_big_view_holder, parent, false);
-            EmptyViewHolder emptyViewHolder = new EmptyViewHolder(view);
-            return emptyViewHolder;
-        }
-*/
+
     }
-/*
-    @Override
-    public int getItemViewType(int position) {
-        // Just as an example, return 0 or 2 depending on position
-        // Note that unlike in ListView adapters, types don't have to be contiguous
-        //TODO: refactor make it more generic!
-        if (position ==
-                mGameList.size() - 1) {
-            return FOOTER;
-        } else {
-            return position;
-        }
-    }*/
 
 
     @Override

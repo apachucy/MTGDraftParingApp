@@ -68,9 +68,9 @@ public class ManualPlayerPairingActivity extends BaseActivity {
             mPlayerSpinnerAdapter.notifyDataSetChanged();
             mRecyclerMatchPlayerAdapter.notifyDataSetChanged();
             //If Spinner contain only one element and footer not exist add footer
-            if ((mPlayerList.isEmpty() || mPlayerList.size() <= 1) && !(mGameList.get(mGameList.size() - 1) instanceof ItemFooter)) {
-                mGameList.add(new ItemFooter());
-            }
+            //if ((mPlayerList.isEmpty() || mPlayerList.size() <= 1) && !(mGameList.get(mGameList.size() - 1) instanceof ItemFooter)) {
+           //     mGameList.add(new ItemFooter());
+           // }
         } else if (mPlayerList == null || mPlayerList.isEmpty() || mPlayerList.get(0).getPlayerName().equals(getString(R.string.spinner_empty_player_list))) {
             Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_empty_list), Toast.LENGTH_LONG).show();
         } else {
