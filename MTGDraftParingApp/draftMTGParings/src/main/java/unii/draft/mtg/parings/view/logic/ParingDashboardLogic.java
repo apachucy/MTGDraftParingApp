@@ -24,30 +24,6 @@ public class ParingDashboardLogic {
         mContext = context;
     }
 
-    public void addDummyPlayer(List<Game> gameList) {
-        gameList.add(new Game(mContext.getString(R.string.dummy_player), mContext.getString(R.string.dummy_player)));//add empty element
-    }
-
-    public void removeDummyPlayer(List<Game> gameList) {
-     /*   Game dummyGame = null;
-        for (Game game : gameList) {
-            if (game.getPlayerNameA().equals(mContext.getString(R.string.dummy_player)) && game.getPlayerNameB().equals(mContext.getString(R.string.dummy_player))) {
-                dummyGame = game;
-            }*/
-         Iterator<Game> gameIterator = gameList.iterator();
-        while (gameIterator.hasNext()) {
-            Game dummyGame = gameIterator.next();
-            if (dummyGame.getPlayerNameA().equals(mContext.getString(R.string.dummy_player)) && dummyGame.getPlayerNameB().equals(mContext.getString(R.string.dummy_player))) {
-                gameIterator.remove();
-            }
-        }
-
-        }
-      /*  if (dummyGame != null) {
-            gameList.remove(dummyGame);
-        }*/
-
-
 
     public void addGameResult(IParingAlgorithm paringAlgorithm, List<Game> gameList) {
         updateGameResults(gameList);
@@ -76,14 +52,14 @@ public class ParingDashboardLogic {
                 // it was a draw
                 g.setWinner(BaseConfig.DRAW);
             }
+            g.setGamesPlayed(g.getPlayerAPoints() + g.getPlayerBPoints() + g.getDraws());
         }
     }
 
 
     private void updatePlayerPoints(IParingAlgorithm paringAlgorithm, List<Game> gameList) {
         List<Player> playerList = paringAlgorithm.getSortedPlayerList();
-        //Remove dummy decorator, unused element
-        //removeDummyPlayer(gameList);
+
 
         for (Player player : playerList) {
             // player has bye

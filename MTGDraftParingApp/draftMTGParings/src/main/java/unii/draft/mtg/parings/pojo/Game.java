@@ -34,6 +34,7 @@ public class Game implements IAdapterItem {
     private int mPlayerBPoints;
 
 
+    private int mGamesPlayed;
     /**
      * In case of a draw 0/1/2
      */
@@ -108,5 +109,13 @@ public class Game implements IAdapterItem {
         } else {
             return pointsB;
         }
+    }
+
+    public int getGamesPlayed() {
+        return mGamesPlayed;
+    }
+
+    public void setGamesPlayed(int mGamesPlayed) {
+        this.mGamesPlayed = mGamesPlayed;
     }
 }

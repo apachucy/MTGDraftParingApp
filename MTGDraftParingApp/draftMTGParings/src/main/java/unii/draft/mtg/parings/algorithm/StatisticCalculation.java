@@ -61,7 +61,7 @@ public class StatisticCalculation implements IStatisticCalculation {
 
         if (pmw < BaseConfig.MIN_OVERALL_VALUE) {
             pmw = BaseConfig.MIN_OVERALL_VALUE;
-        }else if(pmw > BaseConfig.MAX_OVERALL_VALUE){
+        } else if (pmw > BaseConfig.MAX_OVERALL_VALUE) {
             pmw = BaseConfig.MAX_OVERALL_VALUE;
         }
         player.setPlayerMatchOverallWin(pmw);
@@ -103,7 +103,7 @@ public class StatisticCalculation implements IStatisticCalculation {
                     / ((float) (gamesPlayed * BaseConfig.MAX_MATCH));
             if (pgw < BaseConfig.MIN_OVERALL_VALUE) {
                 pgw = BaseConfig.MIN_OVERALL_VALUE;
-            }else if(pgw > BaseConfig.MAX_OVERALL_VALUE){
+            } else if (pgw > BaseConfig.MAX_OVERALL_VALUE) {
                 pgw = BaseConfig.MAX_OVERALL_VALUE;
             }
         }
@@ -148,10 +148,7 @@ public class StatisticCalculation implements IStatisticCalculation {
     private int gamesPlayed(Player player) {
         int gamesPlayed = 0;
         for (Game g : player.getPlayedGame()) {
-            gamesPlayed += g.getPlayerAPoints() + g.getPlayerBPoints();
-            if (g.isGameADraw()) {
-                gamesPlayed += 1;
-            }
+            gamesPlayed += g.getGamesPlayed();
         }
         return gamesPlayed;
     }
