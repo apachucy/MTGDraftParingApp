@@ -35,18 +35,18 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 
-        if (getItemViewType(viewType) != FOOTER) {
+       // if (getItemViewType(viewType) != FOOTER) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_paring_list, parent, false);
             ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
-        } else {
+      /*  } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_empty_big_view_holder, parent, false);
             EmptyViewHolder emptyViewHolder = new EmptyViewHolder(view);
             return emptyViewHolder;
         }
-
+*/
     }
-
+/*
     @Override
     public int getItemViewType(int position) {
         // Just as an example, return 0 or 2 depending on position
@@ -58,7 +58,7 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         } else {
             return position;
         }
-    }
+    }*/
 
 
     @Override

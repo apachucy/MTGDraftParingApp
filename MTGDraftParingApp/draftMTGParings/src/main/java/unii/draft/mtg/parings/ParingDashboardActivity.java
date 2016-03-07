@@ -195,7 +195,7 @@ public class ParingDashboardActivity extends BaseActivity {
             displayErrorDialog();
         }
         mParingDashboardLogic = new ParingDashboardLogic(this);
-        mParingDashboardLogic.addDummyPlayer(mGameList);
+       // mParingDashboardLogic.addDummyPlayer(mGameList);
         mAdapter = new PlayerMatchParingAdapter(this, mGameList);
         mRoundTextView.setText(getString(R.string.text_round) + " "
                 + mParingAlgorithm.getCurrentRound());

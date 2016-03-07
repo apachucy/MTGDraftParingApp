@@ -83,7 +83,7 @@ public class ParingDashboardLogic {
     private void updatePlayerPoints(IParingAlgorithm paringAlgorithm, List<Game> gameList) {
         List<Player> playerList = paringAlgorithm.getSortedPlayerList();
         //Remove dummy decorator, unused element
-        removeDummyPlayer(gameList);
+        //removeDummyPlayer(gameList);
 
         for (Player player : playerList) {
             // player has bye
