@@ -60,7 +60,7 @@ public class BaseActivity extends ActionBarActivity implements IActivityHandler 
         new MaterialDialog.Builder(this)
                 .title(title)
                 .content(body)
-                .positiveText(positiveText)
+                .positiveText(positiveText).backgroundColorRes(R.color.windowBackground)
                 .show();
     }
 
@@ -69,7 +69,7 @@ public class BaseActivity extends ActionBarActivity implements IActivityHandler 
         new MaterialDialog.Builder(this)
                 .title(title)
                 .content(body)
-                .positiveText(positiveText).onPositive(positiveAction)
+                .positiveText(positiveText).onPositive(positiveAction).backgroundColorRes(R.color.windowBackground)
                 .show();
     }
 

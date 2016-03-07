@@ -81,9 +81,6 @@ public class ScoreBoardActivity extends BaseActivity {
     Toolbar mToolBar;
 
     private IParingAlgorithm mAlgorithm;
-    //private CustomDialogFragment mCustomDialogFragment;
-    // private static final String TAG_DIALOG = ScoreBoardActivity.class
-    //        .getName() + "TAG_DIALOG";
 
     // help library
     private TourGuide mTutorialHandler = null;
