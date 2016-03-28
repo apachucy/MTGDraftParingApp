@@ -18,9 +18,7 @@ import butterknife.OnClick;
 import unii.draft.mtg.parings.algorithm.AlgorithmFactory;
 import unii.draft.mtg.parings.algorithm.IAlgorithmConfigure;
 import unii.draft.mtg.parings.pojo.Game;
-import unii.draft.mtg.parings.pojo.ItemFooter;
 import unii.draft.mtg.parings.pojo.Player;
-import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.MatchPlayerCustomAdapter;
 import unii.draft.mtg.parings.view.adapters.MatchPlayerCustomSpinnerAdapter;
 
@@ -69,8 +67,8 @@ public class ManualPlayerPairingActivity extends BaseActivity {
             mRecyclerMatchPlayerAdapter.notifyDataSetChanged();
             //If Spinner contain only one element and footer not exist add footer
             //if ((mPlayerList.isEmpty() || mPlayerList.size() <= 1) && !(mGameList.get(mGameList.size() - 1) instanceof ItemFooter)) {
-           //     mGameList.add(new ItemFooter());
-           // }
+            //     mGameList.add(new ItemFooter());
+            // }
         } else if (mPlayerList == null || mPlayerList.isEmpty() || mPlayerList.get(0).getPlayerName().equals(getString(R.string.spinner_empty_player_list))) {
             Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_empty_list), Toast.LENGTH_LONG).show();
         } else {
@@ -87,14 +85,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         } else if (mPlayerList.size() > 1 && mPlayerList.get(0).hasBye()) {
             Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_bye), Toast.LENGTH_LONG).show();
         } else {
-
-            List<Game> castGameList = new ArrayList<>();
-            for (IAdapterItem adapterItem : mGameList) {
-                if (adapterItem instanceof Game) {
-                    castGameList.add((Game) adapterItem);
-                }
-            }
-            AlgorithmFactory.getInstance().setPlayerGameList(castGameList);
+            AlgorithmFactory.getInstance().setPlayerGameList(mGameList);
             //someone has a bye
             if (mPlayerList.size() == 1 && !mPlayerList.get(0).getPlayerName().equals(getString(R.string.spinner_empty_player_list))) {
                 AlgorithmFactory.getInstance().setPlayerWithBye(mPlayerList.get(0));
@@ -109,7 +100,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     Toolbar mToolBar;
 
     private List<Player> mPlayerList;
-    private List<IAdapterItem> mGameList;
+    private List<Game> mGameList;
     private MatchPlayerCustomSpinnerAdapter mPlayerSpinnerAdapter;
 
 
@@ -133,7 +124,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         mPlayerSpinnerAdapter = new MatchPlayerCustomSpinnerAdapter(this, mPlayerList);
         mPlayer1Spinner.setAdapter(mPlayerSpinnerAdapter);
         mPlayer2Spinner.setAdapter(mPlayerSpinnerAdapter);
-        mGameList = new ArrayList<IAdapterItem>();
+        mGameList = new ArrayList<Game>();
         mRecyclerMatchPlayerAdapter = new MatchPlayerCustomAdapter(this, mGameList);
         mRecyclerMatchPlayerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);

@@ -18,7 +18,6 @@ import unii.draft.mtg.parings.config.BundleConst;
 import unii.draft.mtg.parings.database.model.Draft;
 import unii.draft.mtg.parings.database.model.DraftDao;
 import unii.draft.mtg.parings.database.model.IDatabaseHelper;
-import unii.draft.mtg.parings.pojo.ItemFooter;
 import unii.draft.mtg.parings.pojo.ItemHeader;
 import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
@@ -36,7 +35,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private long mDraftKey;
-    List<IAdapterItem> mPlayerScoreBoardList;
+    private List<IAdapterItem> mPlayerScoreBoardList;
 
 
     @Override
@@ -56,7 +55,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         }
         mDraftKey = bundle.getLong(BundleConst.BUNDLE_KEY_HISTORY_DRAFT_DETAIL);
         DraftDao draftDao = ((IDatabaseHelper) mContext.getApplication()).getDaoSession().getDraftDao();
-            //get entity with provided Id
+        //get entity with provided Id
         Draft draft = draftDao.load(mDraftKey);
         List<Player> playerList = new ArrayList<>();
         for (unii.draft.mtg.parings.database.model.Player player : draft.getPlayers()) {
@@ -66,7 +65,6 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         mPlayerScoreBoardList = new ArrayList<>();
         mPlayerScoreBoardList.add(new ItemHeader());
         mPlayerScoreBoardList.addAll(playerList);
-        mPlayerScoreBoardList.add(new ItemFooter());
         mAdapter = new PlayerScoreboardAdapter(mContext, mPlayerScoreBoardList);
 
         mRecyclerView.setHasFixedSize(true);

@@ -10,4 +10,11 @@
         android:title="@string/action_save"
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_remove_player"
+        android:icon="@drawable/ic_save"
+        android:orderInCategory="101"
+        android:title="@string/action_save"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="always" />
 </menu>

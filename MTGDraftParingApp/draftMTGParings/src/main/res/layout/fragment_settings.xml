@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/settings_counterInfoTextView"
@@ -13,6 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:text="@string/text_display_counter"
@@ -25,7 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/settings_counterInfoTextView"
             android:layout_alignLeft="@+id/settings_timeButton"
+            android:layout_alignStart="@+id/settings_timeButton"
             android:layout_marginTop="@dimen/button_margin_settings"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:checked="false"
             android:textOff="@string/toggle_button_off"
             android:textOn="@string/toggle_button_on" />
@@ -36,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_counterInfoTextView"
+            android:layout_alignStart="@+id/settings_counterInfoTextView"
             android:layout_below="@+id/settings_counterToggleButton"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
@@ -47,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/settings_timeInfoTextView"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/settings_counterToggleButton"
             android:layout_marginTop="@dimen/button_margin_settings"
@@ -60,6 +66,7 @@
             android:layout_below="@id/settings_counterToggleButton"
             android:layout_marginTop="@dimen/edit_text_margin_settings"
             android:layout_toLeftOf="@+id/settings_timeButton"
+            android:layout_toStartOf="@+id/settings_timeButton"
             android:ems="10"
             android:inputType="number"
             android:maxLength="2" />
@@ -70,6 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_timeInfoTextView"
+            android:layout_alignStart="@+id/settings_timeInfoTextView"
             android:layout_below="@+id/settings_timeInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:text="@string/text_vibration"
@@ -82,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/settings_vibrationInfoTextView"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/settings_timeButton"
             android:layout_marginTop="@dimen/button_margin_settings"
@@ -89,7 +98,7 @@
             android:textOn="@string/toggle_button_on" />
 
         <TextView
-            android:id="@+id/settings_vibratonDetailInfoTextView"
+            android:id="@+id/settings_vibrationDetailInfoTextView"
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,12 +108,13 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/setttings_firstVibrationInfoTextView"
+            android:id="@+id/settings_firstVibrationInfoTextView"
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_vibrationInfoTextView"
-            android:layout_below="@+id/settings_vibratonDetailInfoTextView"
+            android:layout_alignStart="@+id/settings_vibrationInfoTextView"
+            android:layout_below="@+id/settings_vibrationDetailInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
             android:text="@string/text_first_vibration" />
@@ -114,22 +124,23 @@
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/setttings_firstVibrationInfoTextView"
-            android:layout_below="@+id/setttings_firstVibrationInfoTextView"
-
+            android:layout_alignLeft="@+id/settings_firstVibrationInfoTextView"
+            android:layout_alignStart="@+id/settings_firstVibrationInfoTextView"
+            android:layout_below="@+id/settings_firstVibrationInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
             android:text="@string/text_second_vibration" />
 
         <Button
-            android:id="@+id/settings_fistrVibrationButton"
+            android:id="@+id/settings_firstVibrationButton"
             style="@style/buttonSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/settings_secondVibrationInfoTextView"
-            android:layout_alignBottom="@+id/setttings_firstVibrationInfoTextView"
+            android:layout_alignBottom="@+id/settings_firstVibrationInfoTextView"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/settings_vibratonDetailInfoTextView"
+            android:layout_below="@+id/settings_vibrationDetailInfoTextView"
             android:layout_marginTop="@dimen/button_margin_settings"
             android:text="@string/text_save" />
 
@@ -139,9 +150,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/settings_secondVibrationInfoTextView"
+            android:layout_alignEnd="@+id/settings_firstVibrationButton"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignRight="@+id/settings_fistrVibrationButton"
-            android:layout_below="@+id/settings_fistrVibrationButton"
+            android:layout_alignRight="@+id/settings_firstVibrationButton"
+            android:layout_below="@+id/settings_firstVibrationButton"
             android:layout_marginTop="@dimen/button_margin_settings"
             android:text="@string/text_save" />
 
@@ -150,9 +163,10 @@
             style="@style/editText.settings"
             android:layout_height="wrap_content"
             android:layout_above="@+id/settings_secondVibrationInfoTextView"
-            android:layout_below="@id/settings_vibratonDetailInfoTextView"
+            android:layout_below="@id/settings_vibrationDetailInfoTextView"
             android:layout_marginTop="@dimen/edit_text_margin_settings"
-            android:layout_toLeftOf="@+id/settings_fistrVibrationButton"
+            android:layout_toLeftOf="@+id/settings_firstVibrationButton"
+            android:layout_toStartOf="@+id/settings_firstVibrationButton"
             android:ems="10"
             android:inputType="number"
             android:maxLength="2">
@@ -167,7 +181,8 @@
             android:layout_alignBottom="@+id/settings_secondVibrationButton"
             android:layout_below="@+id/settings_firstVibrationEditText"
             android:layout_marginTop="@dimen/edit_text_margin_settings"
-            android:layout_toLeftOf="@+id/settings_fistrVibrationButton"
+            android:layout_toLeftOf="@+id/settings_firstVibrationButton"
+            android:layout_toStartOf="@+id/settings_firstVibrationButton"
             android:ems="10"
             android:inputType="number"
             android:maxLength="2" />
@@ -178,6 +193,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
+            android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_secondVibrationInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
@@ -190,7 +206,9 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/settings_durationVibrationInfoTextView"
             android:layout_alignLeft="@+id/settings_secondVibrationButton"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/settings_secondVibrationButton"
             android:layout_below="@+id/settings_secondVibrationButton"
             android:layout_marginTop="@dimen/button_margin_settings"
             android:text="@string/text_save" />
@@ -203,6 +221,7 @@
             android:layout_below="@+id/settings_secondVibrationEditText"
             android:layout_marginTop="@dimen/edit_text_margin_settings"
             android:layout_toLeftOf="@+id/settings_durationVibrationButton"
+            android:layout_toStartOf="@+id/settings_durationVibrationButton"
             android:ems="10"
             android:inputType="number"
             android:maxLength="2" />
@@ -213,10 +232,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_timeInfoTextView"
+            android:layout_alignStart="@+id/settings_timeInfoTextView"
             android:layout_below="@+id/settings_durationVibrationInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:text="@string/settings_other"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/settings_rateApplicationInfoTextView"
+            style="@style/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
+            android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
+            android:layout_below="@+id/settings_otherInfoTextView"
+            android:layout_marginTop="@dimen/text_view_margin_settings"
+            android:padding="5dp"
+            android:text="@string/settings_rate_me" />
 
         <TextView
             android:id="@+id/settings_createParingsManualInfoTextView"
@@ -224,7 +256,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
-            android:layout_below="@+id/settings_otherInfoTextView"
+            android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
+            android:layout_below="@+id/settings_rateApplicationInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
             android:text="@string/text_personal_parings" />
@@ -235,12 +268,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/settings_createParingsManualInfoTextView"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/settings_otherInfoTextView"
+            android:layout_below="@+id/settings_rateApplicationInfoTextView"
             android:layout_marginTop="@dimen/button_margin_settings"
             android:textOff="@string/toggle_button_off"
             android:textOn="@string/toggle_button_on" />
 
+
+        <TextView
+            android:id="@+id/settings_displayScoreBoardsInfoTextView"
+            style="@style/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
+            android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
+            android:layout_below="@+id/settings_createParingsManualInfoTextView"
+            android:layout_marginTop="@dimen/text_view_margin_settings"
+            android:padding="5dp"
+            android:text="@string/settings_display_scoreboards" />
 
         <TextView
             android:id="@+id/settings_removeScoreBoardsInfoTextView"
@@ -248,7 +294,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
-            android:layout_below="@+id/settings_createParingsManualInfoTextView"
+            android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
+            android:layout_below="@+id/settings_displayScoreBoardsInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
             android:text="@string/settings_remove_scoreboards" />
@@ -260,21 +307,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/settings_removeScoreBoardsInfoTextView"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/settings_createParingsManualToggleButton"
+            android:layout_below="@+id/settings_displayScoreBoardsInfoTextView"
             android:layout_marginTop="@dimen/button_margin_settings"
             android:text="@string/settings_remove_text" />
 
-        <TextView
-            android:id="@+id/settings_displayScoreBoardsInfoTextView"
-            style="@style/textView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
-            android:layout_below="@+id/settings_removeScoreBoardsInfoTextView"
-            android:layout_marginTop="@dimen/text_view_margin_settings"
-            android:padding="5dp"
-            android:text="@string/settings_display_scoreboards" />
+
 
     </RelativeLayout>
 </ScrollView>

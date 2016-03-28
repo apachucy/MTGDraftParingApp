@@ -35,7 +35,8 @@ public class PlayerDao extends AbstractDao<Player, Long> {
         public final static Property OponentsMatchOveralWins = new Property(4, Float.class, "OponentsMatchOveralWins", false, "OPONENTS_MATCH_OVERAL_WINS");
         public final static Property PlayerGamesOverallWin = new Property(5, Float.class, "PlayerGamesOverallWin", false, "PLAYER_GAMES_OVERALL_WIN");
         public final static Property OponentsGamesOverallWin = new Property(6, Float.class, "OponentsGamesOverallWin", false, "OPONENTS_GAMES_OVERALL_WIN");
-        public final static Property DraftId = new Property(7, Long.class, "DraftId", false, "DRAFT_ID");
+        public final static Property Dropped = new Property(7, Boolean.class, "Dropped", false, "DROPPED");
+        public final static Property DraftId = new Property(8, Long.class, "DraftId", false, "DRAFT_ID");
     };
 
     private DaoSession daoSession;
@@ -62,7 +63,8 @@ public class PlayerDao extends AbstractDao<Player, Long> {
                 "\"OPONENTS_MATCH_OVERAL_WINS\" REAL," + // 4: OponentsMatchOveralWins
                 "\"PLAYER_GAMES_OVERALL_WIN\" REAL," + // 5: PlayerGamesOverallWin
                 "\"OPONENTS_GAMES_OVERALL_WIN\" REAL," + // 6: OponentsGamesOverallWin
-                "\"DRAFT_ID\" INTEGER);"); // 7: DraftId
+                "\"DROPPED\" INTEGER," + // 7: Dropped
+                "\"DRAFT_ID\" INTEGER);"); // 8: DraftId
     }
 
     /** Drops the underlying database table. */
@@ -111,9 +113,14 @@ public class PlayerDao extends AbstractDao<Player, Long> {
             stmt.bindDouble(7, OponentsGamesOverallWin);
         }
  
+        Boolean Dropped = entity.getDropped();
+        if (Dropped != null) {
+            stmt.bindLong(8, Dropped ? 1L: 0L);
+        }
+ 
         Long DraftId = entity.getDraftId();
         if (DraftId != null) {
-            stmt.bindLong(8, DraftId);
+            stmt.bindLong(9, DraftId);
         }
     }
 
@@ -140,7 +147,8 @@ public class PlayerDao extends AbstractDao<Player, Long> {
             cursor.isNull(offset + 4) ? null : cursor.getFloat(offset + 4), // OponentsMatchOveralWins
             cursor.isNull(offset + 5) ? null : cursor.getFloat(offset + 5), // PlayerGamesOverallWin
             cursor.isNull(offset + 6) ? null : cursor.getFloat(offset + 6), // OponentsGamesOverallWin
-            cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7) // DraftId
+            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // Dropped
+            cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8) // DraftId
         );
         return entity;
     }
@@ -155,7 +163,8 @@ public class PlayerDao extends AbstractDao<Player, Long> {
         entity.setOponentsMatchOveralWins(cursor.isNull(offset + 4) ? null : cursor.getFloat(offset + 4));
         entity.setPlayerGamesOverallWin(cursor.isNull(offset + 5) ? null : cursor.getFloat(offset + 5));
         entity.setOponentsGamesOverallWin(cursor.isNull(offset + 6) ? null : cursor.getFloat(offset + 6));
-        entity.setDraftId(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
+        entity.setDropped(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
+        entity.setDraftId(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
      }
     
     /** @inheritdoc */

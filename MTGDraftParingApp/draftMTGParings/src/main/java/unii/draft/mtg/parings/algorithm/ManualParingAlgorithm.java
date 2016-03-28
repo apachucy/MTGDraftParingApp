@@ -10,9 +10,9 @@ import unii.draft.mtg.parings.pojo.Player;
 /**
  * Created by Arkadiusz Pachucy on 2015-07-14.
  */
-public class ManualParingAlgorithm implements IParingAlgorithm {
+public class ManualParingAlgorithm extends BaseAlgorithm {
     public static int DEFAULT_RANDOM_SEED;
-    private List<Player> mPlayers;
+  //  private List<Player> mPlayers;
     private int mMaxRounds;
     private int mCurrentRound;
     private Player mPlayerWithBye;
@@ -27,31 +27,13 @@ public class ManualParingAlgorithm implements IParingAlgorithm {
      *            max number of played rounds
      */
     public ManualParingAlgorithm(List<String> players, int rounds){
-        populatePlayersList(players);
+        super(players);
         mMaxRounds = rounds;
         mCurrentRound = 0;
         DEFAULT_RANDOM_SEED = players.size();
         mPlayerWithBye = null;
 
     }
-
-    private void populatePlayersList(List<String> players) {
-        mPlayers = new ArrayList<Player>();
-        for (String playerName : players) {
-            Player player = new Player(playerName);
-            mPlayers.add(player);
-        }
-    }
-
-    /**
-     * Sort players using comparator {@link PlayersComparator}
-     */
-    private void sortPlayers() {
-        Collections.sort(mPlayers, new PlayersComparator());
-    }
-
-
-
     @Override
     public List<Game> getParings() {
         mCurrentRound++;
@@ -70,8 +52,16 @@ public class ManualParingAlgorithm implements IParingAlgorithm {
 
     @Override
     public List<Player> getSortedPlayerList() {
-        sortPlayers();
-        return mPlayers;
+        List <Player> playerList = getDraftStartedPlayerList();
+        sortPlayers(playerList);
+        return playerList;
+    }
+
+    @Override
+    public List<Player> getSortedFilteredPlayerList(boolean dropped) {
+        List <Player> playerList = getFilteredPlayerList(dropped);
+        sortPlayers(playerList);
+        return playerList;
     }
 
     @Override
@@ -87,6 +77,6 @@ public class ManualParingAlgorithm implements IParingAlgorithm {
     @Override
     public void setPlayerWithBye(Player playerWithBye) {
         mPlayerWithBye= playerWithBye;
-        mPlayers.get(mPlayers.indexOf(mPlayerWithBye)).setHasBye(true);
+        getDraftStartedPlayerList().get(getDraftStartedPlayerList().indexOf(mPlayerWithBye)).setHasBye(true);
     }
 }

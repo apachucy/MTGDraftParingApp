@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,10 +118,10 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
-    @Bind(R.id.settings_fistrVibrationButton)
+    @Bind(R.id.settings_firstVibrationButton)
     Button mFirstVibrationSaveButton;
 
-    @OnClick(R.id.settings_fistrVibrationButton)
+    @OnClick(R.id.settings_firstVibrationButton)
     void onFirstVibrationButtonClicked(View view) {
         if (!ValidationHelper.isTextEmpty(mFirstVibrationEditText
                 .getText().toString())) {
@@ -187,6 +188,27 @@ public class SettingsFragment extends BaseFragment {
             startActivity(intent);
         }
     }
+
+    @OnClick(R.id.settings_rateApplicationInfoTextView)
+    void onRateMeClicked(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        //Try Google play
+        intent.setData(Uri.parse(BaseConfig.INTENT_OPEN_GOOGLE_PLAY + BaseConfig.INTENT_PACKAGE_DRAFT_MTG));
+        if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            intent.setData(Uri.parse(BaseConfig.INTENT_OPEN_GOOGLE_PLAY_WWW + BaseConfig.INTENT_PACKAGE_DRAFT_MTG));
+            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                //display error msg
+                Toast.makeText(getContext(), getString(R.string.settings_rate_me_error), Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+    }
+
 
     private ISettings mSettingsSharedPreferences;
 

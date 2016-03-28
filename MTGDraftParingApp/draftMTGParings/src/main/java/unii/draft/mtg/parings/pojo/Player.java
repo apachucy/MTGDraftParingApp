@@ -6,7 +6,7 @@ import java.util.List;
 import unii.draft.mtg.parings.config.BaseConfig;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 
-public class Player  implements IAdapterItem{
+public class Player  implements IAdapterItem {
 
     private List<Game> mPlayedGame;
 
@@ -46,6 +46,11 @@ public class Player  implements IAdapterItem{
      */
     private float mOponentsGamesOverallWin;
 
+    /**
+     * Set to true if player mDropped a draft
+     */
+    private boolean mDropped;
+
     public Player(unii.draft.mtg.parings.database.model.Player player) {
         mPlayerName = player.getPlayerName();
 
@@ -54,6 +59,7 @@ public class Player  implements IAdapterItem{
         mOponentsGamesOverallWin = player.getOponentsGamesOverallWin();
         mOponentsMatchOveralWins = player.getOponentsMatchOveralWins();
         mMatchPoints = player.getPlayerMatchPoints();
+        mDropped = player.getDropped();
     }
 
     public Player(String playerName) {
@@ -61,6 +67,7 @@ public class Player  implements IAdapterItem{
         mPlayedGame = new ArrayList<Game>();
         mMatchPoints = 0;
         hasBye = false;
+        mDropped = false;
         mPlayerMatchOverallWin = BaseConfig.MIN_OVERALL_VALUE;
         mOponentsMatchOveralWins = BaseConfig.MIN_OVERALL_VALUE;
         mPlayerGamesOverallWin = BaseConfig.MIN_OVERALL_VALUE;
@@ -160,9 +167,17 @@ public class Player  implements IAdapterItem{
     }
 
 
-
     @Override
     public int getItemType() {
         return ItemType.ITEM;
+    }
+
+
+    public boolean isDropped() {
+        return mDropped;
+    }
+
+    public void setDropped(boolean dropped) {
+        this.mDropped = dropped;
     }
 }

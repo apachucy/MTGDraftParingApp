@@ -31,12 +31,7 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (getItemViewType(viewType) == ItemType.FOOTER) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_empty_view_holder, parent, false);
-            EmptyViewHolder emptyViewHolder = new EmptyViewHolder(view);
-            return emptyViewHolder;
-
-        } else if (getItemViewType(viewType) == ItemType.HEADER) {
+        if (getItemViewType(viewType) == ItemType.HEADER) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_player_list, parent, false);
             EmptyViewHolder emptyViewHolder = new EmptyViewHolder(view);
             return emptyViewHolder;
@@ -46,7 +41,6 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
             return viewHolder;
         }
     }
-
     @Override
     public int getItemViewType(int position) {
         if (position == mPlayerList.size() - 1 && mPlayerList.get(position).getItemType() == ItemType.FOOTER) {
@@ -66,6 +60,19 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
         Player player = (Player) mPlayerList.get(position);
         ViewHolder viewHolder = ((ViewHolder) holder);
+        //set text fields color if player dropped
+        int textColor;
+        if (player.isDropped()) {
+            textColor = mContext.getResources().getColor(R.color.grey_light);
+        } else {
+            textColor = mContext.getResources().getColor(R.color.black);
+        }
+        viewHolder.playerTextView.setTextColor(textColor);
+        viewHolder.pointTextView.setTextColor(textColor);
+        viewHolder.pgwTextView.setTextColor(textColor);
+        viewHolder.ogwTextView.setTextColor(textColor);
+        viewHolder.pmwTextView.setTextColor(textColor);
+        viewHolder.omwTextView.setTextColor(textColor);
         // setting texts
         viewHolder.playerTextView.setText(player
                 .getPlayerName());
@@ -93,7 +100,6 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
             super(itemView);
         }
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.row_playerNameTextView)

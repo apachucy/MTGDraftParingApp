@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.ToMany;
 public class DatabaseDaoGenerator {
     public static void main(String args[]) throws Exception {
         //Create schema add version name and set package
-        Schema schema = new Schema(1, "unii.draft.mtg.parings.database.model");
+        Schema schema = new Schema(2, "unii.draft.mtg.parings.database.model");
         //add entity - player
         Entity player = schema.addEntity("Player");
         player.addIdProperty();
@@ -19,7 +19,7 @@ public class DatabaseDaoGenerator {
         player.addFloatProperty("OponentsMatchOveralWins");
         player.addFloatProperty("PlayerGamesOverallWin");
         player.addFloatProperty("OponentsGamesOverallWin");
-
+        player.addBooleanProperty("Dropped");
         //add entity draft
         Entity draft = schema.addEntity("Draft");
         draft.addIdProperty();

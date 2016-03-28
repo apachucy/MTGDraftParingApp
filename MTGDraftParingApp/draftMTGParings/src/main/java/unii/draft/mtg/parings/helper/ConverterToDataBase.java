@@ -60,6 +60,7 @@ public class ConverterToDataBase {
         dbPlayer.setPlayerMatchOverallWin(player.getPlayerMatchOverallWin());
         dbPlayer.setPlayerMatchPoints(player.getMatchPoints());
         dbPlayer.setPlayerName(player.getPlayerName());
+        dbPlayer.setDropped(player.isDropped());
         dbPlayer.setDraftId(draftId);
         return dbPlayer;
     }

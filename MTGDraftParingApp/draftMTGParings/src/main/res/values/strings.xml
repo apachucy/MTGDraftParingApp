@@ -99,8 +99,11 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="activity_save_score_board_info_small_text">You can watch saved score board using settings</string>
     <string name="activity_save_score_board_save">Save</string>
     <string name="action_save">Save dashboard</string>
+    <string name="action_remove_player">Drop player</string>
     <string name="help_save_dashboard">After Game you can save score board</string>
+    <string name="help_drop_player">If there is a need player can drop a draft</string>
     <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
+    <string name="warning_drop_player">You cannot remove players when draft ended</string>
     <string name="settings_remove_scoreboards">Remove all score boards</string>
     <string name="settings_remove_text">Remove</string>
     <string name="settings_other">Other settings</string>
@@ -125,6 +128,11 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <!-- Show validation dialog-->
     <string name="validation_dialog_title">Validation</string>
     <string name="validation_dialog_body">Please set all game results</string>
-    <string name="validation_dialog_button_name">Ok</string>
-
+    <string name="validation_dialog_button_name" translatable="false">Ok</string>
+    <!-- drop player res -->
+    <string name="drop_players_item">%1$s points: %2$d</string>
+    <string name="drop_player_info_text">To dropp players select them and press save. This action cannot be overriten. Use with caution.</string>
+    <!--Rate me option -->
+    <string name="settings_rate_me">Please, rate this app</string>
+    <string name="settings_rate_me_error"> Could not open Google Play, please install the market app</string>
 </resources>

@@ -5,13 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import unii.draft.mtg.parings.config.BaseConfig;
 import unii.draft.mtg.parings.pojo.Game;
 import unii.draft.mtg.parings.pojo.Player;
 
-public class ParingAlgorithm implements IParingAlgorithm {
+public class ParingAlgorithm extends BaseAlgorithm {
     public static int DEFAULT_RANDOM_SEED;
-    private List<Player> mPlayers;
     private int mMaxRounds;
     private int mCurrentRound;
     private Player mPlayerWithBye;
@@ -21,58 +19,43 @@ public class ParingAlgorithm implements IParingAlgorithm {
      * @param rounds  max number of played rounds
      */
     public ParingAlgorithm(List<String> players, int rounds) {
-        populatePlayersList(players);
+        super(players);
         mMaxRounds = rounds;
         mCurrentRound = 0;
-        DEFAULT_RANDOM_SEED = players.size();
+        DEFAULT_RANDOM_SEED = getDraftStartedPlayerList().size();
         mPlayerWithBye = null;
     }
 
-    private void populatePlayersList(List<String> players) {
-        mPlayers = new ArrayList<Player>();
-        for (String playerName : players) {
-            Player player = new Player(playerName);
-            mPlayers.add(player);
-        }
-    }
 
     /**
      * Each player has equal point <br>
      * so make parings at random
      *
-     * @return pairTable
      */
-    private void calculatePairAtStart() {
+    private void calculatePairAtStart(List<Player> playerList) {
         Random random = new Random();
         // swap element at random
         for (int i = 0; i < DEFAULT_RANDOM_SEED; i++) {
-            int swapA = random.nextInt(mPlayers.size());
-            int swapB = random.nextInt(mPlayers.size());
-            Collections.swap(mPlayers, swapA, swapB);
+            int swapA = random.nextInt(playerList.size());
+            int swapB = random.nextInt(playerList.size());
+            Collections.swap(playerList, swapA, swapB);
         }
     }
 
-    /**
-     * Sort players using comparator {@link PlayersComparator}
-     */
-    private void sortPlayers() {
-        Collections.sort(mPlayers, new PlayersComparator());
-    }
+
 
     /**
      * sort list of players <br>
      * and move player<br>
      * with bye to last position
      */
-    private void movePlayerWithByeOnLastPosition() {
+    private void movePlayerWithByeOnLastPosition(List<Player> playerList) {
 
         int playerPosition = 0;
-        boolean firstPlayerWithoutBye = false;
-        for (int i = mPlayers.size() - 1; i >= 0; i--) {
-            if (!mPlayers.get(i).hasBye() && !firstPlayerWithoutBye) {
-                mPlayers.get(i).setHasBye(true);
-                firstPlayerWithoutBye = true;
-                mPlayerWithBye = mPlayers.get(i);
+        for (int i = playerList.size() - 1; i >= 0; i--) {
+            if (!playerList.get(i).hasBye()) {
+                playerList.get(i).setHasBye(true);
+                mPlayerWithBye = playerList.get(i);
                 playerPosition = i;
                 break;
             }
@@ -80,54 +63,55 @@ public class ParingAlgorithm implements IParingAlgorithm {
 
         // move player with bye on last position
         // swaping with other players
-        for (int i = playerPosition; i + 1 < mPlayers.size(); i++) {
-            Collections.swap(mPlayers, i, i + 1);
+        for (int i = playerPosition; i + 1 < playerList.size(); i++) {
+            Collections.swap(playerList, i, i + 1);
         }
 
     }
 
     @Override
     public List<Game> getParings() {
+        List<Player> filteredPlayerList = getFilteredPlayerList(false);
         List<Game> gameList = null;
         if (mCurrentRound == 0) {
-            calculatePairAtStart();
+            calculatePairAtStart(filteredPlayerList);
 
         } else if (mCurrentRound < mMaxRounds) {
-            sortPlayers();
+            sortPlayers(filteredPlayerList);
 
         } else {
             // game should end so return null
             return gameList;
         }
         List<Player> addedPlayers = new ArrayList<Player>();
-        addedPlayers.addAll(mPlayers);
+        addedPlayers.addAll(filteredPlayerList);
         // someone needs bye
-        if (mPlayers.size() % 2 == 1) {
+        if (filteredPlayerList.size() % 2 == 1) {
 
-            movePlayerWithByeOnLastPosition();
-            mPlayerWithBye = mPlayers.get(mPlayers.size() - 1);
+            movePlayerWithByeOnLastPosition(filteredPlayerList);
+            mPlayerWithBye = filteredPlayerList.get(filteredPlayerList.size() - 1);
             addedPlayers.remove(mPlayerWithBye);
 
         }
         // Game list should have size players/2
-        gameList = new ArrayList<Game>(mPlayers.size() / 2);
+        gameList = new ArrayList<Game>(filteredPlayerList.size() / 2);
 
-        for (int i = 0; i < mPlayers.size(); i++) {
+        for (int i = 0; i < filteredPlayerList.size(); i++) {
             // get only two players name
             // not added last player
-            if (addedPlayers.contains(mPlayers.get(i))) {
+            if (addedPlayers.contains(filteredPlayerList.get(i))) {
                 Integer paringPartner = null;
                 for (int j = 0; j < addedPlayers.size(); j++) {
                     //this player did not play a game yet!
                     if (!addedPlayers.get(j).playedGameWith()
-                            .contains(mPlayers.get(i).getPlayerName())
-                            && mPlayers.get(i) != addedPlayers.get(j)) {
+                            .contains(filteredPlayerList.get(i).getPlayerName())
+                            && filteredPlayerList.get(i) != addedPlayers.get(j)) {
                         paringPartner = j;
                         break;
                     }
                 }
                 if (paringPartner != null) {
-                    Player player1 = mPlayers.get(i);
+                    Player player1 = filteredPlayerList.get(i);
                     Player player2 = addedPlayers.get(paringPartner);
                     Game game = new Game(player1.getPlayerName(),
                             player2.getPlayerName());
@@ -138,7 +122,7 @@ public class ParingAlgorithm implements IParingAlgorithm {
                 } else {
                     //someone played a game before
                     if (addedPlayers.size() % 2 == 0) {
-                        Player player1 = mPlayers.get(i);
+                        Player player1 = filteredPlayerList.get(i);
                         addedPlayers.remove(player1);
                         Player player2 = addedPlayers.get(0);//get first element
                         addedPlayers.remove(player2);
@@ -163,8 +147,16 @@ public class ParingAlgorithm implements IParingAlgorithm {
 
     @Override
     public List<Player> getSortedPlayerList() {
-        sortPlayers();
-        return mPlayers;
+        List <Player> playerList = getDraftStartedPlayerList();
+        sortPlayers(playerList);
+        return playerList;
+    }
+
+    @Override
+    public List<Player> getSortedFilteredPlayerList(boolean dropped) {
+        List <Player> playerList = getFilteredPlayerList(dropped);
+        sortPlayers(playerList);
+        return playerList;
     }
 
     @Override

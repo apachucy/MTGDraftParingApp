@@ -2,81 +2,109 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\library-2.4.0-a3cc3eaefa34d63a62a83f17fe287740d19c62c6.jar" />
+        sha1="e5f32fa48a3eb2de0c987025c11b6e3864b634d9">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\com.android.support-support-v4-23.2.0_fe28588fa1d4ec335292aaa303baa70644ddf27b.jar" />
     </item>
     <item
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\libs\greendao-2.1.0.jar"
+        jar="E:\Android\SDK\extras\android\m2repository\com\android\support\support-annotations\23.2.0\support-annotations-23.2.0.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="9414c1d4578673dac83a23119009624fd695726d">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\greendao-2.1.0-544b62223ac7c689b3801690a75ad24add5e81ad.jar" />
-    </item>
-    <item
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\classes-9c326d6b0faa6814f1e35e754f76b36c99b89017.jar" />
-    </item>
-    <item
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\classes-e77765d24c8ef26678ee08ca2ef7b70c723f1067.jar" />
-    </item>
-    <item
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-0afb6f010122feb3f52804eb6041d6c1019779e9.jar" />
+        sha1="c5bf571bb10462bd90e5419ade67793f71acbc87">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\support-annotations-23.2.0_02c183d82baf326a888587829724fa0181f26f2c.jar" />
     </item>
     <item
         jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.github.worker8\tourguide\1.0.14-SNAPSHOT\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="35af7e9533758e83fd2864f0bc9ce14551c580ef">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\classes-71f03f1040b967974845f033d1efd73e3df5be5c.jar" />
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\com.github.worker8-tourguide-1.0.14-SNAPSHOT_71f03f1040b967974845f033d1efd73e3df5be5c.jar" />
     </item>
     <item
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.0\jars\libs\internal_impl-23.2.0.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\classes-3aa7efbf9b3ff3aef6665680f59b6a25c69a58f4.jar" />
+        sha1="6e239441500605809818997dd63b62a947195f8c">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\internal_impl-23.2.0_009e14b0c8419b09b79073ed7f13e54d5f17f0dd.jar" />
+    </item>
+    <item
+        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\library-2.4.0_a3cc3eaefa34d63a62a83f17fe287740d19c62c6.jar" />
+    </item>
+    <item
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\libs\greendao-2.1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="9414c1d4578673dac83a23119009624fd695726d">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\greendao-2.1.0_544b62223ac7c689b3801690a75ad24add5e81ad.jar" />
+    </item>
+    <item
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\me.zhanghai.android.materialprogressbar\library\1.1.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2a24cba08e1d865a79e61335f5a1bd64d520106d">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\me.zhanghai.android.materialprogressbar-library-1.1.4_f297229b7c1e598bf65205b87d190226ba5ee0e9.jar" />
+    </item>
+    <item
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.github.afollestad.material-dialogs\core\0.8.5.6\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1e9e758b0c20307810a65790e70261d4705a53a9">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\com.github.afollestad.material-dialogs-core-0.8.5.6_e5bbf0eab726b408e7a47acaf8d3aee0999d01ea.jar" />
+    </item>
+    <item
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d4c936aa8c7d2522c82e3f1829c791d9e367f009">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-23.2.0_c8670d0c3ad8f89509d7f0a9d4f8bb4e469524c5.jar" />
+    </item>
+    <item
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8c108c22c99e794eff255bb34d2a461200c4cbb0">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\com.android.support-animated-vector-drawable-23.2.0_33df29dd30f7e6b4a8290f24461417de85c0e862.jar" />
     </item>
     <item
         jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\butterknife-7.0.1-ef256bb740446048b520d5ac3f7f479ee2a602ec.jar" />
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\butterknife-7.0.1_ef256bb740446048b520d5ac3f7f479ee2a602ec.jar" />
     </item>
     <item
-        jar="E:\Android\SDK\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\design\23.2.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-2bb8759d72be243f5127e7f836828b634210f91b.jar" />
+        sha1="1aa5b025efe97f5006f5be16d6ca67c6c3c0c0d8">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\com.android.support-design-23.2.0_74600fa8a2f17936eeb6a87955dcd873cd9e3c0f.jar" />
     </item>
     <item
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\classes-9808f047e5d83133a10c0e5b41d6324bc81cd513.jar" />
+        sha1="292a9fa091757208efa65e77eef63088247e51f3">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\com.android.support-support-vector-drawable-23.2.0_38713a3873bbc2fc58d99441a53074c119aef6d2.jar" />
+    </item>
+    <item
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6e3578f92f7462d1a935a1d36173e3bdd1234976">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-23.2.0_1e57ec426306914c8d7910efff350f1d49d193fe.jar" />
     </item>
     <item
         jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\net.i2p.android.ext\floatingactionbutton\1.9.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="7c5e4db194c6ec3e62b70759ef913381ea4903d1">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\classes-88666396e8eb51de66f2b342cbf6a4dc717cd3ca.jar" />
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\release\net.i2p.android.ext-floatingactionbutton-1.9.0_88666396e8eb51de66f2b342cbf6a4dc717cd3ca.jar" />
     </item>
 
 </items>

@@ -1,13 +1,12 @@
 package unii.draft.mtg.parings.pojo;
 
-import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 
 /***
  * This class represent a simple game between two players
  *
  * @author Arkadiusz Pachucy
  */
-public class Game implements IAdapterItem {
+public class Game  {
 
     /**
      * Game status between two players
@@ -86,10 +85,6 @@ public class Game implements IAdapterItem {
     }
 
 
-    @Override
-    public int getItemType() {
-        return ItemType.ITEM;
-    }
 
     public int getDraws() {
         return mMatchDraws;

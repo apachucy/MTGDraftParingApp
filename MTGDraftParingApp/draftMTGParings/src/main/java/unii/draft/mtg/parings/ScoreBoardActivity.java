@@ -36,7 +36,6 @@ import unii.draft.mtg.parings.config.BundleConst;
 import unii.draft.mtg.parings.database.model.IDatabaseHelper;
 import unii.draft.mtg.parings.helper.ConverterToDataBase;
 import unii.draft.mtg.parings.helper.MenuHelper;
-import unii.draft.mtg.parings.pojo.ItemFooter;
 import unii.draft.mtg.parings.pojo.ItemHeader;
 import unii.draft.mtg.parings.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
@@ -44,7 +43,7 @@ import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 
 public class ScoreBoardActivity extends BaseActivity {
-
+    //TODO: Change color of dropped players
     @Bind(R.id.player_position_roundTextView)
     TextView mRoundTextView;
     @Bind(R.id.player_position_winnerTextView)
@@ -56,7 +55,7 @@ public class ScoreBoardActivity extends BaseActivity {
             showInfoDialog(getString(R.string.dialog_end_title),
                     getString(R.string.dialog_end_message),
                     getString(R.string.dialog_start_button), mOnDialogButtonClick);
-               } else {
+        } else {
 
             Intent intent = null;
             if (SettingsPreferencesFactory.getInstance().areManualParings()) {
@@ -87,7 +86,6 @@ public class ScoreBoardActivity extends BaseActivity {
 
     List<Player> mPlayerList;
     List<IAdapterItem> mPlayerScoreBoardList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,7 +133,7 @@ public class ScoreBoardActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
-        setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView), (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView), (ImageView) menu.getItem(0).getActionView());
+        setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView), (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView), (ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView());
         return true;
     }
 
@@ -153,22 +151,23 @@ public class ScoreBoardActivity extends BaseActivity {
     };
 
 
-    private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView, ImageView saveButton) {
+    private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView, ImageView saveButton, ImageView dropPlayerButton) {
         // just adding some padding to look better
         int padding = MenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 
         saveButton.setPadding(padding, padding, padding, padding);
-
+        dropPlayerButton.setPadding(padding, padding, padding, padding);
         // set an image
         saveButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_save));
-
+        dropPlayerButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_person_minus));
         if (SettingsPreferencesFactory.getInstance().isFirstRun()) {
             SettingsPreferencesFactory.getInstance().setFirstRun(false);
             Sequence sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.help_pmw), pmwTextView, Gravity.LEFT | Gravity.BOTTOM),
                     bindTourGuideButton(getString(R.string.help_omw), omwTextView, Gravity.LEFT | Gravity.BOTTOM),
                     bindTourGuideButton(getString(R.string.help_pgw), pgwTextView, Gravity.LEFT | Gravity.BOTTOM),
                     bindTourGuideButton(getString(R.string.help_ogw), ogwTextView, Gravity.LEFT | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_save_dashboard), saveButton)
+                    bindTourGuideButton(getString(R.string.help_save_dashboard), saveButton),
+                    bindTourGuideButton(getString(R.string.help_drop_player), dropPlayerButton)
             ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -191,6 +190,19 @@ public class ScoreBoardActivity extends BaseActivity {
         });
 
 
+        dropPlayerButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
+                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = null;
+                    intent = new Intent(ScoreBoardActivity.this, DropPlayerActivity.class);
+                    startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_DROPPED);
+
+                }
+            }
+        });
     }
 
     @Override
@@ -204,15 +216,19 @@ public class ScoreBoardActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if (resultCode == RESULT_OK) {
+            if (requestCode == BaseConfig.DRAFT_NAME_SET) {
+                if (data.getExtras().containsKey(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME)) {
+                    String savedGameName = data.getExtras().getString(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME);
 
-        if (resultCode == RESULT_OK && requestCode == BaseConfig.DRAFT_NAME_SET) {
-            if (data.getExtras().containsKey(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME)) {
-                String savedGameName = data.getExtras().getString(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME);
+                    SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
+                    String currentDateandTime = sdf.format(new Date());
+                    ConverterToDataBase.saveToDd(((IDatabaseHelper) getApplication()).getDaoSession(), mPlayerList, savedGameName, currentDateandTime);
+                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), Toast.LENGTH_LONG).show();
+                }
+            } else if (requestCode == BaseConfig.DRAFT_PLAYERS_DROPPED) {
 
-                SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
-                String currentDateandTime = sdf.format(new Date());
-                ConverterToDataBase.saveToDd(((IDatabaseHelper) getApplication()).getDaoSession(), mPlayerList, savedGameName, currentDateandTime);
-                Toast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), Toast.LENGTH_LONG).show();
+                mAdapter.notifyDataSetChanged();
             }
         }
 

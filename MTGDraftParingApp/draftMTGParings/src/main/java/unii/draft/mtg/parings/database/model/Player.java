@@ -16,6 +16,7 @@ public class Player {
     private Float OponentsMatchOveralWins;
     private Float PlayerGamesOverallWin;
     private Float OponentsGamesOverallWin;
+    private Boolean Dropped;
     private Long DraftId;
 
     /** Used to resolve relations */
@@ -35,7 +36,7 @@ public class Player {
         this.id = id;
     }
 
-    public Player(Long id, String PlayerName, Integer PlayerMatchPoints, Float PlayerMatchOverallWin, Float OponentsMatchOveralWins, Float PlayerGamesOverallWin, Float OponentsGamesOverallWin, Long DraftId) {
+    public Player(Long id, String PlayerName, Integer PlayerMatchPoints, Float PlayerMatchOverallWin, Float OponentsMatchOveralWins, Float PlayerGamesOverallWin, Float OponentsGamesOverallWin, Boolean Dropped, Long DraftId) {
         this.id = id;
         this.PlayerName = PlayerName;
         this.PlayerMatchPoints = PlayerMatchPoints;
@@ -43,6 +44,7 @@ public class Player {
         this.OponentsMatchOveralWins = OponentsMatchOveralWins;
         this.PlayerGamesOverallWin = PlayerGamesOverallWin;
         this.OponentsGamesOverallWin = OponentsGamesOverallWin;
+        this.Dropped = Dropped;
         this.DraftId = DraftId;
     }
 
@@ -106,6 +108,14 @@ public class Player {
 
     public void setOponentsGamesOverallWin(Float OponentsGamesOverallWin) {
         this.OponentsGamesOverallWin = OponentsGamesOverallWin;
+    }
+
+    public Boolean getDropped() {
+        return Dropped;
+    }
+
+    public void setDropped(Boolean Dropped) {
+        this.Dropped = Dropped;
     }
 
     public Long getDraftId() {

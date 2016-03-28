@@ -18,10 +18,10 @@ import unii.draft.mtg.parings.pojo.Game;
  * Created by Unii on 2015-12-12.
  */
 public class MatchPlayerCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<IAdapterItem> mPlayerGame;
+    private List<Game> mPlayerGame;
     private Context mContext;
 
-    public MatchPlayerCustomAdapter(Context context, List<IAdapterItem> playerGame) {
+    public MatchPlayerCustomAdapter(Context context, List<Game> playerGame) {
         mContext = context;
         mPlayerGame = playerGame;
     }

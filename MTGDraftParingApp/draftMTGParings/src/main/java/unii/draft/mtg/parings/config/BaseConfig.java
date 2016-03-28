@@ -43,10 +43,12 @@ public final class BaseConfig {
     public static final String DATABASE_NAME = "DRAFT_SCOREBOARD";
     //Activity result
     public static final int DRAFT_NAME_SET = 1;
+    public static final int DRAFT_PLAYERS_DROPPED = 2;
     //pattern for current date
     public static final String DATE_PATTERN = "yyyy-MM-dd";
     public static final String INTENT_PACKAGE_LIFE_COUNTER_APP = "intent.open.lifecounter";
     public static final String INTENT_PACKAGE_LIFE_COUNTER_APP_UNII = "unii.mtg.life.counter";
+    public static final String INTENT_PACKAGE_DRAFT_MTG = "unii.draft.mtg.parings";
     public static final String INTENT_OPEN_GOOGLE_PLAY = "market://details?id=";
     public static final String INTENT_OPEN_GOOGLE_PLAY_WWW = "https://play.google.com/store/apps/details?id=";
 
