@@ -125,5 +125,6 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="warning_drop_player">Nie możesz usunąć graczy po skończonym drafcie</string>
     <string name="settings_rate_me">Proszę, oceń tą aplikację</string>
     <string name="settings_rate_me_error">Nie można otworzyć Google play, zainstaluj market</string>
+    <string name="settings_counter_off">Odblokuj odliczanie w ustawieniach</string>
 
 </resources>

@@ -109,11 +109,12 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Bind(R.id.row_playerOMWTextView)
         TextView omwTextView;
         @Bind(R.id.row_playerPGWTextView)
-        TextView pmwTextView;
+        TextView pgwTextView;
         @Bind(R.id.row_playerOGWTextView)
         TextView ogwTextView;
         @Bind(R.id.row_playerPMWTextView)
-        TextView pgwTextView;
+        TextView pmwTextView;
+
 
 
         public ViewHolder(View itemView) {

@@ -137,6 +137,10 @@ public class ParingDashboardActivity extends BaseActivity {
         hourGlassButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!SettingsPreferencesFactory.getInstance().displayCounterRound()) {
+                    Toast.makeText(ParingDashboardActivity.this, getString(R.string.settings_counter_off), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (!isCountStarted) {
                     isCountStarted = true;
                     mCounterClass.start();
@@ -195,7 +199,7 @@ public class ParingDashboardActivity extends BaseActivity {
             displayErrorDialog();
         }
         mParingDashboardLogic = new ParingDashboardLogic(this);
-       // mParingDashboardLogic.addDummyPlayer(mGameList);
+        // mParingDashboardLogic.addDummyPlayer(mGameList);
         mAdapter = new PlayerMatchParingAdapter(this, mGameList);
         mRoundTextView.setText(getString(R.string.text_round) + " "
                 + mParingAlgorithm.getCurrentRound());

@@ -131,8 +131,10 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="validation_dialog_button_name" translatable="false">Ok</string>
     <!-- drop player res -->
     <string name="drop_players_item">%1$s points: %2$d</string>
-    <string name="drop_player_info_text">To dropp players select them and press save. This action cannot be overriten. Use with caution.</string>
+    <string name="drop_player_info_text">To drop players select them and press save. This action cannot be overriten. Use with caution.</string>
     <!--Rate me option -->
     <string name="settings_rate_me">Please, rate this app</string>
     <string name="settings_rate_me_error"> Could not open Google Play, please install the market app</string>
+    <!-- -->
+    <string name="settings_counter_off">To use time counter turn it on in settings screen</string>
 </resources>
