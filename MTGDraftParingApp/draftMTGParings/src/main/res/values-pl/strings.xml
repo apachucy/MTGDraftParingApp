@@ -126,5 +126,11 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="settings_rate_me">Proszę, oceń tą aplikację</string>
     <string name="settings_rate_me_error">Nie można otworzyć Google play, zainstaluj market</string>
     <string name="settings_counter_off">Odblokuj odliczanie w ustawieniach</string>
+    <string name="dialog_negative">Anuluj</string>
+    <string name="dialog_positive">Ok</string>
+    <string name="player_sittings_description">Miejsca do draftowania</string>
+    <string name="settings_sittings_dialog_title">Wybierz opcje sittingów</string>
+    <string name="settings_sittings_none">brak</string>
+    <string name="settings_sittings_random">losowe</string>
 
 </resources>

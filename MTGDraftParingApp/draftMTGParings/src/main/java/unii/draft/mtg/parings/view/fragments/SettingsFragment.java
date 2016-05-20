@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,9 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -27,6 +32,7 @@ import unii.draft.mtg.parings.database.model.IDatabaseHelper;
 import unii.draft.mtg.parings.database.model.PlayerDao;
 import unii.draft.mtg.parings.sharedprefrences.ISettings;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
+import unii.draft.mtg.parings.sittings.SittingsMode;
 import unii.draft.mtg.parings.validation.ValidationHelper;
 import unii.draft.mtg.parings.view.custom.CheckValueListener;
 import unii.draft.mtg.parings.view.custom.CustomTextWatcher;
@@ -40,6 +46,19 @@ public class SettingsFragment extends BaseFragment {
 
     @Bind(R.id.settings_counterToggleButton)
     ToggleButton mCounterToggle;
+
+    @Bind(R.id.settings_sittingsTextView)
+    TextView mSittingsOptionsTextView;
+
+
+    @OnClick(R.id.settings_sittingsTextView)
+    void onSittingsOptionsChanged(View v) {
+        List<String> sittingsOptionList = new ArrayList<>();
+        sittingsOptionList.add(getString(R.string.settings_sittings_none));
+        sittingsOptionList.add(getString(R.string.settings_sittings_random));
+        showRadioButtonSittingsDialog(getActivity(), getString(R.string.settings_sittings_dialog_title), sittingsOptionList, getString(R.string.dialog_positive), getString(R.string.dialog_negative));
+    }
+
 
     @OnCheckedChanged(R.id.settings_counterToggleButton)
     void onCounterToggleChecked(boolean checked) {
@@ -262,9 +281,22 @@ public class SettingsFragment extends BaseFragment {
                 .addTextChangedListener(mFirstVibraitonTextWatcher);
         mSecondVibrationEditText
                 .addTextChangedListener(mSecondVibrationTextWatcher);
+        setSittingsOptionsText(mSettingsSharedPreferences.getGeneratedSittingMode());
+
         return view;
     }
 
+    private void setSittingsOptionsText(int mode) {
+        String sittingsOptionName;
+
+        if (mode == SittingsMode.NO_SITTINGS) {
+            sittingsOptionName = getString(R.string.settings_sittings_none);
+        } else {
+            sittingsOptionName = getString(R.string.settings_sittings_random);
+        }
+        mSittingsOptionsTextView.setText(getString(R.string.settings_sittings_option, sittingsOptionName));
+
+    }
 
     private void setVibrationWidgetState(boolean useVibration) {
 
@@ -372,4 +404,36 @@ public class SettingsFragment extends BaseFragment {
         super.onDestroy();
         ButterKnife.unbind(this);
     }
+
+
+    protected void showRadioButtonSittingsDialog(Context context, String title, List<String> list, String buttonPositive, String buttonNegative) {
+        new MaterialDialog.Builder(context)
+                .title(title)
+                .items(list)
+                .itemsCallbackSingleChoice(mSettingsSharedPreferences.getGeneratedSittingMode(), new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        /**
+                         * If you use alwaysCallSingleChoiceCallback(), which is discussed below,
+                         * returning false here won't allow the newly selected radio button to actually be selected.
+                         **/
+                        switch (which) {
+                            case SittingsMode.SITTINGS_RANDOM:
+                                mSettingsSharedPreferences.setGeneratedSittingMode(SittingsMode.SITTINGS_RANDOM);
+                                break;
+                            case SittingsMode.NO_SITTINGS:
+                            default:
+                                mSettingsSharedPreferences.setGeneratedSittingMode(SittingsMode.NO_SITTINGS);
+
+                                break;
+                        }
+                        setSittingsOptionsText(mSettingsSharedPreferences.getGeneratedSittingMode());
+                        return true;
+                    }
+                })
+                .positiveText(buttonPositive).backgroundColorRes(R.color.windowBackground)
+                .negativeText(buttonNegative)
+                .show();
+    }
+
 }

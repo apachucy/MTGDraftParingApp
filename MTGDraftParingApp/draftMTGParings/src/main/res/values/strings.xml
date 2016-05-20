@@ -108,6 +108,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="settings_remove_text">Remove</string>
     <string name="settings_other">Other settings</string>
     <string name="settings_display_scoreboards">Display score boards</string>
+    <string name="settings_sittings_option" translatable="false">Sittings: %1$s</string>
     <string name="history_score_board_row_draft_date">Date: %1$s</string>
     <string name="history_score_board_row_draft_best_player">Won: %1$s</string>
     <string name="message_score_boards_removed">All score boards were removed</string>
@@ -137,4 +138,12 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="settings_rate_me_error"> Could not open Google Play, please install the market app</string>
     <!-- -->
     <string name="settings_counter_off">To use time counter turn it on in settings screen</string>
+    <string name="settings_sittings_none">none</string>
+    <string name="settings_sittings_random">random</string>
+    <string name="settings_sittings_dialog_title">Choose Sittings Options:</string>
+    <string name="dialog_positive">Ok</string>
+    <string name="dialog_negative">Cancel</string>
+
+    <string name="player_sittings_position" translatable="false"> %1$d. %2$s</string>
+    <string name="player_sittings_description">Sitting before 1rst round</string>
 </resources>

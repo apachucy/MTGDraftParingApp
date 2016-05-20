@@ -20,10 +20,13 @@ import butterknife.OnClick;
 import unii.draft.mtg.parings.ManualPlayerPairingActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.SittingsActivity;
 import unii.draft.mtg.parings.algorithm.IAlgorithmConfigure;
 import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
 import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
+import unii.draft.mtg.parings.sharedprefrences.SettingsSharedPreferences;
+import unii.draft.mtg.parings.sittings.SittingsMode;
 import unii.draft.mtg.parings.validation.ValidationHelper;
 import unii.draft.mtg.parings.view.custom.IActivityHandler;
 import unii.draft.mtg.parings.view.custom.IPlayerList;
@@ -122,6 +125,7 @@ public class GameMenuFragment extends BaseFragment {
         return view;
     }
 
+    //todo: open sittingsPlayerActivity
     private MaterialDialog.SingleButtonCallback mStartGameDialogOnClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {
@@ -129,12 +133,19 @@ public class GameMenuFragment extends BaseFragment {
                 dialog.dismiss();
                 Intent intent = null;
                 IAlgorithmConfigure algorithmConfigure = (IAlgorithmConfigure) mActivity.getApplication();
+                //set parings Factory
                 if (SettingsPreferencesFactory.getInstance().areManualParings()) {
                     algorithmConfigure.setAlgorithm(new ManualParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString())));
+                } else {
+                    algorithmConfigure.setAlgorithm(new ParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString())));
+                }
+                //set started activity
+                if (SettingsPreferencesFactory.getInstance().getGeneratedSittingMode() == SittingsMode.SITTINGS_RANDOM) {
+                    intent = new Intent(mActivity, SittingsActivity.class);
+                } else if (SettingsPreferencesFactory.getInstance().areManualParings()) {
                     intent = new Intent(mActivity,
                             ManualPlayerPairingActivity.class);
                 } else {
-                    algorithmConfigure.setAlgorithm(new ParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString())));
                     intent = new Intent(mActivity,
                             ParingDashboardActivity.class);
 

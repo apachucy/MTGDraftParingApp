@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/sittings_descriptionTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/text_view_margin_normal"
+        android:gravity="center"
+        android:text="@string/player_sittings_description"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/sittings_descriptionTextView">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/table_sittingsRecyclerView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="vertical" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/sittings_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/floating_button_margin"
+            android:layout_marginRight="@dimen/floating_button_margin"
+            android:src="@drawable/ic_navigate_next"
+            app:layout_anchor="@id/table_sittingsRecyclerView"
+            app:layout_anchorGravity="bottom|right|end" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

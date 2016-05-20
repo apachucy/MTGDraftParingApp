@@ -125,5 +125,7 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="help_drop_player">Wenn es nötig wird, kannst du einen Spieler entfernen. </string>
     <string name="settings_rate_me">Bitte, bewerten die App</string>
     <string name="settings_rate_me_error">Konnte nicht geöffnet Google Play, installieren Sie bitte den Markt App</string>
+    <string name="settings_counter_off">Den Countdown in den Konfigurationen freischalten </string>
+    <string name="dialog_positive">Ok</string>
 
 </resources>

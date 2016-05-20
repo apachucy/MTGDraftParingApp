@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.sharedprefrences;
 
 import unii.draft.mtg.parings.config.BaseConfig;
 import unii.draft.mtg.parings.config.SettingsPreferencesConst;
+import unii.draft.mtg.parings.sittings.SittingsMode;
 
 import android.content.SharedPreferences;
 
@@ -132,6 +133,17 @@ public class SettingsSharedPreferences implements ISettings {
     @Override
     public void setManualParings(boolean areManualParings) {
         mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.MANUAL_PARINGS, areManualParings).apply();
+    }
+
+    @Override
+    public void setGeneratedSittingMode(int sittingMode) {
+        mSharedPreferences.edit().putInt(SettingsPreferencesConst.SITTINGS, sittingMode).apply();
+
+    }
+
+    @Override
+    public int getGeneratedSittingMode() {
+        return mSharedPreferences.getInt(SettingsPreferencesConst.SITTINGS, SittingsMode.NO_SITTINGS);
     }
 
 }

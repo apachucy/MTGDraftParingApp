@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
     Toolbar mToolBar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+      protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

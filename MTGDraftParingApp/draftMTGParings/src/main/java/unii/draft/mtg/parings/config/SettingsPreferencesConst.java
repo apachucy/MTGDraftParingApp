@@ -23,4 +23,5 @@ public class SettingsPreferencesConst {
 			.getName() + " first_run";
 
 	public static final String MANUAL_PARINGS = SettingsPreferencesConst.class.getName() +"manual_parings";
+	public static final String SITTINGS = SettingsPreferencesConst.class.getName() +"sittings_mode";
 }
