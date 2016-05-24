@@ -160,8 +160,7 @@ public class ScoreBoardActivity extends BaseActivity {
         // set an image
         saveButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_save));
         dropPlayerButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_person_minus));
-        if (SettingsPreferencesFactory.getInstance().isFirstRun()) {
-            SettingsPreferencesFactory.getInstance().setFirstRun(false);
+        if (SettingsPreferencesFactory.getInstance().showGuideTourOnScoreBoardScreen()) {
             Sequence sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.help_pmw), pmwTextView, Gravity.LEFT | Gravity.BOTTOM),
                     bindTourGuideButton(getString(R.string.help_omw), omwTextView, Gravity.LEFT | Gravity.BOTTOM),
                     bindTourGuideButton(getString(R.string.help_pgw), pgwTextView, Gravity.LEFT | Gravity.BOTTOM),
@@ -175,6 +174,8 @@ public class ScoreBoardActivity extends BaseActivity {
                 }
             })).setContinueMethod(Sequence.ContinueMethod.OverlayListener).setDefaultPointer(new Pointer()).build();
             mTutorialHandler = TourGuide.init(this).playInSequence(sequence);
+            SettingsPreferencesFactory.getInstance().setGuideTourOnScoreBoardScreen(false);
+
         }
         saveButton.setOnClickListener(new OnClickListener() {
             @Override

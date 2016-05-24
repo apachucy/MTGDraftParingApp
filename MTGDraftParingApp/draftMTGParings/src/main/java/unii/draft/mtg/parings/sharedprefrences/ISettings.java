@@ -97,6 +97,7 @@ public interface ISettings {
      * @return true if app is running first time <br>
      * in other case return false
      */
+    @Deprecated
     public boolean isFirstRun();
 
     /**
@@ -104,6 +105,7 @@ public interface ISettings {
      *
      * @param isFirstRun
      */
+    @Deprecated
     public void setFirstRun(boolean isFirstRun);
 
     /**
@@ -127,8 +129,23 @@ public interface ISettings {
 
     /**
      * get sittings mode
+     *
      * @return
      */
     public int getGeneratedSittingMode();
+
+    public void resetGuideTour();
+
+    public boolean showGuideTourOnMainScreen();
+
+    public void setGuideTourOnMainScreen(boolean isVisible);
+
+    public boolean showGuideTourOnParingScreen();
+
+    public void setGuideTourOnMainParingScreen(boolean isVisible);
+
+    public boolean showGuideTourOnScoreBoardScreen();
+
+    public void setGuideTourOnScoreBoardScreen(boolean isVisible);
 }
 

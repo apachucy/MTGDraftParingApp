@@ -187,6 +187,13 @@ public class SettingsFragment extends BaseFragment {
     @Bind(R.id.settings_secondVibrationEditText)
     EditText mSecondVibrationEditText;
 
+
+    @OnClick(R.id.settings_resetTourGuideInfoTextView)
+    void onTourGuideReset(View view) {
+        SettingsPreferencesFactory.getInstance().resetGuideTour();
+        Toast.makeText(getActivity(), getString(R.string.settings_reset_tour_guide_message), Toast.LENGTH_SHORT).show();
+    }
+
     @OnClick(R.id.settings_removeScoreBoardsButton)
     void onRemoveScoreBoardClicked(View view) {
         PlayerDao playerDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getPlayerDao();

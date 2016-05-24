@@ -127,5 +127,12 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="settings_rate_me_error">Konnte nicht geöffnet Google Play, installieren Sie bitte den Markt App</string>
     <string name="settings_counter_off">Den Countdown in den Konfigurationen freischalten </string>
     <string name="dialog_positive">Ok</string>
+    <string name="dialog_negative">Abbrechen</string>
+    <string name="settings_sittings_random">zufällig</string>
+    <string name="settings_sittings_none">Keine</string>
+    <string name="settings_sittings_dialog_title">Wählen Sie bitte die Sittingoption:</string>
+    <string name="player_sittings_description">Draft Sitzplätze</string>
+    <string name="settings_reset_tour_guide">Setzen Sie Ihre Hilfe</string>
+    <string name="settings_reset_tour_guide_message">Hilfe wurde zurückgesetzt</string>
 
 </resources>

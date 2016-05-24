@@ -129,8 +129,10 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="dialog_negative">Anuluj</string>
     <string name="dialog_positive">Ok</string>
     <string name="player_sittings_description">Miejsca do draftowania</string>
-    <string name="settings_sittings_dialog_title">Wybierz opcje sittingów</string>
+    <string name="settings_sittings_dialog_title">Wybierz opcje sittingów:</string>
     <string name="settings_sittings_none">brak</string>
     <string name="settings_sittings_random">losowe</string>
+    <string name="settings_reset_tour_guide_message">Pomoc została zresetowana</string>
+    <string name="settings_reset_tour_guide">Zresetuj pomoc</string>
 
 </resources>

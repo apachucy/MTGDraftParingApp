@@ -241,26 +241,27 @@
         <TextView
             android:id="@+id/settings_rateApplicationInfoTextView"
             style="@style/textView"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_otherInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
-            android:text="@string/settings_rate_me" />
+            android:text="@string/settings_rate_me"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/settings_sittingsTextView"
             style="@style/textView"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_rateApplicationInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
-            />
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/settings_createParingsManualInfoTextView"
@@ -291,14 +292,15 @@
         <TextView
             android:id="@+id/settings_displayScoreBoardsInfoTextView"
             style="@style/textView"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_createParingsManualInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
-            android:text="@string/settings_display_scoreboards" />
+            android:text="@string/settings_display_scoreboards"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/settings_removeScoreBoardsInfoTextView"
@@ -326,6 +328,17 @@
             android:text="@string/settings_remove_text" />
 
 
-
+        <TextView
+            android:id="@+id/settings_resetTourGuideInfoTextView"
+            style="@style/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
+            android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
+            android:layout_below="@+id/settings_removeScoreBoardsInfoTextView"
+            android:layout_marginTop="@dimen/text_view_margin_settings"
+            android:padding="5dp"
+            android:text="@string/settings_reset_tour_guide" />
     </RelativeLayout>
 </ScrollView>

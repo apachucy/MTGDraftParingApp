@@ -17,6 +17,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
+import unii.draft.mtg.parings.config.SettingsPreferencesConst;
 import unii.draft.mtg.parings.helper.MenuHelper;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.view.custom.IPlayerList;
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
         aboutButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_info));
         settingsButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_settings_applications));
 
-        if (SettingsPreferencesFactory.getInstance().isFirstRun()) {
+        if (SettingsPreferencesFactory.getInstance().showGuideTourOnMainScreen()) {
             Sequence sequence = null;
 
             sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.tutorial_info), aboutButton), bindTourGuideButton(getString(R.string.tutorial_settings), settingsButton))
@@ -90,7 +91,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
                         }
                     })).setContinueMethod(Sequence.ContinueMethod.OverlayListener).setDefaultPointer(new Pointer()).build();
 
-
+            SettingsPreferencesFactory.getInstance().setGuideTourOnMainScreen(false);
             mTutorialHandler = TourGuide.init(this).playInSequence(sequence);
         }
 
