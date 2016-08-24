@@ -79,7 +79,7 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
 	<string name="help_ogw">% liczba wygranych gier przez przeciwników</string>
 
     <!-- Create personal parings-->
-    <string name="text_personal_parings">Stwórz własne paringi:</string>
+    <string name="settings_text_personal_parings">Stwórz własne paringi: %1$s</string>
     <string name="activity_paring_add_paring">Dodaj Paring</string>
     <string name="activity_paring_clean_paring">Usuń Paringi</string>
     <string name="activity_paring_play_round">Graj</string>

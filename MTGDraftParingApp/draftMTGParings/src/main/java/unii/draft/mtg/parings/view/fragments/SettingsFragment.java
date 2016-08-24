@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,23 +28,25 @@ import butterknife.OnClick;
 import unii.draft.mtg.parings.HistoryScoreBoardActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.config.BaseConfig;
+import unii.draft.mtg.parings.config.SettingsPreferencesConst;
 import unii.draft.mtg.parings.database.model.Draft;
 import unii.draft.mtg.parings.database.model.DraftDao;
 import unii.draft.mtg.parings.database.model.IDatabaseHelper;
 import unii.draft.mtg.parings.database.model.PlayerDao;
+import unii.draft.mtg.parings.helper.MapVariableBooleanHelper;
 import unii.draft.mtg.parings.sharedprefrences.ISettings;
 import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
 import unii.draft.mtg.parings.sittings.SittingsMode;
 import unii.draft.mtg.parings.validation.ValidationHelper;
 import unii.draft.mtg.parings.view.custom.CheckValueListener;
 import unii.draft.mtg.parings.view.custom.CustomTextWatcher;
-import unii.draft.mtg.parings.view.custom.IActivityHandler;
 
 /**
  * Created by apachucy on 2015-09-25.
  */
 
 public class SettingsFragment extends BaseFragment {
+
 
     @Bind(R.id.settings_counterToggleButton)
     ToggleButton mCounterToggle;
@@ -58,7 +62,6 @@ public class SettingsFragment extends BaseFragment {
         sittingsOptionList.add(getString(R.string.settings_sittings_random));
         showRadioButtonSittingsDialog(getActivity(), getString(R.string.settings_sittings_dialog_title), sittingsOptionList, getString(R.string.dialog_positive), getString(R.string.dialog_negative));
     }
-
 
     @OnCheckedChanged(R.id.settings_counterToggleButton)
     void onCounterToggleChecked(boolean checked) {
@@ -89,6 +92,17 @@ public class SettingsFragment extends BaseFragment {
     @Bind(R.id.settings_createParingsManualToggleButton)
     ToggleButton mManualParingToggle;
 
+
+    @Bind(R.id.settings_createParingsManualInfoTextView)
+    TextView mCreateManualParingTextView;
+
+
+    @OnClick(R.id.settings_createParingsManualInfoTextView)
+    void onChangeManualParings(View view) {
+
+        showRadioButtonSittingsDialog(getActivity(), getString(R.string.settings_personal_parings_dialog_title), MapVariableBooleanHelper.castBooleanToStringList(), getString(R.string.dialog_positive), getString(R.string.dialog_negative), SettingsPreferencesConst.MANUAL_PARINGS);
+    }
+
     @OnCheckedChanged(R.id.settings_createParingsManualToggleButton)
     void onManualParringToggleChecked(boolean checked) {
         mSettingsSharedPreferences.setManualParings(checked);
@@ -114,11 +128,13 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
-    @Bind(R.id.settings_durationVibrationButton)
-    Button mVibrationDurationSaveButton;
+    @Bind(R.id.settings_durationVibrationInfoTextView)
+    TextView mVibrationDurationTextView;
 
-    @OnClick(R.id.settings_durationVibrationButton)
+    @OnClick(R.id.settings_durationVibrationInfoTextView)
     void onVibrationDurationButtonClicked(View view) {
+        showInputDialog( getActivity(), String title, String content, String hint, String buttonPositive, String buttonNegative, final String shPrefPropertyName);
+
         if (!ValidationHelper.isTextEmpty(mVibrationDurationEditText
                 .getText().toString())) {
             long value = longAsSec(convertStringToLong(mVibrationDurationEditText
@@ -132,7 +148,7 @@ public class SettingsFragment extends BaseFragment {
                 Toast.makeText(mActivity,
                         getString(R.string.toast_saved),
                         Toast.LENGTH_SHORT).show();
-                mVibrationDurationSaveButton.setEnabled(false);
+                mVibrationDurationTextView.setEnabled(false);
             }
         }
     }
@@ -194,7 +210,7 @@ public class SettingsFragment extends BaseFragment {
         Toast.makeText(getActivity(), getString(R.string.settings_reset_tour_guide_message), Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.settings_removeScoreBoardsButton)
+    @OnClick(R.id.settings_removeScoreBoardsInfoTextView)
     void onRemoveScoreBoardClicked(View view) {
         PlayerDao playerDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getPlayerDao();
         DraftDao draftDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getDraftDao();
@@ -265,7 +281,7 @@ public class SettingsFragment extends BaseFragment {
                 mSecondVibrationListener, mSecondVibrationSaveButton,
                 mVibrationToggle);
         mVibrationDurationTextWatcher = new CustomTextWatcher(
-                mVibrationDurationListener, mVibrationDurationSaveButton,
+                mVibrationDurationListener, mVibrationDurationTextView,
                 mVibrationToggle);
 
         mSettingsSharedPreferences = SettingsPreferencesFactory.getInstance();
@@ -289,6 +305,7 @@ public class SettingsFragment extends BaseFragment {
         mSecondVibrationEditText
                 .addTextChangedListener(mSecondVibrationTextWatcher);
         setSittingsOptionsText(mSettingsSharedPreferences.getGeneratedSittingMode());
+        mCreateManualParingTextView.setText(getString(R.string.settings_text_personal_parings, MapVariableBooleanHelper.castBooleanToString(mSettingsSharedPreferences.areManualParings())));
 
         return view;
     }
@@ -315,7 +332,7 @@ public class SettingsFragment extends BaseFragment {
         // button can be enable only from editTexts
         if (!useVibration) {
             mFirstVibrationSaveButton.setEnabled(useVibration);
-            mVibrationDurationSaveButton.setEnabled(useVibration);
+            mVibrationDurationTextView.setEnabled(useVibration);
             mSecondVibrationSaveButton.setEnabled(useVibration);
         }
         mSettingsSharedPreferences.setUseVibration(useVibration);
@@ -336,7 +353,7 @@ public class SettingsFragment extends BaseFragment {
     }
 
     private long longAsMinutes(long timeInMs) {
-        return timeInMs * BaseConfig.DEFAULT_TIME_MINUT;
+        return timeInMs * BaseConfig.DEFAULT_TIME_MINUTE;
     }
 
     private long longAsSec(long timeInMs) {
@@ -348,7 +365,7 @@ public class SettingsFragment extends BaseFragment {
     }
 
     private String stringAsMinuts(long timeInMs) {
-        return timeInMs / BaseConfig.DEFAULT_TIME_MINUT + "";
+        return timeInMs / BaseConfig.DEFAULT_TIME_MINUTE + "";
     }
 
     private void initVibration(boolean vibration, String vib1, String vib2,
@@ -356,7 +373,7 @@ public class SettingsFragment extends BaseFragment {
 
         mVibrationToggle.setChecked(vibration);
 
-        mVibrationDurationSaveButton.setEnabled(false);
+        mVibrationDurationTextView.setEnabled(false);
         mVibrationDurationEditText.setText(duration);
         mVibrationDurationEditText.setEnabled(vibration);
 
@@ -374,7 +391,6 @@ public class SettingsFragment extends BaseFragment {
 
         @Override
         public String getCheckedValue() {
-
             return stringAsMinuts(mSettingsSharedPreferences.getTimePerRound());
         }
     };
@@ -443,4 +459,37 @@ public class SettingsFragment extends BaseFragment {
                 .show();
     }
 
+    protected void showRadioButtonSittingsDialog(Context context, String title, List<String> list, String buttonPositive, String buttonNegative, final String shPrefPropertyName) {
+        new MaterialDialog.Builder(context)
+                .title(title)
+                .items(list)
+                .itemsCallbackSingleChoice(MapVariableBooleanHelper.castBooleanToInteger(mSettingsSharedPreferences.getBooleanValue(shPrefPropertyName)), new MaterialDialog.ListCallbackSingleChoice() {
+
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        switch (which) {
+                            case MapVariableBooleanHelper.FALSE_INT:
+                                mSettingsSharedPreferences.setBooleanValue(shPrefPropertyName, MapVariableBooleanHelper.castStringToBoolean(MapVariableBooleanHelper.FALSE_STRING));
+                                break;
+                            case MapVariableBooleanHelper.TRUE_INT:
+                                mSettingsSharedPreferences.setBooleanValue(shPrefPropertyName, MapVariableBooleanHelper.castStringToBoolean(MapVariableBooleanHelper.TRUE_STRING));
+                                break;
+                        }
+                        return false;
+                    }
+                }).positiveText(buttonPositive).backgroundColorRes(R.color.windowBackground)
+                .negativeText(buttonNegative)
+                .show();
+    }
+
+    protected void showInputDialog(Context context, String title, String content, String hint, String buttonPositive, String buttonNegative, final String shPrefPropertyName) {
+        new MaterialDialog.Builder(context).title(title).content(content).inputType(InputType.TYPE_NUMBER_FLAG_DECIMAL).input(hint, hint, false, new MaterialDialog.InputCallback() {
+
+            @Override
+            public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                mSettingsSharedPreferences.setIntegerValue(shPrefPropertyName, Integer.parseInt(input.toString()));
+            }
+        }).positiveText(buttonPositive).backgroundColorRes(R.color.windowBackground)
+                .negativeText(buttonNegative).show();
+    }
 }

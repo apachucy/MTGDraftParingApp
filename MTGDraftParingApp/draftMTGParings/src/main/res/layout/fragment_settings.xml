@@ -26,10 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/settings_counterInfoTextView"
             android:layout_alignLeft="@+id/settings_timeButton"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignStart="@+id/settings_timeButton"
             android:layout_marginTop="@dimen/button_margin_settings"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:checked="false"
             android:textOff="@string/toggle_button_off"
             android:textOn="@string/toggle_button_on" />
@@ -190,7 +190,8 @@
         <TextView
             android:id="@+id/settings_durationVibrationInfoTextView"
             style="@style/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
@@ -247,9 +248,9 @@
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_otherInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
+            android:gravity="center"
             android:padding="5dp"
-            android:text="@string/settings_rate_me"
-            android:gravity="center" />
+            android:text="@string/settings_rate_me" />
 
         <TextView
             android:id="@+id/settings_sittingsTextView"
@@ -260,34 +261,21 @@
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_rateApplicationInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
-            android:padding="5dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:padding="5dp" />
 
         <TextView
             android:id="@+id/settings_createParingsManualInfoTextView"
             style="@style/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_sittingsTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
+            android:gravity="center"
             android:padding="5dp"
-            android:text="@string/text_personal_parings" />
-
-        <ToggleButton
-            android:id="@+id/settings_createParingsManualToggleButton"
-            style="@style/toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/settings_createParingsManualInfoTextView"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/settings_sittingsTextView"
-            android:layout_marginTop="@dimen/button_margin_settings"
-            android:textOff="@string/toggle_button_off"
-            android:textOn="@string/toggle_button_on" />
-
+            android:text="@string/settings_text_personal_parings" />
 
         <TextView
             android:id="@+id/settings_displayScoreBoardsInfoTextView"
@@ -298,34 +286,22 @@
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_createParingsManualInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
+            android:gravity="center"
             android:padding="5dp"
-            android:text="@string/settings_display_scoreboards"
-            android:gravity="center" />
+            android:text="@string/settings_display_scoreboards" />
 
         <TextView
             android:id="@+id/settings_removeScoreBoardsInfoTextView"
             style="@style/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_displayScoreBoardsInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
+            android:gravity="center"
             android:padding="5dp"
             android:text="@string/settings_remove_scoreboards" />
-
-
-        <Button
-            android:id="@+id/settings_removeScoreBoardsButton"
-            style="@style/buttonSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/settings_removeScoreBoardsInfoTextView"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/settings_displayScoreBoardsInfoTextView"
-            android:layout_marginTop="@dimen/button_margin_settings"
-            android:text="@string/settings_remove_text" />
 
 
         <TextView
@@ -333,11 +309,11 @@
             style="@style/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_removeScoreBoardsInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
+            android:gravity="center"
             android:padding="5dp"
             android:text="@string/settings_reset_tour_guide" />
     </RelativeLayout>

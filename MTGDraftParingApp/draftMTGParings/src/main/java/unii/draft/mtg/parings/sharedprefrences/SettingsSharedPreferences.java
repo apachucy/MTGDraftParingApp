@@ -187,4 +187,24 @@ public class SettingsSharedPreferences implements ISettings {
 
     }
 
+    @Override
+    public void setBooleanValue(String propertyName, boolean booleanValue) {
+        mSharedPreferences.edit().putBoolean(propertyName, booleanValue).apply();
+    }
+
+    @Override
+    public boolean getBooleanValue(String propertyName) {
+        return mSharedPreferences.getBoolean(propertyName, false);
+    }
+
+    @Override
+    public void setIntegerValue(String propertyName, int intValue) {
+        mSharedPreferences.edit().putInt(propertyName, intValue).apply();
+    }
+
+    @Override
+    public int getIntegerValue(String propertyName) {
+        return mSharedPreferences.getInt(propertyName, 0);
+    }
+
 }

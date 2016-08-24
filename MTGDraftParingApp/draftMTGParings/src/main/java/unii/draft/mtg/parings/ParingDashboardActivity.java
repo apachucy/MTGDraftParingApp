@@ -68,7 +68,7 @@ public class ParingDashboardActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putStringArray(BundleConst.BUNDLE_KEY_PLAYERS_NAMES, mParingDashboardLogic.getPlayerNameList(mGameList));
         bundle.putInt(BundleConst.BUNDLE_KEY_ROUND_TIME, (int) (SettingsPreferencesFactory.getInstance()
-                .getTimePerRound() / BaseConfig.DEFAULT_TIME_MINUT));
+                .getTimePerRound() / BaseConfig.DEFAULT_TIME_MINUTE));
         Intent sendIntent = new Intent(BaseConfig.INTENT_PACKAGE_LIFE_COUNTER_APP);
         sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         sendIntent.setType("text/plain");

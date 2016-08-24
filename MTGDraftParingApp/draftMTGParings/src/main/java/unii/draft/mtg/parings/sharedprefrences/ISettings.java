@@ -147,5 +147,13 @@ public interface ISettings {
     public boolean showGuideTourOnScoreBoardScreen();
 
     public void setGuideTourOnScoreBoardScreen(boolean isVisible);
+
+    public void setBooleanValue(String propertyName, boolean booleanValue);
+
+    public boolean getBooleanValue(String propertyName);
+
+    public void setIntegerValue(String propertyName, int booleanValue);
+
+    public int getIntegerValue(String propertyName);
 }
 

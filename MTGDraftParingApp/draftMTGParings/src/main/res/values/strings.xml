@@ -81,7 +81,11 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="help_ogw">Opponents game win %</string>
 
     <!-- Create personal parings-->
-    <string name="text_personal_parings">Create manual parings:</string>
+    <string name="settings_text_personal_parings">Create manual parings: %1$s</string>
+
+    <string name="settings_personal_parings_manual">Manual</string>
+    <string name="settings_personal_parings_auto">Auto</string>
+    <string name="settings_personal_parings_dialog_title">Create manual parings:</string>
     <string name="activity_paring_add_paring">Add Paring</string>
     <string name="activity_paring_clean_paring">Clean Parings</string>
     <string name="activity_paring_play_round">Play</string>
