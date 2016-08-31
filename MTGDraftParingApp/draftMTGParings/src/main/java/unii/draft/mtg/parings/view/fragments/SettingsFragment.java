@@ -19,37 +19,127 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import unii.draft.mtg.parings.HistoryScoreBoardActivity;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.config.BaseConfig;
+import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
+import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.database.model.Draft;
 import unii.draft.mtg.parings.database.model.DraftDao;
-import unii.draft.mtg.parings.database.model.IDatabaseHelper;
 import unii.draft.mtg.parings.database.model.PlayerDao;
-import unii.draft.mtg.parings.sharedprefrences.ISettings;
-import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.sittings.SittingsMode;
-import unii.draft.mtg.parings.validation.ValidationHelper;
+import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
+import unii.draft.mtg.parings.util.config.BaseConfig;
+import unii.draft.mtg.parings.util.validation.ValidationHelper;
 import unii.draft.mtg.parings.view.custom.CheckValueListener;
 import unii.draft.mtg.parings.view.custom.CustomTextWatcher;
-import unii.draft.mtg.parings.view.custom.IActivityHandler;
 
-/**
- * Created by apachucy on 2015-09-25.
- */
 
 public class SettingsFragment extends BaseFragment {
 
+
+    private CustomTextWatcher mCounterTextWatcher;
+    private CustomTextWatcher mVibrationDurationTextWatcher;
+    private CustomTextWatcher mFirstVibrationTextWatcher;
+    private CustomTextWatcher mSecondVibrationTextWatcher;
+    private Activity mActivity;
+
     @Bind(R.id.settings_counterToggleButton)
     ToggleButton mCounterToggle;
-
     @Bind(R.id.settings_sittingsTextView)
     TextView mSittingsOptionsTextView;
+    @Bind(R.id.settings_timeEditText)
+    EditText mCounterEditText;
+    @Bind(R.id.settings_durationVibrationEditText)
+    EditText mVibrationDurationEditText;
+    @Bind(R.id.settings_firstVibrationEditText)
+    EditText mFirstVibrationEditText;
+    @Bind(R.id.settings_secondVibrationEditText)
+    EditText mSecondVibrationEditText;
+    @Bind(R.id.settings_vibrationToggleButton)
+    ToggleButton mVibrationToggle;
+    @Bind(R.id.settings_timeButton)
+    Button mCounterSaveButton;
+    @Bind(R.id.settings_durationVibrationButton)
+    Button mVibrationDurationSaveButton;
+    @Bind(R.id.settings_firstVibrationButton)
+    Button mFirstVibrationSaveButton;
+    @Bind(R.id.settings_secondVibrationButton)
+    Button mSecondVibrationSaveButton;
 
+    @Inject
+    ISharedPreferences mSharedPreferenceManager;
+    @Inject
+    DaoSession mDaoSession;
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        ButterKnife.bind(this, view);
+        injectDependencies();
+        initFragmentData();
+        initFragmentView();
+
+        return view;
+    }
+
+    @Override
+    protected void initFragmentView() {
+        mCounterTextWatcher = new CustomTextWatcher(mCounterListener,
+                mCounterSaveButton, mCounterToggle);
+        mFirstVibrationTextWatcher = new CustomTextWatcher(
+                mFirstVibrationListener, mFirstVibrationSaveButton,
+                mVibrationToggle);
+        mSecondVibrationTextWatcher = new CustomTextWatcher(
+                mSecondVibrationListener, mSecondVibrationSaveButton,
+                mVibrationToggle);
+        mVibrationDurationTextWatcher = new CustomTextWatcher(
+                mVibrationDurationListener, mVibrationDurationSaveButton,
+                mVibrationToggle);
+
+
+    }
+
+    @Override
+    protected void initFragmentData() {
+        // init data from shPerferences
+        initDisplayCounter(mSharedPreferenceManager.displayCounterRound(),
+                stringAsMinuts(mSharedPreferenceManager.getTimePerRound()));
+        initVibration(
+                mSharedPreferenceManager.useVibration(),
+                stringAsMinuts(mSharedPreferenceManager.getFirstVibration()),
+                stringAsMinuts(mSharedPreferenceManager.getSecondVibration()),
+                stringAsSec(mSharedPreferenceManager.getVibrationDuration()));
+
+        mManualParingToggle.setChecked(mSharedPreferenceManager.areManualParings());
+        mCounterEditText.addTextChangedListener(mCounterTextWatcher);
+        mVibrationDurationEditText
+                .addTextChangedListener(mVibrationDurationTextWatcher);
+        mFirstVibrationEditText
+                .addTextChangedListener(mFirstVibrationTextWatcher);
+        mSecondVibrationEditText
+                .addTextChangedListener(mSecondVibrationTextWatcher);
+        setSittingsOptionsText(mSharedPreferenceManager.getGeneratedSittingMode());
+
+    }
 
     @OnClick(R.id.settings_sittingsTextView)
     void onSittingsOptionsChanged(View v) {
@@ -68,7 +158,7 @@ public class SettingsFragment extends BaseFragment {
             mCounterSaveButton.setEnabled(checked);
         }
         mCounterEditText.setEnabled(checked);
-        mSettingsSharedPreferences.setDisplayCounterRound(checked);
+        mSharedPreferenceManager.setDisplayCounterRound(checked);
         // if counter is not displayed
         // disable vibration
         if (!checked && mVibrationToggle.isChecked()) {
@@ -78,8 +168,6 @@ public class SettingsFragment extends BaseFragment {
         mVibrationToggle.setEnabled(checked);
     }
 
-    @Bind(R.id.settings_vibrationToggleButton)
-    ToggleButton mVibrationToggle;
 
     @OnCheckedChanged(R.id.settings_vibrationToggleButton)
     void onVibrationToggleChecked(boolean checked) {
@@ -91,11 +179,8 @@ public class SettingsFragment extends BaseFragment {
 
     @OnCheckedChanged(R.id.settings_createParingsManualToggleButton)
     void onManualParringToggleChecked(boolean checked) {
-        mSettingsSharedPreferences.setManualParings(checked);
+        mSharedPreferenceManager.setManualParings(checked);
     }
-
-    @Bind(R.id.settings_timeButton)
-    Button mCounterSaveButton;
 
     @OnClick(R.id.settings_timeButton)
     void onCounterSaveButtonClicked(View view) {
@@ -104,8 +189,8 @@ public class SettingsFragment extends BaseFragment {
             long value = longAsMinutes(convertStringToLong(mCounterEditText
                     .getText().toString()));
             // save only if value is different from previous
-            if (value != mSettingsSharedPreferences.getTimePerRound()) {
-                mSettingsSharedPreferences.setTimePerRound(value);
+            if (value != mSharedPreferenceManager.getTimePerRound()) {
+                mSharedPreferenceManager.setTimePerRound(value);
                 Toast.makeText(mActivity,
                         getString(R.string.toast_saved),
                         Toast.LENGTH_SHORT).show();
@@ -114,8 +199,6 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
-    @Bind(R.id.settings_durationVibrationButton)
-    Button mVibrationDurationSaveButton;
 
     @OnClick(R.id.settings_durationVibrationButton)
     void onVibrationDurationButtonClicked(View view) {
@@ -124,9 +207,9 @@ public class SettingsFragment extends BaseFragment {
             long value = longAsSec(convertStringToLong(mVibrationDurationEditText
                     .getText().toString()));
             // save only if value is different from previous
-            if (value != mSettingsSharedPreferences
+            if (value != mSharedPreferenceManager
                     .getVibrationDuration()) {
-                mSettingsSharedPreferences
+                mSharedPreferenceManager
                         .setVibrationDuration(longAsSec(convertStringToLong(mVibrationDurationEditText
                                 .getText().toString())));
                 Toast.makeText(mActivity,
@@ -137,8 +220,6 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
-    @Bind(R.id.settings_firstVibrationButton)
-    Button mFirstVibrationSaveButton;
 
     @OnClick(R.id.settings_firstVibrationButton)
     void onFirstVibrationButtonClicked(View view) {
@@ -147,8 +228,8 @@ public class SettingsFragment extends BaseFragment {
             long value = longAsMinutes(convertStringToLong(mFirstVibrationEditText
                     .getText().toString()));
             // save only if value is different from previous
-            if (value != mSettingsSharedPreferences.getFirstVibration()) {
-                mSettingsSharedPreferences.setFirstVibration(value);
+            if (value != mSharedPreferenceManager.getFirstVibration()) {
+                mSharedPreferenceManager.setFirstVibration(value);
                 Toast.makeText(mActivity,
                         getString(R.string.toast_saved),
                         Toast.LENGTH_SHORT).show();
@@ -157,8 +238,6 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
-    @Bind(R.id.settings_secondVibrationButton)
-    Button mSecondVibrationSaveButton;
 
     @OnClick(R.id.settings_secondVibrationButton)
     void onSecondVibrationButtonClicked(View view) {
@@ -167,9 +246,9 @@ public class SettingsFragment extends BaseFragment {
             long value = longAsMinutes(convertStringToLong(mSecondVibrationEditText
                     .getText().toString()));
             // save only if value is different from previous
-            if (value != mSettingsSharedPreferences
+            if (value != mSharedPreferenceManager
                     .getSecondVibration()) {
-                mSettingsSharedPreferences.setSecondVibration(value);
+                mSharedPreferenceManager.setSecondVibration(value);
                 Toast.makeText(mActivity,
                         getString(R.string.toast_saved),
                         Toast.LENGTH_SHORT).show();
@@ -178,26 +257,17 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
-    @Bind(R.id.settings_timeEditText)
-    EditText mCounterEditText;
-    @Bind(R.id.settings_durationVibrationEditText)
-    EditText mVibrationDurationEditText;
-    @Bind(R.id.settings_firstVibrationEditText)
-    EditText mFirstVibrationEditText;
-    @Bind(R.id.settings_secondVibrationEditText)
-    EditText mSecondVibrationEditText;
-
 
     @OnClick(R.id.settings_resetTourGuideInfoTextView)
     void onTourGuideReset(View view) {
-        SettingsPreferencesFactory.getInstance().resetGuideTour();
+        mSharedPreferenceManager.resetGuideTour();
         Toast.makeText(getActivity(), getString(R.string.settings_reset_tour_guide_message), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.settings_removeScoreBoardsButton)
     void onRemoveScoreBoardClicked(View view) {
-        PlayerDao playerDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getPlayerDao();
-        DraftDao draftDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getDraftDao();
+        PlayerDao playerDao = mDaoSession.getPlayerDao();
+        DraftDao draftDao = mDaoSession.getDraftDao();
         playerDao.deleteAll();
         draftDao.deleteAll();
         Toast.makeText(mActivity, getString(R.string.message_score_boards_removed), Toast.LENGTH_LONG).show();
@@ -205,7 +275,7 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.settings_displayScoreBoardsInfoTextView)
     void onDisplayScoreBoardsClicked(View view) {
-        DraftDao draftDao = ((IDatabaseHelper) mActivity.getApplication()).getDaoSession().getDraftDao();
+        DraftDao draftDao = mDaoSession.getDraftDao();
         List<Draft> draftList = draftDao.loadAll();
         if (draftList == null || draftList.size() == 0) {
             Toast.makeText(mActivity, getString(R.string.message_score_board_not_exists), Toast.LENGTH_LONG).show();
@@ -235,63 +305,35 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
-
-    private ISettings mSettingsSharedPreferences;
-
-    private CustomTextWatcher mCounterTextWatcher;
-    private CustomTextWatcher mVibrationDurationTextWatcher;
-    private CustomTextWatcher mFirstVibraitonTextWatcher;
-    private CustomTextWatcher mSecondVibrationTextWatcher;
-    private Activity mActivity;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mActivity = activity;
-
+    protected void showRadioButtonSittingsDialog(Context context, String title, List<String> list, String buttonPositive, String buttonNegative) {
+        new MaterialDialog.Builder(context)
+                .title(title)
+                .items(list)
+                .itemsCallbackSingleChoice(mSharedPreferenceManager.getGeneratedSittingMode(), new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        /**
+                         * If you use alwaysCallSingleChoiceCallback(), which is discussed below,
+                         * returning false here won't allow the newly selected radio button to actually be selected.
+                         **/
+                        switch (which) {
+                            case SittingsMode.SITTINGS_RANDOM:
+                                mSharedPreferenceManager.setGeneratedSittingMode(SittingsMode.SITTINGS_RANDOM);
+                                break;
+                            case SittingsMode.NO_SITTINGS:
+                            default:
+                                mSharedPreferenceManager.setGeneratedSittingMode(SittingsMode.NO_SITTINGS);
+                                break;
+                        }
+                        setSittingsOptionsText(mSharedPreferenceManager.getGeneratedSittingMode());
+                        return true;
+                    }
+                })
+                .positiveText(buttonPositive).backgroundColorRes(R.color.windowBackground)
+                .negativeText(buttonNegative)
+                .show();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        ButterKnife.bind(this, view);
-
-        mCounterTextWatcher = new CustomTextWatcher(mCounterListener,
-                mCounterSaveButton, mCounterToggle);
-        mFirstVibraitonTextWatcher = new CustomTextWatcher(
-                mFirstVibrationListener, mFirstVibrationSaveButton,
-                mVibrationToggle);
-        mSecondVibrationTextWatcher = new CustomTextWatcher(
-                mSecondVibrationListener, mSecondVibrationSaveButton,
-                mVibrationToggle);
-        mVibrationDurationTextWatcher = new CustomTextWatcher(
-                mVibrationDurationListener, mVibrationDurationSaveButton,
-                mVibrationToggle);
-
-        mSettingsSharedPreferences = SettingsPreferencesFactory.getInstance();
-        // init data from shPerferences
-        initDisplayCounter(mSettingsSharedPreferences.displayCounterRound(),
-                stringAsMinuts(mSettingsSharedPreferences.getTimePerRound()));
-        initVibration(
-                mSettingsSharedPreferences.useVibration(),
-                stringAsMinuts(mSettingsSharedPreferences.getFirstVibration()),
-                stringAsMinuts(mSettingsSharedPreferences.getSecondVibration()),
-                stringAsSec(mSettingsSharedPreferences.getVibrationDuration()));
-
-        mManualParingToggle.setChecked(mSettingsSharedPreferences.areManualParings());
-
-
-        mCounterEditText.addTextChangedListener(mCounterTextWatcher);
-        mVibrationDurationEditText
-                .addTextChangedListener(mVibrationDurationTextWatcher);
-        mFirstVibrationEditText
-                .addTextChangedListener(mFirstVibraitonTextWatcher);
-        mSecondVibrationEditText
-                .addTextChangedListener(mSecondVibrationTextWatcher);
-        setSittingsOptionsText(mSettingsSharedPreferences.getGeneratedSittingMode());
-
-        return view;
-    }
 
     private void setSittingsOptionsText(int mode) {
         String sittingsOptionName;
@@ -306,9 +348,7 @@ public class SettingsFragment extends BaseFragment {
     }
 
     private void setVibrationWidgetState(boolean useVibration) {
-
         mVibrationDurationEditText.setEnabled(useVibration);
-
         mFirstVibrationEditText.setEnabled(useVibration);
         mSecondVibrationEditText.setEnabled(useVibration);
         // can only disable buttons
@@ -318,17 +358,14 @@ public class SettingsFragment extends BaseFragment {
             mVibrationDurationSaveButton.setEnabled(useVibration);
             mSecondVibrationSaveButton.setEnabled(useVibration);
         }
-        mSettingsSharedPreferences.setUseVibration(useVibration);
+        mSharedPreferenceManager.setUseVibration(useVibration);
     }
 
     private void initDisplayCounter(boolean displayCounter, String text) {
-
         mCounterToggle.setChecked(displayCounter);
         mCounterSaveButton.setEnabled(false);
-
         mCounterEditText.setEnabled(displayCounter);
         mCounterEditText.setText(text);
-
     }
 
     private long convertStringToLong(String text) {
@@ -353,10 +390,9 @@ public class SettingsFragment extends BaseFragment {
 
     private void initVibration(boolean vibration, String vib1, String vib2,
                                String duration) {
-
         mVibrationToggle.setChecked(vibration);
-
         mVibrationDurationSaveButton.setEnabled(false);
+
         mVibrationDurationEditText.setText(duration);
         mVibrationDurationEditText.setEnabled(vibration);
 
@@ -375,7 +411,7 @@ public class SettingsFragment extends BaseFragment {
         @Override
         public String getCheckedValue() {
 
-            return stringAsMinuts(mSettingsSharedPreferences.getTimePerRound());
+            return stringAsMinuts(mSharedPreferenceManager.getTimePerRound());
         }
     };
 
@@ -383,7 +419,7 @@ public class SettingsFragment extends BaseFragment {
 
         @Override
         public String getCheckedValue() {
-            return stringAsSec(mSettingsSharedPreferences
+            return stringAsSec(mSharedPreferenceManager
                     .getVibrationDuration());
         }
     };
@@ -392,7 +428,7 @@ public class SettingsFragment extends BaseFragment {
 
         @Override
         public String getCheckedValue() {
-            return stringAsMinuts(mSettingsSharedPreferences
+            return stringAsMinuts(mSharedPreferenceManager
                     .getFirstVibration());
         }
     };
@@ -401,46 +437,14 @@ public class SettingsFragment extends BaseFragment {
 
         @Override
         public String getCheckedValue() {
-            return stringAsMinuts(mSettingsSharedPreferences
+            return stringAsMinuts(mSharedPreferenceManager
                     .getSecondVibration());
         }
     };
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
+    private void injectDependencies() {
+        getActivityComponent().inject(this);
     }
 
-
-    protected void showRadioButtonSittingsDialog(Context context, String title, List<String> list, String buttonPositive, String buttonNegative) {
-        new MaterialDialog.Builder(context)
-                .title(title)
-                .items(list)
-                .itemsCallbackSingleChoice(mSettingsSharedPreferences.getGeneratedSittingMode(), new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        /**
-                         * If you use alwaysCallSingleChoiceCallback(), which is discussed below,
-                         * returning false here won't allow the newly selected radio button to actually be selected.
-                         **/
-                        switch (which) {
-                            case SittingsMode.SITTINGS_RANDOM:
-                                mSettingsSharedPreferences.setGeneratedSittingMode(SittingsMode.SITTINGS_RANDOM);
-                                break;
-                            case SittingsMode.NO_SITTINGS:
-                            default:
-                                mSettingsSharedPreferences.setGeneratedSittingMode(SittingsMode.NO_SITTINGS);
-
-                                break;
-                        }
-                        setSittingsOptionsText(mSettingsSharedPreferences.getGeneratedSittingMode());
-                        return true;
-                    }
-                })
-                .positiveText(buttonPositive).backgroundColorRes(R.color.windowBackground)
-                .negativeText(buttonNegative)
-                .show();
-    }
 
 }

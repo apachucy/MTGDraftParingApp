@@ -1,7 +1,7 @@
 package unii.draft.mtg.parings.view.custom;
 
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.pojo.Game;
+import unii.draft.mtg.parings.logic.pojo.Game;
 
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;

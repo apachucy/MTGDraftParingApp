@@ -6,11 +6,10 @@ import android.support.v7.widget.Toolbar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.view.fragments.DropPlayerFragment;
 
-/**
- * Created by Unii on 2016-03-26.
- */
+
 public class DropPlayerActivity extends BaseActivity {
 
     private static final String TAG_FRAGMENT_DROP_PLAYER = DropPlayerActivity.class
@@ -18,19 +17,6 @@ public class DropPlayerActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drop_player);
-        ButterKnife.bind(this);
-        setSupportActionBar(mToolBar);
-        mToolBar.setLogo(R.drawable.ic_launcher);
-        mToolBar.setLogoDescription(R.string.app_name);
-        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
-        mToolBar.setTitle(R.string.app_name);
-        replaceFragments(new DropPlayerFragment(), TAG_FRAGMENT_DROP_PLAYER, R.id.content_frame);
-    }
 
     @Override
     public void onBackPressed() {
@@ -41,4 +27,35 @@ public class DropPlayerActivity extends BaseActivity {
         super.onBackPressed();
 
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_drop_player);
+        ButterKnife.bind(this);
+        initToolBar();
+        initView();
+
+    }
+
+    @Override
+    protected void injectDependencies(ActivityComponent activityComponent) {
+
+    }
+
+    @Override
+    protected void initToolBar() {
+        setSupportActionBar(mToolBar);
+        mToolBar.setLogo(R.drawable.ic_launcher);
+        mToolBar.setLogoDescription(R.string.app_name);
+        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
+        mToolBar.setTitle(R.string.app_name);
+    }
+
+    @Override
+    protected void initView() {
+        replaceFragments(new DropPlayerFragment(), TAG_FRAGMENT_DROP_PLAYER, R.id.content_frame);
+    }
+
+
 }

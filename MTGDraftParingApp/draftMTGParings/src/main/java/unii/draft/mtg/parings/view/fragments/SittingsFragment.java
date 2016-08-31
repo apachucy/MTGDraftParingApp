@@ -12,44 +12,44 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.draft.mtg.parings.ManualPlayerPairingActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.algorithm.IAlgorithmConfigure;
-import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
-import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
-import unii.draft.mtg.parings.pojo.Player;
-import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.sittings.ISittingGenerator;
-import unii.draft.mtg.parings.sittings.RandomSittingGenerator;
-import unii.draft.mtg.parings.view.adapters.DropPlayerAdapter;
+import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
+import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
+import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.SittingsPlayerAdapter;
 
-/**
- * Created by Unii on 2016-05-08.
- */
+
 public class SittingsFragment extends BaseFragment {
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private List<String> mPlayerNameList;
 
-    private ISittingGenerator mSittingsGenerator;
+    @Inject
+    ISharedPreferences mSharedPreferenceManager;
+    @Inject
+    AlgorithmChooser mAlgorithmChooser;
+    @Inject
+    ISittingGenerator mSittingsGenerator;
+
     @Bind(R.id.table_sittingsRecyclerView)
     RecyclerView mRecyclerView;
 
     @OnClick(R.id.sittings_next)
     public void onActionButtonNextClicked(View view) {
         Intent intent = null;
-        IAlgorithmConfigure algorithmConfigure = (IAlgorithmConfigure) getActivity().getApplication();
-        if (SettingsPreferencesFactory.getInstance().areManualParings()) {
-            intent = new Intent(getActivity(),
-                    ManualPlayerPairingActivity.class);
+        if (mSharedPreferenceManager.areManualParings()) {
+            intent = new Intent(getActivity(), ManualPlayerPairingActivity.class);
         } else {
-            intent = new Intent(getActivity(),
-                    ParingDashboardActivity.class);
+            intent = new Intent(getActivity(), ParingDashboardActivity.class);
 
         }
         startActivity(intent);
@@ -62,19 +62,23 @@ public class SittingsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sittings, container, false);
         ButterKnife.bind(this, view);
-        IAlgorithmConfigure algorithmConfigure = (IAlgorithmConfigure) getActivity().getApplication();
-
-        mSittingsGenerator = new RandomSittingGenerator();
-
-        List<String> playerNameList = mSittingsGenerator.generateSittings(getPlayerNameList(algorithmConfigure.getInstance().getSortedPlayerList()));
-        mAdapter = new SittingsPlayerAdapter(getActivity(), playerNameList);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        injectDependencies();
+        initFragmentData();
+        initFragmentView();
 
         return view;
 
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
+    private void injectDependencies() {
+        getActivityComponent().inject(this);
     }
 
     private List<String> getPlayerNameList(List<Player> playerList) {
@@ -86,8 +90,18 @@ public class SittingsFragment extends BaseFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
+    protected void initFragmentView() {
+        mAdapter = new SittingsPlayerAdapter(getActivity(), mPlayerNameList);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+    }
+
+    @Override
+    protected void initFragmentData() {
+        mPlayerNameList = mSittingsGenerator.generateSittings(getPlayerNameList(mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList()));
+
     }
 }

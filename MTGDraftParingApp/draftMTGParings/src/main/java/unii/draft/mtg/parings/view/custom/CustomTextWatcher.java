@@ -1,7 +1,6 @@
 package unii.draft.mtg.parings.view.custom;
 
-import unii.draft.mtg.parings.validation.ValidationHelper;
-import unii.draft.mtg.parings.view.custom.CheckValueListener;
+import unii.draft.mtg.parings.util.validation.ValidationHelper;
 
 import android.text.Editable;
 import android.text.TextWatcher;

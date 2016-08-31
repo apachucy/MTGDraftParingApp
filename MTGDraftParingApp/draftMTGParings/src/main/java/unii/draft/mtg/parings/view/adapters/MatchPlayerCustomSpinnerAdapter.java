@@ -1,7 +1,6 @@
 package unii.draft.mtg.parings.view.adapters;
 
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.pojo.Player;
+import unii.draft.mtg.parings.logic.pojo.Player;
 
 /**
  * Created by Arkadiusz Pachucy on 2015-07-15.

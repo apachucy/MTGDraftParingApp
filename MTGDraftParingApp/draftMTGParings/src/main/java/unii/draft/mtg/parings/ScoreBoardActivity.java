@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -29,36 +31,58 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
-import unii.draft.mtg.parings.algorithm.AlgorithmFactory;
-import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
-import unii.draft.mtg.parings.config.BaseConfig;
-import unii.draft.mtg.parings.config.BundleConst;
-import unii.draft.mtg.parings.database.model.IDatabaseHelper;
-import unii.draft.mtg.parings.helper.ConverterToDataBase;
-import unii.draft.mtg.parings.helper.MenuHelper;
-import unii.draft.mtg.parings.pojo.ItemHeader;
-import unii.draft.mtg.parings.pojo.Player;
-import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
+import unii.draft.mtg.parings.database.model.DaoSession;
+import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
+import unii.draft.mtg.parings.logic.pojo.ItemHeader;
+import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
+import unii.draft.mtg.parings.util.AlgorithmChooser;
+import unii.draft.mtg.parings.util.config.BaseConfig;
+import unii.draft.mtg.parings.util.config.BundleConst;
+import unii.draft.mtg.parings.util.helper.ConverterScoreToDataBase;
+import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 
+
 public class ScoreBoardActivity extends BaseActivity {
-    //TODO: Change color of dropped players
+
+
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    // help library
+    private TourGuide mTutorialHandler = null;
+
+    List<Player> mPlayerList;
+    List<IAdapterItem> mPlayerScoreBoardList;
+
     @Bind(R.id.player_position_roundTextView)
     TextView mRoundTextView;
     @Bind(R.id.player_position_winnerTextView)
     TextView mWinnerTextView;
 
+    @Bind(R.id.player_position_playerListView)
+    RecyclerView mRecyclerView;
+    @Bind(R.id.toolbar)
+    Toolbar mToolBar;
+
+    @Inject
+    DaoSession mDaoSession;
+    @Inject
+    AlgorithmChooser mAlgorithmChooser;
+    @Inject
+    ISharedPreferences mSharedPreferenceManager;
+
     @OnClick(R.id.paring_nextRound)
     void onNextGameButtonClicked(View view) {
-        if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
+        if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
             showInfoDialog(getString(R.string.dialog_end_title),
                     getString(R.string.dialog_end_message),
                     getString(R.string.dialog_start_button), mOnDialogButtonClick);
         } else {
-
             Intent intent = null;
-            if (SettingsPreferencesFactory.getInstance().areManualParings()) {
+            if (mSharedPreferenceManager.areManualParings()) {
                 intent = new Intent(ScoreBoardActivity.this,
                         ManualPlayerPairingActivity.class);
             } else {
@@ -71,61 +95,15 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
 
-    @Bind(R.id.player_position_playerListView)
-    RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
-    @Bind(R.id.toolbar)
-    Toolbar mToolBar;
-
-    private IParingAlgorithm mAlgorithm;
-
-    // help library
-    private TourGuide mTutorialHandler = null;
-
-    List<Player> mPlayerList;
-    List<IAdapterItem> mPlayerScoreBoardList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
         ButterKnife.bind(this);
 
-        mAlgorithm = AlgorithmFactory.getInstance();
-        mPlayerList = mAlgorithm.getSortedPlayerList();
-        mPlayerScoreBoardList = new ArrayList<>();
-        mPlayerScoreBoardList.add(new ItemHeader());
-        mPlayerScoreBoardList.addAll(mPlayerList);
-        mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
-
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mRoundTextView.setText(getString(R.string.text_after_game) + " "
-                + mAlgorithm.getCurrentRound() + " "
-                + getString(R.string.text_from) + " "
-                + +mAlgorithm.getMaxRound());
-
-
-        setSupportActionBar(mToolBar);
-        mToolBar.setLogo(R.drawable.ic_launcher);
-        mToolBar.setLogoDescription(R.string.app_name);
-        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
-        mToolBar.setTitle(R.string.app_name);
-        // when there was last game change button name
-        // show winner
-        if (mAlgorithm.getCurrentRound() == mAlgorithm.getMaxRound()) {
-            mWinnerTextView.setVisibility(View.VISIBLE);
-            mWinnerTextView.setText(getString(R.string.text_winner) + " "
-                    + mPlayerList.get(0).getPlayerName());
-        } else {
-            mWinnerTextView.setVisibility(View.INVISIBLE);
-
-        }
-
-
+        initData();
+        initToolBar();
+        initView();
     }
 
 
@@ -140,70 +118,6 @@ public class ScoreBoardActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    private MaterialDialog.SingleButtonCallback mOnDialogButtonClick = new MaterialDialog.SingleButtonCallback() {
-        @Override
-        public void onClick(MaterialDialog dialog, DialogAction which) {
-            dialog.dismiss();
-            finish();
-        }
-    };
-
-
-    private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView, ImageView saveButton, ImageView dropPlayerButton) {
-        // just adding some padding to look better
-        int padding = MenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
-
-        saveButton.setPadding(padding, padding, padding, padding);
-        dropPlayerButton.setPadding(padding, padding, padding, padding);
-        // set an image
-        saveButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_save));
-        dropPlayerButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_person_minus));
-        if (SettingsPreferencesFactory.getInstance().showGuideTourOnScoreBoardScreen()) {
-            Sequence sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.help_pmw), pmwTextView, Gravity.LEFT | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_omw), omwTextView, Gravity.LEFT | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_pgw), pgwTextView, Gravity.LEFT | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_ogw), ogwTextView, Gravity.LEFT | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_save_dashboard), saveButton),
-                    bindTourGuideButton(getString(R.string.help_drop_player), dropPlayerButton)
-            ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mTutorialHandler.next();
-                }
-            })).setContinueMethod(Sequence.ContinueMethod.OverlayListener).setDefaultPointer(new Pointer()).build();
-            mTutorialHandler = TourGuide.init(this).playInSequence(sequence);
-            SettingsPreferencesFactory.getInstance().setGuideTourOnScoreBoardScreen(false);
-
-        }
-        saveButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
-                    Intent intent = null;
-                    intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
-                    startActivityForResult(intent, BaseConfig.DRAFT_NAME_SET);
-                } else {
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-
-        dropPlayerButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mAlgorithm.getCurrentRound() >= mAlgorithm.getMaxRound()) {
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
-                } else {
-                    Intent intent = null;
-                    intent = new Intent(ScoreBoardActivity.this, DropPlayerActivity.class);
-                    startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_DROPPED);
-
-                }
-            }
-        });
     }
 
     @Override
@@ -223,15 +137,119 @@ public class ScoreBoardActivity extends BaseActivity {
                     String savedGameName = data.getExtras().getString(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME);
 
                     SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
-                    String currentDateandTime = sdf.format(new Date());
-                    ConverterToDataBase.saveToDd(((IDatabaseHelper) getApplication()).getDaoSession(), mPlayerList, savedGameName, currentDateandTime);
+                    String currentDateAndTime = sdf.format(new Date());
+                    ConverterScoreToDataBase.saveToDd(mDaoSession, mPlayerList, savedGameName, currentDateAndTime);
                     Toast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), Toast.LENGTH_LONG).show();
                 }
             } else if (requestCode == BaseConfig.DRAFT_PLAYERS_DROPPED) {
-
                 mAdapter.notifyDataSetChanged();
             }
         }
-
     }
+
+    @Override
+    protected void injectDependencies(ActivityComponent activityComponent) {
+        activityComponent.inject(this);
+    }
+
+    @Override
+    protected void initToolBar() {
+        setSupportActionBar(mToolBar);
+        mToolBar.setLogo(R.drawable.ic_launcher);
+        mToolBar.setLogoDescription(R.string.app_name);
+        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
+        mToolBar.setTitle(R.string.app_name);
+    }
+
+    @Override
+    protected void initView() {
+        mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mRoundTextView.setText(getString(R.string.text_after_game) + " "
+                + mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() + " "
+                + getString(R.string.text_from) + " "
+                + +mAlgorithmChooser.getCurrentAlgorithm().getMaxRound());
+        // when there was last game change button name
+        // show winner
+        if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() == mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
+            mWinnerTextView.setVisibility(View.VISIBLE);
+            mWinnerTextView.setText(getString(R.string.text_winner) + " "
+                    + mPlayerList.get(0).getPlayerName());
+        } else {
+            mWinnerTextView.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private MaterialDialog.SingleButtonCallback mOnDialogButtonClick = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(MaterialDialog dialog, DialogAction which) {
+            dialog.dismiss();
+            finish();
+        }
+    };
+
+
+    private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView, ImageView saveButton, ImageView dropPlayerButton) {
+        // just adding some padding to look better
+        int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
+
+        saveButton.setPadding(padding, padding, padding, padding);
+        dropPlayerButton.setPadding(padding, padding, padding, padding);
+        // set an image
+        saveButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_save));
+        dropPlayerButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_person_minus));
+        if (mSharedPreferenceManager.showGuideTourOnScoreBoardScreen()) {
+            Sequence sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.help_pmw), pmwTextView, Gravity.LEFT | Gravity.BOTTOM),
+                    bindTourGuideButton(getString(R.string.help_omw), omwTextView, Gravity.LEFT | Gravity.BOTTOM),
+                    bindTourGuideButton(getString(R.string.help_pgw), pgwTextView, Gravity.LEFT | Gravity.BOTTOM),
+                    bindTourGuideButton(getString(R.string.help_ogw), ogwTextView, Gravity.LEFT | Gravity.BOTTOM),
+                    bindTourGuideButton(getString(R.string.help_save_dashboard), saveButton),
+                    bindTourGuideButton(getString(R.string.help_drop_player), dropPlayerButton)
+            ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mTutorialHandler.next();
+                }
+            })).setContinueMethod(Sequence.ContinueMethod.OverlayListener).setDefaultPointer(new Pointer()).build();
+            mTutorialHandler = TourGuide.init(this).playInSequence(sequence);
+            mSharedPreferenceManager.setGuideTourOnScoreBoardScreen(false);
+
+        }
+        saveButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
+                    Intent intent = null;
+                    intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
+                    startActivityForResult(intent, BaseConfig.DRAFT_NAME_SET);
+                } else {
+                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        dropPlayerButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
+                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = null;
+                    intent = new Intent(ScoreBoardActivity.this, DropPlayerActivity.class);
+                    startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_DROPPED);
+                }
+            }
+        });
+    }
+
+    private void initData() {
+        mPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
+        mPlayerScoreBoardList = new ArrayList<>();
+        mPlayerScoreBoardList.add(new ItemHeader());
+        mPlayerScoreBoardList.addAll(mPlayerList);
+    }
+
 }

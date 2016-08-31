@@ -12,28 +12,39 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import unii.draft.mtg.parings.algorithm.AlgorithmFactory;
-import unii.draft.mtg.parings.algorithm.IAlgorithmConfigure;
-import unii.draft.mtg.parings.pojo.Game;
-import unii.draft.mtg.parings.pojo.Player;
+import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
+import unii.draft.mtg.parings.logic.pojo.Game;
+import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.MatchPlayerCustomAdapter;
 import unii.draft.mtg.parings.view.adapters.MatchPlayerCustomSpinnerAdapter;
 
 
 public class ManualPlayerPairingActivity extends BaseActivity {
 
+    private List<Player> mPlayerList;
+    private List<Game> mGameList;
+    private MatchPlayerCustomSpinnerAdapter mPlayerSpinnerAdapter;
+    private RecyclerView.Adapter mRecyclerMatchPlayerAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+
     @Bind(R.id.matchPlayer_firstPlayerSpinner)
     Spinner mPlayer1Spinner;
     @Bind(R.id.matchPlayer_secondPlayerSpinner)
     Spinner mPlayer2Spinner;
-
     @Bind(R.id.matchPlayer_PlayersList)
     RecyclerView mRecyclerMatchPlayerView;
-    private RecyclerView.Adapter mRecyclerMatchPlayerAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    @Bind(R.id.toolbar)
+    Toolbar mToolBar;
+
+    @Inject
+    AlgorithmChooser mAlgorithmChooser;
 
 
     @OnClick(R.id.matchPlayer_CleanButton)
@@ -41,7 +52,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         mGameList.clear();
         mRecyclerMatchPlayerAdapter.notifyDataSetChanged();
         mPlayerList.clear();
-        mPlayerList.addAll(((IAlgorithmConfigure) getApplication()).getInstance().getSortedPlayerList());
+        mPlayerList.addAll(mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList());
         //hack
         mPlayer1Spinner.setSelection(1);
         mPlayer2Spinner.setSelection(1);
@@ -85,23 +96,16 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         } else if (mPlayerList.size() > 1 && mPlayerList.get(0).hasBye()) {
             Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_bye), Toast.LENGTH_LONG).show();
         } else {
-            AlgorithmFactory.getInstance().setPlayerGameList(mGameList);
+            mAlgorithmChooser.getCurrentAlgorithm().setPlayerGameList(mGameList);
             //someone has a bye
             if (mPlayerList.size() == 1 && !mPlayerList.get(0).getPlayerName().equals(getString(R.string.spinner_empty_player_list))) {
-                AlgorithmFactory.getInstance().setPlayerWithBye(mPlayerList.get(0));
+                mAlgorithmChooser.getCurrentAlgorithm().setPlayerWithBye(mPlayerList.get(0));
             }
             Intent intent = new Intent(ManualPlayerPairingActivity.this, ParingDashboardActivity.class);
             startActivity(intent);
             finish();
         }
     }
-
-    @Bind(R.id.toolbar)
-    Toolbar mToolBar;
-
-    private List<Player> mPlayerList;
-    private List<Game> mGameList;
-    private MatchPlayerCustomSpinnerAdapter mPlayerSpinnerAdapter;
 
 
     @Override
@@ -110,27 +114,45 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         setContentView(R.layout.activity_manual_player_pairing);
         ButterKnife.bind(this);
 
+        initToolBar();
+        initData();
+        initView();
+    }
+
+
+    @Override
+    protected void injectDependencies(ActivityComponent activityComponent) {
+        activityComponent.inject(this);
+    }
+
+    private void initData() {
+        mPlayerList = new ArrayList<>();
+        mPlayerList.addAll(mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList());
+        mGameList = new ArrayList<Game>();
+    }
+
+    @Override
+    protected void initToolBar() {
         setSupportActionBar(mToolBar);
         mToolBar.setLogo(R.drawable.ic_launcher);
         mToolBar.setLogoDescription(R.string.app_name);
         mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
         mToolBar.setTitle(R.string.app_name);
-        init();
     }
 
-    private void init() {
-        mPlayerList = new ArrayList<>();
-        mPlayerList.addAll(((IAlgorithmConfigure) getApplication()).getInstance().getSortedPlayerList());
+    @Override
+    protected void initView() {
         mPlayerSpinnerAdapter = new MatchPlayerCustomSpinnerAdapter(this, mPlayerList);
         mPlayer1Spinner.setAdapter(mPlayerSpinnerAdapter);
         mPlayer2Spinner.setAdapter(mPlayerSpinnerAdapter);
-        mGameList = new ArrayList<Game>();
+
         mRecyclerMatchPlayerAdapter = new MatchPlayerCustomAdapter(this, mGameList);
         mRecyclerMatchPlayerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerMatchPlayerView.setLayoutManager(mLayoutManager);
         mRecyclerMatchPlayerView.setAdapter(mRecyclerMatchPlayerAdapter);
-    }
 
+
+    }
 
 }

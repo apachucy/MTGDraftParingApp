@@ -9,11 +9,10 @@ import android.view.View;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import unii.draft.mtg.parings.config.BundleConst;
+import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
+import unii.draft.mtg.parings.util.config.BundleConst;
 
-/**
- * Created by Unii on 2015-12-03.
- */
+
 public class SaveScoreBoardActivity extends BaseActivity {
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
@@ -37,14 +36,26 @@ public class SaveScoreBoardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_score_board);
         ButterKnife.bind(this);
+        initToolBar();
+        initView();
+    }
 
-        mScoreBoardTextInput.setHint(getString(R.string.activity_save_score_board_info_text));
+    @Override
+    protected void injectDependencies(ActivityComponent activityComponent) {
+
+    }
+
+    @Override
+    protected void initToolBar() {
         setSupportActionBar(mToolBar);
         mToolBar.setLogo(R.drawable.ic_launcher);
         mToolBar.setLogoDescription(R.string.app_name);
         mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
         mToolBar.setTitle(R.string.app_name);
+    }
 
-
+    @Override
+    protected void initView() {
+        mScoreBoardTextInput.setHint(getString(R.string.activity_save_score_board_info_text));
     }
 }

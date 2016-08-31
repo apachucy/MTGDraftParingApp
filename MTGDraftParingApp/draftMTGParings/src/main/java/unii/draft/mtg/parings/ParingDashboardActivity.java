@@ -19,39 +19,36 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import unii.draft.mtg.parings.algorithm.AlgorithmFactory;
-import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
-import unii.draft.mtg.parings.algorithm.IStatisticCalculation;
-import unii.draft.mtg.parings.algorithm.StatisticCalculation;
-import unii.draft.mtg.parings.config.BaseConfig;
-import unii.draft.mtg.parings.config.BundleConst;
-import unii.draft.mtg.parings.helper.MenuHelper;
-import unii.draft.mtg.parings.pojo.Game;
-import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
+import unii.draft.mtg.parings.buisness.algorithm.IStatisticCalculation;
+import unii.draft.mtg.parings.buisness.algorithm.StatisticCalculation;
+import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
+import unii.draft.mtg.parings.logic.pojo.Game;
+import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
+import unii.draft.mtg.parings.util.AlgorithmChooser;
+import unii.draft.mtg.parings.util.config.BaseConfig;
+import unii.draft.mtg.parings.util.config.BundleConst;
+import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
 import unii.draft.mtg.parings.view.adapters.PlayerMatchParingAdapter;
 import unii.draft.mtg.parings.view.custom.CounterClass;
 import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
 
-public class ParingDashboardActivity extends BaseActivity {
 
+public class ParingDashboardActivity extends BaseActivity {
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
-
     private List<Game> mGameList;
     // setting time and count down
     private CounterClass mCounterClass;
-
-    private static boolean isCountStarted;
-    private IParingAlgorithm mParingAlgorithm;
-
-
     private IStatisticCalculation mStatisticCalculation;
     private ParingDashboardLogic mParingDashboardLogic;
+
+    private static boolean isCountStarted;
 
     @Bind(R.id.paring_counterTextView)
     TextView mCounterTextView;
@@ -62,12 +59,19 @@ public class ParingDashboardActivity extends BaseActivity {
 
     @Bind(R.id.paring_nextRound)
     FloatingActionButton mFloatingActionButton;
+    @Bind(R.id.toolbar)
+    Toolbar mToolBar;
+
+    @Inject
+    ISharedPreferences mSharedPreferenceManager;
+    @Inject
+    AlgorithmChooser mAlgorithmChooser;
 
     @OnClick(R.id.paring_openCounterApplication)
     void onOpenCounterClicked(View view) {
         Bundle bundle = new Bundle();
         bundle.putStringArray(BundleConst.BUNDLE_KEY_PLAYERS_NAMES, mParingDashboardLogic.getPlayerNameList(mGameList));
-        bundle.putInt(BundleConst.BUNDLE_KEY_ROUND_TIME, (int) (SettingsPreferencesFactory.getInstance()
+        bundle.putInt(BundleConst.BUNDLE_KEY_ROUND_TIME, (int) (mSharedPreferenceManager
                 .getTimePerRound() / BaseConfig.DEFAULT_TIME_MINUT));
         Intent sendIntent = new Intent(BaseConfig.INTENT_PACKAGE_LIFE_COUNTER_APP);
         sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -97,22 +101,18 @@ public class ParingDashboardActivity extends BaseActivity {
 
     }
 
-    @Bind(R.id.toolbar)
-    Toolbar mToolBar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paring_dashboard);
         ButterKnife.bind(this);
-
-        setSupportActionBar(mToolBar);
-        mToolBar.setLogo(R.drawable.ic_launcher);
-        mToolBar.setLogoDescription(R.string.app_name);
-        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
-        mToolBar.setTitle(R.string.app_name);
-        init();
+        initToolBar();
+        if (!initData()) {
+            displayErrorDialog();
+            return;
+        }
+        initView();
 
     }
 
@@ -124,9 +124,28 @@ public class ParingDashboardActivity extends BaseActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
+    }
+
+    @Override
+    protected void injectDependencies(ActivityComponent activityComponent) {
+        activityComponent.inject(this);
+    }
+
     private void setMenuActions(ImageView hourGlassButton) {
         // just adding some padding to look better
-        int padding = MenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
+        int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 
         hourGlassButton.setPadding(padding, padding, padding, padding);
 
@@ -137,7 +156,7 @@ public class ParingDashboardActivity extends BaseActivity {
         hourGlassButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!SettingsPreferencesFactory.getInstance().displayCounterRound()) {
+                if (!mSharedPreferenceManager.displayCounterRound()) {
                     Toast.makeText(ParingDashboardActivity.this, getString(R.string.settings_counter_off), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -155,67 +174,62 @@ public class ParingDashboardActivity extends BaseActivity {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    private void init() {
+    private boolean initData() {
         long timePerRound;
         long firstVibration;
         long secondVibration;
         long vibrationDuration;
-        if (SettingsPreferencesFactory.getInstance().useVibration()) {
-            firstVibration = SettingsPreferencesFactory.getInstance()
-                    .getFirstVibration();
-            secondVibration = SettingsPreferencesFactory.getInstance()
-                    .getSecondVibration();
-            vibrationDuration = SettingsPreferencesFactory.getInstance()
-                    .getVibrationDuration();
+        if (mSharedPreferenceManager.useVibration()) {
+            firstVibration = mSharedPreferenceManager.getFirstVibration();
+            secondVibration = mSharedPreferenceManager.getSecondVibration();
+            vibrationDuration = mSharedPreferenceManager.getVibrationDuration();
         } else {
             firstVibration = 0;
             secondVibration = 0;
             vibrationDuration = 0;
         }
-        if (SettingsPreferencesFactory.getInstance().displayCounterRound()) {
-            mCounterTextView.setVisibility(View.VISIBLE);
-
-            timePerRound = SettingsPreferencesFactory.getInstance()
-                    .getTimePerRound();
+        if (mSharedPreferenceManager.displayCounterRound()) {
+            timePerRound = mSharedPreferenceManager.getTimePerRound();
             mCounterClass = new CounterClass(this, timePerRound,
                     BaseConfig.DEFAULT_COUNTER_INTERVAL, mCounterTextView,
                     firstVibration, secondVibration, vibrationDuration);
-        } else {
-            mCounterTextView.setVisibility(View.INVISIBLE);
         }
         isCountStarted = false;
-        mParingAlgorithm = AlgorithmFactory.getInstance();
-        if (mParingAlgorithm == null) {
-            displayErrorDialog();
+        if (mAlgorithmChooser.getCurrentAlgorithm() == null) {
+            return false;
         }
-        mGameList = mParingAlgorithm.getParings();
+        mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings();
         if (mGameList == null || mGameList.isEmpty()) {
-            displayErrorDialog();
+            return false;
         }
         mParingDashboardLogic = new ParingDashboardLogic(this);
-        // mParingDashboardLogic.addDummyPlayer(mGameList);
-        mAdapter = new PlayerMatchParingAdapter(this, mGameList);
-        mRoundTextView.setText(getString(R.string.text_round) + " "
-                + mParingAlgorithm.getCurrentRound());
-        //mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-
+        return true;
     }
 
     @Override
-    public void onBackPressed() {
-        Intent setIntent = new Intent(Intent.ACTION_MAIN);
-        setIntent.addCategory(Intent.CATEGORY_HOME);
-        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(setIntent);
+    protected void initToolBar() {
+        setSupportActionBar(mToolBar);
+        mToolBar.setLogo(R.drawable.ic_launcher);
+        mToolBar.setLogoDescription(R.string.app_name);
+        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
+        mToolBar.setTitle(R.string.app_name);
+    }
+
+
+    @Override
+    protected void initView() {
+        if (mSharedPreferenceManager.displayCounterRound()) {
+            mCounterTextView.setVisibility(View.VISIBLE);
+        } else {
+            mCounterTextView.setVisibility(View.INVISIBLE);
+        }
+
+        mAdapter = new PlayerMatchParingAdapter(this, mGameList);
+        mRoundTextView.setText(getString(R.string.text_round) + " "
+                + mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
@@ -240,17 +254,17 @@ public class ParingDashboardActivity extends BaseActivity {
         showInfoDialog(getString(R.string.dialog_error_algorithm_title),
                 getString(R.string.dialog_error_algorithm__message),
                 getString(R.string.dialog_start_button), mDialogButtonClickListener);
-
     }
 
     private void moveToScoreBoard() {
-        mParingDashboardLogic.addGameResult(mParingAlgorithm, mGameList);
-        mStatisticCalculation = new StatisticCalculation(mParingAlgorithm);
+        mParingDashboardLogic.addGameResult(mAlgorithmChooser.getCurrentAlgorithm(), mGameList);
+        mStatisticCalculation = new StatisticCalculation(mAlgorithmChooser.getCurrentAlgorithm());
         mStatisticCalculation.calculateAll();
         Intent intent = new Intent(ParingDashboardActivity.this,
                 ScoreBoardActivity.class);
         startActivity(intent);
         finish();
     }
+
 
 }

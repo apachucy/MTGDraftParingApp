@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.algorithm.IParingAlgorithm;
-import unii.draft.mtg.parings.config.BaseConfig;
-import unii.draft.mtg.parings.pojo.Game;
-import unii.draft.mtg.parings.pojo.Player;
+import unii.draft.mtg.parings.buisness.algorithm.IParingAlgorithm;
+import unii.draft.mtg.parings.util.config.BaseConfig;
+import unii.draft.mtg.parings.logic.pojo.Game;
+import unii.draft.mtg.parings.logic.pojo.Player;
 
 /**
  * Created by apachucy on 2016-03-04.

@@ -11,32 +11,34 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.config.BundleConst;
+import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.database.model.Draft;
 import unii.draft.mtg.parings.database.model.DraftDao;
-import unii.draft.mtg.parings.database.model.IDatabaseHelper;
-import unii.draft.mtg.parings.pojo.ItemHeader;
-import unii.draft.mtg.parings.pojo.Player;
+import unii.draft.mtg.parings.logic.pojo.ItemHeader;
+import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 
-/**
- * Created by Unii on 2015-12-06.
- */
+
 public class HistoryScoreBoardDetailFragment extends BaseFragment {
 
     private Activity mContext;
-    @Bind(R.id.player_position_playerListView)
-    RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
     private long mDraftKey;
     private List<IAdapterItem> mPlayerScoreBoardList;
 
+    @Inject
+    DaoSession mDaoSession;
+
+    @Bind(R.id.player_position_playerListView)
+    RecyclerView mRecyclerView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -48,13 +50,38 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history_score_board_detail, container, false);
         ButterKnife.bind(this, view);
+        injectDependencies();
+        initFragmentData();
+        initFragmentView();
 
+
+        return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
+
+    @Override
+    protected void initFragmentView() {
+        mAdapter = new PlayerScoreboardAdapter(mContext, mPlayerScoreBoardList);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(mContext);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void initFragmentData() {
         Bundle bundle = getArguments();
         if (!bundle.containsKey(BundleConst.BUNDLE_KEY_HISTORY_DRAFT_DETAIL)) {
             mContext.finish();
         }
         mDraftKey = bundle.getLong(BundleConst.BUNDLE_KEY_HISTORY_DRAFT_DETAIL);
-        DraftDao draftDao = ((IDatabaseHelper) mContext.getApplication()).getDaoSession().getDraftDao();
+        DraftDao draftDao = mDaoSession.getDraftDao();
         //get entity with provided Id
         Draft draft = draftDao.load(mDraftKey);
         List<Player> playerList = new ArrayList<>();
@@ -65,20 +92,10 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         mPlayerScoreBoardList = new ArrayList<>();
         mPlayerScoreBoardList.add(new ItemHeader());
         mPlayerScoreBoardList.addAll(playerList);
-        mAdapter = new PlayerScoreboardAdapter(mContext, mPlayerScoreBoardList);
-
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(mContext);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-
-        return view;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
+    private void injectDependencies() {
+        getActivityComponent().inject(this);
     }
 
 }

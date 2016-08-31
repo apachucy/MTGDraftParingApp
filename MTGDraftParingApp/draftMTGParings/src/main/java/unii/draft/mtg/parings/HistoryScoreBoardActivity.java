@@ -7,12 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import unii.draft.mtg.parings.config.BundleConst;
-import unii.draft.mtg.parings.helper.MenuHelper;
+import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
+import unii.draft.mtg.parings.util.config.BundleConst;
+import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
 import unii.draft.mtg.parings.view.fragments.HistoryScoreBoardDetailFragment;
 import unii.draft.mtg.parings.view.fragments.HistoryScoreBoardListFragment;
 import unii.draft.mtg.parings.view.fragments.IDisplayHistoryScoreBoardDetail;
@@ -22,23 +22,9 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayH
             .getName() + "TAG_FRAGMENT_LIST";
     private static final String TAG_FRAGMENT_DETAIL = HistoryScoreBoardActivity.class.getName() + "TAG_FRAGMENT_DETAIL";
     private static String sCurrentFragmentTag;
+
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_score_board);
-        ButterKnife.bind(this);
-        setSupportActionBar(mToolBar);
-        mToolBar.setLogo(R.drawable.ic_launcher);
-        mToolBar.setLogoDescription(R.string.app_name);
-        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
-        mToolBar.setTitle(R.string.app_name);
-        sCurrentFragmentTag = TAG_FRAGMENT_LIST;
-        replaceFragments(new HistoryScoreBoardListFragment(), TAG_FRAGMENT_LIST, R.id.content_frame);
-
-    }
 
     @Override
     public void displayHistoryScoreBoardDetail(Long detailKey) {
@@ -54,7 +40,7 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayH
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
-        int padding = MenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
+        int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
         ImageView imageButton = (ImageView) menu.getItem(0).getActionView();
         imageButton.setPadding(padding, padding, padding, padding);
 
@@ -74,5 +60,37 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayH
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_history_score_board);
+        ButterKnife.bind(this);
+        initToolBar();
+        initView();
+
+
+    }
+
+
+    @Override
+    protected void injectDependencies(ActivityComponent activityComponent) {
+
+    }
+
+    @Override
+    protected void initToolBar() {
+        setSupportActionBar(mToolBar);
+        mToolBar.setLogo(R.drawable.ic_launcher);
+        mToolBar.setLogoDescription(R.string.app_name);
+        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
+        mToolBar.setTitle(R.string.app_name);
+    }
+
+    @Override
+    protected void initView() {
+        sCurrentFragmentTag = TAG_FRAGMENT_LIST;
+        replaceFragments(new HistoryScoreBoardListFragment(), TAG_FRAGMENT_LIST, R.id.content_frame);
     }
 }

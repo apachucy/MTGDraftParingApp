@@ -2,7 +2,7 @@ package unii.draft.mtg.parings.view.custom;
 
 import java.util.concurrent.TimeUnit;
 
-import unii.draft.mtg.parings.config.BaseConfig;
+import unii.draft.mtg.parings.util.config.BaseConfig;
 
 import android.content.Context;
 import android.os.CountDownTimer;

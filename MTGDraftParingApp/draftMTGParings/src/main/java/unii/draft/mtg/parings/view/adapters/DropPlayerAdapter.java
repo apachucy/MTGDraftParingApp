@@ -13,7 +13,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.pojo.Player;
+import unii.draft.mtg.parings.logic.pojo.Player;
 
 /**
  * Created by Unii on 2016-03-26.

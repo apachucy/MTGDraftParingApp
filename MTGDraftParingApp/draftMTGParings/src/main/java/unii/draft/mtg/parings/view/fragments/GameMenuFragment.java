@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,26 +23,20 @@ import unii.draft.mtg.parings.ManualPlayerPairingActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.SittingsActivity;
-import unii.draft.mtg.parings.algorithm.IAlgorithmConfigure;
-import unii.draft.mtg.parings.algorithm.ManualParingAlgorithm;
-import unii.draft.mtg.parings.algorithm.ParingAlgorithm;
-import unii.draft.mtg.parings.sharedprefrences.SettingsPreferencesFactory;
-import unii.draft.mtg.parings.sharedprefrences.SettingsSharedPreferences;
-import unii.draft.mtg.parings.sittings.SittingsMode;
-import unii.draft.mtg.parings.validation.ValidationHelper;
+import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
+import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
+import unii.draft.mtg.parings.util.AlgorithmChooser;
+import unii.draft.mtg.parings.util.validation.ValidationHelper;
 import unii.draft.mtg.parings.view.custom.IActivityHandler;
 import unii.draft.mtg.parings.view.custom.IPlayerList;
 
-/**
- * Created by apachucy on 2015-09-25.
- */
+
 public class GameMenuFragment extends BaseFragment {
 
     private IPlayerList mPlayerNameList;
     private IActivityHandler mActivityHandler;
     private ArrayAdapter<String> mListAdapter;
     private Activity mActivity;
-
 
     @Bind(R.id.init_playerList)
     ListView mPlayerList;
@@ -50,6 +46,43 @@ public class GameMenuFragment extends BaseFragment {
 
     @Bind(R.id.init_roundsTextInput)
     TextInputLayout mRoundsTextInput;
+
+    @Inject
+    ISharedPreferences mSharedPreferenceManager;
+    @Inject
+    AlgorithmChooser mAlgorithmChooser;
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
+        mPlayerNameList = (IPlayerList) mActivity;
+        if (!(mActivity instanceof IActivityHandler)) {
+            throw new RuntimeException("Activity should implement IActivityHandler");
+        }
+        mActivityHandler = (IActivityHandler) mActivity;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_game_menu, container, false);
+        ButterKnife.bind(this, view);
+        injectDependencies();
+        initFragmentData();
+        initFragmentView(inflater);
+
+
+
+        return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
 
     @OnClick(R.id.init_addPlayerButton)
     void onAddPlayerClick(View view) {
@@ -92,24 +125,7 @@ public class GameMenuFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mActivity = activity;
-        mPlayerNameList = (IPlayerList) mActivity;
-        if (!(mActivity instanceof IActivityHandler)) {
-            throw new RuntimeException("Activity should implement IActivityHandler");
-        }
-        mActivityHandler = (IActivityHandler) mActivity;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
-            savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_game_menu, container, false);
-        ButterKnife.bind(this, view);
-
-
+    protected void initFragmentView(LayoutInflater inflater) {
         mListAdapter = new ArrayAdapter<String>(mActivity, R.layout.row_player_name,
                 mPlayerNameList.getPlayerList());
 
@@ -121,8 +137,16 @@ public class GameMenuFragment extends BaseFragment {
 
         mPlayerList.addHeaderView(header);
         mPlayerList.setAdapter(mListAdapter);
+    }
 
-        return view;
+    @Override
+    protected void initFragmentView() {
+        //Not-implemented
+    }
+
+    @Override
+    protected void initFragmentData() {
+
     }
 
     //todo: open sittingsPlayerActivity
@@ -132,17 +156,13 @@ public class GameMenuFragment extends BaseFragment {
             if (dialog != null && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
                 dialog.dismiss();
                 Intent intent = null;
-                IAlgorithmConfigure algorithmConfigure = (IAlgorithmConfigure) mActivity.getApplication();
                 //set parings Factory
-                if (SettingsPreferencesFactory.getInstance().areManualParings()) {
-                    algorithmConfigure.setAlgorithm(new ManualParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString())));
-                } else {
-                    algorithmConfigure.setAlgorithm(new ParingAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString())));
-                }
+                mAlgorithmChooser.getCurrentAlgorithm().startAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString()));
+
                 //set started activity
-                if (SettingsPreferencesFactory.getInstance().getGeneratedSittingMode() == SittingsMode.SITTINGS_RANDOM) {
+                if (mSharedPreferenceManager.getGeneratedSittingMode() == SittingsMode.SITTINGS_RANDOM) {
                     intent = new Intent(mActivity, SittingsActivity.class);
-                } else if (SettingsPreferencesFactory.getInstance().areManualParings()) {
+                } else if (mSharedPreferenceManager.areManualParings()) {
                     intent = new Intent(mActivity,
                             ManualPlayerPairingActivity.class);
                 } else {
@@ -170,9 +190,9 @@ public class GameMenuFragment extends BaseFragment {
         return isAddedBefore;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
+    private void injectDependencies() {
+        getActivityComponent().inject(this);
     }
+
+
 }

@@ -10,7 +10,7 @@ android {
         targetSdkVersion 21
         generatedDensities = []
     }
-
+    apply plugin: 'com.neenbedankt.android-apt'
 // This is handled for you by the 2.0+ Gradle Plugin
     aaptOptions {
         additionalParameters "--no-version-vectors"
@@ -29,15 +29,20 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:23.2.0'
     compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:recyclerview-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+
     compile 'com.jakewharton:butterknife:7.0.1'
     compile('com.github.worker8:tourguide:1.0.14-SNAPSHOT@aar') {
         transitive = true
     }
     compile files('libs/greendao-2.1.0.jar')
-    compile 'com.android.support:recyclerview-v7:23.2.0'
-    compile 'com.android.support:design:23.2.0'
+
     compile('com.github.afollestad.material-dialogs:core:0.8.5.6@aar') {
         transitive = true
     }
-
+    //dagger
+    provided 'javax.annotation:jsr250-api:1.0'
+    compile 'com.google.dagger:dagger:2.0.2'
+    provided 'com.google.dagger:dagger-compiler:2.0.2'
 }
