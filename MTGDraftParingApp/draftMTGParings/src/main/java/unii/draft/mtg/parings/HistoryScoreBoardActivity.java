@@ -76,7 +76,7 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayH
 
     @Override
     protected void injectDependencies(ActivityComponent activityComponent) {
-
+        activityComponent.inject(this);
     }
 
     @Override

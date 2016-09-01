@@ -11,6 +11,7 @@ android {
         generatedDensities = []
     }
     apply plugin: 'com.neenbedankt.android-apt'
+
 // This is handled for you by the 2.0+ Gradle Plugin
     aaptOptions {
         additionalParameters "--no-version-vectors"
@@ -18,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
 

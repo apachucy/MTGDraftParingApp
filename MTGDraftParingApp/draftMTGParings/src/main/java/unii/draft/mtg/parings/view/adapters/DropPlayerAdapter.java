@@ -15,9 +15,7 @@ import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
-/**
- * Created by Unii on 2016-03-26.
- */
+
 public class DropPlayerAdapter extends RecyclerView.Adapter<DropPlayerAdapter.ViewHolder> {
     private Context mContext;
     private List<Player> mNotDroppedPlayerList;

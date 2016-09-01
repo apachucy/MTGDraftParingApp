@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.logic.dagger;
 
 
 import unii.draft.mtg.parings.buisness.algorithm.IParingAlgorithm;
+import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -20,6 +21,8 @@ public interface IApplicationModule {
     AlgorithmChooser provideAlgorithmChooser();
 
     ISittingGenerator provideSittingGenerator();
+
+    IShareData provideShareDataContent();
 
 
 }

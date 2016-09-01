@@ -149,4 +149,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
 
     <string name="player_sittings_position" translatable="false"> %1$d. %2$s</string>
     <string name="player_sittings_description">Sitting before 1rst round</string>
+
+    <string name="shared_data_formatted_winner" translatable="false">Draft winner is: %1$s\n</string>
+    <string name="shared_data_formatted_player" translatable="false">%1$s scored: %2$d points\n</string>
 </resources>

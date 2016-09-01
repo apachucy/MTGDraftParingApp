@@ -11,6 +11,8 @@ import dagger.Provides;
 import unii.draft.mtg.parings.buisness.algorithm.IParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.ManualParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.AutomaticParingAlgorithm;
+import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
+import unii.draft.mtg.parings.buisness.share.scoreboard.ShareDataContent;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
 import unii.draft.mtg.parings.buisness.sittings.RandomSittingGenerator;
 import unii.draft.mtg.parings.database.model.DaoMaster;
@@ -89,5 +91,12 @@ public class ApplicationModule implements IApplicationModule {
     @Singleton
     public ISittingGenerator provideSittingGenerator() {
         return new RandomSittingGenerator();
+    }
+
+    @Override
+    @Provides
+    @Singleton
+    public IShareData provideShareDataContent() {
+        return new ShareDataContent(mContext);
     }
 }

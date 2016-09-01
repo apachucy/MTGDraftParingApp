@@ -133,7 +133,6 @@ public class MainActivity extends BaseActivity implements IPlayerList {
         aboutButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 showInfoDialog(getString(R.string.dialog_info_title),
                         getString(R.string.dialog_info_message),
                         getString(R.string.dialog_start_button));

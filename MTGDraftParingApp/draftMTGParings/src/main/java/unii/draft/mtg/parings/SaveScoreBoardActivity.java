@@ -42,7 +42,7 @@ public class SaveScoreBoardActivity extends BaseActivity {
 
     @Override
     protected void injectDependencies(ActivityComponent activityComponent) {
-
+        activityComponent.inject(this);
     }
 
     @Override

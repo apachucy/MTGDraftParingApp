@@ -69,16 +69,16 @@ public class HistoryScoreBoardListFragment extends BaseFragment {
 
     @Override
     protected void initFragmentView() {
-        mDraftDao = mDaoSession.getDraftDao();
-    }
-
-    @Override
-    protected void initFragmentData() {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecorator(mContext, DividerItemDecorator.VERTICAL_LIST));
         mAdapter = new HistoryScoreBoardAdapter(mContext, new ArrayList<Draft>(mDraftDao.loadAll()), mDisplayHistoryScoreBoardDetail);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void initFragmentData() {
+        mDraftDao = mDaoSession.getDraftDao();
     }
 }

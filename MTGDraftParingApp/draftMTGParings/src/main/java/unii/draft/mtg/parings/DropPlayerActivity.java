@@ -40,7 +40,7 @@ public class DropPlayerActivity extends BaseActivity {
 
     @Override
     protected void injectDependencies(ActivityComponent activityComponent) {
-
+        activityComponent.inject(this);
     }
 
     @Override
