@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.util.config;
 
+import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
+
 public final class BaseConfig {
     private BaseConfig() {
     }
@@ -12,7 +14,9 @@ public final class BaseConfig {
     public static final long DEFAULT_COUNTER_INTERVAL = DEFAULT_TIME_SECOND;// 1s
 
     public static final boolean DEFAULT_DISPLAY_COUNTER_ROUND = true;
+    @Deprecated
     public static final boolean DEFAULT_MANUAL_PARINGS = false;
+    public static final int DEFAULT_TYPE_PAIRINGS = PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS;
     // time
     public static final boolean DEFAULT_USE_VIBRATION = true;
     public static final long DEFAULT_FIRST_VIBRATION = 300000;// 5min before end
@@ -51,6 +55,10 @@ public final class BaseConfig {
     public static final String INTENT_PACKAGE_DRAFT_MTG = "unii.draft.mtg.parings";
     public static final String INTENT_OPEN_GOOGLE_PLAY = "market://details?id=";
     public static final String INTENT_OPEN_GOOGLE_PLAY_WWW = "https://play.google.com/store/apps/details?id=";
+    public static final String INTENT_OPEN_DEVELOPER_APPS_WWW = "https://play.google.com/store/apps/developer?id=Unii";
+    public static final String INTENT_OPEN_EMAIL = "mailto:";
+    public static final String INTENT_EMAIL_RECIPIENT = "pachucek@gmail.com";
+    public static final String INTENT_EMAIL_SUBJECT = "[MTGDraftParingApp] Idea for new feature";
 
 
 }

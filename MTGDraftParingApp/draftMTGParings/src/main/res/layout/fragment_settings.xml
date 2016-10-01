@@ -239,7 +239,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/settings_rateApplicationInfoTextView"
+            android:id="@+id/settings_rateApplicationTextView"
             style="@style/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
-            android:layout_below="@+id/settings_rateApplicationInfoTextView"
+            android:layout_below="@+id/settings_rateApplicationTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
             android:padding="5dp"
             android:gravity="center" />
@@ -290,7 +290,7 @@
 
 
         <TextView
-            android:id="@+id/settings_displayScoreBoardsInfoTextView"
+            android:id="@+id/settings_displayScoreBoardsTextView"
             style="@style/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -298,21 +298,21 @@
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
             android:layout_below="@+id/settings_createParingsManualInfoTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
-            android:padding="5dp"
+            android:padding="@dimen/settings_padding"
             android:text="@string/settings_display_scoreboards"
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/settings_removeScoreBoardsInfoTextView"
+            android:id="@+id/settings_removeScoreBoardsTextView"
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
-            android:layout_below="@+id/settings_displayScoreBoardsInfoTextView"
+            android:layout_below="@+id/settings_displayScoreBoardsTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
-            android:padding="5dp"
-            android:text="@string/settings_remove_scoreboards" />
+            android:padding="@dimen/settings_padding"
+            android:text="@string/settings_clean_history" />
 
 
         <Button
@@ -320,25 +320,25 @@
             style="@style/buttonSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/settings_removeScoreBoardsInfoTextView"
+            android:layout_alignBottom="@+id/settings_removeScoreBoardsTextView"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/settings_displayScoreBoardsInfoTextView"
+            android:layout_below="@+id/settings_displayScoreBoardsTextView"
             android:layout_marginTop="@dimen/button_margin_settings"
             android:text="@string/settings_remove_text" />
 
 
         <TextView
-            android:id="@+id/settings_resetTourGuideInfoTextView"
+            android:id="@+id/settings_resetTourGuideTextView"
             style="@style/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_alignLeft="@+id/settings_secondVibrationInfoTextView"
             android:layout_alignStart="@+id/settings_secondVibrationInfoTextView"
-            android:layout_below="@+id/settings_removeScoreBoardsInfoTextView"
+            android:layout_below="@+id/settings_removeScoreBoardsTextView"
             android:layout_marginTop="@dimen/text_view_margin_settings"
-            android:padding="5dp"
+            android:padding="@dimen/settings_padding"
             android:text="@string/settings_reset_tour_guide" />
     </RelativeLayout>
 </ScrollView>

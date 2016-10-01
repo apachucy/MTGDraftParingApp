@@ -258,7 +258,7 @@ public class SettingsFragment extends BaseFragment {
     }
 
 
-    @OnClick(R.id.settings_resetTourGuideInfoTextView)
+    @OnClick(R.id.settings_resetTourGuideTextView)
     void onTourGuideReset(View view) {
         mSharedPreferenceManager.resetGuideTour();
         Toast.makeText(getActivity(), getString(R.string.settings_reset_tour_guide_message), Toast.LENGTH_SHORT).show();
@@ -273,7 +273,7 @@ public class SettingsFragment extends BaseFragment {
         Toast.makeText(mActivity, getString(R.string.message_score_boards_removed), Toast.LENGTH_LONG).show();
     }
 
-    @OnClick(R.id.settings_displayScoreBoardsInfoTextView)
+    @OnClick(R.id.settings_displayScoreBoardsTextView)
     void onDisplayScoreBoardsClicked(View view) {
         DraftDao draftDao = mDaoSession.getDraftDao();
         List<Draft> draftList = draftDao.loadAll();
@@ -285,7 +285,7 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
-    @OnClick(R.id.settings_rateApplicationInfoTextView)
+    @OnClick(R.id.settings_rateApplicationTextView)
     void onRateMeClicked(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         //Try Google play

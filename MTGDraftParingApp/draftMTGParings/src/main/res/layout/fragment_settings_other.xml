@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/settings_rateApplicationTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:gravity="center"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/settings_rate_me" />
+
+    <TextView
+        android:id="@+id/settings_checkOtherApplicationTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/settings_check_other_apps" />
+
+    <TextView
+        android:id="@+id/settings_ideaBoxTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/settings_idea_box" />
+
+    <TextView
+        android:id="@+id/settings_resetTourGuideTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/settings_reset_tour_guide" />
+</LinearLayout>

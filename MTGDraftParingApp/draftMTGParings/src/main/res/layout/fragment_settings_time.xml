@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/settings_useCounter"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_display_counter"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/settings_useCounterDetail"
+        style="@style/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings_small"
+        android:text="@string/text_use_counter_detail"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/settings_setTimeCounter"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/text_time_round" />
+
+    <CheckBox
+        android:id="@+id/settings_useVibration"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:text="@string/text_vibration"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/settings_vibrationDetail"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings_small"
+        android:text="@string/text_vibration_detail"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/settings_firstVibration"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/text_first_vibration" />
+
+    <TextView
+        android:id="@+id/settings_secondVibration"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/text_second_vibration" />
+
+
+    <TextView
+        android:id="@+id/settings_durationVibration"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/text_duration_vibration" />
+
+</LinearLayout>

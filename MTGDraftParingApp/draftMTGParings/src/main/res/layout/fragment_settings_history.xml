@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/settings_displayScoreBoardsTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:gravity="center"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/settings_display_scoreboards" />
+
+    <TextView
+        android:id="@+id/settings_displayPlayerHistoryTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:gravity="center"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/settings_display_players_history" />
+
+    <TextView
+        android:id="@+id/settings_removeScoreBoardsTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:gravity="center"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/settings_clean_history" />
+
+</LinearLayout>

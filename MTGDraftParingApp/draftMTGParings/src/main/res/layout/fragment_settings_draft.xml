@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/settings_sittingsTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:gravity="center"
+        android:padding="@dimen/settings_padding" />
+
+    <TextView
+        android:id="@+id/settings_createPairingsChooserTextView"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_view_margin_settings"
+        android:padding="@dimen/settings_padding"
+        android:text="@string/text_personal_parings" />
+</LinearLayout>

@@ -136,6 +136,16 @@ public class SharedPreferencesManager implements ISharedPreferences {
     }
 
     @Override
+    public int getPairingType() {
+        return mSharedPreferences.getInt(SettingsPreferencesConst.PAIRINGS_TYPE, BaseConfig.DEFAULT_TYPE_PAIRINGS);
+    }
+
+    @Override
+    public void setPairingType(int pairingType) {
+        mSharedPreferences.edit().putInt(SettingsPreferencesConst.PAIRINGS_TYPE, BaseConfig.DEFAULT_TYPE_PAIRINGS).apply();
+    }
+
+    @Override
     public void setManualParings(boolean areManualParings) {
         mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.MANUAL_PARINGS, areManualParings).apply();
     }

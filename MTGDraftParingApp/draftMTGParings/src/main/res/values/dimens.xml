@@ -19,7 +19,8 @@
     <dimen name="text_view_player_list">11dp</dimen>
     <dimen name="text_view_point_padding">22dp</dimen>
     <dimen name="text_view_margin_small">3dp</dimen>
-	<dimen name= "text_view_margin_medium">5dp</dimen>
+    <dimen name="text_view_margin_medium">5dp</dimen>
+    <dimen name="settings_padding">5dp</dimen>
     <!-- Style -->
     <dimen name="button_padding">5dp</dimen>
     <dimen name="button_padding_small">1dp</dimen>

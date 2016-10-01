@@ -22,7 +22,10 @@ public class SettingsPreferencesConst {
     public static final String FIRST_RUN = SettingsPreferencesConst.class
             .getName() + " first_run";
 
+    @Deprecated
     public static final String MANUAL_PARINGS = SettingsPreferencesConst.class.getName() + "manual_parings";
+
+    public static final String PAIRINGS_TYPE = SettingsPreferencesConst.class.getName() + "pairings_type";
     public static final String SITTINGS = SettingsPreferencesConst.class.getName() + "sittings_mode";
 
     /**

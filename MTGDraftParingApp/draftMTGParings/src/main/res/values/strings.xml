@@ -29,12 +29,13 @@
     <string name="toggle_button_on">ON</string>
     <string name="toggle_button_off">OFF</string>
     <string name="text_display_counter">Display round time:</string>
-    <string name="text_time_round">Time per round[m]:</string>
+    <string name="text_time_round">Time per round[m]: %1$s</string>
     <string name="text_vibration">Turn vibration:</string>
     <string name="text_vibration_detail">Allows the vibration to inform about the ending time of round</string>
-    <string name="text_first_vibration">First vibration[m]:</string>
-    <string name="text_second_vibration">Second vibration[m]:</string>
-    <string name="text_duration_vibration">Duration[s]:</string>
+    <string name="text_use_counter_detail">Allows countdown time for round</string>
+    <string name="text_first_vibration">First vibration[m]: %1$s</string>
+    <string name="text_second_vibration">Second vibration[m]: %1$s</string>
+    <string name="text_duration_vibration">Duration[s]: %1$s</string>
     <string name="text_save">Save</string>
     <string name="toast_saved">Changes saved</string>
 
@@ -55,6 +56,19 @@
     <!-- Dialog Info -->
     <string name="dialog_info_title">Info</string>
     <string name="dialog_info_message">Fansite version of the app\nfor paring players in MTG drafts</string>
+    <!-- Dialog Settings-->
+    <!-- Time Settings -->
+    <string name="settings_dialog_round_time_title">Set round time</string>
+    <string name="settings_dialog_round_time_content">Time per round in minutes</string>
+    <string name="settings_dialog_round_time_hint">Preferred round time: 50 minutes</string>
+    <!--Vibration -->
+    <string name="settings_dialog_round_first_vibration_title">Set first vibration</string>
+    <string name="settings_dialog_round_first_vibration_content">Set time before end when first vibration should trigger</string>
+    <string name="settings_dialog_round_first_vibration_hint">Preferred 5 minutes</string>
+
+    <string name="settings_dialog_round_second_vibration_title">Set second vibration</string>
+    <string name="settings_dialog_round_second_vibration_content">Set time before end when second vibration should trigger.\nIt will be saved only when set less time than in first vibration</string>
+    <string name="settings_dialog_round_second_vibration_hint">Preferred 1 minute</string>
 
     <!-- Help/Showcase start screen -->
     <string name="help_title">Help</string>
@@ -81,7 +95,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="help_ogw">Opponents game win %</string>
 
     <!-- Create personal parings-->
-    <string name="text_personal_parings">Create manual parings:</string>
+    <string name="text_personal_parings">Create manual parings:  %1$s</string>
     <string name="activity_paring_add_paring">Add Paring</string>
     <string name="activity_paring_clean_paring">Clean Parings</string>
     <string name="activity_paring_play_round">Play</string>
@@ -104,10 +118,11 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="help_drop_player">If there is a need player can drop a draft</string>
     <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
     <string name="warning_drop_player">You cannot remove players when draft ended</string>
-    <string name="settings_remove_scoreboards">Remove all score boards</string>
+    <string name="settings_clean_history">Clean history</string>
     <string name="settings_remove_text">Remove</string>
     <string name="settings_other">Other settings</string>
     <string name="settings_display_scoreboards">Display score boards</string>
+    <string name="settings_display_players_history">Display players history</string>
     <string name="settings_sittings_option" translatable="false">Sittings: %1$s</string>
     <string name="settings_reset_tour_guide">Reset Tour Guide and display help</string>
     <string name="settings_reset_tour_guide_message">Tour Guide was reset</string>
@@ -138,15 +153,24 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="drop_player_info_text">To drop players select them and press save. This action cannot be overriten. Use with caution.</string>
     <!--Rate me option -->
     <string name="settings_rate_me">Please, rate this app</string>
+    <string name="settings_check_other_apps">Check other apps</string>
+    <string name="settings_idea_box">Idea box</string>
     <string name="settings_rate_me_error"> Could not open Google Play, please install the market app</string>
-    <!-- -->
+    <string name="settings_developer_account_error">Could not open browser, please install one and try this action again </string>
+    <string name="settings_idea_box_error">Could not open find e-mail client, please install one and try this action again </string>
+
+    <!--Settings -->
     <string name="settings_counter_off">To use time counter turn it on in settings screen</string>
     <string name="settings_sittings_none">none</string>
     <string name="settings_sittings_random">random</string>
     <string name="settings_sittings_dialog_title">Choose Sittings Options:</string>
+
     <string name="dialog_positive">Ok</string>
     <string name="dialog_negative">Cancel</string>
 
+    <string name="settings_pairing_mode_manual">Manual</string>
+    <string name="settings_pairing_mode_automatic_with_repeats">Automatic with repeats</string>
+    <string name="settings_pairing_mode_dialog_title">Choose Pairing Options:</string>
     <string name="player_sittings_position" translatable="false"> %1$d. %2$s</string>
     <string name="player_sittings_description">Sitting before 1rst round</string>
 

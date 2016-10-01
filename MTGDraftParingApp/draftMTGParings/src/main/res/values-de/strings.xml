@@ -29,12 +29,12 @@
     <string name="toggle_button_on">ON</string>
     <string name="toggle_button_off">OFF</string>
     <string name="text_display_counter">Vorstellungszeiten:</string>
-    <string name="text_time_round">Zeit pro Runde[m]:</string>
+    <string name="text_time_round">Zeit pro Runde[m]: %1$s</string>
     <string name="text_vibration">Vibration-switch:</string>
     <string name="text_vibration_detail">Informieren der Benutzer über die Endzeit des Spiels</string>
-    <string name="text_first_vibration">Erste Vibration[m]:</string>
-    <string name="text_second_vibration">Zweite Vibration[m]:</string>
-    <string name="text_duration_vibration">Die Dauer der Vibrationen[s]:</string>
+    <string name="text_first_vibration">Erste Vibration[m]: %1$s</string>
+    <string name="text_second_vibration">Zweite Vibration[m]: %1$s</string>
+    <string name="text_duration_vibration">Die Dauer der Vibrationen[s]: %1$s</string>
     <string name="text_save">Speichern</string>
     <string name="toast_saved">Änderungen wurden gespeichert</string>
 
@@ -79,7 +79,7 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="help_ogw">% Anzahl der Spiele, die von den Gegnern gewonnen</string>
 
     <!-- Create personal parings-->
-    <string name="text_personal_parings">Erstellen Sie Ihre eigenem Paring:</string>
+    <string name="text_personal_parings">Erstellen Sie Ihre eigenem Paring:  %1$s</string>
     <string name="activity_paring_add_paring">Hinzufügen Paring</string>
     <string name="activity_paring_clean_paring">Löschen Paring</string>
     <string name="activity_paring_play_round">Spielen</string>
@@ -106,7 +106,7 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="message_score_boards_removed">Alle Draft würden gelöscht</string>
     <string name="settings_other">Anderen Konfigurationen</string>
     <string name="settings_display_scoreboards">Draftliste</string>
-    <string name="settings_remove_scoreboards">Löschen alle Draft</string>
+    <string name="settings_clean_history">Löschen alle Draft</string>
     <string name="settings_remove_text">Löschen</string>
     <string name="warning_save_dashboard">Nach allen Wettbewerben können einen Entwurf zu speichern.</string>
     <string name="action_countdown">Countdown</string>

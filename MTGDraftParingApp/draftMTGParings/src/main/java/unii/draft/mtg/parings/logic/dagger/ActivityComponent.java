@@ -15,6 +15,10 @@ import unii.draft.mtg.parings.view.fragments.HistoryScoreBoardDetailFragment;
 import unii.draft.mtg.parings.view.fragments.HistoryScoreBoardListFragment;
 import unii.draft.mtg.parings.view.fragments.SettingsFragment;
 import unii.draft.mtg.parings.view.fragments.SittingsFragment;
+import unii.draft.mtg.parings.view.fragments.settings.DraftSettingsFragment;
+import unii.draft.mtg.parings.view.fragments.settings.HistorySettingsFragment;
+import unii.draft.mtg.parings.view.fragments.settings.OtherSettingsFragment;
+import unii.draft.mtg.parings.view.fragments.settings.TimeSettingsFragment;
 
 @ActivityScope
 @Subcomponent(modules = {ActivityModule.class})
@@ -33,7 +37,7 @@ public interface ActivityComponent {
 
     void inject(DropPlayerActivity dropPlayerActivity);
 
-    void inject (SaveScoreBoardActivity saveScoreBoardActivity);
+    void inject(SaveScoreBoardActivity saveScoreBoardActivity);
 
     void inject(SettingsFragment settingsFragment);
 
@@ -46,5 +50,13 @@ public interface ActivityComponent {
     void inject(HistoryScoreBoardDetailFragment historyScoreBoardDetailFragment);
 
     void inject(HistoryScoreBoardListFragment historyScoreBoardListFragment);
+
+    void inject(TimeSettingsFragment timeSettingsFragment);
+
+    void inject(DraftSettingsFragment draftSettingsFragment);
+
+    void inject(OtherSettingsFragment otherSettingsFragment);
+
+    void inject(HistorySettingsFragment historySettingsFragment);
 }
 

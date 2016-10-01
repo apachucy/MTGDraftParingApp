@@ -29,12 +29,12 @@
     <string name="toggle_button_on">ON</string>
     <string name="toggle_button_off">OFF</string>
     <string name="text_display_counter">Wyświetl czas:</string>
-    <string name="text_time_round">Czas na rundę[m]:</string>
+    <string name="text_time_round">Czas na rundę[m]: %1$s</string>
     <string name="text_vibration">Włącz wibracje:</string>
     <string name="text_vibration_detail">Informują użytkowników o kończącym się czasie rozgrywki</string>
-    <string name="text_first_vibration">Pierwsza wibracja[m]:</string>
-    <string name="text_second_vibration">Druga wibracja[m]:</string>
-    <string name="text_duration_vibration">Czas trwania wibracji[s]:</string>
+    <string name="text_first_vibration">Pierwsza wibracja[m]: %1$s</string>
+    <string name="text_second_vibration">Druga wibracja[m]: %1$s</string>
+    <string name="text_duration_vibration">Czas trwania wibracji[s]: %1$s</string>
     <string name="text_save">Zapisz</string>
     <string name="toast_saved">Zmiany zostały zapisane</string>
 
@@ -79,7 +79,7 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
 	<string name="help_ogw">% liczba wygranych gier przez przeciwników</string>
 
     <!-- Create personal parings-->
-    <string name="text_personal_parings">Stwórz własne paringi:</string>
+    <string name="text_personal_parings">Stwórz własne paringi:  %1$s</string>
     <string name="activity_paring_add_paring">Dodaj Paring</string>
     <string name="activity_paring_clean_paring">Usuń Paringi</string>
     <string name="activity_paring_play_round">Graj</string>
@@ -106,7 +106,7 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="message_score_boards_removed">Wszystkie drafty zostały usunięte</string>
     <string name="settings_other">Pozostałe ustawienia</string>
     <string name="settings_display_scoreboards">Wyświetl listę draftów</string>
-    <string name="settings_remove_scoreboards">Usuń wszystkie drafty</string>
+    <string name="settings_clean_history">Usuń wszystkie drafty</string>
     <string name="settings_remove_text">Usuń</string>
     <string name="warning_save_dashboard">Dopiero po wszystkich rozgrywkach możesz zapisać draft</string>
     <string name="action_countdown">Odliczanie</string>
