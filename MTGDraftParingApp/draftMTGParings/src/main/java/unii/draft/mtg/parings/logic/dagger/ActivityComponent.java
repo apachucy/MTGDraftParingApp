@@ -1,19 +1,23 @@
 package unii.draft.mtg.parings.logic.dagger;
 
 import dagger.Subcomponent;
-import unii.draft.mtg.parings.DropPlayerActivity;
-import unii.draft.mtg.parings.HistoryScoreBoardActivity;
+import unii.draft.mtg.parings.view.activities.options.DropPlayerActivity;
+import unii.draft.mtg.parings.view.activities.settings.HistoryPlayerAchievementsActivity;
+import unii.draft.mtg.parings.view.activities.settings.HistoryScoreBoardActivity;
 import unii.draft.mtg.parings.MainActivity;
-import unii.draft.mtg.parings.ManualPlayerPairingActivity;
+import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
-import unii.draft.mtg.parings.SaveScoreBoardActivity;
+import unii.draft.mtg.parings.view.activities.options.SaveScoreBoardActivity;
 import unii.draft.mtg.parings.ScoreBoardActivity;
-import unii.draft.mtg.parings.SittingsActivity;
+import unii.draft.mtg.parings.view.activities.settings.SettingsMenuActivity;
+import unii.draft.mtg.parings.view.activities.options.SittingsActivity;
 import unii.draft.mtg.parings.view.fragments.DropPlayerFragment;
 import unii.draft.mtg.parings.view.fragments.GameMenuFragment;
-import unii.draft.mtg.parings.view.fragments.HistoryScoreBoardDetailFragment;
-import unii.draft.mtg.parings.view.fragments.HistoryScoreBoardListFragment;
-import unii.draft.mtg.parings.view.fragments.SettingsFragment;
+import unii.draft.mtg.parings.view.fragments.history.HistoryPlayerAchievementsFragment;
+import unii.draft.mtg.parings.view.fragments.history.HistoryPlayerListFragment;
+import unii.draft.mtg.parings.view.fragments.history.HistoryScoreBoardDetailFragment;
+import unii.draft.mtg.parings.view.fragments.history.HistoryScoreBoardListFragment;
+import unii.draft.mtg.parings.view.fragments.settings.SettingsMenuFragment;
 import unii.draft.mtg.parings.view.fragments.SittingsFragment;
 import unii.draft.mtg.parings.view.fragments.settings.DraftSettingsFragment;
 import unii.draft.mtg.parings.view.fragments.settings.HistorySettingsFragment;
@@ -27,6 +31,9 @@ public interface ActivityComponent {
 
     void inject(SittingsActivity sittingsActivity);
 
+
+    void inject(HistoryPlayerAchievementsActivity historyPlayerAchievementsActivity);
+
     void inject(ScoreBoardActivity scoreBoardActivity);
 
     void inject(ParingDashboardActivity paringDashboardActivity);
@@ -39,7 +46,9 @@ public interface ActivityComponent {
 
     void inject(SaveScoreBoardActivity saveScoreBoardActivity);
 
-    void inject(SettingsFragment settingsFragment);
+    void inject(SettingsMenuActivity settingsMenuActivity);
+
+    void inject(SettingsMenuFragment settingsMenuFragment);
 
     void inject(SittingsFragment sittingsFragment);
 
@@ -58,5 +67,9 @@ public interface ActivityComponent {
     void inject(OtherSettingsFragment otherSettingsFragment);
 
     void inject(HistorySettingsFragment historySettingsFragment);
+
+    void inject(HistoryPlayerListFragment historyPlayerListFragment);
+
+    void inject(HistoryPlayerAchievementsFragment historyPlayerAchievementsFragment);
 }
 

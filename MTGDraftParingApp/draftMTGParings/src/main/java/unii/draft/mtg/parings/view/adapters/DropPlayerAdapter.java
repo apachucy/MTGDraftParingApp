@@ -28,8 +28,7 @@ public class DropPlayerAdapter extends RecyclerView.Adapter<DropPlayerAdapter.Vi
     @Override
     public DropPlayerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_drop_player, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override

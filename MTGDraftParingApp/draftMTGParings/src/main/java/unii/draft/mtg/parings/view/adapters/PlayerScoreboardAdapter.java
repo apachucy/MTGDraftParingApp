@@ -15,9 +15,7 @@ import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.ItemType;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
-/**
- * Created by Unii on 2015-12-11.
- */
+
 public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<IAdapterItem> mPlayerList;
@@ -33,12 +31,10 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (getItemViewType(viewType) == ItemType.HEADER) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_player_list, parent, false);
-            EmptyViewHolder emptyViewHolder = new EmptyViewHolder(view);
-            return emptyViewHolder;
+            return new EmptyViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_player_list, parent, false);
-            ViewHolder viewHolder = new ViewHolder(view);
-            return viewHolder;
+            return new ViewHolder(view);
         }
     }
     @Override
@@ -94,9 +90,9 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
         return mPlayerList.size();
     }
 
-    public class EmptyViewHolder extends RecyclerView.ViewHolder {
+    private class EmptyViewHolder extends RecyclerView.ViewHolder {
 
-        public EmptyViewHolder(View itemView) {
+        EmptyViewHolder(View itemView) {
             super(itemView);
         }
     }

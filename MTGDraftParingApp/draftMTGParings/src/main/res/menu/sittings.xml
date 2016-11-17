@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="unii.draft.mtg.parings.view.activities.options.SittingsActivity">
+    <item
+        android:id="@+id/action_calculate_mana"
+        android:icon="@drawable/ic_calculator"
+        android:orderInCategory="100"
+        android:title="@string/action_calculate_mana"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="always" />
+</menu>

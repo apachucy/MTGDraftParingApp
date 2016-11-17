@@ -51,4 +51,14 @@ public abstract class BaseAlgorithm implements IParingAlgorithm {
         }
     }
 
+    @Override
+    public Player getPlayer(String playerName) {
+        for (Player player : mDraftStartedPlayers) {
+            if (player.getPlayerName().equals(playerName)) {
+                return player;
+            }
+        }
+        return null;
+    }
+
 }

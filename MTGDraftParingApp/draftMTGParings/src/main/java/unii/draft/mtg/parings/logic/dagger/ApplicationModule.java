@@ -1,26 +1,25 @@
 package unii.draft.mtg.parings.logic.dagger;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import unii.draft.mtg.parings.buisness.algorithm.AutomaticParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.IParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.ManualParingAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.AutomaticParingAlgorithm;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.buisness.share.scoreboard.ShareDataContent;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
 import unii.draft.mtg.parings.buisness.sittings.RandomSittingGenerator;
-import unii.draft.mtg.parings.database.model.DaoMaster;
-import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.sharedprefrences.SharedPreferencesManager;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
-import unii.draft.mtg.parings.util.config.BaseConfig;
+import unii.draft.mtg.parings.util.config.SettingsMenuItems;
+import unii.draft.mtg.parings.util.helper.DatabaseHelper;
+import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 
 @Module
 public class ApplicationModule implements IApplicationModule {
@@ -31,10 +30,7 @@ public class ApplicationModule implements IApplicationModule {
     private final HasComponent<ApplicationComponent> mHasApplicationComponent;
 
 
-    private DaoMaster.DevOpenHelper mHelper;
-    private SQLiteDatabase mDb;
-    private DaoMaster mDaoMaster;
-    private DaoSession mDaoSession;
+
 
     public ApplicationModule(Context context, HasComponent<ApplicationComponent> applicationComponent) {
         mContext = context;
@@ -65,19 +61,6 @@ public class ApplicationModule implements IApplicationModule {
         return new AutomaticParingAlgorithm();
     }
 
-    @Provides
-    @Singleton
-    @Override
-    public DaoSession provideDatabaseManager() {
-        //OpenSession
-        if (mHelper == null) {
-            mHelper = new DaoMaster.DevOpenHelper(mContext, BaseConfig.DATABASE_NAME, null);
-            mDb = mHelper.getWritableDatabase();
-            mDaoMaster = new DaoMaster(mDb);
-            mDaoSession = mDaoMaster.newSession();
-        }
-        return mDaoSession;
-    }
 
     @Override
     @Provides
@@ -99,4 +82,12 @@ public class ApplicationModule implements IApplicationModule {
     public IShareData provideShareDataContent() {
         return new ShareDataContent(mContext);
     }
+
+    @Override
+    @Provides
+    @Singleton
+    public IDatabaseHelper provideDatabaseHelper() {
+        return new DatabaseHelper(mContext,mHasApplicationComponent.getComponent());
+    }
+
 }

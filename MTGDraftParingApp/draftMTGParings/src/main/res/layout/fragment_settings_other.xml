@@ -4,40 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/settings_rateApplicationTextView"
-        style="@style/textView"
+    <Button
+        android:id="@+id/settings_rateApplicationButton"
+        style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_view_margin_settings"
-        android:gravity="center"
-        android:padding="@dimen/settings_padding"
         android:text="@string/settings_rate_me" />
 
-    <TextView
-        android:id="@+id/settings_checkOtherApplicationTextView"
-        style="@style/textView"
+    <Button
+        android:id="@+id/settings_checkOtherApplicationButton"
+        style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/settings_padding"
         android:text="@string/settings_check_other_apps" />
 
-    <TextView
-        android:id="@+id/settings_ideaBoxTextView"
-        style="@style/textView"
+    <Button
+        android:id="@+id/settings_ideaBoxButton"
+        style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/settings_padding"
         android:text="@string/settings_idea_box" />
 
-    <TextView
-        android:id="@+id/settings_resetTourGuideTextView"
-        style="@style/textView"
+    <Button
+        android:id="@+id/settings_resetTourGuideButton"
+        style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/settings_padding"
         android:text="@string/settings_reset_tour_guide" />
 </LinearLayout>

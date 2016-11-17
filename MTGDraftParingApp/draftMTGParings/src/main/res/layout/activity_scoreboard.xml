@@ -1,10 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true"
-    tools:context=".PlayerPositionActivity">
+    android:keepScreenOn="true">
 
     <view
         android:id="@+id/toolbar"
@@ -15,18 +13,18 @@
         android:layout_alignParentTop="true" />
 
     <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/main_content"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/toolbar"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:layout_below="@id/toolbar">
 
         <RelativeLayout
+            android:id="@+id/main_content"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
             <TextView
                 android:id="@+id/player_position_roundTextView"
@@ -61,17 +59,16 @@
 
         </RelativeLayout>
 
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/paring_nextRound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:layout_marginBottom="@dimen/floating_button_margin"
-            android:layout_marginRight="@dimen/floating_button_margin"
+            android:layout_margin="@dimen/floating_button_margin"
             android:src="@drawable/ic_navigate_next"
-            app:layout_anchor="@id/player_position_playerListView"
+            app:layout_anchor="@id/main_content"
             app:layout_anchorGravity="bottom|right|end" />
-
 
     </android.support.design.widget.CoordinatorLayout>
 

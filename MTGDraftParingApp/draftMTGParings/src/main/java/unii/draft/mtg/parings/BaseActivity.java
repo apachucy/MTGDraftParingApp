@@ -1,9 +1,12 @@
 package unii.draft.mtg.parings;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.inputmethod.InputMethodManager;
@@ -81,8 +84,8 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
     protected TourGuide bindTourGuideButton(String bodyText, ImageView imageView) {
         ToolTip toolTip = new ToolTip()
                 .setTitle(getString(R.string.help_title))
-                .setDescription(bodyText).setBackgroundColor(getResources().getColor(R.color.accent))
-                .setGravity(Gravity.LEFT | Gravity.BOTTOM);
+                .setDescription(bodyText).setBackgroundColor(getSingleColor(R.color.accent))
+                .setGravity(Gravity.START | Gravity.BOTTOM);// Gravity.LEFT |
 
         return TourGuide.init(this)
                 .setToolTip(toolTip).playLater(imageView);
@@ -91,7 +94,7 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
     protected TourGuide bindTourGuideButton(String bodyText, TextView textView, int gravity) {
         ToolTip toolTip = new ToolTip()
                 .setTitle(getString(R.string.help_title))
-                .setDescription(bodyText).setBackgroundColor(getResources().getColor(R.color.accent))
+                .setDescription(bodyText).setBackgroundColor(getSingleColor(R.color.accent))
                 .setGravity(gravity);
 
         return TourGuide.init(this)
@@ -106,5 +109,11 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
         return mActivityComponent;
     }
 
+    protected Drawable getSingleDrawable(int drawableRes) {
+        return ContextCompat.getDrawable(this, drawableRes);
+    }
 
+    protected int getSingleColor(int colorRes) {
+        return ContextCompat.getColor(this, colorRes);
+    }
 }

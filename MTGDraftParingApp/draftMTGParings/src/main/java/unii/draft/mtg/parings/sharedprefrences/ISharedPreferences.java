@@ -121,11 +121,13 @@ public interface ISharedPreferences {
     int getPairingType();
 
     void setPairingType(int pairingType);
+
     /**
      * Choose if parings should be manual or by algorithm
      *
      * @param areManualParings
      */
+    @Deprecated
     void setManualParings(boolean areManualParings);
 
     /**
@@ -150,9 +152,13 @@ public interface ISharedPreferences {
 
     boolean showGuideTourOnParingScreen();
 
-    void setGuideTourOnMainParingScreen(boolean isVisible);
+    void setGuideTourOnParingScreen(boolean isVisible);
 
     boolean showGuideTourOnScoreBoardScreen();
 
     void setGuideTourOnScoreBoardScreen(boolean isVisible);
+
+    boolean showGuideTourOnSittingsScreen();
+
+    void setGuideTourOnSittingsScreen(boolean isVisible);
 }

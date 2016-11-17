@@ -7,40 +7,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.database.model.Draft;
-import unii.draft.mtg.parings.view.fragments.IDisplayHistoryScoreBoardDetail;
+import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
+import unii.draft.mtg.parings.view.fragments.history.IDisplayDetailFragment;
 
-/**
- * Created by Unii on 2015-12-05.
- */
+
 public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<HistoryScoreBoardAdapter.ViewHolder> {
-    private ArrayList<Draft> mDraftList;
+    private List<Draft> mDraftList;
     private Context mContext;
-    private IDisplayHistoryScoreBoardDetail mDisplayHistoryScoreBoardDetail;
+    private IDisplayDetailFragment mDisplayHistoryScoreBoardDetail;
+    private IDatabaseHelper mDatabaseHelper;
 
-    public HistoryScoreBoardAdapter(Context context, ArrayList<Draft> draftList, IDisplayHistoryScoreBoardDetail displayHistoryScoreBoardDetail) {
+    public HistoryScoreBoardAdapter(Context context, IDatabaseHelper databaseHelper, IDisplayDetailFragment displayHistoryScoreBoardDetail) {
         mContext = context;
-        mDraftList = draftList;
         mDisplayHistoryScoreBoardDetail = displayHistoryScoreBoardDetail;
+        mDatabaseHelper = databaseHelper;
+        mDraftList = mDatabaseHelper.getAllDraftList();
+
     }
 
     @Override
     public HistoryScoreBoardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_history_score_board, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(HistoryScoreBoardAdapter.ViewHolder holder, int position) {
-        holder.draftTitleTextView.setText(mDraftList.get(position).getDraftName());
+        Draft selectedDraft = mDraftList.get(position);
+        List<Player> playerList = mDatabaseHelper.getAllPlayersInDraft(selectedDraft.getId());
+        holder.draftTitleTextView.setText(mContext.getString(R.string.history_score_board_row_draft_name, mDraftList.get(position).getDraftName()));
         holder.draftDateTextView.setText(mContext.getString(R.string.history_score_board_row_draft_date, mDraftList.get(position).getDraftDate()));
-        holder.playerWonTextView.setText(mContext.getString(R.string.history_score_board_row_draft_best_player, mDraftList.get(position).getPlayers().get(0).getPlayerName()));
+        holder.playerWonTextView.setText(mContext.getString(R.string.history_score_board_row_draft_best_player, playerList.get(0).getPlayerName()));
     }
 
     @Override
@@ -65,7 +69,7 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<HistoryScoreB
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mDisplayHistoryScoreBoardDetail.displayHistoryScoreBoardDetail(mDraftList.get(getPosition()).getId());
+                    mDisplayHistoryScoreBoardDetail.displayDetailView(mDraftList.get(getAdapterPosition()).getId());
                 }
             });
         }

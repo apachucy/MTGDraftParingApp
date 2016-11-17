@@ -1,7 +1,9 @@
 package unii.draft.mtg.parings;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import dagger.Lazy;
 import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
@@ -25,7 +28,7 @@ import unii.draft.mtg.parings.util.config.SetPreferencesOnFirstRun;
 import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
 import unii.draft.mtg.parings.view.custom.IPlayerList;
 import unii.draft.mtg.parings.view.fragments.GameMenuFragment;
-import unii.draft.mtg.parings.view.fragments.SettingsFragment;
+import unii.draft.mtg.parings.view.fragments.settings.SettingsMenuFragment;
 
 
 public class MainActivity extends BaseActivity implements IPlayerList {
@@ -42,7 +45,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
     Toolbar mToolBar;
 
     @Inject
-    ISharedPreferences mSharedPreferenceManager;
+    Lazy<ISharedPreferences> mSharedPreferenceManager;
 
 
     @Override
@@ -68,10 +71,10 @@ public class MainActivity extends BaseActivity implements IPlayerList {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_cointainer);
         ButterKnife.bind(this);
         initPreferenceManager();
-        mPlayerNameList = new ArrayList<String>();
+        mPlayerNameList = new ArrayList<>();
         initToolBar();
         initView();
     }
@@ -83,13 +86,13 @@ public class MainActivity extends BaseActivity implements IPlayerList {
     }
 
 
-
     @Override
     protected void initToolBar() {
         setSupportActionBar(mToolBar);
         mToolBar.setLogo(R.drawable.ic_launcher);
         mToolBar.setLogoDescription(R.string.app_name);
-        mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
+
+        mToolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
         mToolBar.setTitle(R.string.app_name);
     }
 
@@ -100,10 +103,11 @@ public class MainActivity extends BaseActivity implements IPlayerList {
     }
 
     private void initPreferenceManager() {
-        if (mSharedPreferenceManager.isFirstRun()) {
-            new SetPreferencesOnFirstRun(((MTGDraftParingsApplication) getApplication()).getComponent()).defaultSharedPreferencesConfig();
+        if (mSharedPreferenceManager.get().isFirstRun()) {
+            SetPreferencesOnFirstRun.defaultSharedPreferencesConfig(mSharedPreferenceManager.get());
         }
     }
+
     private void setMenuActions(ImageView aboutButton, ImageView settingsButton) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
@@ -112,10 +116,10 @@ public class MainActivity extends BaseActivity implements IPlayerList {
         settingsButton.setPadding(padding, padding, padding, padding);
 
         // set an image
-        aboutButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_info));
-        settingsButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_settings_applications));
+        aboutButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_info));
+        settingsButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_settings_applications));
 
-        if (mSharedPreferenceManager.showGuideTourOnMainScreen()) {
+        if (mSharedPreferenceManager.get().showGuideTourOnMainScreen()) {
             Sequence sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.tutorial_info), aboutButton),
                     bindTourGuideButton(getString(R.string.tutorial_settings), settingsButton))
                     .setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
@@ -126,7 +130,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
                     })).setContinueMethod(Sequence.ContinueMethod.OverlayListener).
                             setDefaultPointer(new Pointer()).build();
 
-            mSharedPreferenceManager.setGuideTourOnMainScreen(false);
+            mSharedPreferenceManager.get().setGuideTourOnMainScreen(false);
             mTutorialHandler = TourGuide.init(this).playInSequence(sequence);
         }
 
@@ -144,7 +148,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
             public void onClick(View view) {
                 Fragment fragmentFound = getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT_GAME);
                 if (fragmentFound != null) {
-                    replaceFragments(new SettingsFragment(), TAG_FRAGMENT_SETTINGS, R.id.content_frame);
+                    replaceFragments(new SettingsMenuFragment(), TAG_FRAGMENT_SETTINGS, R.id.content_frame);
                 } else {
                     replaceFragments(new GameMenuFragment(), TAG_FRAGMENT_GAME, R.id.content_frame);
                 }
@@ -152,4 +156,17 @@ public class MainActivity extends BaseActivity implements IPlayerList {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT_SETTINGS);
+        if (fragment != null && fragment.isVisible()) {
+            replaceFragments(new GameMenuFragment(), TAG_FRAGMENT_GAME, R.id.content_frame);
+            return;
+        }
+        super.onBackPressed();
+
+    }
+
+
 }

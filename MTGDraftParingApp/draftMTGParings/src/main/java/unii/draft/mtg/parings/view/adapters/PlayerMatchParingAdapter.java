@@ -16,25 +16,21 @@ import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.view.custom.CustomOnCheckedChangeListener;
 
-/**
- * Created by Unii on 2015-12-09.
- */
+
 public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Game> mGameList;
     private Context mContext;
 
     public PlayerMatchParingAdapter(Context context, List<Game> games) {
         mGameList = games;
-           mContext = context;
+        mContext = context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_paring_list, parent, false);
-            ViewHolder viewHolder = new ViewHolder(view);
-            return viewHolder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_paring_list, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
 
     }
 
@@ -50,23 +46,24 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         ((ViewHolder) holder).playerRightRadioGroup.setOnCheckedChangeListener(null);
         ((ViewHolder) holder).drawRadioGroup.setOnClickListener(null);
         // set points in RadioGroup
-        setCheckBoxes(position, ((ViewHolder) holder));
+        setCheckBoxes(holder.getPosition(), ((ViewHolder) holder));
         // setting player names
 
-        ((ViewHolder) holder).playerLeftTextView.setText(mGameList.get(position)
+        ((ViewHolder) holder).playerLeftTextView.setText(mGameList.get(holder.getPosition())
                 .getPlayerNameA());
-        ((ViewHolder) holder).playerRightTextView.setText(mGameList.get(position)
+        ((ViewHolder) holder).playerRightTextView.setText(mGameList.get(holder.getPosition())
                 .getPlayerNameB());
         // add listeners
         ((ViewHolder) holder).playerLeftRadioGroup
                 .setOnCheckedChangeListener(new CustomOnCheckedChangeListener(
-                        mGameList.get(position)));
+                        mGameList.get(holder.getPosition())));
 
         ((ViewHolder) holder).playerRightRadioGroup
                 .setOnCheckedChangeListener(new CustomOnCheckedChangeListener(
-                        mGameList.get(position)));
-        ((ViewHolder) holder).drawRadioGroup.setOnCheckedChangeListener(new CustomOnCheckedChangeListener(
-                mGameList.get(position)));
+                        mGameList.get(holder.getPosition())));
+        ((ViewHolder) holder).drawRadioGroup
+                .setOnCheckedChangeListener(new CustomOnCheckedChangeListener(
+                        mGameList.get(holder.getPosition())));
     }
 
     @Override
@@ -121,7 +118,7 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.row_leftPlayerTextView)
         TextView playerLeftTextView;
         @Bind(R.id.row_rightPlayerTextView)
@@ -134,10 +131,10 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         RadioGroup drawRadioGroup;
 
 
-
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
         }
     }
 }

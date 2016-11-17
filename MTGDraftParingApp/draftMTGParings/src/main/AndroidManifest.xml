@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="unii.draft.mtg.parings"
-    android:versionCode="23"
-    android:versionName="0.10.5">
+    android:versionCode="27"
+    android:versionName="1.0.0">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MTGDraftParingsApplication"
         android:allowBackup="true"
@@ -18,6 +20,7 @@
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,24 +31,33 @@
             android:name=".ScoreBoardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ManualPlayerPairingActivity"
+            android:name=".view.activities.options.ManualPlayerPairingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SaveScoreBoardActivity"
+            android:name=".view.activities.options.SaveScoreBoardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HistoryScoreBoardActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".view.activities.settings.HistoryScoreBoardActivity"
+            android:screenOrientation="portrait" />
         <activity
-        android:name=".DropPlayerActivity"
-        android:screenOrientation="portrait"/>
+            android:name=".view.activities.settings.SettingsMenuActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".SittingsActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".view.activities.settings.HistoryPlayerAchievementsActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activities.options.DropPlayerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.options.SittingsActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="cf9681571439d7c8941d4f5f36f2603e9681592f" />
+
+
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

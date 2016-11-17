@@ -2,13 +2,14 @@ package unii.draft.mtg.parings.view.fragments.settings;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -33,16 +34,16 @@ public class TimeSettingsFragment extends BaseFragment {
     CheckBox mUseVibrationCheckBox;
 
     @Bind(R.id.settings_setTimeCounter)
-    TextView mSetTimeCounterTextView;
+    Button mSetTimeCounterTextView;
 
     @Bind(R.id.settings_firstVibration)
-    TextView mSetFirstVibrationTextView;
+    Button mSetFirstVibrationTextView;
 
     @Bind(R.id.settings_secondVibration)
-    TextView mSetSecondVibrationTextView;
+    Button mSetSecondVibrationTextView;
 
     @Bind(R.id.settings_durationVibration)
-    TextView mDurationVibrationTextView;
+    Button mDurationVibrationTextView;
 
     @Inject
     ISharedPreferences mSharedPreferenceManager;
@@ -73,7 +74,6 @@ public class TimeSettingsFragment extends BaseFragment {
 
     @Override
     protected void initFragmentData() {
-        // init data from shPerferences
         initDisplayCounter(mSharedPreferenceManager.displayCounterRound(),
                 stringAsMinutes(mSharedPreferenceManager.getTimePerRound()));
         initVibration(
@@ -101,7 +101,7 @@ public class TimeSettingsFragment extends BaseFragment {
     }
 
     @OnClick(R.id.settings_setTimeCounter)
-    void onSetTimeCounterClick(View view) {
+    void onSetTimeCounterClick() {
         String roundTime = stringAsMinutes(mSharedPreferenceManager.getTimePerRound());
         UpdateData updateDataTimeCounter = new UpdateData() {
             @Override
@@ -112,7 +112,7 @@ public class TimeSettingsFragment extends BaseFragment {
 
             @Override
             public void updateSharedPreferences(String newData) {
-                long timePerRound = convertStringToLong(newData);
+                long timePerRound = longAsMinutes(convertStringToLong(newData));
                 if (timePerRound != mSharedPreferenceManager.getTimePerRound()) {
                     mSharedPreferenceManager.setTimePerRound(timePerRound);
                 }
@@ -123,7 +123,7 @@ public class TimeSettingsFragment extends BaseFragment {
     }
 
     @OnClick(R.id.settings_firstVibration)
-    void onSetFirstVibrationClick(View view) {
+    void onSetFirstVibrationClick() {
         String firstVibration = stringAsMinutes(mSharedPreferenceManager.getFirstVibration());
         UpdateData updateDataFirstVibration = new UpdateData() {
             @Override
@@ -146,13 +146,13 @@ public class TimeSettingsFragment extends BaseFragment {
 
 
     @OnClick(R.id.settings_secondVibration)
-    void onSetSecondVibrationClick(View view) {
+    void onSetSecondVibrationClick() {
         String secondVibration = stringAsMinutes(mSharedPreferenceManager.getSecondVibration());
         UpdateData updateDataSecondVibration = new UpdateData() {
             @Override
             public void updateView() {
                 String secondVibrationTime = stringAsMinutes(mSharedPreferenceManager.getSecondVibration());
-                mSetSecondVibrationTextView.setText(getString(R.string.text_first_vibration, secondVibrationTime));
+                mSetSecondVibrationTextView.setText(getString(R.string.text_second_vibration, secondVibrationTime));
             }
 
             @Override
@@ -169,7 +169,7 @@ public class TimeSettingsFragment extends BaseFragment {
     }
 
     @OnClick(R.id.settings_durationVibration)
-    void onSetDurationVibrationClick(View view) {
+    void onSetDurationVibrationClick() {
         String durationVibrationTimeInSec = stringAsSec(mSharedPreferenceManager.getVibrationDuration());
         UpdateData durationVibrationTime = new UpdateData() {
             @Override
@@ -186,23 +186,44 @@ public class TimeSettingsFragment extends BaseFragment {
                     mSharedPreferenceManager.setVibrationDuration(newValue);
                 }
             }
+
         };
+
+        showEditTextDialog(getContext(), getString(R.string.settings_dialog_round_duration_vibration_title), getString(R.string.settings_dialog_round_duration_vibration_content), getString(R.string.settings_dialog_round_duration_vibration_hint),
+                durationVibrationTimeInSec, durationVibrationTime);
     }
+
     protected void showEditTextDialog(Context context, String title, String content, String hint, String lastValue,
                                       final UpdateData updateData) {
         new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
-                .inputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED)
+                .inputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED)
+                .backgroundColorRes(R.color.windowBackground)
                 .input(hint, lastValue, new MaterialDialog.InputCallback() {
                     @Override
-                    public void onInput(MaterialDialog dialog, CharSequence input) {
-                        updateData.updateSharedPreferences(input.toString());
-                        updateData.updateView();
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                        int value = 0;
+
+                        try {
+                            value = Integer.parseInt(input.toString());
+                        } catch (NumberFormatException e) {
+                            value = 0;
+                        } finally {
+                            if (value < 0) {
+                                //noinspection ReturnInsideFinallyBlock
+                                return;
+                            }
+                            updateData.updateSharedPreferences(input.toString());
+                            updateData.updateView();
+                        }
+
+
                     }
                 }).show();
 
     }
+
     private long convertStringToLong(String text) {
         return Long.parseLong(text);
     }
@@ -244,7 +265,6 @@ public class TimeSettingsFragment extends BaseFragment {
     private void injectDependencies() {
         getActivityComponent().inject(this);
     }
-
 
 
     private interface UpdateData {

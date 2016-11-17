@@ -8,6 +8,8 @@
     <string name="add_item">Add</string>
     <string name="hint_rounds">Rounds</string>
     <string name="start_game">Start</string>
+    <string name="add_players_from_history">Add players from history</string>
+    <string name="no_players_from_history">No players in history</string>
     <string name="text_end_round">End</string>
     <string name="warning_empty_field">Cannot be empty</string>
     <string name="warning_need_players">Please add players</string>
@@ -55,7 +57,7 @@
     <string name="dialog_warning_message">Too many rounds or too less players.\nPlease add players or decrement number of rounds.</string>
     <!-- Dialog Info -->
     <string name="dialog_info_title">Info</string>
-    <string name="dialog_info_message">Fansite version of the app\nfor paring players in MTG drafts</string>
+    <string name="dialog_info_message">Fansite version of the app\nfor paring players in MTG drafts\nHelps from Piotr S. and Szymon Sz.</string>
     <!-- Dialog Settings-->
     <!-- Time Settings -->
     <string name="settings_dialog_round_time_title">Set round time</string>
@@ -70,12 +72,18 @@
     <string name="settings_dialog_round_second_vibration_content">Set time before end when second vibration should trigger.\nIt will be saved only when set less time than in first vibration</string>
     <string name="settings_dialog_round_second_vibration_hint">Preferred 1 minute</string>
 
+    <string name="settings_dialog_round_duration_vibration_title">Set duration of vibration</string>
+    <string name="settings_dialog_round_duration_vibration_content">Set how long vibration should last</string>
+    <string name="settings_dialog_round_duration_vibration_hint">Preferred: 5 seconds</string>
+
     <!-- Help/Showcase start screen -->
     <string name="help_title">Help</string>
      <string name="help_message">Tool to organize booster draft of MTG.
 Pairings are calculate with Swiss-System tournament. Check settings in menu for configuration your own draft. </string>
     <string name="tutorial_info">Info about used libraries</string>
     <string name="tutorial_settings">Configure your draft before play </string>
+    <string name="tutorial_hour_glass">Press for countdown</string>
+    <string name="tutorial_life_app">Open life app for this round</string>
     <!-- Headers -->
     <string name="header_player_position_name">Player</string>
     <string name="header_player_position_points">Points</string>
@@ -104,8 +112,11 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="activity_paring_warning_paring_not_finished">Please end all possible parings for players</string>
     <string name="activity_paring_warning_bye">Last player already has a bye</string>
     <string name="warning_player_name_added">Provided player was previously added</string>
-    <string name="select_player1">Select 1st player:</string>
-    <string name="select_player2">Select 2nd player:</string>
+    <string name="select_player1">Select 1st player</string>
+    <string name="select_player2">Select 2nd player</string>
+    <string name="select_player_name">Selected: %1$s</string>
+    <string name="select_player_manual_title">Select Player</string>
+    <string name="select_player_manual_add">Add</string>
     <string name="spinner_empty_player_list">No more players</string>
 
     <!--Save Score Board-->
@@ -113,34 +124,46 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="activity_save_score_board_info_small_text">You can watch saved score board using settings</string>
     <string name="activity_save_score_board_save">Save</string>
     <string name="action_save">Save dashboard</string>
+    <string name="action_calculate_mana">Open Mana Calculator</string>
+    <string name="action_share">Share content</string>
     <string name="action_remove_player">Drop player</string>
     <string name="help_save_dashboard">After Game you can save score board</string>
     <string name="help_drop_player">If there is a need player can drop a draft</string>
+    <string name="help_share_content">After Game you can share it</string>
     <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
     <string name="warning_drop_player">You cannot remove players when draft ended</string>
     <string name="settings_clean_history">Clean history</string>
     <string name="settings_remove_text">Remove</string>
     <string name="settings_other">Other settings</string>
     <string name="settings_display_scoreboards">Display score boards</string>
-    <string name="settings_display_players_history">Display players history</string>
+    <string name="settings_display_players_list">Display players list</string>
     <string name="settings_sittings_option" translatable="false">Sittings: %1$s</string>
     <string name="settings_reset_tour_guide">Reset Tour Guide and display help</string>
+    <string name="settings_reset_tour_guide_dialog_title">Do you want to reset help?</string>
+    <string name="settings_reset_tour_guide_dialog_content">Help will be reset in this aplication</string>
     <string name="settings_reset_tour_guide_message">Tour Guide was reset</string>
 
+    <string name="history_score_board_row_draft_name">Draft name: %1$s</string>
     <string name="history_score_board_row_draft_date">Date: %1$s</string>
     <string name="history_score_board_row_draft_best_player">Won: %1$s</string>
     <string name="message_score_boards_removed">All score boards were removed</string>
     <string name="message_score_board_not_exists">No score board to display</string>
+    <string name="message_player_list_not_exists">No player list to display</string>
     <string name="message_score_board_saved">Score board successful saved</string>
     <string name="action_show_list">Show score board list</string>
     <!--Modify App UI -->
     <string name="action_countdown">Countdown</string>
+    <string name="action_open_life_app">Open Life App</string>
     <string name="message_action_countdown_started">Countdown...</string>
     <string name="message_action_countdown_cancel">Cancelled countdown</string>
     <!--Open Intent -->
-    <string name="chooser_intent_title">Choose life counter application</string>
-    <string name="chooser_dialog_title">Download LifeCounterApp</string>
-    <string name="chooser_dialog_body">To handle this action\nplease download application for counting life</string>
+    <string name="chooser_intent_title_life_counter">Choose life counter application</string>
+    <string name="chooser_dialog_title_life_counter">Download LifeCounterApp</string>
+    <string name="chooser_dialog_body_life_counter">To handle this action\nplease download application for counting life</string>
+
+    <string name="chooser_intent_title_mana_calculator">Choose mana calculator application</string>
+    <string name="chooser_dialog_title_mana_calculator">Download ManaCalculatorApp</string>
+    <string name="chooser_dialog_body_mana_calculator">To handle this action\nplease download application for mana calculation</string>
     <string name="chooser_dialog_button_name">Download</string>
 
     <string name="dummy_player" translatable="false"></string>
@@ -160,10 +183,13 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="settings_idea_box_error">Could not open find e-mail client, please install one and try this action again </string>
 
     <!--Settings -->
+    <string name="settings_content_description">Select Settings Menu</string>
     <string name="settings_counter_off">To use time counter turn it on in settings screen</string>
     <string name="settings_sittings_none">none</string>
     <string name="settings_sittings_random">random</string>
     <string name="settings_sittings_dialog_title">Choose Sittings Options:</string>
+    <string name="settings_history_remove_clean_history_dialog_title">Do you want to remove all things?</string>
+    <string name="settings_history_remove_clean_history_dialog_body">Draft history will be removed and all players will be removed </string>
 
     <string name="dialog_positive">Ok</string>
     <string name="dialog_negative">Cancel</string>
@@ -176,4 +202,10 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
 
     <string name="shared_data_formatted_winner" translatable="false">Draft winner is: %1$s\n</string>
     <string name="shared_data_formatted_player" translatable="false">%1$s scored: %2$d points\n</string>
+    <string name="history_player_played_drafts">Draft played: %1$d</string>
+    <string name="history_player_detail_place">Place: %1$d / %2$d</string>
+    <string name="settings_menu_item_draft" translatable="false">Draft</string>
+    <string name="settings_menu_item_history">History</string>
+    <string name="settings_menu_item_other">Other</string>
+    <string name="settings_menu_item_time">Time</string>
 </resources>

@@ -142,7 +142,7 @@ public class SharedPreferencesManager implements ISharedPreferences {
 
     @Override
     public void setPairingType(int pairingType) {
-        mSharedPreferences.edit().putInt(SettingsPreferencesConst.PAIRINGS_TYPE, BaseConfig.DEFAULT_TYPE_PAIRINGS).apply();
+        mSharedPreferences.edit().putInt(SettingsPreferencesConst.PAIRINGS_TYPE, pairingType).apply();
     }
 
     @Override
@@ -166,6 +166,7 @@ public class SharedPreferencesManager implements ISharedPreferences {
         mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_MAIN_SCREEN, true)
                 .putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_PARING_SCREEN, true)
                 .putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_SCOREBOARD_SCREEN, true)
+                .putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN, true)
                 .apply();
 
     }
@@ -186,7 +187,7 @@ public class SharedPreferencesManager implements ISharedPreferences {
     }
 
     @Override
-    public void setGuideTourOnMainParingScreen(boolean isVisible) {
+    public void setGuideTourOnParingScreen(boolean isVisible) {
         mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_PARING_SCREEN, isVisible).apply();
 
     }
@@ -200,6 +201,17 @@ public class SharedPreferencesManager implements ISharedPreferences {
     public void setGuideTourOnScoreBoardScreen(boolean isVisible) {
         mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_SCOREBOARD_SCREEN, isVisible).apply();
 
+    }
+
+    @Override
+    public boolean showGuideTourOnSittingsScreen() {
+        return mSharedPreferences.getBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN, true);
+
+    }
+
+    @Override
+    public void setGuideTourOnSittingsScreen(boolean isVisible) {
+        mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN, isVisible).apply();
     }
 
 }

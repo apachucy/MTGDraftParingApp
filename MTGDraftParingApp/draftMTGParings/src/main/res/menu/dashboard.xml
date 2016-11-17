@@ -3,18 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="unii.draft.mtg.parings.MainActivity">
+
+    <item
+        android:id="@+id/action_remove_player"
+        android:icon="@drawable/ic_person_minus"
+        android:orderInCategory="101"
+        android:title="@string/action_remove_player"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_save"
         android:icon="@drawable/ic_save"
-        android:orderInCategory="100"
+        android:orderInCategory="102"
         android:title="@string/action_save"
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_remove_player"
-        android:icon="@drawable/ic_save"
-        android:orderInCategory="101"
-        android:title="@string/action_save"
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share"
+        android:orderInCategory="103"
+        android:title="@string/action_share"
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="always" />
 </menu>

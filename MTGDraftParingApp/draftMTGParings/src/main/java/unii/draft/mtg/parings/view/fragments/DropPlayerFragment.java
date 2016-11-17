@@ -20,11 +20,11 @@ import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.DropPlayerAdapter;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class DropPlayerFragment extends BaseFragment {
 
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private List<Player> mNotDroppedPlayerList;
 
     @Bind(R.id.table_dropPlayerRecyclerView)
@@ -54,7 +54,7 @@ public class DropPlayerFragment extends BaseFragment {
 
     @OnClick(R.id.save_dropPlayerButton)
     public void onSaveButtonClicked() {
-        getActivity().setResult(getActivity().RESULT_OK);
+        getActivity().setResult(RESULT_OK);
         getActivity().finish();
     }
 
@@ -68,11 +68,11 @@ public class DropPlayerFragment extends BaseFragment {
 
     @Override
     protected void initFragmentView() {
-        mAdapter = new DropPlayerAdapter(getActivity(), mNotDroppedPlayerList);
+        RecyclerView.Adapter adapter = new DropPlayerAdapter(getActivity(), mNotDroppedPlayerList);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override

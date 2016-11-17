@@ -1,6 +1,5 @@
 package unii.draft.mtg.parings.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,25 +15,18 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import unii.draft.mtg.parings.ManualPlayerPairingActivity;
-import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
 import unii.draft.mtg.parings.logic.pojo.Player;
-import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.SittingsPlayerAdapter;
 
 
 public class SittingsFragment extends BaseFragment {
 
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private List<String> mPlayerNameList;
 
-    @Inject
-    ISharedPreferences mSharedPreferenceManager;
+
     @Inject
     AlgorithmChooser mAlgorithmChooser;
     @Inject
@@ -43,18 +35,7 @@ public class SittingsFragment extends BaseFragment {
     @Bind(R.id.table_sittingsRecyclerView)
     RecyclerView mRecyclerView;
 
-    @OnClick(R.id.sittings_next)
-    public void onActionButtonNextClicked(View view) {
-        Intent intent = null;
-        if (mSharedPreferenceManager.areManualParings()) {
-            intent = new Intent(getActivity(), ManualPlayerPairingActivity.class);
-        } else {
-            intent = new Intent(getActivity(), ParingDashboardActivity.class);
 
-        }
-        startActivity(intent);
-        getActivity().finish();
-    }
 
 
     @Nullable
@@ -91,11 +72,11 @@ public class SittingsFragment extends BaseFragment {
 
     @Override
     protected void initFragmentView() {
-        mAdapter = new SittingsPlayerAdapter(getActivity(), mPlayerNameList);
+        RecyclerView.Adapter adapter = new SittingsPlayerAdapter(getActivity(), mPlayerNameList);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(adapter);
 
     }
 

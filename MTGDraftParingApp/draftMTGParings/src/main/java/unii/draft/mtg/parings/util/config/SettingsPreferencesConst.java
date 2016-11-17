@@ -34,6 +34,6 @@ public class SettingsPreferencesConst {
     public static final String SHOW_GUIDE_TOUR_ON_MAIN_SCREEN = SettingsPreferencesConst.class.getName() + "SHOW_GUIDE_TOUR_ON_MAIN_SCREEN";
     public static final String SHOW_GUIDE_TOUR_ON_PARING_SCREEN = SettingsPreferencesConst.class.getName() + "SHOW_GUIDE_TOUR_ON_PARING_SCREEN";
     public static final String SHOW_GUIDE_TOUR_ON_SCOREBOARD_SCREEN = SettingsPreferencesConst.class.getName() + "SHOW_GUIDE_TOUR_ON_SCOREBOARD_SCREEN";
-
+    public static final String SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN = SettingsPreferencesConst.class.getName() + "SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN";
 
 }

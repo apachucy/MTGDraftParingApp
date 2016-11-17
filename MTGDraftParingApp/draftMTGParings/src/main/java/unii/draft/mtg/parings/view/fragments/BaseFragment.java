@@ -18,16 +18,24 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract void initFragmentView();
+
     protected abstract void initFragmentData();
 
 
-
     protected void showRadioButtonListDialog(Context context, String title, List<String> list, String buttonPositive, String buttonNegative,
-                                           int defaultSelectedValue, MaterialDialog.ListCallbackSingleChoice listCallbackSingleChoice) {
+                                             int defaultSelectedValue, MaterialDialog.ListCallbackSingleChoice listCallbackSingleChoice) {
         new MaterialDialog.Builder(context)
                 .title(title).items(list).itemsCallbackSingleChoice(defaultSelectedValue, listCallbackSingleChoice)
                 .positiveText(buttonPositive).backgroundColorRes(R.color.windowBackground).negativeText(buttonNegative)
                 .show();
     }
 
+    protected void showDialogWithTwoOptions(Context context, String title, String content, String positiveText, String negativeText, MaterialDialog.SingleButtonCallback positiveCallback) {
+        new MaterialDialog.Builder(context)
+                .title(title)
+                .content(content)
+                .positiveText(positiveText)
+                .negativeText(negativeText).backgroundColorRes(R.color.windowBackground).onPositive(positiveCallback)
+                .show();
+    }
 }

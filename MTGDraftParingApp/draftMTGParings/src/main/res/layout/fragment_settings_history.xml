@@ -4,34 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/settings_displayScoreBoardsTextView"
-        style="@style/textView"
+    <Button
+        android:id="@+id/settings_displayScoreBoardsButton"
+        style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_view_margin_settings"
-        android:gravity="center"
-        android:padding="@dimen/settings_padding"
         android:text="@string/settings_display_scoreboards" />
 
-    <TextView
-        android:id="@+id/settings_displayPlayerHistoryTextView"
-        style="@style/textView"
+    <Button
+        android:id="@+id/settings_displayPlayerHistoryButton"
+        style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_view_margin_settings"
-        android:gravity="center"
-        android:padding="@dimen/settings_padding"
-        android:text="@string/settings_display_players_history" />
+        android:text="@string/settings_display_players_list" />
 
-    <TextView
-        android:id="@+id/settings_removeScoreBoardsTextView"
-        style="@style/textView"
+    <Button
+        android:id="@+id/settings_removeScoreBoardsButton"
+        style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_view_margin_settings"
-        android:gravity="center"
-        android:padding="@dimen/settings_padding"
         android:text="@string/settings_clean_history" />
 
 </LinearLayout>

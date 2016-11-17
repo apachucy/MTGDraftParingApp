@@ -1,17 +1,12 @@
 package unii.draft.mtg.parings.database.model;
 
-import java.util.List;
-import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.Property;
-import de.greenrobot.dao.internal.SqlUtils;
 import de.greenrobot.dao.internal.DaoConfig;
-import de.greenrobot.dao.query.Query;
-import de.greenrobot.dao.query.QueryBuilder;
 
 import unii.draft.mtg.parings.database.model.Player;
 
@@ -30,18 +25,10 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property PlayerName = new Property(1, String.class, "PlayerName", false, "PLAYER_NAME");
-        public final static Property PlayerMatchPoints = new Property(2, Integer.class, "PlayerMatchPoints", false, "PLAYER_MATCH_POINTS");
-        public final static Property PlayerMatchOverallWin = new Property(3, Float.class, "PlayerMatchOverallWin", false, "PLAYER_MATCH_OVERALL_WIN");
-        public final static Property OponentsMatchOveralWins = new Property(4, Float.class, "OponentsMatchOveralWins", false, "OPONENTS_MATCH_OVERAL_WINS");
-        public final static Property PlayerGamesOverallWin = new Property(5, Float.class, "PlayerGamesOverallWin", false, "PLAYER_GAMES_OVERALL_WIN");
-        public final static Property OponentsGamesOverallWin = new Property(6, Float.class, "OponentsGamesOverallWin", false, "OPONENTS_GAMES_OVERALL_WIN");
-        public final static Property Dropped = new Property(7, Boolean.class, "Dropped", false, "DROPPED");
-        public final static Property DraftId = new Property(8, Long.class, "DraftId", false, "DRAFT_ID");
     };
 
     private DaoSession daoSession;
 
-    private Query<Player> draft_PlayersQuery;
 
     public PlayerDao(DaoConfig config) {
         super(config);
@@ -57,14 +44,7 @@ public class PlayerDao extends AbstractDao<Player, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"PLAYER\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"PLAYER_NAME\" TEXT," + // 1: PlayerName
-                "\"PLAYER_MATCH_POINTS\" INTEGER," + // 2: PlayerMatchPoints
-                "\"PLAYER_MATCH_OVERALL_WIN\" REAL," + // 3: PlayerMatchOverallWin
-                "\"OPONENTS_MATCH_OVERAL_WINS\" REAL," + // 4: OponentsMatchOveralWins
-                "\"PLAYER_GAMES_OVERALL_WIN\" REAL," + // 5: PlayerGamesOverallWin
-                "\"OPONENTS_GAMES_OVERALL_WIN\" REAL," + // 6: OponentsGamesOverallWin
-                "\"DROPPED\" INTEGER," + // 7: Dropped
-                "\"DRAFT_ID\" INTEGER);"); // 8: DraftId
+                "\"PLAYER_NAME\" TEXT);"); // 1: PlayerName
     }
 
     /** Drops the underlying database table. */
@@ -87,41 +67,6 @@ public class PlayerDao extends AbstractDao<Player, Long> {
         if (PlayerName != null) {
             stmt.bindString(2, PlayerName);
         }
- 
-        Integer PlayerMatchPoints = entity.getPlayerMatchPoints();
-        if (PlayerMatchPoints != null) {
-            stmt.bindLong(3, PlayerMatchPoints);
-        }
- 
-        Float PlayerMatchOverallWin = entity.getPlayerMatchOverallWin();
-        if (PlayerMatchOverallWin != null) {
-            stmt.bindDouble(4, PlayerMatchOverallWin);
-        }
- 
-        Float OponentsMatchOveralWins = entity.getOponentsMatchOveralWins();
-        if (OponentsMatchOveralWins != null) {
-            stmt.bindDouble(5, OponentsMatchOveralWins);
-        }
- 
-        Float PlayerGamesOverallWin = entity.getPlayerGamesOverallWin();
-        if (PlayerGamesOverallWin != null) {
-            stmt.bindDouble(6, PlayerGamesOverallWin);
-        }
- 
-        Float OponentsGamesOverallWin = entity.getOponentsGamesOverallWin();
-        if (OponentsGamesOverallWin != null) {
-            stmt.bindDouble(7, OponentsGamesOverallWin);
-        }
- 
-        Boolean Dropped = entity.getDropped();
-        if (Dropped != null) {
-            stmt.bindLong(8, Dropped ? 1L: 0L);
-        }
- 
-        Long DraftId = entity.getDraftId();
-        if (DraftId != null) {
-            stmt.bindLong(9, DraftId);
-        }
     }
 
     @Override
@@ -141,14 +86,7 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     public Player readEntity(Cursor cursor, int offset) {
         Player entity = new Player( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // PlayerName
-            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // PlayerMatchPoints
-            cursor.isNull(offset + 3) ? null : cursor.getFloat(offset + 3), // PlayerMatchOverallWin
-            cursor.isNull(offset + 4) ? null : cursor.getFloat(offset + 4), // OponentsMatchOveralWins
-            cursor.isNull(offset + 5) ? null : cursor.getFloat(offset + 5), // PlayerGamesOverallWin
-            cursor.isNull(offset + 6) ? null : cursor.getFloat(offset + 6), // OponentsGamesOverallWin
-            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // Dropped
-            cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8) // DraftId
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // PlayerName
         );
         return entity;
     }
@@ -158,13 +96,6 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     public void readEntity(Cursor cursor, Player entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setPlayerName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setPlayerMatchPoints(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
-        entity.setPlayerMatchOverallWin(cursor.isNull(offset + 3) ? null : cursor.getFloat(offset + 3));
-        entity.setOponentsMatchOveralWins(cursor.isNull(offset + 4) ? null : cursor.getFloat(offset + 4));
-        entity.setPlayerGamesOverallWin(cursor.isNull(offset + 5) ? null : cursor.getFloat(offset + 5));
-        entity.setOponentsGamesOverallWin(cursor.isNull(offset + 6) ? null : cursor.getFloat(offset + 6));
-        entity.setDropped(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
-        entity.setDraftId(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
      }
     
     /** @inheritdoc */
@@ -189,110 +120,5 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     protected boolean isEntityUpdateable() {
         return true;
     }
-    
-    /** Internal query to resolve the "Players" to-many relationship of Draft. */
-    public List<Player> _queryDraft_Players(Long DraftId) {
-        synchronized (this) {
-            if (draft_PlayersQuery == null) {
-                QueryBuilder<Player> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.DraftId.eq(null));
-                draft_PlayersQuery = queryBuilder.build();
-            }
-        }
-        Query<Player> query = draft_PlayersQuery.forCurrentThread();
-        query.setParameter(0, DraftId);
-        return query.list();
-    }
 
-    private String selectDeep;
-
-    protected String getSelectDeep() {
-        if (selectDeep == null) {
-            StringBuilder builder = new StringBuilder("SELECT ");
-            SqlUtils.appendColumns(builder, "T", getAllColumns());
-            builder.append(',');
-            SqlUtils.appendColumns(builder, "T0", daoSession.getDraftDao().getAllColumns());
-            builder.append(" FROM PLAYER T");
-            builder.append(" LEFT JOIN DRAFT T0 ON T.\"DRAFT_ID\"=T0.\"_id\"");
-            builder.append(' ');
-            selectDeep = builder.toString();
-        }
-        return selectDeep;
-    }
-    
-    protected Player loadCurrentDeep(Cursor cursor, boolean lock) {
-        Player entity = loadCurrent(cursor, 0, lock);
-        int offset = getAllColumns().length;
-
-        Draft draft = loadCurrentOther(daoSession.getDraftDao(), cursor, offset);
-        entity.setDraft(draft);
-
-        return entity;    
-    }
-
-    public Player loadDeep(Long key) {
-        assertSinglePk();
-        if (key == null) {
-            return null;
-        }
-
-        StringBuilder builder = new StringBuilder(getSelectDeep());
-        builder.append("WHERE ");
-        SqlUtils.appendColumnsEqValue(builder, "T", getPkColumns());
-        String sql = builder.toString();
-        
-        String[] keyArray = new String[] { key.toString() };
-        Cursor cursor = db.rawQuery(sql, keyArray);
-        
-        try {
-            boolean available = cursor.moveToFirst();
-            if (!available) {
-                return null;
-            } else if (!cursor.isLast()) {
-                throw new IllegalStateException("Expected unique result, but count was " + cursor.getCount());
-            }
-            return loadCurrentDeep(cursor, true);
-        } finally {
-            cursor.close();
-        }
-    }
-    
-    /** Reads all available rows from the given cursor and returns a list of new ImageTO objects. */
-    public List<Player> loadAllDeepFromCursor(Cursor cursor) {
-        int count = cursor.getCount();
-        List<Player> list = new ArrayList<Player>(count);
-        
-        if (cursor.moveToFirst()) {
-            if (identityScope != null) {
-                identityScope.lock();
-                identityScope.reserveRoom(count);
-            }
-            try {
-                do {
-                    list.add(loadCurrentDeep(cursor, false));
-                } while (cursor.moveToNext());
-            } finally {
-                if (identityScope != null) {
-                    identityScope.unlock();
-                }
-            }
-        }
-        return list;
-    }
-    
-    protected List<Player> loadDeepAllAndCloseCursor(Cursor cursor) {
-        try {
-            return loadAllDeepFromCursor(cursor);
-        } finally {
-            cursor.close();
-        }
-    }
-    
-
-    /** A raw-style query where you can pass any WHERE clause and arguments. */
-    public List<Player> queryDeep(String where, String... selectionArg) {
-        Cursor cursor = db.rawQuery(getSelectDeep() + where, selectionArg);
-        return loadDeepAllAndCloseCursor(cursor);
-    }
- 
 }

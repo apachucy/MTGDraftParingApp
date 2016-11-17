@@ -13,6 +13,8 @@ public class Draft {
     private Long id;
     private String DraftName;
     private String DraftDate;
+    private Integer DraftRounds;
+    private Integer NumberOfPlayers;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -20,7 +22,7 @@ public class Draft {
     /** Used for active entity operations. */
     private transient DraftDao myDao;
 
-    private List<Player> Players;
+    private List<PlayerDraftJoinTable> Drafts;
 
     public Draft() {
     }
@@ -29,10 +31,12 @@ public class Draft {
         this.id = id;
     }
 
-    public Draft(Long id, String DraftName, String DraftDate) {
+    public Draft(Long id, String DraftName, String DraftDate, Integer DraftRounds, Integer NumberOfPlayers) {
         this.id = id;
         this.DraftName = DraftName;
         this.DraftDate = DraftDate;
+        this.DraftRounds = DraftRounds;
+        this.NumberOfPlayers = NumberOfPlayers;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -65,26 +69,42 @@ public class Draft {
         this.DraftDate = DraftDate;
     }
 
+    public Integer getDraftRounds() {
+        return DraftRounds;
+    }
+
+    public void setDraftRounds(Integer DraftRounds) {
+        this.DraftRounds = DraftRounds;
+    }
+
+    public Integer getNumberOfPlayers() {
+        return NumberOfPlayers;
+    }
+
+    public void setNumberOfPlayers(Integer NumberOfPlayers) {
+        this.NumberOfPlayers = NumberOfPlayers;
+    }
+
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<Player> getPlayers() {
-        if (Players == null) {
+    public List<PlayerDraftJoinTable> getDrafts() {
+        if (Drafts == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            PlayerDao targetDao = daoSession.getPlayerDao();
-            List<Player> PlayersNew = targetDao._queryDraft_Players(id);
+            PlayerDraftJoinTableDao targetDao = daoSession.getPlayerDraftJoinTableDao();
+            List<PlayerDraftJoinTable> DraftsNew = targetDao._queryDraft_Drafts(id);
             synchronized (this) {
-                if(Players == null) {
-                    Players = PlayersNew;
+                if(Drafts == null) {
+                    Drafts = DraftsNew;
                 }
             }
         }
-        return Players;
+        return Drafts;
     }
 
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetPlayers() {
-        Players = null;
+    public synchronized void resetDrafts() {
+        Drafts = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

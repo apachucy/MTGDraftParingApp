@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/text_view_margin_medium"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/history_detail_player_draft_name"
+        style="@style/textView.item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/history_detail_player_draft_position"
+        style="@style/textView.item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center" />
+
+</LinearLayout>

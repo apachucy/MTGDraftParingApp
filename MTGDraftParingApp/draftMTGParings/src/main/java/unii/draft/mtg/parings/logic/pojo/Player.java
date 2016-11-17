@@ -3,6 +3,7 @@ package unii.draft.mtg.parings.logic.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import unii.draft.mtg.parings.database.model.PlayerDraftJoinTable;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 
@@ -51,16 +52,17 @@ public class Player  implements IAdapterItem {
      */
     private boolean mDropped;
 
-    public Player(unii.draft.mtg.parings.database.model.Player player) {
+    public Player(unii.draft.mtg.parings.database.model.Player player, PlayerDraftJoinTable playerDraftJoinTable){
         mPlayerName = player.getPlayerName();
 
-        mPlayerMatchOverallWin = player.getPlayerMatchOverallWin();
-        mPlayerGamesOverallWin = player.getPlayerGamesOverallWin();
-        mOponentsGamesOverallWin = player.getOponentsGamesOverallWin();
-        mOponentsMatchOveralWins = player.getOponentsMatchOveralWins();
-        mMatchPoints = player.getPlayerMatchPoints();
-        mDropped = player.getDropped();
+        mPlayerMatchOverallWin = playerDraftJoinTable.getPlayerMatchOverallWin();
+        mPlayerGamesOverallWin = playerDraftJoinTable.getPlayerGamesOverallWin();
+        mOponentsGamesOverallWin = playerDraftJoinTable.getOponentsGamesOverallWin();
+        mOponentsMatchOveralWins = playerDraftJoinTable.getOponentsMatchOveralWins();
+        mMatchPoints = playerDraftJoinTable.getPlayerMatchPoints();
+        mDropped = playerDraftJoinTable.getDropped();
     }
+
 
     public Player(String playerName) {
         mPlayerName = playerName;

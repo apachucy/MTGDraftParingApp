@@ -3,11 +3,15 @@ package unii.draft.mtg.parings.view.fragments.settings;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import javax.inject.Inject;
 
@@ -53,14 +57,14 @@ public class OtherSettingsFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.settings_resetTourGuideTextView)
-    void onTourGuideReset(View view) {
-        mSharedPreferenceManager.resetGuideTour();
-        Toast.makeText(getActivity(), getString(R.string.settings_reset_tour_guide_message), Toast.LENGTH_SHORT).show();
+    @OnClick(R.id.settings_resetTourGuideButton)
+    void onTourGuideReset() {
+        showDialogWithTwoOptions(getActivity(), getString(R.string.settings_reset_tour_guide_dialog_title), getString(R.string.settings_reset_tour_guide_dialog_content),
+                getString(R.string.dialog_positive), getString(R.string.dialog_negative), mPositiveCallback);
     }
 
-    @OnClick(R.id.settings_rateApplicationTextView)
-    void onRateMeClicked(View view) {
+    @OnClick(R.id.settings_rateApplicationButton)
+    void onRateMeClicked() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         //Try Google play
         intent.setData(Uri.parse(BaseConfig.INTENT_OPEN_GOOGLE_PLAY + BaseConfig.INTENT_PACKAGE_DRAFT_MTG));
@@ -79,8 +83,8 @@ public class OtherSettingsFragment extends BaseFragment {
         }
     }
 
-    @OnClick(R.id.settings_checkOtherApplicationTextView)
-    void onCheckOtherApplicationClicked(View view) {
+    @OnClick(R.id.settings_checkOtherApplicationButton)
+    void onCheckOtherApplicationClicked() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(BaseConfig.INTENT_OPEN_DEVELOPER_APPS_WWW));
         if (intent.resolveActivity(getContext().getPackageManager()) != null) {
@@ -91,8 +95,8 @@ public class OtherSettingsFragment extends BaseFragment {
         }
     }
 
-    @OnClick(R.id.settings_ideaBoxTextView)
-    public void onIdeaBoxClicked(View view) {
+    @OnClick(R.id.settings_ideaBoxButton)
+    public void onIdeaBoxClicked() {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse(BaseConfig.INTENT_OPEN_EMAIL)); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_EMAIL, BaseConfig.INTENT_EMAIL_RECIPIENT);
@@ -110,4 +114,12 @@ public class OtherSettingsFragment extends BaseFragment {
     private void injectDependencies() {
         getActivityComponent().inject(this);
     }
+
+    private MaterialDialog.SingleButtonCallback mPositiveCallback = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            mSharedPreferenceManager.resetGuideTour();
+            Toast.makeText(getActivity(), getString(R.string.settings_reset_tour_guide_message), Toast.LENGTH_SHORT).show();
+        }
+    };
 }

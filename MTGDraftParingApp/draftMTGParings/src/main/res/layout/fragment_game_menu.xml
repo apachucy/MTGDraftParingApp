@@ -3,17 +3,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <ListView
+        android:id="@+id/init_playerList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/init_mainContainer" />
+
     <RelativeLayout
         android:id="@+id/init_mainContainer"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <Button
+            android:id="@+id/init_addPlayerFromHistoryButton"
+            style="@style/buttonSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/init_playerContainer"
+            android:layout_alignLeft="@+id/init_playerContainer"
+            android:layout_alignRight="@+id/init_playerContainer"
+            android:layout_alignStart="@+id/init_playerContainer"
+            android:layout_below="@+id/init_playerContainer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/button_padding"
+            android:layout_marginTop="@dimen/button_padding"
+            android:text="@string/add_players_from_history" />
+
+        <RelativeLayout
+            android:id="@+id/init_roundsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/init_addPlayerFromHistoryButton"
+            android:layout_alignLeft="@+id/init_addPlayerFromHistoryButton"
+            android:layout_alignRight="@+id/init_addPlayerFromHistoryButton"
+            android:layout_alignStart="@+id/init_addPlayerFromHistoryButton"
+            android:layout_below="@id/init_addPlayerFromHistoryButton"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/init_roundsButton"
+                style="@style/buttonSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/text_view_margin_settings_small"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_toEndOf="@+id/init_roundsTextInput"
+                android:layout_toRightOf="@+id/init_roundsTextInput"
+                android:text="@string/start_game" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/init_roundsTextInput"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="@dimen/button_padding">
+
+                <EditText
+                    style="@style/editText"
+                    android:layout_width="@dimen/edit_text_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_view_margin_settings_small"
+                    android:layout_marginLeft="@dimen/text_view_margin_settings_small"
+                    android:layout_marginRight="@dimen/text_view_margin_settings_small"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:hint="@string/hint_rounds"
+                    android:inputType="number"
+                    android:maxLength="3" />
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/init_playerContainer"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:gravity="center">
 
             <android.support.design.widget.TextInputLayout
@@ -23,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_margin="@dimen/button_padding"
                 android:layout_marginTop="@dimen/standard_margin">
 
                 <EditText
@@ -43,61 +118,10 @@
                 style="@style/buttonSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/text_view_margin_settings_small"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:layout_toEndOf="@id/init_playerNameTextInput"
                 android:layout_toRightOf="@id/init_playerNameTextInput"
                 android:text="@string/add_item" />
         </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/init_roundsContainer"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/init_playerContainer"
-            android:gravity="center">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/init_roundsTextInput"
-                style="@style/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
-
-                <EditText
-                    style="@style/editText"
-                    android:layout_width="@dimen/edit_text_width"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/init_playerNameTextInput"
-                    android:layout_marginBottom="@dimen/text_view_margin_settings_small"
-                    android:layout_marginLeft="@dimen/text_view_margin_settings_small"
-                    android:layout_marginRight="@dimen/text_view_margin_settings_small"
-                    android:hint="@string/hint_rounds"
-                    android:inputType="number"
-                    android:maxLength="3" />
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/init_roundsButton"
-                style="@style/buttonSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/text_view_margin_settings_small"
-                android:layout_toEndOf="@id/init_roundsTextInput"
-                android:layout_toRightOf="@id/init_roundsTextInput"
-                android:text="@string/start_game" />
-        </RelativeLayout>
-
     </RelativeLayout>
-
-
-    <ListView
-        android:id="@+id/init_playerList"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/init_mainContainer"
-        android:layout_marginTop="@dimen/standard_margin" />
 </RelativeLayout>

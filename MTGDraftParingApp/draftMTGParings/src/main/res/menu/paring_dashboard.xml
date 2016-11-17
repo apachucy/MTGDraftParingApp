@@ -10,4 +10,12 @@
         android:title="@string/action_countdown"
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_open_life_app"
+        android:icon="@drawable/ic_life_small"
+        android:orderInCategory="200"
+        android:title="@string/action_open_life_app"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="always"
+        />
 </menu>

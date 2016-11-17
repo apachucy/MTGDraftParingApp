@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import unii.draft.mtg.parings.buisness.algorithm.IParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
 import unii.draft.mtg.parings.logic.dagger.ApplicationComponent;
 import unii.draft.mtg.parings.logic.dagger.ApplicationModule;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -28,7 +29,7 @@ public class AlgorithmChooser {
     }
 
     public IParingAlgorithm getCurrentAlgorithm() {
-        if (mSharedPreferences.areManualParings()) {
+        if (mSharedPreferences.getPairingType() == PairingMode.PAIRING_MANUAL) {
             return mAlgorithmManual;
         } else {
             return mAlgorithmAutomatic;

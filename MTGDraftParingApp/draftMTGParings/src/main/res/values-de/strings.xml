@@ -55,7 +55,7 @@
 
     <!-- Dialog Info -->
     <string name="dialog_info_title">Informationen</string>
-    <string name="dialog_info_message">Fanowska wersja aplikacji do liczenia paringów podczas draftowania w MTG</string>
+    <string name="dialog_info_message">Fansite version of the app\nfor paring players in MTG drafts\nHelps from Piotr S. and Szymon Sz.</string>
 
     <!-- Help/Showcase -->
     <string name="help_title">Hilfe</string>
@@ -88,8 +88,8 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="activity_paring_warning_paring_not_finished">Bitte beenden Sie Paarung Spieler</string>
     <string name="activity_paring_warning_bye">Der letzte Spieler hat bereits ein bye</string>
     <string name="warning_player_name_added">Der Spieler wurde bereits hinzugefügt</string>
-    <string name="select_player1">Den ersten Spieler auswählen:</string>
-    <string name="select_player2">Den zweiten Spieler auswählen:</string>
+    <string name="select_player1">Den ersten Spieler auswählen</string>
+    <string name="select_player2">Den zweiten Spieler auswählen</string>
     <string name="spinner_empty_player_list">Das Ende der Spieler</string>
     <string name="tutorial_info">Informationen zu den verwendeten Bibliotheken</string>
     <string name="tutorial_settings">Draftskonfigurationseinstellungen</string>
@@ -113,9 +113,9 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="message_action_countdown_cancel">Countdown wurde annulieren</string>
     <string name="message_action_countdown_started">Countdown...</string>
     <string name="chooser_dialog_button_name">Herunterladen</string>
-    <string name="chooser_dialog_title">Herunterladen LifeCounterApp</string>
-    <string name="chooser_dialog_body">Downloaden Sie bitte die App zum Punkt des Lebens zählen, damit diese Aktion ausführen</string>
-    <string name="chooser_intent_title">Wählen Sie bitte die App zum Punkt des Lebens zählen</string>
+    <string name="chooser_dialog_title_life_counter">Herunterladen LifeCounterApp</string>
+    <string name="chooser_dialog_body_life_counter">Downloaden Sie bitte die App zum Punkt des Lebens zählen, damit diese Aktion ausführen</string>
+    <string name="chooser_intent_title_life_counter">Wählen Sie bitte die App zum Punkt des Lebens zählen</string>
     <string name="validation_dialog_body">Bitte setzen Sie alle Spielergebnisse </string>
     <string name="validation_dialog_title">Verifikation</string>
     <string name="action_remove_player">Entferne den Spieler</string>
@@ -128,11 +128,58 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="settings_counter_off">Den Countdown in den Konfigurationen freischalten </string>
     <string name="dialog_positive">Ok</string>
     <string name="dialog_negative">Abbrechen</string>
-    <string name="settings_sittings_random">zufällig</string>
+    <string name="settings_sittings_random">Zufällig</string>
     <string name="settings_sittings_none">Keine</string>
     <string name="settings_sittings_dialog_title">Wählen Sie bitte die Sittingoption:</string>
     <string name="player_sittings_description">Draft Sitzplätze</string>
     <string name="settings_reset_tour_guide">Setzen Sie Ihre Hilfe</string>
     <string name="settings_reset_tour_guide_message">Hilfe wurde zurückgesetzt</string>
+    <string name="chooser_dialog_title_mana_calculator">Herunterladen ManaCalculatorApp</string>
+    <string name="action_calculate_mana">Offen Mana Calculator</string>
+    <string name="action_open_life_app">Offen Life App</string>
+    <string name="action_share">Teilst dein Ergebnis</string>
+    <string name="add_players_from_history">Gespeicherte Spieler hinzufügen</string>
+    <string name="help_share_content">Nach dem Spiel können Sie das Ergebnis teilen</string>
+    <string name="history_player_detail_place">Platz %1$d / %2$d</string>
+    <string name="message_player_list_not_exists">Keine Liste der Spieler zum Zeigen</string>
+    <string name="no_players_from_history">Keine gespeicherten Spilern</string>
+    <string name="select_player_name">Ausgewählt: %1$s</string>
+    <string name="settings_check_other_apps">Überprüfen Sie die anderen Anwendungen</string>
+    <string name="settings_content_description">"Wählen Sie die Einstellungen "</string>
+    <string name="settings_dialog_round_duration_vibration_content">Wählen Sie die Dauer der Schwingung</string>
+    <string name="settings_dialog_round_duration_vibration_hint">Vorschlag: 5 Sekunden</string>
+    <string name="settings_dialog_round_duration_vibration_title">Die Dauer der Schwingung</string>
+    <string name="settings_dialog_round_first_vibration_content">Wählen Sie eine Zeit vor dem Ende des Spiels, wenn Vibrationen ausgeführt werden soll</string>
+    <string name="settings_dialog_round_first_vibration_hint">Vorschlag: 5 Minuten</string>
+    <string name="settings_dialog_round_second_vibration_title">Legen Sie die zweite Schwingung</string>
+    <string name="settings_dialog_round_second_vibration_content">Wählen Sie eine Zeit vor dem Ende des Spiels, wenn die zweite Schwingung ausgeführt werden soll</string>
+    <string name="settings_dialog_round_second_vibration_hint">Bevorzugte Zeit: 1 Minute</string>
+    <string name="settings_dialog_round_time_content">Runde Zeit in Minuten</string>
+    <string name="settings_dialog_round_time_hint">Die vorgeschlagene Runde Zeit: 50 Minuten</string>
+    <string name="settings_dialog_round_time_title">Eingestellten Zeit runden</string>
+    <string name="settings_display_players_list">Die Liste der Spieler anzeigen</string>
+    <string name="settings_history_remove_clean_history_dialog_body">Die ganze Geschichte wird gelöscht</string>
+    <string name="settings_history_remove_clean_history_dialog_title">Möchten Sie die ganze Geschichte zu löschen?</string>
+    <string name="settings_idea_box">Ideen-box</string>
+    <string name="settings_idea_box_error">Sie können nicht Ihren E-Mail finden, einige installieren und versuchen Sie es später</string>
+    <string name="settings_menu_item_history">Geschichte</string>
+    <string name="settings_menu_item_other">Sonstiges</string>
+    <string name="settings_menu_item_time">Zeit</string>
+    <string name="settings_pairing_mode_automatic_with_repeats">Automatisch mit der möglichen Wiederholung</string>
+    <string name="settings_pairing_mode_dialog_title">Paarung Spieler auswählen:</string>
+    <string name="settings_pairing_mode_manual">Hand</string>
+    <string name="settings_reset_tour_guide_dialog_content">Die Beihilfe wird in der Anwendung zurückgesetzt werden</string>
+    <string name="settings_reset_tour_guide_dialog_title">Möchten Sie Hilfe zurücksetzen?</string>
+    <string name="text_use_counter_detail">Können Sie den Countdown in der Runde zu starten</string>
+    <string name="tutorial_hour_glass">Presse, den Countdown zu starten</string>
+    <string name="chooser_dialog_body_mana_calculator">Bitte laden Sie die Anwendung Mana Calculator</string>
+    <string name="chooser_intent_title_mana_calculator">Wählen Sie die Anwendung für das Zählen Mana</string>
+    <string name="history_player_played_drafts">Draft gespielt: %1$d</string>
+    <string name="history_score_board_row_draft_name">Name des Draft-Picks: %1$s</string>
+    <string name="settings_developer_account_error">Sie können nicht einen Web-Browser öffnen, installieren Sie etwas aus und versuchen Sie es erneut</string>
+    <string name="settings_dialog_round_first_vibration_title">Legen Sie die zuerst Schwingung</string>
+    <string name="tutorial_life_app">Öffnen Sie Ihr Leben für diese Runde zu zählen</string>
+    <string name="select_player_manual_title">Spieler auswählen</string>
+    <string name="select_player_manual_add">Add</string>
 
 </resources>

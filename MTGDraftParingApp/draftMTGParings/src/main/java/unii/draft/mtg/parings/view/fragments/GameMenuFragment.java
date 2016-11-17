@@ -1,8 +1,10 @@
 package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +16,24 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import unii.draft.mtg.parings.ManualPlayerPairingActivity;
+import dagger.Lazy;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.SittingsActivity;
+import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
+import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 import unii.draft.mtg.parings.util.validation.ValidationHelper;
+import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivity;
+import unii.draft.mtg.parings.view.activities.options.SittingsActivity;
 import unii.draft.mtg.parings.view.custom.IActivityHandler;
 import unii.draft.mtg.parings.view.custom.IPlayerList;
 
@@ -48,11 +55,13 @@ public class GameMenuFragment extends BaseFragment {
     TextInputLayout mRoundsTextInput;
 
     @Inject
-    ISharedPreferences mSharedPreferenceManager;
+    Lazy<ISharedPreferences> mSharedPreferenceManager;
     @Inject
-    AlgorithmChooser mAlgorithmChooser;
+    Lazy<AlgorithmChooser> mAlgorithmChooser;
+    @Inject
+    Lazy<IDatabaseHelper> mDatabaseHelper;
 
-
+    @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -72,9 +81,6 @@ public class GameMenuFragment extends BaseFragment {
         injectDependencies();
         initFragmentData();
         initFragmentView(inflater);
-
-
-
         return view;
     }
 
@@ -85,7 +91,7 @@ public class GameMenuFragment extends BaseFragment {
     }
 
     @OnClick(R.id.init_addPlayerButton)
-    void onAddPlayerClick(View view) {
+    void onAddPlayerClick() {
         // add new player
         if (!ValidationHelper.isTextInputFieldEmpty(mPlayerNameTextInput,
                 getString(R.string.warning_empty_field)) && !isNameAddedBefore(mPlayerNameTextInput.getEditText().getText()
@@ -102,7 +108,7 @@ public class GameMenuFragment extends BaseFragment {
     }
 
     @OnClick(R.id.init_roundsButton)
-    void onStartGameClick(View view) {
+    void onStartGameClick() {
         if (!ValidationHelper.isTextInputFieldEmpty(mRoundsTextInput,
                 getString(R.string.warning_empty_field))) {
             if (mPlayerNameList.getPlayerList().isEmpty() || mPlayerNameList.getPlayerList().size() < 2) {
@@ -125,8 +131,36 @@ public class GameMenuFragment extends BaseFragment {
         }
     }
 
+    @OnClick(R.id.init_addPlayerFromHistoryButton)
+    public void onAddPlayersFromHistoryClicked() {
+        final List<String> playersNameFromHistory = mDatabaseHelper.get().getAllPlayersNames();
+        if (playersNameFromHistory.isEmpty()) {
+            Toast.makeText(getContext(), getString(R.string.no_players_from_history), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice = new MaterialDialog.ListCallbackMultiChoice() {
+            @Override
+            public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+
+                for (Integer aWhich : which) {
+                    String playerName = playersNameFromHistory.get(aWhich);
+                    if (!isNameAddedBefore(playerName)) {
+                        mPlayerNameList.getPlayerList().add(playerName);
+                        mListAdapter.notifyDataSetChanged();
+                    }
+                }
+                return true;
+            }
+        };
+
+        showMultipleChoiceListDialog(getContext(), getString(R.string.add_players_from_history), playersNameFromHistory,
+                listCallbackMultiChoice, getString(R.string.add_item));
+    }
+
+
     protected void initFragmentView(LayoutInflater inflater) {
-        mListAdapter = new ArrayAdapter<String>(mActivity, R.layout.row_player_name,
+        mListAdapter = new ArrayAdapter<>(mActivity, R.layout.row_player_name,
                 mPlayerNameList.getPlayerList());
 
         mPlayerNameTextInput.setHint(getString(R.string.hint_player_name));
@@ -149,20 +183,19 @@ public class GameMenuFragment extends BaseFragment {
 
     }
 
-    //todo: open sittingsPlayerActivity
     private MaterialDialog.SingleButtonCallback mStartGameDialogOnClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onClick(MaterialDialog dialog, DialogAction which) {
-            if (dialog != null && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            if (mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
                 dialog.dismiss();
-                Intent intent = null;
+                Intent intent;
                 //set parings Factory
-                mAlgorithmChooser.getCurrentAlgorithm().startAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString()));
+                mAlgorithmChooser.get().getCurrentAlgorithm().startAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString()));
 
                 //set started activity
-                if (mSharedPreferenceManager.getGeneratedSittingMode() == SittingsMode.SITTINGS_RANDOM) {
+                if (mSharedPreferenceManager.get().getGeneratedSittingMode() == SittingsMode.SITTINGS_RANDOM) {
                     intent = new Intent(mActivity, SittingsActivity.class);
-                } else if (mSharedPreferenceManager.areManualParings()) {
+                } else if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_MANUAL) {
                     intent = new Intent(mActivity,
                             ManualPlayerPairingActivity.class);
                 } else {
@@ -194,5 +227,11 @@ public class GameMenuFragment extends BaseFragment {
         getActivityComponent().inject(this);
     }
 
-
+    private void showMultipleChoiceListDialog(Context context, String title, List<String> data, MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice, String positiveText) {
+        new MaterialDialog.Builder(context)
+                .title(title).items(data)
+                .itemsCallbackMultiChoice(null, listCallbackMultiChoice)
+                .backgroundColorRes(R.color.windowBackground)
+                .positiveText(positiveText).show();
+    }
 }

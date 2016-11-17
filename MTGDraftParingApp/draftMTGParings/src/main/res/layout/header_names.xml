@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_playerNameTextView"
+    style="@style/textView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:paddingBottom="@dimen/text_view_margin_normal"
+    android:paddingTop="@dimen/text_view_margin_normal"
+    android:text="@string/header_player_position_name"
+    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/header_playerNameTextView"
-        style="@style/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:paddingBottom="@dimen/text_view_margin_normal"
-        android:paddingTop="@dimen/text_view_margin_normal"
-        android:text="@string/header_player_position_name"
-        android:textStyle="bold" />
-
-</RelativeLayout>

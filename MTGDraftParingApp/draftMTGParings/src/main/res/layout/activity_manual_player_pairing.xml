@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-
-    tools:context="unii.draft.mtg.parings.ManualPlayerPairingActivity">
+    tools:context=".view.activities.options.ManualPlayerPairingActivity">
 
     <view
         android:id="@+id/toolbar"
@@ -20,14 +19,15 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/toolbar"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+       >
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
             <TextView
                 android:id="@+id/matchPlayer_player1TextView"
@@ -42,14 +42,15 @@
                 android:text="@string/select_player1"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/matchPlayer_firstPlayerSpinner"
+            <Button
+                android:id="@+id/matchPlayer_firstPlayerButton"
+                style="@style/buttonBorderless"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/matchPlayer_secondPlayerSpinner"
+                android:layout_alignLeft="@+id/matchPlayer_secondPlayerButton"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignStart="@+id/matchPlayer_secondPlayerSpinner"
+                android:layout_alignStart="@+id/matchPlayer_secondPlayerButton"
                 android:layout_below="@id/matchPlayer_player1TextView"
                 android:paddingBottom="@dimen/spinner_padding_small"
                 android:paddingLeft="@dimen/spinner_padding_small"
@@ -61,7 +62,7 @@
                 style="@style/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/matchPlayer_firstPlayerSpinner"
+                android:layout_below="@id/matchPlayer_firstPlayerButton"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/text_view_margin_settings_small"
                 android:layout_marginTop="@dimen/text_view_margin_settings_small"
@@ -80,9 +81,10 @@
                 android:text="@string/select_player2"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/matchPlayer_secondPlayerSpinner"
+            <Button
+                android:id="@+id/matchPlayer_secondPlayerButton"
                 android:layout_width="fill_parent"
+                style="@style/buttonBorderless"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/matchPlayer_player2TextView"
                 android:layout_centerHorizontal="true"
@@ -95,14 +97,14 @@
                 android:id="@+id/matchPlayer_buttonHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/matchPlayer_secondPlayerSpinner"
+                android:layout_below="@id/matchPlayer_secondPlayerButton"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/button_padding"
                 android:layout_marginTop="@dimen/button_padding">
 
 
                 <Button
-                    android:id="@+id/matchPlayer_CleanButton"
+                    android:id="@+id/matchPlayer_cleanButton"
                     style="@style/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,8 +119,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/button_padding"
                     android:layout_marginTop="@dimen/button_padding"
-                    android:layout_toEndOf="@id/matchPlayer_CleanButton"
-                    android:layout_toRightOf="@id/matchPlayer_CleanButton"
+                    android:layout_toEndOf="@id/matchPlayer_cleanButton"
+                    android:layout_toRightOf="@id/matchPlayer_cleanButton"
                     android:text="@string/activity_paring_add_paring" />
 
             </RelativeLayout>
@@ -127,24 +129,23 @@
                 android:id="@+id/matchPlayer_PlayersList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignLeft="@+id/matchPlayer_secondPlayerSpinner"
+                android:layout_alignLeft="@+id/matchPlayer_secondPlayerButton"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignStart="@+id/matchPlayer_secondPlayerSpinner"
+                android:layout_alignStart="@+id/matchPlayer_secondPlayerButton"
                 android:layout_below="@id/matchPlayer_buttonHolder"
                 android:layout_marginTop="@dimen/standard_margin"
-                android:paddingBottom="@dimen/footer_height"
                 android:clipToPadding="false"
+                android:paddingBottom="@dimen/footer_height"
                 android:scrollbars="vertical" />
         </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/paring_nextRound"
+            android:id="@+id/floating_action_button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:layout_marginBottom="@dimen/floating_button_margin"
-            android:layout_marginRight="@dimen/floating_button_margin"
+            android:layout_margin="@dimen/floating_button_margin"
             android:src="@drawable/ic_navigate_next"
             app:layout_anchor="@id/matchPlayer_PlayersList"
             app:layout_anchorGravity="bottom|right|end" />

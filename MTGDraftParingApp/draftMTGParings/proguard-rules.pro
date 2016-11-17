@@ -63,3 +63,9 @@
 public static java.lang.String TABLENAME;
 }
 -keep class **$Properties
+
+#Crashlytics
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**

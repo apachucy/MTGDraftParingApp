@@ -1,38 +1,32 @@
 package unii.draft.mtg.parings.util.config;
 
-import javax.inject.Inject;
-
-import unii.draft.mtg.parings.logic.dagger.ApplicationComponent;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 
 public class SetPreferencesOnFirstRun {
 
-    @Inject
-    ISharedPreferences mSharedPreferences;
 
-    public SetPreferencesOnFirstRun(ApplicationComponent component) {
-        component.inject(this);
+    private SetPreferencesOnFirstRun() {
 
     }
 
-    public void defaultSharedPreferencesConfig() {
-        if (!mSharedPreferences.isFirstRun()) {
+    public static void defaultSharedPreferencesConfig(ISharedPreferences sharedPreferences) {
+        if (!sharedPreferences.isFirstRun()) {
             return;
         }
 
-        mSharedPreferences.setDisplayCounterRound(
+        sharedPreferences.setDisplayCounterRound(
                 BaseConfig.DEFAULT_DISPLAY_COUNTER_ROUND);
-        mSharedPreferences.setFirstVibration(
+        sharedPreferences.setFirstVibration(
                 BaseConfig.DEFAULT_FIRST_VIBRATION);
-        mSharedPreferences.setSecondVibration(
+        sharedPreferences.setSecondVibration(
                 BaseConfig.DEFAULT_SECOND_VIBRATION);
-        mSharedPreferences.setTimePerRound(
+        sharedPreferences.setTimePerRound(
                 BaseConfig.DEFAULT_TIME_PER_ROUND);
-        mSharedPreferences.setUseVibration(
+        sharedPreferences.setUseVibration(
                 BaseConfig.DEFAULT_USE_VIBRATION);
-        mSharedPreferences.setVibrationDuration(
+        sharedPreferences.setVibrationDuration(
                 BaseConfig.DEFAULT_VIBRATION_DURATION);
-        mSharedPreferences.setFirstRun(false);
+        sharedPreferences.setFirstRun(false);
     }
 
 

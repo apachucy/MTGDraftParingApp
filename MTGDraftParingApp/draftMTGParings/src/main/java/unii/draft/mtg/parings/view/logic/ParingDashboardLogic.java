@@ -13,9 +13,7 @@ import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
-/**
- * Created by apachucy on 2016-03-04.
- */
+
 public class ParingDashboardLogic {
     private Context mContext;
 

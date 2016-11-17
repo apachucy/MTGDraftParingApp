@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -27,17 +27,17 @@ import unii.draft.mtg.parings.view.fragments.BaseFragment;
 public class DraftSettingsFragment extends BaseFragment {
 
 
-    @Bind(R.id.settings_sittingsTextView)
-    TextView mSittingsOptionsTextView;
-    @Bind(R.id.settings_createPairingsChooserTextView)
-    TextView mCreateParingChooserTextView;
+    @Bind(R.id.settings_sittingsButton)
+    Button mSittingsOptionsTextView;
+    @Bind(R.id.settings_createPairingsChooserButton)
+    Button mCreateParingChooserTextView;
     @Inject
     ISharedPreferences mSharedPreferenceManager;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings_time, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings_draft, container, false);
         ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentView();
@@ -55,8 +55,9 @@ public class DraftSettingsFragment extends BaseFragment {
     protected void initFragmentData() {
 
     }
-    @OnClick(R.id.settings_sittingsTextView)
-    void onSittingsTextViewClicked(View view){
+
+    @OnClick(R.id.settings_sittingsButton)
+    void onSittingsTextViewClicked() {
         List<String> sittingsOptionList = new ArrayList<>();
         sittingsOptionList.add(getString(R.string.settings_sittings_none));
         sittingsOptionList.add(getString(R.string.settings_sittings_random));
@@ -65,8 +66,9 @@ public class DraftSettingsFragment extends BaseFragment {
                 mSharedPreferenceManager.getGeneratedSittingMode(), mSittingsCallback);
 
     }
-    @OnClick(R.id.settings_createPairingsChooserTextView)
-    void onCreatePairingsTextViewClicked(View view){
+
+    @OnClick(R.id.settings_createPairingsChooserButton)
+    void onCreatePairingsTextViewClicked() {
         List<String> pairingsOptionList = new ArrayList<>();
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_automatic_with_repeats));
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_manual));
@@ -137,6 +139,8 @@ public class DraftSettingsFragment extends BaseFragment {
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_MANUAL);
                     break;
                 case PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS:
+                    mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS);
+                    break;
                 default:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS);
                     break;

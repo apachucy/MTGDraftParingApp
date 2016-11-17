@@ -52,6 +52,9 @@ public final class BaseConfig {
     public static final String DATE_PATTERN = "yyyy-MM-dd";
     public static final String INTENT_PACKAGE_LIFE_COUNTER_APP = "intent.open.lifecounter";
     public static final String INTENT_PACKAGE_LIFE_COUNTER_APP_UNII = "unii.mtg.life.counter";
+    public static final String INTENT_PACKAGE_MANA_CALCULATOR_APP_UNII = "unii.mtg.mana.calculator";
+    public static final String INTENT_PACKAGE_MANA_CALCULATOR_APP = "intent.open.manacalculator";
+
     public static final String INTENT_PACKAGE_DRAFT_MTG = "unii.draft.mtg.parings";
     public static final String INTENT_OPEN_GOOGLE_PLAY = "market://details?id=";
     public static final String INTENT_OPEN_GOOGLE_PLAY_WWW = "https://play.google.com/store/apps/details?id=";
@@ -59,6 +62,7 @@ public final class BaseConfig {
     public static final String INTENT_OPEN_EMAIL = "mailto:";
     public static final String INTENT_EMAIL_RECIPIENT = "pachucek@gmail.com";
     public static final String INTENT_EMAIL_SUBJECT = "[MTGDraftParingApp] Idea for new feature";
+    public static final String INTENT_SHARE_DATA_TYPE = "text/plain";
 
 
 }

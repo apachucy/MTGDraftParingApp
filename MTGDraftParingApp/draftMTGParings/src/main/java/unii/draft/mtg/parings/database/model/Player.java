@@ -1,5 +1,6 @@
 package unii.draft.mtg.parings.database.model;
 
+import java.util.List;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import de.greenrobot.dao.DaoException;
 
@@ -11,13 +12,6 @@ public class Player {
 
     private Long id;
     private String PlayerName;
-    private Integer PlayerMatchPoints;
-    private Float PlayerMatchOverallWin;
-    private Float OponentsMatchOveralWins;
-    private Float PlayerGamesOverallWin;
-    private Float OponentsGamesOverallWin;
-    private Boolean Dropped;
-    private Long DraftId;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -25,9 +19,7 @@ public class Player {
     /** Used for active entity operations. */
     private transient PlayerDao myDao;
 
-    private Draft draft;
-    private Long draft__resolvedKey;
-
+    private List<PlayerDraftJoinTable> Players;
 
     public Player() {
     }
@@ -36,16 +28,9 @@ public class Player {
         this.id = id;
     }
 
-    public Player(Long id, String PlayerName, Integer PlayerMatchPoints, Float PlayerMatchOverallWin, Float OponentsMatchOveralWins, Float PlayerGamesOverallWin, Float OponentsGamesOverallWin, Boolean Dropped, Long DraftId) {
+    public Player(Long id, String PlayerName) {
         this.id = id;
         this.PlayerName = PlayerName;
-        this.PlayerMatchPoints = PlayerMatchPoints;
-        this.PlayerMatchOverallWin = PlayerMatchOverallWin;
-        this.OponentsMatchOveralWins = OponentsMatchOveralWins;
-        this.PlayerGamesOverallWin = PlayerGamesOverallWin;
-        this.OponentsGamesOverallWin = OponentsGamesOverallWin;
-        this.Dropped = Dropped;
-        this.DraftId = DraftId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -70,85 +55,26 @@ public class Player {
         this.PlayerName = PlayerName;
     }
 
-    public Integer getPlayerMatchPoints() {
-        return PlayerMatchPoints;
-    }
-
-    public void setPlayerMatchPoints(Integer PlayerMatchPoints) {
-        this.PlayerMatchPoints = PlayerMatchPoints;
-    }
-
-    public Float getPlayerMatchOverallWin() {
-        return PlayerMatchOverallWin;
-    }
-
-    public void setPlayerMatchOverallWin(Float PlayerMatchOverallWin) {
-        this.PlayerMatchOverallWin = PlayerMatchOverallWin;
-    }
-
-    public Float getOponentsMatchOveralWins() {
-        return OponentsMatchOveralWins;
-    }
-
-    public void setOponentsMatchOveralWins(Float OponentsMatchOveralWins) {
-        this.OponentsMatchOveralWins = OponentsMatchOveralWins;
-    }
-
-    public Float getPlayerGamesOverallWin() {
-        return PlayerGamesOverallWin;
-    }
-
-    public void setPlayerGamesOverallWin(Float PlayerGamesOverallWin) {
-        this.PlayerGamesOverallWin = PlayerGamesOverallWin;
-    }
-
-    public Float getOponentsGamesOverallWin() {
-        return OponentsGamesOverallWin;
-    }
-
-    public void setOponentsGamesOverallWin(Float OponentsGamesOverallWin) {
-        this.OponentsGamesOverallWin = OponentsGamesOverallWin;
-    }
-
-    public Boolean getDropped() {
-        return Dropped;
-    }
-
-    public void setDropped(Boolean Dropped) {
-        this.Dropped = Dropped;
-    }
-
-    public Long getDraftId() {
-        return DraftId;
-    }
-
-    public void setDraftId(Long DraftId) {
-        this.DraftId = DraftId;
-    }
-
-    /** To-one relationship, resolved on first access. */
-    public Draft getDraft() {
-        Long __key = this.DraftId;
-        if (draft__resolvedKey == null || !draft__resolvedKey.equals(__key)) {
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<PlayerDraftJoinTable> getPlayers() {
+        if (Players == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            DraftDao targetDao = daoSession.getDraftDao();
-            Draft draftNew = targetDao.load(__key);
+            PlayerDraftJoinTableDao targetDao = daoSession.getPlayerDraftJoinTableDao();
+            List<PlayerDraftJoinTable> PlayersNew = targetDao._queryPlayer_Players(id);
             synchronized (this) {
-                draft = draftNew;
-            	draft__resolvedKey = __key;
+                if(Players == null) {
+                    Players = PlayersNew;
+                }
             }
         }
-        return draft;
+        return Players;
     }
 
-    public void setDraft(Draft draft) {
-        synchronized (this) {
-            this.draft = draft;
-            DraftId = draft == null ? null : draft.getId();
-            draft__resolvedKey = DraftId;
-        }
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetPlayers() {
+        Players = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

@@ -4,12 +4,12 @@ package unii.draft.mtg.parings.logic.dagger;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import unii.draft.mtg.parings.buisness.algorithm.ManualParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.AutomaticParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.ManualParingAlgorithm;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.sharedprefrences.SharedPreferencesManager;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
-import unii.draft.mtg.parings.util.config.SetPreferencesOnFirstRun;
+import unii.draft.mtg.parings.util.helper.DatabaseHelper;
 
 @Singleton
 @Component(modules = {ApplicationModule.class})
@@ -26,5 +26,5 @@ public interface ApplicationComponent {
 
     void inject(AlgorithmChooser provideAlgorithmChooser);
 
-    void inject (SetPreferencesOnFirstRun provideSetPreferencesOnFirstRun);
+    void inject(DatabaseHelper databaseHelper);
 }
