@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.buisness.algorithm;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,23 +11,10 @@ import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
 public class AutomaticParingAlgorithm extends BaseAlgorithm {
-    public static int DEFAULT_RANDOM_SEED;
-    private int mMaxRounds;
-    private int mCurrentRound;
-    private Player mPlayerWithBye;
 
-    /**
-     * @param playerNames list of players
-     * @param rounds      max number of played rounds
-     */
-    @Override
-    public void startAlgorithm(List<String> playerNames, int rounds) {
-        super.startAlgorithm(playerNames, rounds);
-        mMaxRounds = rounds;
-        mCurrentRound = 0;
-        DEFAULT_RANDOM_SEED = getDraftStartedPlayerList().size();
-        mPlayerWithBye = null;
 
+    public AutomaticParingAlgorithm(Context context) {
+        super(context);
     }
 
 
@@ -33,10 +22,10 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
     public List<Game> getParings() {
         List<Player> filteredPlayerList = getFilteredPlayerList(false);
         List<Game> gameList = null;
-        if (mCurrentRound == 0) {
+        if (getCurrentRound() == 0) {
             calculatePairAtStart(filteredPlayerList);
 
-        } else if (mCurrentRound < mMaxRounds) {
+        } else if (getCurrentRound() < getMaxRound()) {
             sortPlayers(filteredPlayerList);
 
         } else {
@@ -49,12 +38,12 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         if (filteredPlayerList.size() % 2 == 1) {
 
             movePlayerWithByeOnLastPosition(filteredPlayerList);
-            mPlayerWithBye = filteredPlayerList.get(filteredPlayerList.size() - 1);
-            addedPlayers.remove(mPlayerWithBye);
+            setPlayerWithBye(filteredPlayerList.get(filteredPlayerList.size() - 1));
+            addedPlayers.remove(getPlayerWithBye());
 
         }
         // Game list should have size players/2
-        gameList = new ArrayList<Game>(filteredPlayerList.size() / 2);
+        gameList = new ArrayList<>(filteredPlayerList.size() / 2);
 
         for (int i = 0; i < filteredPlayerList.size(); i++) {
             // get only two players name
@@ -94,16 +83,11 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
             }
 
         }
-
-        mCurrentRound++;
-
+        setCurrentRound(getCurrentRound() + 1);
+        setRoundList(gameList);
         return gameList;
     }
 
-    @Override
-    public int getCurrentRound() {
-        return mCurrentRound;
-    }
 
     @Override
     public List<Player> getSortedPlayerList() {
@@ -119,10 +103,6 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         return playerList;
     }
 
-    @Override
-    public Player getPlayerWithBye() {
-        return mPlayerWithBye;
-    }
 
     @Override
     public void setPlayerGameList(List<Game> playerList) {
@@ -132,15 +112,9 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
 
     @Override
     public void setPlayerWithBye(Player playerWithBye) {
-        //not implemented
-
+        super.setPlayerWithBye(playerWithBye);
     }
 
-
-    @Override
-    public int getMaxRound() {
-        return mMaxRounds;
-    }
 
     /**
      * Each player has equal point <br>
@@ -149,7 +123,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
     private void calculatePairAtStart(List<Player> playerList) {
         Random random = new Random();
         // swap element at random
-        for (int i = 0; i < DEFAULT_RANDOM_SEED; i++) {
+        for (int i = 0; i < getDefaultRandomSeed(); i++) {
             int swapA = random.nextInt(playerList.size());
             int swapB = random.nextInt(playerList.size());
             Collections.swap(playerList, swapA, swapB);
@@ -168,7 +142,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         for (int i = playerList.size() - 1; i >= 0; i--) {
             if (!playerList.get(i).hasBye()) {
                 playerList.get(i).setHasBye(true);
-                mPlayerWithBye = playerList.get(i);
+                setPlayerWithBye(playerList.get(i));
                 playerPosition = i;
                 break;
             }

@@ -49,7 +49,7 @@ public class ApplicationModule implements IApplicationModule {
     @Singleton
     @Override
     public IParingAlgorithm provideManualAlgorithmManager() {
-        return new ManualParingAlgorithm();
+        return new ManualParingAlgorithm(mContext);
     }
 
 
@@ -58,7 +58,7 @@ public class ApplicationModule implements IApplicationModule {
     @Singleton
     @Override
     public IParingAlgorithm provideAutomaticAlgorithmManager() {
-        return new AutomaticParingAlgorithm();
+        return new AutomaticParingAlgorithm(mContext);
     }
 
 

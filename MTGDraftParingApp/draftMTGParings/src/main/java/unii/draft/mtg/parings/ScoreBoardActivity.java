@@ -3,7 +3,6 @@ package unii.draft.mtg.parings;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -34,6 +33,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
+import unii.draft.mtg.parings.buisness.algorithm.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
@@ -129,6 +129,12 @@ public class ScoreBoardActivity extends BaseActivity {
         return true;
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
@@ -201,6 +207,8 @@ public class ScoreBoardActivity extends BaseActivity {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
             dialog.dismiss();
+            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            baseAlgorithm.clearCache();
             finish();
         }
     };
@@ -279,6 +287,12 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     private void initData() {
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            if (!baseAlgorithm.isLoadCachedDraftWasNeeded()) {
+                baseAlgorithm.cacheDraft();
+            }
+        }
         mPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
         mPlayerScoreBoardList = new ArrayList<>();
         mPlayerScoreBoardList.add(new ItemHeader());

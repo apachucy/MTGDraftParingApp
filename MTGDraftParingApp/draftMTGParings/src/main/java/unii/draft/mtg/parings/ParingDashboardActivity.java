@@ -27,6 +27,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
+import unii.draft.mtg.parings.buisness.algorithm.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.IStatisticCalculation;
 import unii.draft.mtg.parings.buisness.algorithm.StatisticCalculation;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
@@ -96,6 +97,7 @@ public class ParingDashboardActivity extends BaseActivity {
         initView();
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -196,6 +198,7 @@ public class ParingDashboardActivity extends BaseActivity {
 
 
     private boolean initData() {
+
         long timePerRound;
         long firstVibration;
         long secondVibration;
@@ -216,10 +219,19 @@ public class ParingDashboardActivity extends BaseActivity {
                     firstVibration, secondVibration, vibrationDuration);
         }
         isCountStarted = false;
-        if (mAlgorithmChooser.getCurrentAlgorithm() == null) {
-            return false;
+
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            if (baseAlgorithm.isLoadCachedDraftWasNeeded()) {
+                mGameList = ((BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm()).getGameRoundList();
+            } else {
+                mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings();
+                //save round in sharedPreferences
+                baseAlgorithm.cacheDraft();
+
+
+            }
         }
-        mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings();
         if (mGameList == null || mGameList.isEmpty()) {
             return false;
         }
@@ -262,6 +274,12 @@ public class ParingDashboardActivity extends BaseActivity {
         }
     };
 
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+
+    }
 
     private MaterialDialog.SingleButtonCallback mDownloadMTGCounterAppListener = new MaterialDialog.SingleButtonCallback() {
         @Override

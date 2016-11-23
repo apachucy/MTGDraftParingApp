@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="unii.draft.mtg.parings"
-    android:versionCode="27"
-    android:versionName="1.0.0">
+    package="unii.draft.mtg.parings">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />

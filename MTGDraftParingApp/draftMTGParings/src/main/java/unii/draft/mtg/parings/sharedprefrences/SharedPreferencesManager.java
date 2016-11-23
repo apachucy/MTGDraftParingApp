@@ -214,4 +214,6 @@ public class SharedPreferencesManager implements ISharedPreferences {
         mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN, isVisible).apply();
     }
 
+
+
 }

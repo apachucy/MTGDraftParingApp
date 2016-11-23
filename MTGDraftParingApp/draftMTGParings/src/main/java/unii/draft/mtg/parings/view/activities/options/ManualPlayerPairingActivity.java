@@ -23,7 +23,7 @@ import butterknife.OnClick;
 import unii.draft.mtg.parings.BaseActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
@@ -75,6 +75,10 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     }
 
     private void initData() {
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            baseAlgorithm.isLoadCachedDraftWasNeeded();
+        }
         List<Player> playerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
         mPlayerNameList = new ArrayList<>();
         mPlayerNameList.addAll(getPlayerNameList(playerList));
@@ -182,6 +186,8 @@ public class ManualPlayerPairingActivity extends BaseActivity {
             if (mPlayerNameList.size() == 1 && !mPlayerNameList.get(0).equals(getString(R.string.spinner_empty_player_list))) {
                 mAlgorithmChooser.getCurrentAlgorithm().setPlayerWithBye(mAlgorithmChooser.getCurrentAlgorithm().getPlayer(mPlayerNameList.get(0)));
             }
+
+            saveRound();
             Intent intent = new Intent(ManualPlayerPairingActivity.this, ParingDashboardActivity.class);
             startActivity(intent);
             finish();
@@ -205,5 +211,10 @@ public class ManualPlayerPairingActivity extends BaseActivity {
                 .show();
     }
 
-
+    private void saveRound() { //save round in sharedPreferences
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            baseAlgorithm.cacheDraft();
+        }
+    }
 }

@@ -26,6 +26,7 @@ import butterknife.OnClick;
 import dagger.Lazy;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.buisness.algorithm.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -191,7 +192,10 @@ public class GameMenuFragment extends BaseFragment {
                 Intent intent;
                 //set parings Factory
                 mAlgorithmChooser.get().getCurrentAlgorithm().startAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString()));
-
+                if (mAlgorithmChooser.get().getCurrentAlgorithm() instanceof BaseAlgorithm) {
+                    BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.get().getCurrentAlgorithm();
+                    baseAlgorithm.cacheDraft();
+                }
                 //set started activity
                 if (mSharedPreferenceManager.get().getGeneratedSittingMode() == SittingsMode.SITTINGS_RANDOM) {
                     intent = new Intent(mActivity, SittingsActivity.class);

@@ -103,6 +103,7 @@ public class ParingDashboardLogic {
         }
         paringAlgorithm.getSortedPlayerList();
 
+
     }
 
     public String[] getPlayerNameList(List<Game> gameList) {
