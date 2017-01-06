@@ -48,6 +48,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\gson-2.7_8b53e8835b7c191a2baa82461532f16578c667b0.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.github.afollestad.material-dialogs\core\0.8.5.6\jars\classes.jar"
         jumboMode="false"
         optimize="true"

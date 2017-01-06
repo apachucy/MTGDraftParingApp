@@ -112,10 +112,17 @@ public class TimeSettingsFragment extends BaseFragment {
 
             @Override
             public void updateSharedPreferences(String newData) {
-                long timePerRound = longAsMinutes(convertStringToLong(newData));
-                if (timePerRound != mSharedPreferenceManager.getTimePerRound()) {
-                    mSharedPreferenceManager.setTimePerRound(timePerRound);
+                try {
+                    long timePerRound = longAsMinutes(convertStringToLong(newData));
+                    if (timePerRound != mSharedPreferenceManager.getTimePerRound()) {
+                        mSharedPreferenceManager.setTimePerRound(timePerRound);
+                    }
+                } catch (NumberFormatException exception) {
+                    return;
+                } finally {
+
                 }
+
             }
         };
         showEditTextDialog(getContext(), getString(R.string.settings_dialog_round_time_title), getString(R.string.settings_dialog_round_time_content),
@@ -134,9 +141,15 @@ public class TimeSettingsFragment extends BaseFragment {
 
             @Override
             public void updateSharedPreferences(String newData) {
-                long newValue = longAsMinutes(convertStringToLong(newData));
-                if (newValue != mSharedPreferenceManager.getFirstVibration()) {
-                    mSharedPreferenceManager.setFirstVibration(newValue);
+                try {
+                    long newValue = longAsMinutes(convertStringToLong(newData));
+                    if (newValue != mSharedPreferenceManager.getFirstVibration()) {
+                        mSharedPreferenceManager.setFirstVibration(newValue);
+                    }
+                } catch (NumberFormatException exception) {
+                    return;
+                } finally {
+
                 }
             }
         };
@@ -157,9 +170,15 @@ public class TimeSettingsFragment extends BaseFragment {
 
             @Override
             public void updateSharedPreferences(String newData) {
-                long newValue = longAsMinutes(convertStringToLong(newData));
-                if (newValue != mSharedPreferenceManager.getSecondVibration() && newValue < mSharedPreferenceManager.getFirstVibration()) {
-                    mSharedPreferenceManager.setSecondVibration(newValue);
+                try {
+                    long newValue = longAsMinutes(convertStringToLong(newData));
+                    if (newValue != mSharedPreferenceManager.getSecondVibration() && newValue < mSharedPreferenceManager.getFirstVibration()) {
+                        mSharedPreferenceManager.setSecondVibration(newValue);
+                    }
+                } catch (NumberFormatException exception) {
+                    return;
+                } finally {
+
                 }
             }
         };
@@ -181,9 +200,15 @@ public class TimeSettingsFragment extends BaseFragment {
 
             @Override
             public void updateSharedPreferences(String newData) {
-                long newValue = longAsSec(convertStringToLong(newData));
-                if (newValue != mSharedPreferenceManager.getVibrationDuration()) {
-                    mSharedPreferenceManager.setVibrationDuration(newValue);
+                try {
+                    long newValue = longAsSec(convertStringToLong(newData));
+                    if (newValue != mSharedPreferenceManager.getVibrationDuration()) {
+                        mSharedPreferenceManager.setVibrationDuration(newValue);
+                    }
+                } catch (NumberFormatException exception) {
+                    return;
+                } finally {
+
                 }
             }
 
