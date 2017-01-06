@@ -86,3 +86,8 @@ public static java.lang.String TABLENAME;
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
+
+#Parcelable bug without using any parcelable
+-keepclassmembers class * implements android.os.Parcelable {
+    static ** CREATOR;
+}

@@ -1,8 +1,5 @@
 package unii.draft.mtg.parings.sharedprefrences;
 
-import java.util.List;
-
-import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 
 public interface ISharedPreferences {
