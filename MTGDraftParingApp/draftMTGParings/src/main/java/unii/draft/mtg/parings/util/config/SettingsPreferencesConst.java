@@ -27,6 +27,7 @@ public class SettingsPreferencesConst {
 
     public static final String PAIRINGS_TYPE = SettingsPreferencesConst.class.getName() + "pairings_type";
     public static final String SITTINGS = SettingsPreferencesConst.class.getName() + "sittings_mode";
+    public static final String SAVE_DRAFT_RESULTS  = SettingsPreferencesConst.class.getName() + "save_draft_results";
 
     /**
      * Guide Tour

@@ -23,7 +23,7 @@ import butterknife.OnClick;
 import unii.draft.mtg.parings.BaseActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.buisness.algorithm.BaseAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;

@@ -33,8 +33,8 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
-import unii.draft.mtg.parings.buisness.algorithm.BaseAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.logic.pojo.ItemHeader;
@@ -51,6 +51,8 @@ import unii.draft.mtg.parings.view.activities.options.SaveScoreBoardActivity;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 
+import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_DRAFT_SAVED_NAME;
+
 
 public class ScoreBoardActivity extends BaseActivity {
 
@@ -63,6 +65,7 @@ public class ScoreBoardActivity extends BaseActivity {
 
     private List<Player> mPlayerList;
     private List<IAdapterItem> mPlayerScoreBoardList;
+    private String mDraftName;
 
     @Bind(R.id.player_position_roundTextView)
     TextView mRoundTextView;
@@ -109,14 +112,26 @@ public class ScoreBoardActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_scoreboard);
         ButterKnife.bind(this);
 
-        initData();
+        initData(savedInstanceState);
         initToolBar();
         initView();
     }
 
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        mDraftName = savedInstanceState.getString(BUNDLE_KEY_DRAFT_SAVED_NAME);
+    }
+
+    // invoked when the activity may be temporarily destroyed, save the instance state here
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(BUNDLE_KEY_DRAFT_SAVED_NAME, mDraftName);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -154,12 +169,7 @@ public class ScoreBoardActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == BaseConfig.DRAFT_NAME_SET) {
                 if (data.getExtras().containsKey(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME)) {
-                    String savedGameName = data.getExtras().getString(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME);
-
-                    SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
-                    String currentDateAndTime = sdf.format(new Date());
-                    mDatabaseHelper.get().saveDraft(mPlayerList, savedGameName, currentDateAndTime, mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), Toast.LENGTH_LONG).show();
+                    mDraftName = data.getExtras().getString(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME);
                 }
             } else if (requestCode == BaseConfig.DRAFT_PLAYERS_DROPPED) {
                 mAdapter.notifyDataSetChanged();
@@ -207,12 +217,28 @@ public class ScoreBoardActivity extends BaseActivity {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
             dialog.dismiss();
+            if ((mDraftName != null && mSharedPreferenceManager.getSaveDraftResults() == 0) || mSharedPreferenceManager.getSaveDraftResults() == 1) {
+                saveDraft(mDraftName);
+            }
             BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
             baseAlgorithm.clearCache();
             finish();
         }
     };
 
+    private void saveDraft(String draftName) {
+        String tempDraftName;
+        SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
+        String currentDateAndTime = sdf.format(new Date());
+        if (draftName == null || draftName.isEmpty()) {
+            tempDraftName = currentDateAndTime;
+        } else {
+            tempDraftName = draftName;
+        }
+        mDatabaseHelper.get().saveDraft(mPlayerList, tempDraftName, currentDateAndTime, mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
+        Toast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), Toast.LENGTH_LONG).show();
+
+    }
 
     private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView,
                                      ImageView dropPlayerButton, ImageView saveDraft, ImageView shareContent) {
@@ -286,7 +312,11 @@ public class ScoreBoardActivity extends BaseActivity {
         });
     }
 
-    private void initData() {
+    private void initData(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            mDraftName = savedInstanceState.getString(BUNDLE_KEY_DRAFT_SAVED_NAME);
+        }
         if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
             BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
             if (!baseAlgorithm.isLoadCachedDraftWasNeeded()) {

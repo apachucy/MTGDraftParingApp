@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.buisness.algorithm.IParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;

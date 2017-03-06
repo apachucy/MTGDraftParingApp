@@ -7,9 +7,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import unii.draft.mtg.parings.buisness.algorithm.AutomaticParingAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.IParingAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.ManualParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.automatic.AutomaticParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.manual.ManualParingAlgorithm;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.buisness.share.scoreboard.ShareDataContent;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
@@ -17,7 +17,6 @@ import unii.draft.mtg.parings.buisness.sittings.RandomSittingGenerator;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.sharedprefrences.SharedPreferencesManager;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
-import unii.draft.mtg.parings.util.config.SettingsMenuItems;
 import unii.draft.mtg.parings.util.helper.DatabaseHelper;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 

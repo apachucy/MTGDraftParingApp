@@ -19,7 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.view.fragments.BaseFragment;
@@ -31,6 +31,8 @@ public class DraftSettingsFragment extends BaseFragment {
     Button mSittingsOptionsTextView;
     @Bind(R.id.settings_createPairingsChooserButton)
     Button mCreateParingChooserTextView;
+    @Bind(R.id.settings_saveResultsAfterDraftButton)
+    Button mSaveDraftResultButton;
     @Inject
     ISharedPreferences mSharedPreferenceManager;
 
@@ -49,6 +51,7 @@ public class DraftSettingsFragment extends BaseFragment {
     protected void initFragmentView() {
         setSittingsOptionsText(mSharedPreferenceManager.getGeneratedSittingMode());
         setPairingOptionText(mSharedPreferenceManager.getPairingType());
+        setSaveDraftResults(mSharedPreferenceManager.getSaveDraftResults());
     }
 
     @Override
@@ -72,9 +75,23 @@ public class DraftSettingsFragment extends BaseFragment {
         List<String> pairingsOptionList = new ArrayList<>();
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_automatic_with_repeats));
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_manual));
+        pairingsOptionList.add(getString(R.string.settings_pairing_mode_tournament));
         showRadioButtonListDialog(getActivity(), getString(R.string.settings_pairing_mode_dialog_title), pairingsOptionList,
                 getString(R.string.dialog_positive), getString(R.string.dialog_negative),
                 mSharedPreferenceManager.getPairingType(), mPairingTypeCallback);
+
+
+    }
+
+    @OnClick(R.id.settings_saveResultsAfterDraftButton)
+    void onSaveDraftResultsViewClicked() {
+        List<String> options = new ArrayList<>();
+        options.add(getString(R.string.negative));
+        options.add(getString(R.string.possitive));
+
+        showRadioButtonListDialog(getActivity(), getString(R.string.settings_save_draft_result_dialog_title), options,
+                getString(R.string.dialog_positive), getString(R.string.dialog_negative),
+                mSharedPreferenceManager.getSaveDraftResults(), mSaveDraftResultCallback);
 
 
     }
@@ -89,6 +106,16 @@ public class DraftSettingsFragment extends BaseFragment {
         getActivityComponent().inject(this);
     }
 
+    private void setSaveDraftResults(int mode) {
+        String option;
+        if (mode == 0) {
+            option = getString(R.string.negative);
+        } else {
+            option = getString(R.string.possitive);
+        }
+        mSaveDraftResultButton.setText(getString(R.string.text_save_results_after_draft, option));
+    }
+
     private void setSittingsOptionsText(int mode) {
         String sittingsOptionName;
         if (mode == SittingsMode.NO_SITTINGS) {
@@ -101,14 +128,43 @@ public class DraftSettingsFragment extends BaseFragment {
 
     private void setPairingOptionText(int mode) {
         String pairingOptionName;
-        if (mode == PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS) {
-            pairingOptionName = getString(R.string.settings_pairing_mode_automatic_with_repeats);
-        } else {
-            pairingOptionName = getString(R.string.settings_pairing_mode_manual);
+        switch (mode) {
+            case PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS:
+                pairingOptionName = getString(R.string.settings_pairing_mode_automatic_with_repeats);
+                break;
+            case PairingMode.PAIRING_MANUAL:
+                pairingOptionName = getString(R.string.settings_pairing_mode_manual);
+                break;
+            case PairingMode.PAIRING_TOURNAMENT:
+                pairingOptionName = getString(R.string.settings_pairing_mode_tournament);
+                break;
+            default:
+                pairingOptionName = getString(R.string.settings_pairing_mode_automatic_with_repeats);
+                break;
         }
         mCreateParingChooserTextView.setText(getString(R.string.text_personal_parings, pairingOptionName));
     }
 
+    private MaterialDialog.ListCallbackSingleChoice mSaveDraftResultCallback = new MaterialDialog.ListCallbackSingleChoice() {
+        @Override
+        public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+            /**
+             * If you use alwaysCallSingleChoiceCallback(), which is discussed below,
+             * returning false here won't allow the newly selected radio button to actually be selected.
+             **/
+            switch (which) {
+                case 0:
+                    mSharedPreferenceManager.setSaveDraftResults(0);
+                    break;
+                case 1:
+                default:
+                    mSharedPreferenceManager.setSaveDraftResults(1);
+                    break;
+            }
+            setSaveDraftResults(mSharedPreferenceManager.getSaveDraftResults());
+            return true;
+        }
+    };
 
     private MaterialDialog.ListCallbackSingleChoice mSittingsCallback = new MaterialDialog.ListCallbackSingleChoice() {
         @Override
@@ -140,6 +196,9 @@ public class DraftSettingsFragment extends BaseFragment {
                     break;
                 case PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS);
+                    break;
+                case PairingMode.PAIRING_TOURNAMENT:
+                    mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_TOURNAMENT);
                     break;
                 default:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS);

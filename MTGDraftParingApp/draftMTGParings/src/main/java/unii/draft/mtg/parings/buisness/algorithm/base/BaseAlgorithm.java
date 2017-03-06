@@ -1,4 +1,4 @@
-package unii.draft.mtg.parings.buisness.algorithm;
+package unii.draft.mtg.parings.buisness.algorithm.base;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

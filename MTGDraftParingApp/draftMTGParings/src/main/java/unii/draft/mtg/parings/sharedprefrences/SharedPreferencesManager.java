@@ -141,6 +141,17 @@ public class SharedPreferencesManager implements ISharedPreferences {
     }
 
     @Override
+    public int getSaveDraftResults() {
+        return mSharedPreferences.getInt(SettingsPreferencesConst.SAVE_DRAFT_RESULTS, BaseConfig.DEFAULT_SAVE_DRAFT_RESULT);
+    }
+
+    @Override
+    public void setSaveDraftResults(int shouldSave) {
+        mSharedPreferences.edit().putInt(SettingsPreferencesConst.SAVE_DRAFT_RESULTS, shouldSave).apply();
+
+    }
+
+    @Override
     public void setPairingType(int pairingType) {
         mSharedPreferences.edit().putInt(SettingsPreferencesConst.PAIRINGS_TYPE, pairingType).apply();
     }
@@ -213,7 +224,6 @@ public class SharedPreferencesManager implements ISharedPreferences {
     public void setGuideTourOnSittingsScreen(boolean isVisible) {
         mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN, isVisible).apply();
     }
-
 
 
 }

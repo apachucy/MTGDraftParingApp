@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,8 +27,9 @@ import butterknife.OnClick;
 import dagger.Lazy;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.buisness.algorithm.BaseAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.tournament.TournamentRounds;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
@@ -54,6 +56,10 @@ public class GameMenuFragment extends BaseFragment {
 
     @Bind(R.id.init_roundsTextInput)
     TextInputLayout mRoundsTextInput;
+
+
+    @Bind(R.id.init_addPlayerFromHistoryButton)
+    Button mAddPlayerFromHistoryButton;
 
     @Inject
     Lazy<ISharedPreferences> mSharedPreferenceManager;
@@ -110,22 +116,27 @@ public class GameMenuFragment extends BaseFragment {
 
     @OnClick(R.id.init_roundsButton)
     void onStartGameClick() {
-        if (!ValidationHelper.isTextInputFieldEmpty(mRoundsTextInput,
-                getString(R.string.warning_empty_field))) {
+        if (isValidRoundEditText()) {
             if (mPlayerNameList.getPlayerList().isEmpty() || mPlayerNameList.getPlayerList().size() < 2) {
                 Toast.makeText(mActivity,
                         getString(R.string.warning_need_players),
                         Toast.LENGTH_LONG).show();
                 // if number of player where bigger than
                 // round ask user to change it
-            } else if (Integer.parseInt(mRoundsTextInput.getEditText().getText()
+            } else if (mRoundsTextInput.getVisibility() == View.VISIBLE && Integer.parseInt(mRoundsTextInput.getEditText().getText()
                     .toString()) >= mPlayerNameList.getPlayerList().size()) {
                 mActivityHandler.showInfoDialog(getString(R.string.dialog_warning_title),
                         getString(R.string.dialog_warning_message),
                         getString(R.string.dialog_start_button));
             } else {
+                int rounds = 0;
+                if (mRoundsTextInput.getVisibility() == View.VISIBLE && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
+                    rounds = Integer.parseInt(mRoundsTextInput.getEditText().getText().toString());
+                } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
+                    rounds = new TournamentRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
+                }
                 mActivityHandler.showInfoDialog(getString(R.string.dialog_start_title),
-                        getString(R.string.dialog_start_message, mPlayerNameList.getPlayerList().size(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString())),
+                        getString(R.string.dialog_start_message, mPlayerNameList.getPlayerList().size(), rounds),
                         getString(R.string.start_game), mStartGameDialogOnClickListener);
 
             }
@@ -134,11 +145,11 @@ public class GameMenuFragment extends BaseFragment {
 
     @OnClick(R.id.init_addPlayerFromHistoryButton)
     public void onAddPlayersFromHistoryClicked() {
-        final List<String> playersNameFromHistory = mDatabaseHelper.get().getAllPlayersNames();
-        if (playersNameFromHistory.isEmpty()) {
+        if (playersNotExistInHistory()) {
             Toast.makeText(getContext(), getString(R.string.no_players_from_history), Toast.LENGTH_SHORT).show();
             return;
         }
+        final List<String> playersNameFromHistory = mDatabaseHelper.get().getAllPlayersNames();
 
         MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice = new MaterialDialog.ListCallbackMultiChoice() {
             @Override
@@ -169,7 +180,11 @@ public class GameMenuFragment extends BaseFragment {
         mRoundsTextInput.setErrorEnabled(true);
         mPlayerNameTextInput.setErrorEnabled(true);
         View header = inflater.inflate(R.layout.header_names, null);
+        if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
+            mRoundsTextInput.setVisibility(View.GONE);
+        }
 
+        mAddPlayerFromHistoryButton.setEnabled(!playersNotExistInHistory());
         mPlayerList.addHeaderView(header);
         mPlayerList.setAdapter(mListAdapter);
     }
@@ -184,14 +199,32 @@ public class GameMenuFragment extends BaseFragment {
 
     }
 
+    private boolean isValidRoundEditText() {
+        return (mRoundsTextInput.getVisibility() != View.VISIBLE) || (mRoundsTextInput.getVisibility() == View.VISIBLE && !ValidationHelper.isTextInputFieldEmpty(mRoundsTextInput,
+                getString(R.string.warning_empty_field)));
+    }
+
+
+    private boolean playersNotExistInHistory() {
+        final List<String> playersNameFromHistory = mDatabaseHelper.get().getAllPlayersNames();
+        return playersNameFromHistory.isEmpty();
+    }
+
     private MaterialDialog.SingleButtonCallback mStartGameDialogOnClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            if (mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
+            int rounds = 0;
+            if (mRoundsTextInput.getVisibility() == View.VISIBLE && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
+                rounds = Integer.parseInt(mRoundsTextInput.getEditText().getText().toString());
+            } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
+                rounds = new TournamentRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
+            }
+
+            if (rounds != 0) {
                 dialog.dismiss();
                 Intent intent;
                 //set parings Factory
-                mAlgorithmChooser.get().getCurrentAlgorithm().startAlgorithm(mPlayerNameList.getPlayerList(), Integer.parseInt(mRoundsTextInput.getEditText().getText().toString()));
+                mAlgorithmChooser.get().getCurrentAlgorithm().startAlgorithm(mPlayerNameList.getPlayerList(), rounds);
                 if (mAlgorithmChooser.get().getCurrentAlgorithm() instanceof BaseAlgorithm) {
                     BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.get().getCurrentAlgorithm();
                     baseAlgorithm.cacheDraft();

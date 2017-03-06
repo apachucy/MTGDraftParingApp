@@ -104,6 +104,9 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
 
     <!-- Create personal parings-->
     <string name="text_personal_parings">Create manual parings:  %1$s</string>
+    <string name="text_save_results_after_draft">Save Results after draft: %1$s</string>
+    <string name="possitive">Yes</string>
+    <string name="negative">No</string>
     <string name="activity_paring_add_paring">Add Paring</string>
     <string name="activity_paring_clean_paring">Clean Parings</string>
     <string name="activity_paring_play_round">Play</string>
@@ -127,7 +130,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="action_calculate_mana">Open Mana Calculator</string>
     <string name="action_share">Share content</string>
     <string name="action_remove_player">Drop player</string>
-    <string name="help_save_dashboard">After Game you can save score board</string>
+    <string name="help_save_dashboard">After Game you can choose name for score board</string>
     <string name="help_drop_player">If there is a need player can drop a draft</string>
     <string name="help_share_content">After Game you can share it</string>
     <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
@@ -195,8 +198,10 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="dialog_negative">Cancel</string>
 
     <string name="settings_pairing_mode_manual">Manual</string>
+    <string name="settings_pairing_mode_tournament">Tournament</string>
     <string name="settings_pairing_mode_automatic_with_repeats">Automatic with repeats</string>
     <string name="settings_pairing_mode_dialog_title">Choose Pairing Options:</string>
+    <string name="settings_save_draft_result_dialog_title">Should draft results be saved:</string>
     <string name="player_sittings_position" translatable="false"> %1$d. %2$s</string>
     <string name="player_sittings_description">Sitting before 1rst round</string>
 

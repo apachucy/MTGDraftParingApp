@@ -120,6 +120,10 @@ public interface ISharedPreferences {
 
     int getPairingType();
 
+    int getSaveDraftResults();
+
+    void setSaveDraftResults(int shouldSave);
+
     void setPairingType(int pairingType);
 
     /**

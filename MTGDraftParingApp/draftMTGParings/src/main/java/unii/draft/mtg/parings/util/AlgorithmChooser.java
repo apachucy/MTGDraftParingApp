@@ -3,8 +3,8 @@ package unii.draft.mtg.parings.util;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import unii.draft.mtg.parings.buisness.algorithm.IParingAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.logic.dagger.ApplicationComponent;
 import unii.draft.mtg.parings.logic.dagger.ApplicationModule;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;

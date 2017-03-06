@@ -1,4 +1,4 @@
-package unii.draft.mtg.parings.buisness.algorithm;
+package unii.draft.mtg.parings.buisness.algorithm.base;
 
 import java.util.List;
 

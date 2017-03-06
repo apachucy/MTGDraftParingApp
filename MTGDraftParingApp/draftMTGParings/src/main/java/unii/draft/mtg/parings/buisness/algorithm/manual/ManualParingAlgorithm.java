@@ -1,9 +1,10 @@
-package unii.draft.mtg.parings.buisness.algorithm;
+package unii.draft.mtg.parings.buisness.algorithm.manual;
 
 import android.content.Context;
 
 import java.util.List;
 
+import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 

@@ -14,5 +14,5 @@ public final class BundleConst {
     public static final String BUNDLE_KEY_ROUND_TIME = "BUNDLE_KEY_ROUND_TIME";
 
     public static final String BUNDLE_KEY_SETTINGS_FRAGMENT = "BUNDLE_KEY_SETTINGS_FRAGMENT";
-
+    public static final String BUNDLE_KEY_DRAFT_SAVED_NAME = "BUNDLE_KEY_DRAFT_SAVED_NAME";
 }

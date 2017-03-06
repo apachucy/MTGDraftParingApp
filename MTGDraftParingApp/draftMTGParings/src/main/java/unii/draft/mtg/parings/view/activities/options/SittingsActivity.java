@@ -21,19 +21,17 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
-import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.BaseActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.buisness.algorithm.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
 import unii.draft.mtg.parings.view.fragments.SittingsFragment;
-import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
 import unii.draft.mtg.parings.view.logic.SittingsLogic;
 
 /**

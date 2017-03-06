@@ -98,7 +98,7 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="activity_save_score_board_info_small_text">Liste der letzten Draft befindet sich in Konfigurationen</string>
     <string name="activity_save_score_board_info_text">Draftname</string>
     <string name="activity_save_score_board_save">Speichern</string>
-    <string name="help_save_dashboard">Nachdem Sie fertig werden, können Sie Draft speichern</string>
+    <string name="help_save_dashboard">Nachdem Sie fertig werden, können Sie Draftname speichern</string>
     <string name="history_score_board_row_draft_best_player">Gewonnen: %1$s</string>
     <string name="history_score_board_row_draft_date">Date: %1$s</string>
     <string name="message_score_board_not_exists">Keine Draftliste</string>
@@ -181,5 +181,10 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="tutorial_life_app">Öffnen Sie Ihr Leben für diese Runde zu zählen</string>
     <string name="select_player_manual_title">Spieler auswählen</string>
     <string name="select_player_manual_add">Add</string>
+    <string name="possitive">Ja</string>
+    <string name="settings_pairing_mode_tournament">Turnier</string>
+    <string name="negative">Nicht</string>
+    <string name="settings_save_draft_result_dialog_title">Haben Sie Draft-Picks sparen:</string>
+    <string name="text_save_results_after_draft">Speichern Sie die Draft-Picks: %1$s</string>
 
 </resources>

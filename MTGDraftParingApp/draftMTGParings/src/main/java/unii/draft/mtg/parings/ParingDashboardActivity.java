@@ -27,9 +27,9 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
-import unii.draft.mtg.parings.buisness.algorithm.BaseAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.IStatisticCalculation;
-import unii.draft.mtg.parings.buisness.algorithm.StatisticCalculation;
+import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.IStatisticCalculation;
+import unii.draft.mtg.parings.buisness.algorithm.base.StatisticCalculation;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -276,9 +276,7 @@ public class ParingDashboardActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
-
         super.onPause();
-
     }
 
     private MaterialDialog.SingleButtonCallback mDownloadMTGCounterAppListener = new MaterialDialog.SingleButtonCallback() {

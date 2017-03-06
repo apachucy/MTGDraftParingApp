@@ -16,4 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_personal_parings" />
+
+
+    <Button
+        android:id="@+id/settings_saveResultsAfterDraftButton"
+        style="@style/buttonBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_personal_parings" />
 </LinearLayout>

@@ -1,4 +1,4 @@
-package unii.draft.mtg.parings.buisness.algorithm;
+package unii.draft.mtg.parings.buisness.algorithm.automatic;
 
 import android.content.Context;
 
@@ -7,16 +7,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
 public class AutomaticParingAlgorithm extends BaseAlgorithm {
 
-
     public AutomaticParingAlgorithm(Context context) {
         super(context);
     }
-
 
     @Override
     public List<Game> getParings() {
@@ -88,7 +87,6 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         return gameList;
     }
 
-
     @Override
     public List<Player> getSortedPlayerList() {
         List<Player> playerList = getDraftStartedPlayerList();
@@ -103,18 +101,15 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         return playerList;
     }
 
-
     @Override
     public void setPlayerGameList(List<Game> playerList) {
         //not implemented
-
     }
 
     @Override
     public void setPlayerWithBye(Player playerWithBye) {
         super.setPlayerWithBye(playerWithBye);
     }
-
 
     /**
      * Each player has equal point <br>
@@ -129,7 +124,6 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
             Collections.swap(playerList, swapA, swapB);
         }
     }
-
 
     /**
      * sort list of players <br>
@@ -147,7 +141,6 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
                 break;
             }
         }
-
         // move player with bye on last position
         // swaping with other players
         for (int i = playerPosition; i + 1 < playerList.size(); i++) {

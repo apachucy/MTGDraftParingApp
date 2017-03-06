@@ -98,7 +98,7 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="activity_save_score_board_info_small_text">Lista rozegranych draftów znajduje się w ustawieniach</string>
     <string name="activity_save_score_board_info_text">Nazwa draftu</string>
     <string name="activity_save_score_board_save">Zapisz</string>
-    <string name="help_save_dashboard">Dopiero po skończonym drafcie możesz go zapisać</string>
+    <string name="help_save_dashboard">Dopiero po skończonym drafcie możesz zapisać wyniki</string>
     <string name="history_score_board_row_draft_best_player">Wygrał: %1$s</string>
     <string name="history_score_board_row_draft_date">Data: %1$s</string>
     <string name="message_score_board_not_exists">Brak list draftów</string>
@@ -181,4 +181,9 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="settings_dialog_round_first_vibration_hint">Propozycja: 5 minut</string>
     <string name="select_player_manual_title">Wybierz zawodnika</string>
     <string name="select_player_manual_add">Dodaj</string>
+    <string name="possitive">Tak</string>
+    <string name="settings_pairing_mode_tournament">Turniej</string>
+    <string name="negative">Nie</string>
+    <string name="settings_save_draft_result_dialog_title">Czy zapisać wyniki draftu:</string>
+    <string name="text_save_results_after_draft">Zapisz wyniki draftu: %1$s</string>
 </resources>
