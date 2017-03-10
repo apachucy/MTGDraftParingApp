@@ -12,7 +12,6 @@ import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 
 public class AlgorithmChooser {
 
-
     @Inject
     @Named(ApplicationModule.ALGORITHM_MANUAL)
     IParingAlgorithm mAlgorithmManual;

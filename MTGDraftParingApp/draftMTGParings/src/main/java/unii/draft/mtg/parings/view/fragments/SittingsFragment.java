@@ -16,16 +16,15 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.SittingsPlayerAdapter;
 
-
 public class SittingsFragment extends BaseFragment {
 
     private List<String> mPlayerNameList;
-
 
     @Inject
     AlgorithmChooser mAlgorithmChooser;
@@ -34,9 +33,6 @@ public class SittingsFragment extends BaseFragment {
 
     @Bind(R.id.table_sittingsRecyclerView)
     RecyclerView mRecyclerView;
-
-
-
 
     @Nullable
     @Override
@@ -82,6 +78,10 @@ public class SittingsFragment extends BaseFragment {
 
     @Override
     protected void initFragmentData() {
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+            BaseAlgorithm base = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            base.isLoadCachedDraftWasNeeded();
+        }
         mPlayerNameList = mSittingsGenerator.generateSittings(getPlayerNameList(mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList()));
 
     }
