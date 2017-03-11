@@ -104,8 +104,6 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerMatchPlayerView.setLayoutManager(mLayoutManager);
         mRecyclerMatchPlayerView.setAdapter(mRecyclerMatchPlayerAdapter);
-
-
     }
 
     @Override
@@ -124,7 +122,6 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     @OnClick(R.id.matchPlayer_secondPlayerButton)
     void onSecondPlayerClicked() {
         showSingleChoiceList(this, getString(R.string.select_player_manual_title), mPlayerNameList, getString(R.string.select_player_manual_add), mSelectPlayer2Action);
-
     }
 
     @OnClick(R.id.matchPlayer_cleanButton)
@@ -134,7 +131,6 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         mPlayerNameList.clear();
         List<Player> playerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
         mPlayerNameList.addAll(getPlayerNameList(playerList));
-
 
         mRecyclerMatchPlayerAdapter.notifyDataSetChanged();
         mSelectPlayer1Action.cleanName();

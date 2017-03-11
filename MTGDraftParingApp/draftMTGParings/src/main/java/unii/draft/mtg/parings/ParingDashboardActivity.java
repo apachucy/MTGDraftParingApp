@@ -41,6 +41,8 @@ import unii.draft.mtg.parings.view.adapters.PlayerMatchParingAdapter;
 import unii.draft.mtg.parings.view.custom.CounterClass;
 import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
 
+import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS_GENERATED;
+
 
 public class ParingDashboardActivity extends BaseActivity {
 
@@ -54,6 +56,7 @@ public class ParingDashboardActivity extends BaseActivity {
     private TourGuide mTutorialHandler = null;
 
     private static boolean isCountStarted;
+    private boolean isPairingsGenerated = false;
 
     @Bind(R.id.paring_counterTextView)
     TextView mCounterTextView;
@@ -61,8 +64,6 @@ public class ParingDashboardActivity extends BaseActivity {
     TextView mRoundTextView;
     @Bind(R.id.paring_paringListView)
     RecyclerView mRecyclerView;
-
-
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
@@ -70,7 +71,6 @@ public class ParingDashboardActivity extends BaseActivity {
     ISharedPreferences mSharedPreferenceManager;
     @Inject
     AlgorithmChooser mAlgorithmChooser;
-
 
     @OnClick(R.id.floating_action_button_next)
     void onEndRoundClicked() {
@@ -83,14 +83,13 @@ public class ParingDashboardActivity extends BaseActivity {
 
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paring_dashboard);
         ButterKnife.bind(this);
         initToolBar();
-        if (!initData()) {
+        if (!initData(savedInstanceState)) {
             displayErrorDialog();
             return;
         }
@@ -122,6 +121,18 @@ public class ParingDashboardActivity extends BaseActivity {
     }
 
     @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        isPairingsGenerated = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_GENERATED);
+    }
+
+    // invoked when the activity may be temporarily destroyed, save the instance state here
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(BUNDLE_KEY_PAIRINGS_GENERATED, isPairingsGenerated);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void injectDependencies(ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
@@ -135,7 +146,6 @@ public class ParingDashboardActivity extends BaseActivity {
         // set an image
         hourGlassButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_hourglass));
         openLifeAppButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_life_small));
-
 
         if (mSharedPreferenceManager.showGuideTourOnParingScreen()) {
             Sequence sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.tutorial_hour_glass), hourGlassButton),
@@ -197,7 +207,7 @@ public class ParingDashboardActivity extends BaseActivity {
     }
 
 
-    private boolean initData() {
+    private boolean initData(Bundle savedInstanceState) {
 
         long timePerRound;
         long firstVibration;
@@ -220,16 +230,20 @@ public class ParingDashboardActivity extends BaseActivity {
         }
         isCountStarted = false;
 
+//TU JEST COS NAMOTANE
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            isPairingsGenerated = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_GENERATED);
+        }
         if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
             BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
-            if (baseAlgorithm.isLoadCachedDraftWasNeeded()) {
+            if (baseAlgorithm.isLoadCachedDraftWasNeeded() || isPairingsGenerated) {
                 mGameList = ((BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm()).getGameRoundList();
             } else {
                 mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings();
+                isPairingsGenerated = true;
                 //save round in sharedPreferences
                 baseAlgorithm.cacheDraft();
-
-
             }
         }
         if (mGameList == null || mGameList.isEmpty()) {
@@ -297,6 +311,7 @@ public class ParingDashboardActivity extends BaseActivity {
         mParingDashboardLogic.addGameResult(mAlgorithmChooser.getCurrentAlgorithm(), mGameList);
         mStatisticCalculation = new StatisticCalculation(mAlgorithmChooser.getCurrentAlgorithm());
         mStatisticCalculation.calculateAll();
+        isPairingsGenerated = false;
         Intent intent = new Intent(ParingDashboardActivity.this,
                 ScoreBoardActivity.class);
         startActivity(intent);
