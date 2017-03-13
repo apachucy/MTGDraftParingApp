@@ -32,6 +32,9 @@ public class GamePreferences implements IGamePreferences {
     public DraftDataProvider getDraftDataProvider() {
         Gson gson = new Gson();
         String json = mSharedPreferences.getString(GamePreferencesConst.CURRENT_DRAFT_STATUS, null);
+        if (json == null) {
+            return null;
+        }
         return gson.fromJson(json, DraftDataProvider.class);
     }
 

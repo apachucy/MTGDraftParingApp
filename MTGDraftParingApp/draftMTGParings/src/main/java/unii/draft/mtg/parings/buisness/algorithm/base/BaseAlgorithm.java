@@ -25,6 +25,11 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
     public BaseAlgorithm(Context context) {
         mGamePreferences = new GamePreferences(context);
         mDraftDataProvider = new DraftDataProvider();
+        DraftDataProvider temp = mGamePreferences.getDraftDataProvider();
+        if (temp != null) {
+            mDraftDataProvider = temp;
+        }
+
     }
 
     public int getDefaultRandomSeed() {

@@ -74,16 +74,6 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         activityComponent.inject(this);
     }
 
-    private void initData() {
-        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
-            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
-            baseAlgorithm.isLoadCachedDraftWasNeeded();
-        }
-        List<Player> playerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
-        mPlayerNameList = new ArrayList<>();
-        mPlayerNameList.addAll(getPlayerNameList(playerList));
-        mGameList = new ArrayList<>();
-    }
 
     @Override
     protected void initToolBar() {
@@ -160,6 +150,18 @@ public class ManualPlayerPairingActivity extends BaseActivity {
 
         }
     }
+
+    private void initData() {
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            baseAlgorithm.isLoadCachedDraftWasNeeded();
+        }
+        List<Player> playerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
+        mPlayerNameList = new ArrayList<>();
+        mPlayerNameList.addAll(getPlayerNameList(playerList));
+        mGameList = new ArrayList<>();
+    }
+
 
     private boolean canAddPlayers() {
         boolean isPlayer1NameSelected = !(mSelectPlayer1Action.getCurrentName() == null || mSelectPlayer1Action.getCurrentName().isEmpty() || mSelectPlayer1Action.getCurrentName().equals(getString(R.string.spinner_empty_player_list)));

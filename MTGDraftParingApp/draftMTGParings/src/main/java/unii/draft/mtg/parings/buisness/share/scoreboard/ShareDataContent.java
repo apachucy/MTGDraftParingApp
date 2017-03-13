@@ -19,6 +19,10 @@ public class ShareDataContent implements IShareData {
 
     @Override
     public String getPlayerWithPoints(List<Player> players) {
+        if (players == null || players.isEmpty()) {
+            return null;
+        }
+
         String formattedOutPut = winnerToString(players.get(0));
         for (Player player : players) {
             formattedOutPut += playerToString(player);
