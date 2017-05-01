@@ -122,6 +122,50 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     @Override
+    protected void onPause() {
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            baseAlgorithm.cacheDraft();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+                BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+                baseAlgorithm.isLoadCachedDraftWasNeeded();
+            }
+            mPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
+            mPlayerScoreBoardList.clear();
+            mPlayerScoreBoardList.addAll(mPlayerList);
+
+            mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
+
+            mRecyclerView.setAdapter(mAdapter);
+            mRoundTextView.setText(getString(R.string.text_after_game) + " "
+                    + mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() + " "
+                    + getString(R.string.text_from) + " "
+                    + +mAlgorithmChooser.getCurrentAlgorithm().getMaxRound());
+            // when there was last game change button name
+            // show winner
+            if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() == mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
+                mWinnerTextView.setVisibility(View.VISIBLE);
+                mWinnerTextView.setText(getString(R.string.text_winner) + " "
+                        + mPlayerList.get(0).getPlayerName());
+            } else {
+                mWinnerTextView.setVisibility(View.INVISIBLE);
+            }
+        } catch (NullPointerException exception) {
+            displayErrorDialog();
+        } finally {
+            //nothing
+        }
+    }
+
+    @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         mDraftName = savedInstanceState.getString(BUNDLE_KEY_DRAFT_SAVED_NAME);
     }
@@ -193,24 +237,10 @@ public class ScoreBoardActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mRoundTextView.setText(getString(R.string.text_after_game) + " "
-                + mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() + " "
-                + getString(R.string.text_from) + " "
-                + +mAlgorithmChooser.getCurrentAlgorithm().getMaxRound());
-        // when there was last game change button name
-        // show winner
-        if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() == mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
-            mWinnerTextView.setVisibility(View.VISIBLE);
-            mWinnerTextView.setText(getString(R.string.text_winner) + " "
-                    + mPlayerList.get(0).getPlayerName());
-        } else {
-            mWinnerTextView.setVisibility(View.INVISIBLE);
-        }
+
     }
 
     private MaterialDialog.SingleButtonCallback mOnDialogButtonClick = new MaterialDialog.SingleButtonCallback() {
@@ -317,16 +347,22 @@ public class ScoreBoardActivity extends BaseActivity {
             // Restore value of members from saved state
             mDraftName = savedInstanceState.getString(BUNDLE_KEY_DRAFT_SAVED_NAME);
         }
-        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
-            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
-            if (!baseAlgorithm.isLoadCachedDraftWasNeeded()) {
-                baseAlgorithm.cacheDraft();
-            }
-        }
-        mPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
+
         mPlayerScoreBoardList = new ArrayList<>();
         mPlayerScoreBoardList.add(new ItemHeader());
-        mPlayerScoreBoardList.addAll(mPlayerList);
     }
 
+    private void displayErrorDialog() {
+        showInfoDialog(getString(R.string.dialog_error_algorithm_title),
+                getString(R.string.dialog_error_algorithm__message),
+                getString(R.string.dialog_start_button), mDialogButtonClickListener);
+    }
+
+    private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(MaterialDialog dialog, DialogAction which) {
+            dialog.dismiss();
+            finish();
+        }
+    };
 }

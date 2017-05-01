@@ -26,7 +26,9 @@
     <dimen name="button_padding_small">1dp</dimen>
     <dimen name="text_view_padding_small">1dp</dimen>
     <dimen name="text_view_padding">5dp</dimen>
-
+    <!-- Elevation -->
+    <dimen name="elevation_small">2dp</dimen>
+    <dimen name="elevation">6dp</dimen>
     <!-- Style drawable -->
     <dimen name="radius_big">5dp</dimen>
     <dimen name="stroke_width_big">5dp</dimen>

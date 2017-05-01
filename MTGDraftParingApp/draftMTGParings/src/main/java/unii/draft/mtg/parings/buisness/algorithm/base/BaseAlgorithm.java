@@ -52,8 +52,8 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
 
 
     @Override
-    public void cacheDraft() {
-        saveDraftInMemory();
+    public boolean cacheDraft() {
+        return saveDraftInMemory();
     }
 
     @Override
@@ -62,7 +62,7 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
     }
 
     @Override
-    public boolean isLoadCachedDraftWasNeeded() {
+    public boolean isLoadCachedDraftWasNeeded() throws NullPointerException {
         return loadDraftFromMemory();
     }
 
@@ -145,13 +145,19 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         mDraftDataProvider.setPlayerWithBye(mPlayerWithBye);
     }
 
-    private void saveDraftInMemory() {
-        mGamePreferences.saveDraftDataProvider(mDraftDataProvider);
+    private boolean saveDraftInMemory() {
+        if (mGamePreferences == null || mDraftDataProvider == null) {
+            return false;
+        }
+        return mGamePreferences.saveDraftDataProvider(mDraftDataProvider);
     }
 
-    private boolean loadDraftFromMemory() {
+    private boolean loadDraftFromMemory() throws NullPointerException {
         if (mDraftDataProvider == null || !mDraftDataProvider.isObjectInitialized()) {
             mDraftDataProvider = mGamePreferences.getDraftDataProvider();
+            if (mDraftDataProvider == null) {
+                throw new NullPointerException("draft data provider should not be null");
+            }
             return true;
         }
         return false;

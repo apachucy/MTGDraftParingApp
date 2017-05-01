@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
@@ -74,6 +75,31 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         activityComponent.inject(this);
     }
 
+    @Override
+    protected void onPause() {
+        saveRound();
+        super.onPause();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+                BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+                baseAlgorithm.isLoadCachedDraftWasNeeded();
+            }
+            mPlayerNameList.clear();
+            List<Player> playerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
+            mPlayerNameList.addAll(getPlayerNameList(playerList));
+            mRecyclerMatchPlayerView.setAdapter(mRecyclerMatchPlayerAdapter);
+        } catch (NullPointerException exception) {
+            displayErrorDialog();
+        } finally {
+            //Nothing here
+        }
+    }
 
     @Override
     protected void initToolBar() {
@@ -93,7 +119,6 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         mRecyclerMatchPlayerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerMatchPlayerView.setLayoutManager(mLayoutManager);
-        mRecyclerMatchPlayerView.setAdapter(mRecyclerMatchPlayerAdapter);
     }
 
     @Override
@@ -152,13 +177,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     }
 
     private void initData() {
-        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
-            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
-            baseAlgorithm.isLoadCachedDraftWasNeeded();
-        }
-        List<Player> playerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
         mPlayerNameList = new ArrayList<>();
-        mPlayerNameList.addAll(getPlayerNameList(playerList));
         mGameList = new ArrayList<>();
     }
 
@@ -185,7 +204,6 @@ public class ManualPlayerPairingActivity extends BaseActivity {
                 mAlgorithmChooser.getCurrentAlgorithm().setPlayerWithBye(mAlgorithmChooser.getCurrentAlgorithm().getPlayer(mPlayerNameList.get(0)));
             }
 
-            saveRound();
             Intent intent = new Intent(ManualPlayerPairingActivity.this, ParingDashboardActivity.class);
             startActivity(intent);
             finish();
@@ -215,4 +233,19 @@ public class ManualPlayerPairingActivity extends BaseActivity {
             baseAlgorithm.cacheDraft();
         }
     }
+
+
+    private void displayErrorDialog() {
+        showInfoDialog(getString(R.string.dialog_error_algorithm_title),
+                getString(R.string.dialog_error_algorithm__message),
+                getString(R.string.dialog_start_button), mDialogButtonClickListener);
+    }
+
+    private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(MaterialDialog dialog, DialogAction which) {
+            dialog.dismiss();
+            finish();
+        }
+    };
 }

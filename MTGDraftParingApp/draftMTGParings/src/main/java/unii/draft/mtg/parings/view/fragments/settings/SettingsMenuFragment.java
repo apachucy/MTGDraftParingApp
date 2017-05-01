@@ -2,11 +2,13 @@ package unii.draft.mtg.parings.view.fragments.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -14,6 +16,7 @@ import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.SettingsMenu;
 import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.util.config.SettingsMenuItems;
+import unii.draft.mtg.parings.util.helper.SupportAnimation;
 import unii.draft.mtg.parings.view.activities.settings.SettingsMenuActivity;
 import unii.draft.mtg.parings.view.adapters.SettingsGridViewAdapter;
 import unii.draft.mtg.parings.view.fragments.BaseFragment;
@@ -68,17 +71,26 @@ public class SettingsMenuFragment extends BaseFragment {
 
     private OnGridItemSelected mOnGridItemSelectedListener = new OnGridItemSelected() {
         @Override
-        public void onCategorySelected(SettingsMenu settingsMenu) {
+        public void onCategorySelected(View itemView, SettingsMenu settingsMenu) {
             Intent intent = new Intent(getActivity(), SettingsMenuActivity.class);
             Bundle bundle = new Bundle();
             bundle.putInt(BundleConst.BUNDLE_KEY_SETTINGS_FRAGMENT, settingsMenu.getId());
+
+
+            if (SupportAnimation.checkIfAnimationAreSupported()) {
+                ImageView imageView = (ImageView) itemView.findViewById(R.id.row_settings_chooser_image);
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(getActivity(), (View) imageView, "settingsImage");
+                bundle.putAll(options.toBundle());
+            }
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivity(intent, bundle);
         }
     };
 
     public interface OnGridItemSelected {
-        void onCategorySelected(SettingsMenu settingsMenu);
+        void onCategorySelected(View itemView, SettingsMenu settingsMenu);
     }
 
 

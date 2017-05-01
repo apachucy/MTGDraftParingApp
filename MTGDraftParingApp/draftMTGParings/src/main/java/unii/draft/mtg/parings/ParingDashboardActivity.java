@@ -42,6 +42,8 @@ import unii.draft.mtg.parings.view.custom.CounterClass;
 import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
 
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS_GENERATED;
+import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS_TIMER_ON;
+import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS_TIMER_TIME;
 
 
 public class ParingDashboardActivity extends BaseActivity {
@@ -55,8 +57,9 @@ public class ParingDashboardActivity extends BaseActivity {
     private ParingDashboardLogic mParingDashboardLogic;
     private TourGuide mTutorialHandler = null;
 
-    private static boolean isCountStarted;
+    private boolean isCountStarted = false;
     private boolean isPairingsGenerated = false;
+    private long mTimerTimeTillEnd = 0;
 
     @Bind(R.id.paring_counterTextView)
     TextView mCounterTextView;
@@ -123,12 +126,16 @@ public class ParingDashboardActivity extends BaseActivity {
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         isPairingsGenerated = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_GENERATED);
+        isCountStarted = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_TIMER_ON);
+        mTimerTimeTillEnd = savedInstanceState.getLong(BUNDLE_KEY_PAIRINGS_TIMER_TIME);
     }
 
     // invoked when the activity may be temporarily destroyed, save the instance state here
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(BUNDLE_KEY_PAIRINGS_GENERATED, isPairingsGenerated);
+        outState.putBoolean(BUNDLE_KEY_PAIRINGS_TIMER_ON, isCountStarted);
+        outState.putLong(BUNDLE_KEY_PAIRINGS_TIMER_TIME, mTimerTimeTillEnd);
         super.onSaveInstanceState(outState);
     }
 
@@ -222,32 +229,27 @@ public class ParingDashboardActivity extends BaseActivity {
             secondVibration = 0;
             vibrationDuration = 0;
         }
-        if (mSharedPreferenceManager.displayCounterRound()) {
-            timePerRound = mSharedPreferenceManager.getTimePerRound();
-            mCounterClass = new CounterClass(this, timePerRound,
-                    BaseConfig.DEFAULT_COUNTER_INTERVAL, mCounterTextView,
-                    firstVibration, secondVibration, vibrationDuration);
-        }
-        isCountStarted = false;
 
-//TU JEST COS NAMOTANE
+
         if (savedInstanceState != null) {
             // Restore value of members from saved state
             isPairingsGenerated = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_GENERATED);
+            isCountStarted = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_TIMER_ON);
+            mTimerTimeTillEnd = savedInstanceState.getLong(BUNDLE_KEY_PAIRINGS_TIMER_TIME);
         }
-        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
-            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
-            if (baseAlgorithm.isLoadCachedDraftWasNeeded() || isPairingsGenerated) {
-                mGameList = ((BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm()).getGameRoundList();
-            } else {
-                mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings();
-                isPairingsGenerated = true;
-                //save round in sharedPreferences
-                baseAlgorithm.cacheDraft();
+        if (isCountStarted) {
+            timePerRound = mTimerTimeTillEnd;
+        } else {
+            timePerRound = mSharedPreferenceManager.getTimePerRound();
+        }
+        if (mSharedPreferenceManager.displayCounterRound()) {
+
+            mCounterClass = new CounterClass(this, timePerRound,
+                    BaseConfig.DEFAULT_COUNTER_INTERVAL, mCounterTextView,
+                    firstVibration, secondVibration, vibrationDuration);
+            if (isCountStarted) {
+                mCounterClass.start();
             }
-        }
-        if (mGameList == null || mGameList.isEmpty()) {
-            return false;
         }
         mParingDashboardLogic = new ParingDashboardLogic(this);
         return true;
@@ -270,13 +272,8 @@ public class ParingDashboardActivity extends BaseActivity {
         } else {
             mCounterTextView.setVisibility(View.INVISIBLE);
         }
-
-        mAdapter = new PlayerMatchParingAdapter(this, mGameList);
-        mRoundTextView.setText(getString(R.string.text_round) + " "
-                + mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
@@ -289,7 +286,43 @@ public class ParingDashboardActivity extends BaseActivity {
     };
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+                BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+
+                if (baseAlgorithm.isLoadCachedDraftWasNeeded() || isPairingsGenerated) {
+                    mGameList = ((BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm()).getGameRoundList();
+                } else {
+                    mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings();
+                    isPairingsGenerated = true;
+                    //save round in sharedPreferences
+                    baseAlgorithm.cacheDraft();
+                }
+            }
+            if (mGameList == null || mGameList.isEmpty()) {
+                throw new NullPointerException("Game List should be populated");
+            }
+
+            mAdapter = new PlayerMatchParingAdapter(this, mGameList);
+            mRoundTextView.setText(getString(R.string.text_round) + " "
+                    + mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
+            mRecyclerView.setAdapter(mAdapter);
+        } catch (NullPointerException exception) {
+            displayErrorDialog();
+        } finally {
+            //nothing here
+        }
+    }
+
+    @Override
     protected void onPause() {
+        if (mCounterClass != null) {
+            mTimerTimeTillEnd = mCounterClass.onPause();
+        }
+        BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+        baseAlgorithm.cacheDraft();
         super.onPause();
     }
 
@@ -315,6 +348,10 @@ public class ParingDashboardActivity extends BaseActivity {
         Intent intent = new Intent(ParingDashboardActivity.this,
                 ScoreBoardActivity.class);
         startActivity(intent);
+        isCountStarted = false;
+        if (mCounterClass != null) {
+            mCounterClass.cancel();
+        }
         finish();
     }
 

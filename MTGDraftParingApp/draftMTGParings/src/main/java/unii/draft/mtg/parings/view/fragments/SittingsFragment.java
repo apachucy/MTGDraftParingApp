@@ -78,11 +78,16 @@ public class SittingsFragment extends BaseFragment {
 
     @Override
     protected void initFragmentData() {
-        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
-            BaseAlgorithm base = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
-            base.isLoadCachedDraftWasNeeded();
+        try {
+            if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+                BaseAlgorithm base = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+                base.isLoadCachedDraftWasNeeded();
+            }
+            mPlayerNameList = mSittingsGenerator.generateSittings(getPlayerNameList(mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList()));
+        } catch (NullPointerException exception) {
+            getActivity().finish();
+        } finally {
+            //Nothing here
         }
-        mPlayerNameList = mSittingsGenerator.generateSittings(getPlayerNameList(mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList()));
-
     }
 }

@@ -1,9 +1,9 @@
 package unii.draft.mtg.parings.buisness.algorithm.base;
 
 public interface IApplicationDraftMemoryState {
-    void cacheDraft();
+    boolean cacheDraft();
 
-    boolean isLoadCachedDraftWasNeeded();
+    boolean isLoadCachedDraftWasNeeded() throws NullPointerException;
 
     void clearCache();
 }

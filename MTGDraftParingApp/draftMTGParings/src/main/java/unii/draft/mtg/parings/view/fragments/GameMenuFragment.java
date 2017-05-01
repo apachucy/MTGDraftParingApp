@@ -25,6 +25,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.Lazy;
+import unii.draft.mtg.parings.MainActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
@@ -227,7 +228,10 @@ public class GameMenuFragment extends BaseFragment {
                 mAlgorithmChooser.get().getCurrentAlgorithm().startAlgorithm(mPlayerNameList.getPlayerList(), rounds);
                 if (mAlgorithmChooser.get().getCurrentAlgorithm() instanceof BaseAlgorithm) {
                     BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.get().getCurrentAlgorithm();
-                    baseAlgorithm.cacheDraft();
+                    if (!baseAlgorithm.cacheDraft()) {
+                        displayErrorDialog();
+                        return;
+                    }
                 }
                 //set started activity
                 if (mSharedPreferenceManager.get().getGeneratedSittingMode() == SittingsMode.SITTINGS_RANDOM) {
@@ -271,4 +275,17 @@ public class GameMenuFragment extends BaseFragment {
                 .backgroundColorRes(R.color.windowBackground)
                 .positiveText(positiveText).show();
     }
+
+    private void displayErrorDialog() {
+        ((MainActivity) getActivity()).showInfoDialog(getString(R.string.dialog_error_algorithm_title),
+                getString(R.string.dialog_error_algorithm__message),
+                getString(R.string.dialog_start_button), mDialogErrorButtonClickListener);
+    }
+
+    private MaterialDialog.SingleButtonCallback mDialogErrorButtonClickListener = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(MaterialDialog dialog, DialogAction which) {
+            dialog.dismiss();
+        }
+    };
 }

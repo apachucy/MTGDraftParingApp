@@ -21,11 +21,15 @@ public class GamePreferences implements IGamePreferences {
 
 
     @Override
-    public void saveDraftDataProvider(DraftDataProvider draftDataProvider) {
+    public boolean saveDraftDataProvider(DraftDataProvider draftDataProvider) {
         Gson gson = new Gson();
-
         String json = gson.toJson(draftDataProvider);
+        if (json == null) {
+            return false;
+        }
+
         mSharedPreferences.edit().putString(GamePreferencesConst.CURRENT_DRAFT_STATUS, json).apply();
+        return true;
     }
 
     @Override

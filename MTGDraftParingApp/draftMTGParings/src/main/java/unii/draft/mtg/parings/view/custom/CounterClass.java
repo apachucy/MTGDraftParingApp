@@ -1,13 +1,13 @@
 package unii.draft.mtg.parings.view.custom;
 
-import java.util.concurrent.TimeUnit;
-
-import unii.draft.mtg.parings.util.config.BaseConfig;
-
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.widget.TextView;
+
+import java.util.concurrent.TimeUnit;
+
+import unii.draft.mtg.parings.util.config.BaseConfig;
 
 public class CounterClass extends CountDownTimer {
 
@@ -16,6 +16,7 @@ public class CounterClass extends CountDownTimer {
     private long mSecondVibration;
     private long mTimeVibration;
     private Vibrator mVibration;
+    private long millisTillFinishWillBeCalled;
 
     /**
      * @param context           create an instance of vibration class
@@ -60,19 +61,23 @@ public class CounterClass extends CountDownTimer {
         mTextView.setText(hms);
     }
 
+    public long onPause() {
+        return millisTillFinishWillBeCalled;
+    }
+
     @Override
     public void onTick(long millisUntilFinished) {
-        long millis = millisUntilFinished;
+        millisTillFinishWillBeCalled = millisUntilFinished;
         // display formated string
         String hms = String.format(
                 "%02d:%02d:%02d",
-                TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis)
+                TimeUnit.MILLISECONDS.toHours(millisTillFinishWillBeCalled),
+                TimeUnit.MILLISECONDS.toMinutes(millisTillFinishWillBeCalled)
                         - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS
-                        .toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis)
+                        .toHours(millisTillFinishWillBeCalled)),
+                TimeUnit.MILLISECONDS.toSeconds(millisTillFinishWillBeCalled)
                         - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
-                        .toMinutes(millis)));
+                        .toMinutes(millisTillFinishWillBeCalled)));
 
         mTextView.setText(hms);
         // instance of vibration exist

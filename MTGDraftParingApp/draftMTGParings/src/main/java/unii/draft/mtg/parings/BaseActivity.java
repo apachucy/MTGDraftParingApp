@@ -1,7 +1,6 @@
 package unii.draft.mtg.parings;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -71,13 +70,16 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
         imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
     }
 
+
     protected void replaceFragments(Fragment fragment, String tag, int container) {
         Fragment fragmentFound = getSupportFragmentManager().findFragmentByTag(tag);
         if (fragmentFound != null) {
             getSupportFragmentManager().beginTransaction().show(fragmentFound).commit();
         } else {
             hideKeyboard();
-            getSupportFragmentManager().beginTransaction().replace(container, fragment, tag).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(container, fragment, tag)
+                    .commit();
         }
     }
 

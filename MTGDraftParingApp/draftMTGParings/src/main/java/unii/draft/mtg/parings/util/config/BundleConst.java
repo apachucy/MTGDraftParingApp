@@ -16,4 +16,6 @@ public final class BundleConst {
     public static final String BUNDLE_KEY_SETTINGS_FRAGMENT = "BUNDLE_KEY_SETTINGS_FRAGMENT";
     public static final String BUNDLE_KEY_DRAFT_SAVED_NAME = "BUNDLE_KEY_DRAFT_SAVED_NAME";
     public static final String BUNDLE_KEY_PAIRINGS_GENERATED = "BUNDLE_KEY_PAIRINGS_GENERATED";
+    public static final String BUNDLE_KEY_PAIRINGS_TIMER_ON = "BUNDLE_KEY_PAIRINGS_TIMER_ON";
+    public static final String BUNDLE_KEY_PAIRINGS_TIMER_TIME = "BUNDLE_KEY_PAIRINGS_TIMER_TIME";
 }

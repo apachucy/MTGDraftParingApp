@@ -57,12 +57,12 @@ public class SettingsGridViewAdapter extends RecyclerView.Adapter<SettingsGridVi
         @Bind(R.id.row_settings_chooser_image)
         ImageView mImageMenuImageView;
 
-        public ViewHolder(View view) {
+        public ViewHolder(final View view) {
             super(view);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mOnGridItemSelected.onCategorySelected(mSettingsMenuList.get(getPosition()));
+                    mOnGridItemSelected.onCategorySelected(view, mSettingsMenuList.get(getPosition()));
                 }
             });
             ButterKnife.bind(this, view);
