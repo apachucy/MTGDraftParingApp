@@ -1,5 +1,6 @@
 package unii.draft.mtg.parings.view.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,6 +50,7 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     }
 
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EmptyViewHolder) {

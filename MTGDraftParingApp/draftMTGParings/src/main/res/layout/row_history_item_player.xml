@@ -17,13 +17,26 @@
 
     <TextView
         android:id="@+id/history_score_board_playerInfoTextView"
-        style="@style/textView"
+        style="@style/textView.item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/history_score_board_playerTextView"
-        android:layout_centerHorizontal="true"
-        android:padding="@dimen/settings_padding"
         android:text="New Text" />
 
-
+    <TextView
+        android:id="@+id/history_score_board_playerDraftWinTextView"
+        style="@style/textView.item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/history_score_board_playerInfoTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/history_score_board_playerInfoTextView"
+        android:layout_below="@+id/history_score_board_playerTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/history_score_board_playerInfoTextView"
+        android:layout_toStartOf="@id/history_score_board_playerInfoTextView"
+        android:text="New Text" />
 </RelativeLayout>

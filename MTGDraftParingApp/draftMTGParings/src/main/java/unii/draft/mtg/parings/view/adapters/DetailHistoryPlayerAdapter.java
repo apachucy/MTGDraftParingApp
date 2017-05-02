@@ -13,21 +13,16 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.database.model.Draft;
-import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
+import unii.draft.mtg.parings.logic.pojo.PlayerDraft;
 
 public class DetailHistoryPlayerAdapter extends RecyclerView.Adapter<DetailHistoryPlayerAdapter.ViewHolder> {
 
     private Context mContext;
-    private IDatabaseHelper mDatabaseHelper;
-    private List<Draft> mDraftList;
-    private long mPlayerId;
+    private List<PlayerDraft> mDraftList;
 
-    public DetailHistoryPlayerAdapter(Context context, IDatabaseHelper databaseHelper, long playerId) {
+    public DetailHistoryPlayerAdapter(Context context, List<PlayerDraft> list) {
         mContext = context;
-        mDatabaseHelper = databaseHelper;
-        mPlayerId = playerId;
-        mDraftList = mDatabaseHelper.getAllDraftsForPlayer(mPlayerId);
+        mDraftList = list;
     }
 
     @Override
@@ -38,11 +33,11 @@ public class DetailHistoryPlayerAdapter extends RecyclerView.Adapter<DetailHisto
 
     @Override
     public void onBindViewHolder(DetailHistoryPlayerAdapter.ViewHolder holder, int position) {
-        Draft selectedDraft = mDraftList.get(position);
+        PlayerDraft selectedDraft = mDraftList.get(position);
 
         holder.mDraftNameTextView.setText(selectedDraft.getDraftName());
         holder.mPlayerDraftPositionTextView.setText(mContext.getString(R.string.history_player_detail_place,
-                mDatabaseHelper.getPlayerPlaceInDraft(selectedDraft.getId(), mPlayerId), selectedDraft.getNumberOfPlayers()));
+                selectedDraft.getPlace(), selectedDraft.getTotalPlayers()));
     }
 
     @Override

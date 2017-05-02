@@ -16,11 +16,11 @@ import unii.draft.mtg.parings.R;
 /**
  * DisplaySittings in Random order
  */
-public class SittingsPlayerAdapter extends RecyclerView.Adapter<SittingsPlayerAdapter.ViewHolder> {
+public class SingleTextViewAdapter extends RecyclerView.Adapter<SingleTextViewAdapter.ViewHolder> {
     private List<String> mPlayerNameList;
     private Context mContext;
 
-    public SittingsPlayerAdapter(Context context, List<String> playerNameList) {
+    public SingleTextViewAdapter(Context context, List<String> playerNameList) {
         mContext = context;
         mPlayerNameList = playerNameList;
     }

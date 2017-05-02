@@ -40,28 +40,21 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayD
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dashboard, menu);
-        int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
-        ImageView imageButton = (ImageView) menu.getItem(0).getActionView();
-        imageButton.setPadding(padding, padding, padding, padding);
-
-        // set an image
-        imageButton.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_view_list));
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (sCurrentFragmentTag.equals(TAG_FRAGMENT_DETAIL)) {
-                    replaceFragments(new HistoryScoreBoardListFragment(), TAG_FRAGMENT_LIST, R.id.content_frame);
-                }
-            }
-        });
+        getMenuInflater().inflate(R.menu.history_score_board, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_show_list:
+                if (sCurrentFragmentTag.equals(TAG_FRAGMENT_DETAIL)) {
+                    replaceFragments(new HistoryScoreBoardListFragment(), TAG_FRAGMENT_LIST, R.id.content_frame);
+                }
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override

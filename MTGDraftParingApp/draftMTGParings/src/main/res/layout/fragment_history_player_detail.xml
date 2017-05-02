@@ -10,10 +10,41 @@
         android:layout_height="wrap_content"
         android:gravity="center" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/history_player_detail_playerAchievementsTextView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/history_player_detail_playerNameTextView"
-        android:scrollbars="vertical" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/history_player_detailplayerOverallPositionsTextView"
+            style="@style/textView.item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/history_player_overall_places" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/history_player_detail_playerOverallPositionsList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/text_view_padding"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:id="@+id/history_player_playerAchievementsTextView"
+            style="@style/textView.item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/history_player_overall_played" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/history_player_detail_playerAchievementsList"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:padding="@dimen/text_view_padding"
+            android:scrollbars="vertical" />
+    </LinearLayout>
 </RelativeLayout>

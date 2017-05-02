@@ -186,4 +186,10 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="negative">Nie</string>
     <string name="settings_save_draft_result_dialog_title">Czy zapisać wyniki draftu:</string>
     <string name="text_save_results_after_draft">Zapisz wyniki draftu: %1$s</string>
+    <string name="history_detail_player_overall_count_position">Miejsce %1$d: %2$d razy</string>
+    <string name="history_player_overall_places">Miejsca w draftach:</string>
+    <string name="history_player_overall_played">Udział w draftach:</string>
+    <string name="history_player_wins_drafts">Wygranych: %1$d</string>
+    <string name="history_score_board_row_draft_count_players">Zawodników: %1$d</string>
+    <string name="history_score_board_row_draft_rounds">Rundy: %1$d</string>
 </resources>

@@ -6,29 +6,27 @@
 
     <TextView
         android:id="@+id/history_score_board_titleTextView"
-        style="@style/textView"
+        style="@style/textView.item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:padding="@dimen/text_view_padding"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/history_score_board_playerWonTextView"
-        style="@style/textView"
+        style="@style/textView.item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/history_score_board_titleTextView"
         android:drawableLeft="@drawable/ic_cup"
-        android:drawableStart="@drawable/ic_cup"
-        android:padding="@dimen/text_view_padding" />
+        android:drawableStart="@drawable/ic_cup" />
 
     <TextView
-        android:id="@+id/history_score_board_dateTextView"
-        style="@style/textView"
+        android:id="@+id/history_score_board_countPlayerTextView"
+        style="@style/textView.item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/history_score_board_playerWonTextView"
@@ -36,5 +34,30 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/history_score_board_playerWonTextView"
         android:layout_below="@+id/history_score_board_titleTextView"
-        android:padding="@dimen/text_view_padding" />
+        android:layout_toLeftOf="@id/history_score_board_playerWonTextView"
+        android:layout_toStartOf="@id/history_score_board_playerWonTextView" />
+
+    <TextView
+        android:id="@+id/history_score_board_roundsTextView"
+        style="@style/textView.item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/history_score_board_playerWonTextView" />
+
+    <TextView
+        android:id="@+id/history_score_board_dateTextView"
+        style="@style/textView.item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/history_score_board_roundsTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/history_score_board_roundsTextView"
+        android:layout_below="@+id/history_score_board_countPlayerTextView"
+        android:layout_toLeftOf="@id/history_score_board_roundsTextView"
+        android:layout_toStartOf="@id/history_score_board_roundsTextView" />
+
+
 </RelativeLayout>

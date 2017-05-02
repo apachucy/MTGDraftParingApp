@@ -13,21 +13,20 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
-import unii.draft.mtg.parings.database.model.Player;
-import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
+import unii.draft.mtg.parings.logic.pojo.PlayerAchievements;
 import unii.draft.mtg.parings.view.fragments.history.IDisplayDetailFragment;
 
 public class HistoryPlayerAdapter extends RecyclerView.Adapter<HistoryPlayerAdapter.ViewHolder> {
 
-    private List<Player> mPlayerList;
+    public static final int PLAYER_PLACE_1 = 1;
+    private List<PlayerAchievements> mPlayerList;
     private Context mContext;
     private IDisplayDetailFragment mDisplayHistoryScoreBoardDetail;
 
-    public HistoryPlayerAdapter(Context context, IDatabaseHelper databaseHelper, IDisplayDetailFragment displayHistoryScoreBoardDetail) {
+    public HistoryPlayerAdapter(Context context, List<PlayerAchievements> playerAchievements, IDisplayDetailFragment displayHistoryScoreBoardDetail) {
         mContext = context;
         mDisplayHistoryScoreBoardDetail = displayHistoryScoreBoardDetail;
-        mPlayerList = databaseHelper.getAllPlayerList();
-
+        mPlayerList = playerAchievements;
     }
 
     @Override
@@ -39,11 +38,15 @@ public class HistoryPlayerAdapter extends RecyclerView.Adapter<HistoryPlayerAdap
 
     @Override
     public void onBindViewHolder(HistoryPlayerAdapter.ViewHolder holder, int position) {
-        Player player = mPlayerList.get(position);
+        PlayerAchievements player = mPlayerList.get(position);
 
         holder.mPlayerTextView.setText(player.getPlayerName());
-        holder.mPlayerInfoTextView.setText(mContext.getString(R.string.history_player_played_drafts, player.getPlayers().size()));
-
+        holder.mPlayerInfoTextView.setText(mContext.getString(R.string.history_player_played_drafts, player.getDraftPlayed()));
+        int playerWinsDraft = 0;
+        if (player.getPlaceInDrafts().containsKey(PLAYER_PLACE_1)) {
+            playerWinsDraft = player.getPlaceInDrafts().get(PLAYER_PLACE_1);
+        }
+        holder.mPlayerDraftWinTextView.setText(mContext.getString(R.string.history_player_wins_drafts, playerWinsDraft));
     }
 
     @Override
@@ -56,7 +59,8 @@ public class HistoryPlayerAdapter extends RecyclerView.Adapter<HistoryPlayerAdap
         TextView mPlayerTextView;
         @Bind(R.id.history_score_board_playerInfoTextView)
         TextView mPlayerInfoTextView;
-
+        @Bind(R.id.history_score_board_playerDraftWinTextView)
+        TextView mPlayerDraftWinTextView;
         View itemView;
 
         public ViewHolder(View itemView) {
@@ -67,7 +71,7 @@ public class HistoryPlayerAdapter extends RecyclerView.Adapter<HistoryPlayerAdap
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mDisplayHistoryScoreBoardDetail.displayDetailView(mPlayerList.get(getPosition()).getId());
+                    mDisplayHistoryScoreBoardDetail.displayDetailView(mPlayerList.get(getPosition()).getPlayerId());
                 }
             });
         }

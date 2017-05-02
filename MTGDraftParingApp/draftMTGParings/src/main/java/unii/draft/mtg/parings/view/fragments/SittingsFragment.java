@@ -20,7 +20,7 @@ import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
-import unii.draft.mtg.parings.view.adapters.SittingsPlayerAdapter;
+import unii.draft.mtg.parings.view.adapters.SingleTextViewAdapter;
 
 public class SittingsFragment extends BaseFragment {
 
@@ -68,7 +68,7 @@ public class SittingsFragment extends BaseFragment {
 
     @Override
     protected void initFragmentView() {
-        RecyclerView.Adapter adapter = new SittingsPlayerAdapter(getActivity(), mPlayerNameList);
+        RecyclerView.Adapter adapter = new SingleTextViewAdapter(getActivity(), mPlayerNameList);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);

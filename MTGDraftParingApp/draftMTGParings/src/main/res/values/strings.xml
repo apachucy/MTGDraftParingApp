@@ -149,6 +149,8 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="history_score_board_row_draft_name">Draft name: %1$s</string>
     <string name="history_score_board_row_draft_date">Date: %1$s</string>
     <string name="history_score_board_row_draft_best_player">Won: %1$s</string>
+    <string name="history_score_board_row_draft_count_players">Players: %1$d</string>
+    <string name="history_score_board_row_draft_rounds">Rounds: %1$d</string>
     <string name="message_score_boards_removed">All score boards were removed</string>
     <string name="message_score_board_not_exists">No score board to display</string>
     <string name="message_player_list_not_exists">No player list to display</string>
@@ -207,8 +209,17 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
 
     <string name="shared_data_formatted_winner" translatable="false">Draft winner is: %1$s\n</string>
     <string name="shared_data_formatted_player" translatable="false">%1$s scored: %2$d points\n</string>
+    <string name="shared_data_formatted_draft" translatable="false">Draft name:  %1$s\nDraft winner is: %2$s\nNumber of players: %3$d\nRounds:%4$d\n</string>
+    <string name="shared_data_player_list" translatable="false">Player name: %1$s\nDraft played: %2$d\nWins: %3$d\n</string>
+
+
+
     <string name="history_player_played_drafts">Draft played: %1$d</string>
     <string name="history_player_detail_place">Place: %1$d / %2$d</string>
+    <string name="history_player_wins_drafts">Wins: %1$d</string>
+    <string name="history_player_overall_places">Places in drafts:</string>
+    <string name="history_player_overall_played">Played in drafts:</string>
+    <string name="history_detail_player_overall_count_position">Place %1$d: %2$d times</string>
     <string name="settings_menu_item_draft" translatable="false">Draft</string>
     <string name="settings_menu_item_history">History</string>
     <string name="settings_menu_item_other">Other</string>

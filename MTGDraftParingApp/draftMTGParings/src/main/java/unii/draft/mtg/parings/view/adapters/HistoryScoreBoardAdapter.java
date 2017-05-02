@@ -45,6 +45,8 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<HistoryScoreB
         holder.draftTitleTextView.setText(mContext.getString(R.string.history_score_board_row_draft_name, mDraftList.get(position).getDraftName()));
         holder.draftDateTextView.setText(mContext.getString(R.string.history_score_board_row_draft_date, mDraftList.get(position).getDraftDate()));
         holder.playerWonTextView.setText(mContext.getString(R.string.history_score_board_row_draft_best_player, playerList.get(0).getPlayerName()));
+        holder.draftRoundsTextView.setText(mContext.getString(R.string.history_score_board_row_draft_rounds, selectedDraft.getDraftRounds()));
+        holder.draftPlayerCountTextView.setText(mContext.getString(R.string.history_score_board_row_draft_count_players, selectedDraft.getNumberOfPlayers()));
     }
 
     @Override
@@ -59,7 +61,10 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<HistoryScoreB
         TextView playerWonTextView;
         @Bind(R.id.history_score_board_dateTextView)
         TextView draftDateTextView;
-
+        @Bind(R.id.history_score_board_roundsTextView)
+        TextView draftRoundsTextView;
+        @Bind(R.id.history_score_board_countPlayerTextView)
+        TextView draftPlayerCountTextView;
         View itemView;
 
         public ViewHolder(View itemView) {

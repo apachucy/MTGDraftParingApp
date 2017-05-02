@@ -6,8 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -15,6 +21,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import dagger.Lazy;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.buisness.share.draft.list.ISharePlayerHistoryList;
+import unii.draft.mtg.parings.buisness.share.draft.list.SharePlayerAchievementList;
+import unii.draft.mtg.parings.database.model.Player;
+import unii.draft.mtg.parings.logic.pojo.PlayerAchievements;
+import unii.draft.mtg.parings.util.converter.Converter;
+import unii.draft.mtg.parings.util.converter.PlayerAchievementsConverter;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 import unii.draft.mtg.parings.view.adapters.DividerItemDecorator;
 import unii.draft.mtg.parings.view.adapters.HistoryPlayerAdapter;
@@ -25,8 +37,8 @@ public class HistoryPlayerListFragment extends BaseFragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private IDisplayDetailFragment mDisplayHistoryScoreBoardDetail;
     private Activity mContext;
-
-
+    private List<PlayerAchievements> mPlayerList;
+    private ISharePlayerHistoryList mDraftListForShare;
     @Bind(R.id.settings_menuRecyclerView)
     RecyclerView mRecyclerView;
 
@@ -43,6 +55,13 @@ public class HistoryPlayerListFragment extends BaseFragment {
         } else {
             new Throwable("Activity should implement IDisplayDetailFragment");
         }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
     }
 
     @Nullable
@@ -64,18 +83,39 @@ public class HistoryPlayerListFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                shareAction(mDraftListForShare.getPlayerListToString(mPlayerList));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void initFragmentView() {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecorator(mContext, DividerItemDecorator.VERTICAL_LIST));
-        mAdapter = new HistoryPlayerAdapter(mContext, mDatabaseHelper.get(), mDisplayHistoryScoreBoardDetail);
+        mAdapter = new HistoryPlayerAdapter(mContext, mPlayerList, mDisplayHistoryScoreBoardDetail);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     protected void initFragmentData() {
+        mDraftListForShare = new SharePlayerAchievementList(getActivity());
+        Converter<PlayerAchievements, Player> converter = new PlayerAchievementsConverter();
+        mPlayerList = new ArrayList<>();
 
+        for (Player player : mDatabaseHelper.get().getAllPlayerList()) {
+            mPlayerList.add(converter.convert(player));
+        }
     }
 
     private void injectDependencies() {

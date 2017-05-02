@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.buisness.share.scoreboard;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import unii.draft.mtg.parings.logic.pojo.Player;
 public class ShareDataContent implements IShareData {
     private Context mContext;
 
-    public ShareDataContent(Context context) {
+    public ShareDataContent(@NonNull Context context) {
         mContext = context;
     }
 
@@ -36,6 +37,6 @@ public class ShareDataContent implements IShareData {
     }
 
     private String playerToString(Player player) {
-        return mContext.getString(R.string.shared_data_formatted_player, player.getPlayerName(), player.getGamePoints());
+        return mContext.getString(R.string.shared_data_formatted_player, player.getPlayerName(), player.getMatchPoints());
     }
 }

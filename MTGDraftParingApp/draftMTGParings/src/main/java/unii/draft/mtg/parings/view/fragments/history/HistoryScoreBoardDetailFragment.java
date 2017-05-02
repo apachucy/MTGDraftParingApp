@@ -2,9 +2,13 @@ package unii.draft.mtg.parings.view.fragments.history;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,6 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import dagger.Lazy;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.logic.pojo.ItemHeader;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.config.BundleConst;
@@ -30,10 +35,13 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
 
     private Activity mContext;
     private List<IAdapterItem> mPlayerScoreBoardList;
-
+    private List<Player> mPlayerList;
 
     @Inject
     Lazy<IDatabaseHelper> mDatabaseHelper;
+
+    @Inject
+    IShareData mShareData;
 
     @Bind(R.id.settings_menuRecyclerView)
     RecyclerView mRecyclerView;
@@ -46,14 +54,20 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycle_view, container, false);
         ButterKnife.bind(this, view);
+
         injectDependencies();
         initFragmentData();
         initFragmentView();
-
-
         return view;
     }
 
@@ -63,6 +77,22 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //inflater.inflate(R.menu.settings_share, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                shareAction(mShareData.getPlayerWithPoints(mPlayerList));
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void initFragmentView() {
@@ -80,12 +110,12 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
             mContext.finish();
         }
         long draftKey = bundle.getLong(BundleConst.BUNDLE_KEY_HISTORY_DRAFT_DETAIL);
-        List<Player> playerList = new ArrayList<>();
+        mPlayerList = new ArrayList<>();
 
-        playerList.addAll(mDatabaseHelper.get().getAllPlayersInDraft(draftKey));
+        mPlayerList.addAll(mDatabaseHelper.get().getAllPlayersInDraft(draftKey));
         mPlayerScoreBoardList = new ArrayList<>();
         mPlayerScoreBoardList.add(new ItemHeader());
-        mPlayerScoreBoardList.addAll(playerList);
+        mPlayerScoreBoardList.addAll(mPlayerList);
     }
 
     private void injectDependencies() {
