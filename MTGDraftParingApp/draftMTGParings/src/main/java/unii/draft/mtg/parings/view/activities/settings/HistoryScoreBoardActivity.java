@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -14,7 +12,6 @@ import unii.draft.mtg.parings.BaseActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.util.config.BundleConst;
-import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
 import unii.draft.mtg.parings.view.fragments.history.HistoryScoreBoardDetailFragment;
 import unii.draft.mtg.parings.view.fragments.history.HistoryScoreBoardListFragment;
 import unii.draft.mtg.parings.view.fragments.history.IDisplayDetailFragment;

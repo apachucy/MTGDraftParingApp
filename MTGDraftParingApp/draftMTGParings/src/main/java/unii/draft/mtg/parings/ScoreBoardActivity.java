@@ -140,6 +140,7 @@ public class ScoreBoardActivity extends BaseActivity {
             }
             mPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
             mPlayerScoreBoardList.clear();
+            mPlayerScoreBoardList.add(new ItemHeader());
             mPlayerScoreBoardList.addAll(mPlayerList);
 
             mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
@@ -180,6 +181,12 @@ public class ScoreBoardActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+          /*TODO: this is only temporary fix ?
+        *Activity don't have a possibility to get points for header to display toll tips
+        *  Add about and display all information about games
+        *
+        *
+        */
         getMenuInflater().inflate(R.menu.dashboard, menu);
         setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView),
                 (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView),
@@ -349,7 +356,6 @@ public class ScoreBoardActivity extends BaseActivity {
         }
 
         mPlayerScoreBoardList = new ArrayList<>();
-        mPlayerScoreBoardList.add(new ItemHeader());
     }
 
     private void displayErrorDialog() {
