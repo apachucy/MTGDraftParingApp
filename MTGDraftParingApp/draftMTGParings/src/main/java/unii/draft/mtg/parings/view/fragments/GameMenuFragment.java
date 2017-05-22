@@ -268,13 +268,6 @@ public class GameMenuFragment extends BaseFragment {
         getActivityComponent().inject(this);
     }
 
-    private void showMultipleChoiceListDialog(Context context, String title, List<String> data, MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice, String positiveText) {
-        new MaterialDialog.Builder(context)
-                .title(title).items(data)
-                .itemsCallbackMultiChoice(null, listCallbackMultiChoice)
-                .backgroundColorRes(R.color.windowBackground)
-                .positiveText(positiveText).show();
-    }
 
     private void displayErrorDialog() {
         ((MainActivity) getActivity()).showInfoDialog(getString(R.string.dialog_error_algorithm_title),

@@ -13,6 +13,8 @@ import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.List;
+
 import tourguide.tourguide.ToolTip;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
@@ -25,18 +27,20 @@ import unii.draft.mtg.parings.view.custom.IActivityHandler;
 public abstract class BaseActivity extends ActionBarActivity implements IActivityHandler, HasComponent<ActivityComponent> {
 
     private ActivityComponent mActivityComponent;
+    private MaterialDialog mMaterialDialogInstance;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final ActivityComponent activityComponent = initActivityComponent();
         injectDependencies(activityComponent);
+        mMaterialDialogInstance = null;
     }
 
 
     @Override
     public void showInfoDialog(String title, String body, String positiveText) {
-        new MaterialDialog.Builder(this)
+        mMaterialDialogInstance = new MaterialDialog.Builder(this)
                 .title(title)
                 .content(body)
                 .positiveText(positiveText).backgroundColorRes(R.color.windowBackground)
@@ -45,11 +49,28 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
 
     @Override
     public void showInfoDialog(String title, String body, String positiveText, MaterialDialog.SingleButtonCallback positiveAction) {
-        new MaterialDialog.Builder(this)
+        mMaterialDialogInstance = new MaterialDialog.Builder(this)
                 .title(title)
                 .content(body)
                 .positiveText(positiveText).onPositive(positiveAction).backgroundColorRes(R.color.windowBackground)
                 .show();
+    }
+    @Override
+    public void showSingleChoiceList(Context context, String title, List<String> list, String positiveText, MaterialDialog.ListCallbackSingleChoice singleListCallback) {
+        mMaterialDialogInstance = new MaterialDialog.Builder(context)
+                .title(title).items(list)
+                .itemsCallbackSingleChoice(-1, singleListCallback).backgroundColorRes(R.color.windowBackground)
+                .positiveText(positiveText)
+                .show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mMaterialDialogInstance != null) {
+            mMaterialDialogInstance.dismiss();
+            mMaterialDialogInstance = null;
+        }
     }
 
     @Override

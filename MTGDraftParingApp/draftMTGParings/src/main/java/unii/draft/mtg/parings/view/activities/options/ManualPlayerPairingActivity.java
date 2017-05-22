@@ -219,13 +219,6 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         return playerNameList;
     }
 
-    private void showSingleChoiceList(Context context, String title, List<String> list, String positiveText, MaterialDialog.ListCallbackSingleChoice singleListCallback) {
-        new MaterialDialog.Builder(context)
-                .title(title).items(list)
-                .itemsCallbackSingleChoice(-1, singleListCallback).backgroundColorRes(R.color.windowBackground)
-                .positiveText(positiveText)
-                .show();
-    }
 
     private void saveRound() { //save round in sharedPreferences
         if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
