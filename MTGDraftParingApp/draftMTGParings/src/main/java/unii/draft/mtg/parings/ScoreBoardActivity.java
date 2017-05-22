@@ -344,7 +344,7 @@ public class ScoreBoardActivity extends BaseActivity {
         information.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                showInfoDialog(getString(R.string.dialog_scoreboard_info_title), getString(R.string.dialog_scoreboard_info_body), getString(R.string.possitive));
+                showInfoDialog(getString(R.string.dialog_scoreboard_info_title), getString(R.string.dialog_scoreboard_info_body), getString(R.string.dialog_positive));
             }
         });
     }
