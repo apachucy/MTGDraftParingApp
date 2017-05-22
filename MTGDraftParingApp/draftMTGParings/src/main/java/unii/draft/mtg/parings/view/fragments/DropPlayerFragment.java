@@ -16,6 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.DropPlayerAdapter;
@@ -77,7 +78,18 @@ public class DropPlayerFragment extends BaseFragment {
 
     @Override
     protected void initFragmentData() {
-        mNotDroppedPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedFilteredPlayerList(false);
+        try {
+            if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+                BaseAlgorithm base = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+                base.isLoadCachedDraftWasNeeded();
+            }
+            mNotDroppedPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedFilteredPlayerList(false);
+        } catch (NullPointerException exception) {
+            getActivity().finish();
+        } finally {
+            //Nothing here
+        }
+
     }
 
     private void injectDependencies() {
