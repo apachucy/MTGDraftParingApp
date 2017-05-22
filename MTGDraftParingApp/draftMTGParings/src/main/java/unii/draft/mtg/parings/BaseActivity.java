@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -32,7 +31,6 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
         super.onCreate(savedInstanceState);
         final ActivityComponent activityComponent = initActivityComponent();
         injectDependencies(activityComponent);
-
     }
 
 
@@ -93,15 +91,6 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
                 .setToolTip(toolTip).playLater(imageView);
     }
 
-    protected TourGuide bindTourGuideButton(String bodyText, TextView textView, int gravity) {
-        ToolTip toolTip = new ToolTip()
-                .setTitle(getString(R.string.help_title))
-                .setDescription(bodyText).setBackgroundColor(getSingleColor(R.color.accent))
-                .setGravity(gravity);
-
-        return TourGuide.init(this)
-                .setToolTip(toolTip).playLater(textView);
-    }
 
     private ActivityComponent initActivityComponent() {
         MTGDraftParingsApplication application = (MTGDraftParingsApplication) getApplication();

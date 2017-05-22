@@ -71,12 +71,6 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
 
     <!-- List Draw -->
     <string name="text_draw">Unentschieden</string>
-    <!-- Help/Showcase player list -->
-    <string name="help_points">Punkt für den Kampf mit dem Feind\n1 für ein Unentschieden, 3 für den Sieg</string>
-    <string name="help_pmw">% Anzahl der gewonnenen Matche</string>
-    <string name="help_omw">% Anzahl der Matche, die von den Gegnern gewonnen</string>
-    <string name="help_pgw">% Anzahl der gewonnenen Spiele</string>
-    <string name="help_ogw">% Anzahl der Spiele, die von den Gegnern gewonnen</string>
 
     <!-- Create personal parings-->
     <string name="text_personal_parings">Erstellen Sie Ihre eigenem Paring:  %1$s</string>
@@ -192,5 +186,7 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="history_player_wins_drafts">Won: %1$d</string>
     <string name="history_score_board_row_draft_count_players">Kandidaten: %1$d</string>
     <string name="history_score_board_row_draft_rounds">Runde: %1$d</string>
+    <string name="dialog_scoreboard_info_title">Erläuterung</string>
+    <string name="help_information_scoreboard">Was es bedeutet: PMG, PGW&#8230;</string>
 
 </resources>

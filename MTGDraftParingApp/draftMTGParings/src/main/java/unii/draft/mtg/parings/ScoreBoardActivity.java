@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -181,17 +180,11 @@ public class ScoreBoardActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-          /*TODO: this is only temporary fix ?
-        *Activity don't have a possibility to get points for header to display toll tips
-        *  Add about and display all information about games
-        *
-        *
-        */
+
         getMenuInflater().inflate(R.menu.dashboard, menu);
-        setListGuideActions((TextView) findViewById(R.id.header_playerPMWTextView), (TextView) findViewById(R.id.header_playerOMWTextView),
-                (TextView) findViewById(R.id.header_playerPGWTextView), (TextView) findViewById(R.id.header_playerOGWTextView),
+        setListGuideActions(
                 (ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView(),
-                (ImageView) menu.getItem(2).getActionView());
+                (ImageView) menu.getItem(2).getActionView(), (ImageView) menu.getItem(3).getActionView());
         return true;
     }
 
@@ -277,28 +270,29 @@ public class ScoreBoardActivity extends BaseActivity {
 
     }
 
-    private void setListGuideActions(TextView pmwTextView, TextView omwTextView, TextView pgwTextView, TextView ogwTextView,
-                                     ImageView dropPlayerButton, ImageView saveDraft, ImageView shareContent) {
+    private void setListGuideActions(
+            ImageView dropPlayerButton, ImageView saveDraft, ImageView shareContent, ImageView information) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 
         dropPlayerButton.setPadding(padding, padding, padding, padding);
         saveDraft.setPadding(padding, padding, padding, padding);
         shareContent.setPadding(padding, padding, padding, padding);
+        information.setPadding(padding, padding, padding, padding);
         // set an image
         dropPlayerButton.setImageDrawable(getSingleDrawable(R.drawable.ic_person_minus));
         saveDraft.setImageDrawable(getSingleDrawable(R.drawable.ic_save));
         shareContent.setImageDrawable(getSingleDrawable(R.drawable.ic_share));
-        if (mSharedPreferenceManager.showGuideTourOnScoreBoardScreen()) {
-            Sequence sequence = new Sequence.SequenceBuilder().add(bindTourGuideButton(getString(R.string.help_pmw), pmwTextView, Gravity.START | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_omw), omwTextView, Gravity.START | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_pgw), pgwTextView, Gravity.START | Gravity.BOTTOM),
-                    bindTourGuideButton(getString(R.string.help_ogw), ogwTextView, Gravity.START | Gravity.BOTTOM),
+        information.setImageDrawable(getSingleDrawable(R.drawable.ic_info));
 
-                    bindTourGuideButton(getString(R.string.help_drop_player), dropPlayerButton),
-                    bindTourGuideButton(getString(R.string.help_save_dashboard), saveDraft),
-                    bindTourGuideButton(getString(R.string.help_share_content), shareContent)
-            ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
+        if (mSharedPreferenceManager.showGuideTourOnScoreBoardScreen()) {
+            Sequence sequence = new Sequence.SequenceBuilder().
+                    add(
+                            bindTourGuideButton(getString(R.string.help_drop_player), dropPlayerButton),
+                            bindTourGuideButton(getString(R.string.help_save_dashboard), saveDraft),
+                            bindTourGuideButton(getString(R.string.help_share_content), shareContent),
+                            bindTourGuideButton(getString(R.string.help_information_scoreboard), information)
+                    ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mTutorialHandler.next();
@@ -347,6 +341,12 @@ public class ScoreBoardActivity extends BaseActivity {
                 }
             }
         });
+        information.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInfoDialog(getString(R.string.dialog_scoreboard_info_title), getString(R.string.dialog_scoreboard_info_body), getString(R.string.possitive));
+            }
+        });
     }
 
     private void initData(Bundle savedInstanceState) {
@@ -366,7 +366,7 @@ public class ScoreBoardActivity extends BaseActivity {
 
     private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onClick(MaterialDialog dialog, DialogAction which) {
+        public void onClick(@NonNull MaterialDialog dialog,@NonNull DialogAction which) {
             dialog.dismiss();
             finish();
         }

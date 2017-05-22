@@ -96,11 +96,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="text_draw">Draw</string>
 
     <!-- Help/Showcase player list -->
-    <string name="help_points">Points for clashing with opponents\n1 for draw, 3 for winning</string>
-    <string name="help_pmw">Player match win %</string>
-    <string name="help_omw">Opponents match win %</string>
-    <string name="help_pgw">Player game win %</string>
-    <string name="help_ogw">Opponents game win %</string>
+
 
     <!-- Create personal parings-->
     <string name="text_personal_parings">Create manual parings:  %1$s</string>
@@ -133,6 +129,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="help_save_dashboard">After Game you can choose name for score board</string>
     <string name="help_drop_player">If there is a need player can drop a draft</string>
     <string name="help_share_content">After Game you can share it</string>
+    <string name="help_information_scoreboard">What means: PMG, PGW&#8230;</string>
     <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
     <string name="warning_drop_player">You cannot remove players when draft ended</string>
     <string name="settings_clean_history">Clean history</string>
@@ -213,7 +210,6 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="shared_data_player_list" translatable="false">Player name: %1$s\nDraft played: %2$d\nWins: %3$d\n</string>
 
 
-
     <string name="history_player_played_drafts">Draft played: %1$d</string>
     <string name="history_player_detail_place">Place: %1$d / %2$d</string>
     <string name="history_player_wins_drafts">Wins: %1$d</string>
@@ -224,4 +220,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="settings_menu_item_history">History</string>
     <string name="settings_menu_item_other">Other</string>
     <string name="settings_menu_item_time">Time</string>
+    <string name="dialog_scoreboard_info_title">Explanation</string>
+    <string name="dialog_scoreboard_info_body" translatable="false">All Statistic will change after each game\n<b>Points</b>\n1 for draw, 3 for winning\n<b>PMW</b>Player match win %\n<b>OMW</b>Opponents match win %\n<b>PGW</b>Player game win %\n<b>OMW</b>Opponents game win %\nSo who is better?\nFirst criterion is point criterion (big points or PMW) then there is a check how good opponents played (OMW) if there is a tie to this point next is check with PGW and at the end there is a comparison who win a game with who</string>
+
 </resources>

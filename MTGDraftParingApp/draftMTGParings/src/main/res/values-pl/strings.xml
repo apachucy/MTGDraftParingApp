@@ -71,12 +71,6 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
 
     <!-- List Draw -->
     <string name="text_draw">Remis</string>
-  <!-- Help/Showcase player list -->
-	<string name="help_points">Punkt za walkę z przeciwnikami\n1 za remis, 3 za zwycięstwo</string>
-	<string name="help_pmw">% liczba wygranych meczy</string>
-	<string name="help_omw">% liczba wygranych meczy przez przeciwników</string>
-	<string name="help_pgw">% liczba wygranych gier</string>
-	<string name="help_ogw">% liczba wygranych gier przez przeciwników</string>
 
     <!-- Create personal parings-->
     <string name="text_personal_parings">Stwórz własne paringi:  %1$s</string>
@@ -192,4 +186,7 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="history_player_wins_drafts">Wygranych: %1$d</string>
     <string name="history_score_board_row_draft_count_players">Zawodników: %1$d</string>
     <string name="history_score_board_row_draft_rounds">Rundy: %1$d</string>
+    <string name="help_information_scoreboard">Co znaczy: PMG, PGW&#8230;</string>
+    <string name="dialog_scoreboard_info_title">Wyjaśnienie</string>
+
 </resources>

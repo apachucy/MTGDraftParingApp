@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="unii.draft.mtg.parings.MainActivity">
+    tools:context="unii.draft.mtg.parings.ScoreBoardActivity">
 
     <item
         android:id="@+id/action_remove_player"
@@ -25,4 +25,12 @@
         android:title="@string/action_share"
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_info"
+        android:icon="@drawable/ic_info"
+        android:orderInCategory="104"
+        android:title="@string/action_info"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="always" />
+
 </menu>
