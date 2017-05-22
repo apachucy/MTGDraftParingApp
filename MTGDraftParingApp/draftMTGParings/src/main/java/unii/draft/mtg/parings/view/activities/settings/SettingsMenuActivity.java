@@ -77,7 +77,7 @@ public class SettingsMenuActivity extends BaseActivity {
     @Override
     protected void initView() {
         Bundle bundle = getIntent().getExtras();
-        if (!bundle.containsKey(BundleConst.BUNDLE_KEY_SETTINGS_FRAGMENT)) {
+        if (bundle == null || !bundle.containsKey(BundleConst.BUNDLE_KEY_SETTINGS_FRAGMENT)) {
             finish();
         }
         int selectedSettings = bundle.getInt(BundleConst.BUNDLE_KEY_SETTINGS_FRAGMENT);
