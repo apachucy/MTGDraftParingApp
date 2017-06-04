@@ -18,9 +18,7 @@ import unii.draft.mtg.parings.sharedprefrences.IGamePreferences;
  */
 public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDraftMemoryState {
     private DraftDataProvider mDraftDataProvider;
-
     private IGamePreferences mGamePreferences;
-
 
     public BaseAlgorithm(Context context) {
         mGamePreferences = new GamePreferences(context);
@@ -29,7 +27,6 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         if (temp != null) {
             mDraftDataProvider = temp;
         }
-
     }
 
     public int getDefaultRandomSeed() {
@@ -45,15 +42,31 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         populatePlayersList(playerNames);
         mDraftDataProvider.setMaxRound(rounds);
         mDraftDataProvider.setCurrentRound(0);
+        mDraftDataProvider.setPlayedRound(0);
         mDraftDataProvider.setDefaultRandomSeed(playerNames.size());
         mDraftDataProvider.setPlayerWithBye(null);
         mDraftDataProvider.objectInitialized();
     }
 
+    @Override
+    public List<Game> getParings() {
+        return mDraftDataProvider.getParingGameList();
+    }
 
     @Override
     public boolean cacheDraft() {
         return saveDraftInMemory();
+    }
+
+    @Override
+    public int playedRound() {
+        //get two player to check with round is it
+        return mDraftDataProvider.getPlayedRound();
+    }
+
+    @Override
+    public void setPlayedRound(int roundsPlayed) {
+        mDraftDataProvider.setPlayedRound(roundsPlayed);
     }
 
     @Override
@@ -64,6 +77,11 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
     @Override
     public boolean isLoadCachedDraftWasNeeded() throws NullPointerException {
         return loadDraftFromMemory();
+    }
+
+    @Override
+    public boolean isCacheEmpty() {
+        return mGamePreferences.isEmpty();
     }
 
     public void setDraftStartedPlayersList(List<Player> playerList) {
@@ -110,6 +128,12 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         }
         return null;
     }
+
+    @Override
+    public List<Game> getLastPlayedGameList() {
+        return mDraftDataProvider.getParingGameList();
+    }
+
 
     @Override
     public int getMaxRound() {
@@ -162,4 +186,5 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         }
         return false;
     }
+
 }

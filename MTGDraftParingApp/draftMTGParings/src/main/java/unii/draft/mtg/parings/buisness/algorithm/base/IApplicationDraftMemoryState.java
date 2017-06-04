@@ -6,4 +6,6 @@ public interface IApplicationDraftMemoryState {
     boolean isLoadCachedDraftWasNeeded() throws NullPointerException;
 
     void clearCache();
+
+    boolean isCacheEmpty();
 }

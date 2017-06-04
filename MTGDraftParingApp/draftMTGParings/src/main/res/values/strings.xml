@@ -223,4 +223,9 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="dialog_scoreboard_info_title">Explanation</string>
     <string name="dialog_scoreboard_info_body" translatable="false">All Statistic will change after each game\n<b>Points</b>\n1 for draw, 3 for winning\n<b>PMW</b>Player match win %\n<b>OMW</b>Opponents match win %\n<b>PGW</b>Player game win %\n<b>OMW</b>Opponents game win %\nSo who is better?\nFirst criterion is point criterion (big points or PMW) then there is a check how good opponents played (OMW) if there is a tie to this point next is check with PGW and at the end there is a comparison who win a game with who</string>
 
+    <string name="dialog_load_not_ended_draft_title">Load previous draft</string>
+    <string name="dialog_load_not_ended_draft_body">Your previous draft was not finished. Do you want to resume it?</string>
+
+    <!-- Go back dialog -->
+    <string name="dialog_warning_go_back_body">Do you really want to edit last round?</string>
 </resources>

@@ -19,6 +19,13 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
 
     @Override
     public List<Game> getParings() {
+        /**
+         * If current played round is bigger than finished round
+         * load last generated game
+         */
+        if (getCurrentRound() > playedRound()) {
+            return super.getParings();
+        }
         List<Player> filteredPlayerList = getFilteredPlayerList(false);
         List<Game> gameList = null;
         if (getCurrentRound() == 0) {

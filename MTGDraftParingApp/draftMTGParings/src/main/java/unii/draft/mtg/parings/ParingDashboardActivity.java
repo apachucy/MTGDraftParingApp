@@ -41,6 +41,7 @@ import unii.draft.mtg.parings.view.adapters.PlayerMatchParingAdapter;
 import unii.draft.mtg.parings.view.custom.CounterClass;
 import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
 
+import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_LOAD_PREVIOUS_DRAFT;
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS_GENERATED;
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS_TIMER_ON;
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS_TIMER_TIME;
@@ -59,6 +60,7 @@ public class ParingDashboardActivity extends BaseActivity {
 
     private boolean isCountStarted = false;
     private boolean isPairingsGenerated = false;
+    private boolean isLoaded = false;
     private long mTimerTimeTillEnd = 0;
 
     @Bind(R.id.paring_counterTextView)
@@ -289,10 +291,13 @@ public class ParingDashboardActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         try {
+
             if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
                 BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+                if (isLoaded = getIntent().getBooleanExtra(BUNDLE_KEY_LOAD_PREVIOUS_DRAFT, false)) {
+                    mGameList = baseAlgorithm.getLastPlayedGameList();
 
-                if (baseAlgorithm.isLoadCachedDraftWasNeeded() || isPairingsGenerated) {
+                } else if (baseAlgorithm.isLoadCachedDraftWasNeeded() || isPairingsGenerated) {
                     mGameList = ((BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm()).getGameRoundList();
                 } else {
                     mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings();
@@ -341,9 +346,14 @@ public class ParingDashboardActivity extends BaseActivity {
     }
 
     private void moveToScoreBoard() {
+        //TODO: This is not optimal - think about update!!
+        if (isLoaded) {
+            mParingDashboardLogic.removeLastGameResult(mAlgorithmChooser.getCurrentAlgorithm());
+        }
         mParingDashboardLogic.addGameResult(mAlgorithmChooser.getCurrentAlgorithm(), mGameList);
         mStatisticCalculation = new StatisticCalculation(mAlgorithmChooser.getCurrentAlgorithm());
         mStatisticCalculation.calculateAll();
+        mAlgorithmChooser.getCurrentAlgorithm().setPlayedRound(mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
         isPairingsGenerated = false;
         Intent intent = new Intent(ParingDashboardActivity.this,
                 ScoreBoardActivity.class);

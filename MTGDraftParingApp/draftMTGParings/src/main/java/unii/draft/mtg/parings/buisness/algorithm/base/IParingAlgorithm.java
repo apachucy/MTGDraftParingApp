@@ -59,4 +59,9 @@ public interface IParingAlgorithm {
 
     Player getPlayer(String playerName);
 
+    int playedRound();
+
+    void setPlayedRound(int roundsPlayed);
+
+    List<Game> getLastPlayedGameList();
 }

@@ -1,7 +1,6 @@
 package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,7 +27,9 @@ import dagger.Lazy;
 import unii.draft.mtg.parings.MainActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.ScoreBoardActivity;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.buisness.algorithm.tournament.TournamentRounds;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
@@ -48,7 +49,7 @@ public class GameMenuFragment extends BaseFragment {
     private IActivityHandler mActivityHandler;
     private ArrayAdapter<String> mListAdapter;
     private Activity mActivity;
-
+    private boolean isPreviousDraftNotEnded;
     @Bind(R.id.init_playerList)
     ListView mPlayerList;
 
@@ -173,6 +174,12 @@ public class GameMenuFragment extends BaseFragment {
 
 
     protected void initFragmentView(LayoutInflater inflater) {
+        if (isPreviousDraftNotEnded) {
+            //display dialog that can kill this application and move to scoreboard :)
+            showDialogWithTwoOptions(getActivity(), getString(R.string.dialog_load_not_ended_draft_title), getString(R.string.dialog_load_not_ended_draft_body),
+                    getString(R.string.possitive), getString(R.string.negative), mDialogLoadDraftClickListener);
+        }
+
         mListAdapter = new ArrayAdapter<>(mActivity, R.layout.row_player_name,
                 mPlayerNameList.getPlayerList());
 
@@ -197,7 +204,9 @@ public class GameMenuFragment extends BaseFragment {
 
     @Override
     protected void initFragmentData() {
-
+        BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.get().getCurrentAlgorithm();
+        isPreviousDraftNotEnded = !baseAlgorithm.isCacheEmpty()
+                && baseAlgorithm.playedRound() < baseAlgorithm.getMaxRound();
     }
 
     private boolean isValidRoundEditText() {
@@ -279,6 +288,23 @@ public class GameMenuFragment extends BaseFragment {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {
             dialog.dismiss();
+        }
+    };
+
+    private MaterialDialog.SingleButtonCallback mDialogLoadDraftClickListener = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(MaterialDialog dialog, DialogAction which) {
+            dialog.dismiss();
+            Intent intent;
+            IParingAlgorithm currentAlgorithm = mAlgorithmChooser.get().getCurrentAlgorithm();
+            if (currentAlgorithm.getCurrentRound() == currentAlgorithm.playedRound()) {
+                intent = new Intent(getActivity(), ScoreBoardActivity.class);
+            } else {
+                intent = new Intent(getActivity(), ParingDashboardActivity.class);
+            }
+
+            startActivity(intent);
+            getActivity().finish();
         }
     };
 }

@@ -70,6 +70,15 @@
             app:layout_anchor="@id/main_content"
             app:layout_anchorGravity="bottom|right|end" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/paring_previousRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_margin="@dimen/floating_button_margin"
+            android:src="@drawable/ic_navigate_back"
+            app:layout_anchor="@id/main_content"
+            app:layout_anchorGravity="bottom|left|start" />
     </android.support.design.widget.CoordinatorLayout>
 
 </RelativeLayout>

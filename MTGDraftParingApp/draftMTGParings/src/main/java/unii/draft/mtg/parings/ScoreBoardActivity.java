@@ -51,6 +51,7 @@ import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_DRAFT_SAVED_NAME;
+import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_LOAD_PREVIOUS_DRAFT;
 
 
 public class ScoreBoardActivity extends BaseActivity {
@@ -107,6 +108,14 @@ public class ScoreBoardActivity extends BaseActivity {
         }
     }
 
+    @OnClick(R.id.paring_previousRound)
+    void onPreviousGameButtonClicked() {
+
+        showInfoDialog(getString(R.string.dialog_warning_title),
+                getString(R.string.dialog_warning_go_back_body),
+                getString(R.string.possitive),
+                mOnEditRoundButtonClick);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,6 +265,17 @@ public class ScoreBoardActivity extends BaseActivity {
         }
     };
 
+    private MaterialDialog.SingleButtonCallback mOnEditRoundButtonClick = new MaterialDialog.SingleButtonCallback() {
+
+        @Override
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            Intent intent = new Intent(ScoreBoardActivity.this, ParingDashboardActivity.class);
+            intent.putExtra(BUNDLE_KEY_LOAD_PREVIOUS_DRAFT, true);
+            startActivity(intent);
+            finish();
+        }
+    };
+
     private void saveDraft(String draftName) {
         String tempDraftName;
         SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
@@ -366,7 +386,7 @@ public class ScoreBoardActivity extends BaseActivity {
 
     private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onClick(@NonNull MaterialDialog dialog,@NonNull DialogAction which) {
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
             dialog.dismiss();
             finish();
         }

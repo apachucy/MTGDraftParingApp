@@ -9,9 +9,9 @@ import java.util.List;
 
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
-import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.util.config.BaseConfig;
 
 
 public class ParingDashboardLogic {
@@ -27,6 +27,49 @@ public class ParingDashboardLogic {
         updatePlayerPoints(paringAlgorithm, gameList);
     }
 
+    public void removeLastGameResult(IParingAlgorithm paringAlgorithm) {
+        List<Player> playerList = paringAlgorithm.getSortedPlayerList();
+
+        for (Player player : playerList) {
+            List<Game> playedGames = player.getPlayedGame();
+            Game lastGame = playedGames.get(playedGames.size() - 1);
+            playedGames.remove(lastGame);
+            if (paringAlgorithm.getPlayerWithBye() != null
+                    && player.equals(paringAlgorithm.getPlayerWithBye())) {
+                // remove maximum
+                // points
+                // for
+                // player
+                // with bye
+                player.setMatchPoints(player.getMatchPoints() - BaseConfig.MATCH_WIN);
+                return;
+            }
+
+            // draw
+            if (lastGame.getWinner().equals(BaseConfig.DRAW)) {
+                player.setMatchPoints(player.getMatchPoints()
+                        - BaseConfig.MATCH_DRAW);
+                // win match
+            } else if (lastGame.getWinner().equals(player.getPlayerName())) {
+                player.setMatchPoints(player.getMatchPoints()
+                        - BaseConfig.MATCH_WIN);
+
+            }
+
+            // There was a draw so each player gains 1 point for each draw
+            if (lastGame.getDraws() > 0) {
+                player.setGamePoints(player.getGamePoints() - lastGame.getDraws());
+            }
+            // add "small" points for a player
+            if (player.getPlayerName().equals(lastGame.getPlayerNameA())) {
+                player.setGamePoints(player.getGamePoints()
+                        - lastGame.getPlayerAPoints() * 3);
+            } else {
+                player.setGamePoints(player.getGamePoints()
+                        - lastGame.getPlayerBPoints() * 3);
+            }
+        }
+    }
 
     public boolean validateDataSet(List<Game> gameList) {
         boolean isAllGamePointsSet = true;

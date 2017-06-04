@@ -8,5 +8,7 @@ public interface IGamePreferences {
 
     DraftDataProvider getDraftDataProvider();
 
+    boolean isEmpty();
+
     void clean();
 }

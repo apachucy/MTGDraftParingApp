@@ -18,4 +18,6 @@ public final class BundleConst {
     public static final String BUNDLE_KEY_PAIRINGS_GENERATED = "BUNDLE_KEY_PAIRINGS_GENERATED";
     public static final String BUNDLE_KEY_PAIRINGS_TIMER_ON = "BUNDLE_KEY_PAIRINGS_TIMER_ON";
     public static final String BUNDLE_KEY_PAIRINGS_TIMER_TIME = "BUNDLE_KEY_PAIRINGS_TIMER_TIME";
+
+    public static final String BUNDLE_KEY_LOAD_PREVIOUS_DRAFT = "BUNDLE_KEY_LOAD_PREVIOUS_DRAFT";
 }
