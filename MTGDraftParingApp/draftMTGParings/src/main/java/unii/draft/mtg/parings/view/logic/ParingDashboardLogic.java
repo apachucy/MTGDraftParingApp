@@ -32,6 +32,10 @@ public class ParingDashboardLogic {
 
         for (Player player : playerList) {
             List<Game> playedGames = player.getPlayedGame();
+            if (playedGames == null || playedGames.isEmpty() || playedGames.size() == 0) {
+                return;
+            }
+
             Game lastGame = playedGames.get(playedGames.size() - 1);
             playedGames.remove(lastGame);
             if (paringAlgorithm.getPlayerWithBye() != null
