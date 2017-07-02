@@ -191,5 +191,6 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="dialog_warning_go_back_body">Willst du die letzte Runde wirklich bearbeiten?</string>
     <string name="dialog_load_not_ended_draft_body">Ihr vorheriger draft war noch nicht fertig. Willst du es wieder aufnehmen?</string>
     <string name="dialog_load_not_ended_draft_title">Vorherigen draft laden</string>
+    <string name="dialog_start_message_warning_replays">Presse zu starten\nAnzahl der Spieler: %1$d\nAnzahl der Runden: %2$d\nMit dieser Einstellung können die Spieler miteinander spielen mehr als einmal zu gehen, Einstellungen zu ändern</string>
 
 </resources>

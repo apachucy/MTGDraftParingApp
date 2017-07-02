@@ -45,6 +45,8 @@
     <!-- Dialog Start -->
     <string name="dialog_start_title">Game start</string>
     <string name="dialog_start_message">To start parings press button\nNumber of players: %1$d\nNumber of rounds: %2$d</string>
+    <string name="dialog_start_message_warning_replays">To start parings press button\nNumber of players: %1$d\nNumber of rounds: %2$d\nWith this setting player can be paired more than once to change it go to settings!</string>
+
     <string name="dialog_start_button">Close</string>
     <!-- Dialog Game End -->
     <string name="dialog_end_title">Game ended</string>

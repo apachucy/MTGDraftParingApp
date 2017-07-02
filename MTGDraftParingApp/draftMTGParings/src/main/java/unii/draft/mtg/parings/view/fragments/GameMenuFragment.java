@@ -137,9 +137,12 @@ public class GameMenuFragment extends BaseFragment {
                 } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
                     rounds = new TournamentRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
                 }
-                mActivityHandler.showInfoDialog(getString(R.string.dialog_start_title),
-                        getString(R.string.dialog_start_message, mPlayerNameList.getPlayerList().size(), rounds),
-                        getString(R.string.start_game), mStartGameDialogOnClickListener);
+
+                String textBody = getString(R.string.dialog_start_message, mPlayerNameList.getPlayerList().size(), rounds);
+                if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS) {
+                    textBody = getString(R.string.dialog_start_message_warning_replays, mPlayerNameList.getPlayerList().size(), rounds);
+                }
+                mActivityHandler.showInfoDialog(getString(R.string.dialog_start_title), textBody, getString(R.string.start_game), mStartGameDialogOnClickListener);
 
             }
         }

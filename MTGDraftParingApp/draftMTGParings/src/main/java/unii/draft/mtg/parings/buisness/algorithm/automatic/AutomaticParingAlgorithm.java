@@ -2,6 +2,10 @@ package unii.draft.mtg.parings.buisness.algorithm.automatic;
 
 import android.content.Context;
 
+import org.paukov.combinatorics.Factory;
+import org.paukov.combinatorics.Generator;
+import org.paukov.combinatorics.ICombinatoricsVector;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +14,6 @@ import java.util.Random;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
-
 public class AutomaticParingAlgorithm extends BaseAlgorithm {
 
     public AutomaticParingAlgorithm(Context context) {
@@ -50,48 +53,96 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         }
         // Game list should have size players/2
         gameList = new ArrayList<>(filteredPlayerList.size() / 2);
+        Generator<Player> allPermutation = generatePermutations(addedPlayers);
+        gameList = generateParings(allPermutation, gameList, filteredPlayerList);
+        if (gameList == null) {
+            gameList = new ArrayList<>(filteredPlayerList.size() / 2);
+            gameList = generateParingsWithPlayersOtherThanLastPlayed(allPermutation, gameList, filteredPlayerList);
+        }
+        setCurrentRound(getCurrentRound() + 1);
 
-        for (int i = 0; i < filteredPlayerList.size(); i++) {
-            // get only two players name
-            // not added last player
-            if (addedPlayers.contains(filteredPlayerList.get(i))) {
-                Integer paringPartner = null;
-                for (int j = 0; j < addedPlayers.size(); j++) {
-                    //this player did not play a game yet!
-                    if (!addedPlayers.get(j).playedGameWith()
-                            .contains(filteredPlayerList.get(i).getPlayerName())
-                            && filteredPlayerList.get(i) != addedPlayers.get(j)) {
-                        paringPartner = j;
-                        break;
+        setRoundList(gameList);
+        return gameList;
+    }
+
+    private List<Game> generateParingsWithPlayersOtherThanLastPlayed(Generator<Player> allPermutation, List<Game> gameList, List<Player> filteredPlayerList) {
+        for (ICombinatoricsVector<Player> playersPermutation : allPermutation) {
+            gameList.clear();
+            List<Player> playerListPermutation = playersPermutation.getVector();
+            for (int i = 0; i < filteredPlayerList.size(); i++) {
+                // get only two players name
+                // not added last player
+                if (playerListPermutation.contains(filteredPlayerList.get(i))) {
+                    Integer paringPartner = null;
+                    for (int j = 0; j < playerListPermutation.size(); j++) {
+                        int rounds = playerListPermutation.get(j).playedGameWith().size();
+                        if (!playerListPermutation.get(j).playedGameWith().get(rounds - 1)
+                                .equals(filteredPlayerList.get(i).getPlayerName())
+                                && filteredPlayerList.get(i) != playerListPermutation.get(j)) {
+                            paringPartner = j;
+                            break;
+                        }
                     }
-                }
-                if (paringPartner != null) {
-                    Player player1 = filteredPlayerList.get(i);
-                    Player player2 = addedPlayers.get(paringPartner);
-                    Game game = new Game(player1.getPlayerName(),
-                            player2.getPlayerName());
-                    gameList.add(game);
-                    addedPlayers.remove(player1);
-                    addedPlayers.remove(player2);
-                    paringPartner = null;
-                } else {
-                    //someone played a game before
-                    if (addedPlayers.size() % 2 == 0) {
+                    if (paringPartner != null) {
                         Player player1 = filteredPlayerList.get(i);
-                        addedPlayers.remove(player1);
-                        Player player2 = addedPlayers.get(0);//get first element
-                        addedPlayers.remove(player2);
-                        Game game = new Game(player1.getPlayerName(), player2.getPlayerName());
+                        Player player2 = playerListPermutation.get(paringPartner);
+                        Game game = new Game(player1.getPlayerName(),
+                                player2.getPlayerName());
                         gameList.add(game);
-
+                        playerListPermutation.remove(player1);
+                        playerListPermutation.remove(player2);
+                        if (playerListPermutation.isEmpty()) {
+                            return gameList;
+                        }
                     }
                 }
             }
-
         }
-        setCurrentRound(getCurrentRound() + 1);
-        setRoundList(gameList);
-        return gameList;
+
+        return null;
+    }
+
+    private List<Game> generateParings
+    (Generator<Player> allPermutation, List<Game> gameList, List<Player> filteredPlayerList) {
+        for (ICombinatoricsVector<Player> playersPermutation : allPermutation) {
+            gameList.clear();
+            List<Player> playerListPermutation = playersPermutation.getVector();
+            for (int i = 0; i < filteredPlayerList.size(); i++) {
+                // get only two players name
+                // not added last player
+                if (playerListPermutation.contains(filteredPlayerList.get(i))) {
+                    Integer paringPartner = null;
+                    for (int j = 0; j < playerListPermutation.size(); j++) {
+                        //this player did not play a game yet!
+                        if (!playerListPermutation.get(j).playedGameWith()
+                                .contains(filteredPlayerList.get(i).getPlayerName())
+                                && filteredPlayerList.get(i) != playerListPermutation.get(j)) {
+                            paringPartner = j;
+                            break;
+                        }
+                    }
+                    if (paringPartner != null) {
+                        Player player1 = filteredPlayerList.get(i);
+                        Player player2 = playerListPermutation.get(paringPartner);
+                        Game game = new Game(player1.getPlayerName(),
+                                player2.getPlayerName());
+                        gameList.add(game);
+                        playerListPermutation.remove(player1);
+                        playerListPermutation.remove(player2);
+                        if (playerListPermutation.isEmpty()) {
+                            return gameList;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private Generator<Player> generatePermutations(List<Player> playerList) {
+        ICombinatoricsVector<Player> originalVector = Factory.createVector(playerList);
+        Generator<Player> generatedPermutation = Factory.createPermutationGenerator(originalVector);
+        return generatedPermutation;
     }
 
     @Override
@@ -122,6 +173,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
      * Each player has equal point <br>
      * so make parings at random
      */
+
     private void calculatePairAtStart(List<Player> playerList) {
         Random random = new Random();
         // swap element at random
@@ -149,7 +201,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
             }
         }
         // move player with bye on last position
-        // swaping with other players
+        // swapping with other players
         for (int i = playerPosition; i + 1 < playerList.size(); i++) {
             Collections.swap(playerList, i, i + 1);
         }

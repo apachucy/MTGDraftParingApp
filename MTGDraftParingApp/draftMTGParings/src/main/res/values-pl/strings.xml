@@ -191,5 +191,6 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="dialog_warning_go_back_body">Czy napewno chcesz zedytować poprzednią rundę?</string>
     <string name="dialog_load_not_ended_draft_body">Twój ostatni draft się nie skończył. Czy chcesz go wczytać?</string>
     <string name="dialog_load_not_ended_draft_title">Wczytać poprzedni draft</string>
+    <string name="dialog_start_message_warning_replays">Aby zacząć naciśnij przycisk\nLiczba graczy: %1$d\nLiczba rund: %2$d\nZ tym ustawieniem gracze mogą grać ze sobą więcej niż raz, aby to zmienić przejdź do ustawień!</string>
 
 </resources>

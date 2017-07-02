@@ -21,8 +21,8 @@ android {
 
     defaultConfig {
         applicationId "unii.draft.mtg.parings"
-        versionCode 41
-        versionName "1.1.1"
+        versionCode 42
+        versionName "1.1.2-no-golden-solution"
         minSdkVersion 14
         targetSdkVersion 21
         generatedDensities = []
@@ -75,6 +75,8 @@ dependencies {
     //save player objects (protect from removing it)
     compile 'com.google.code.gson:gson:2.7'
 
+    //permutation library
+    compile 'com.googlecode.combinatoricslib:combinatoricslib:2.1'
 
     //tests
     testCompile 'junit:junit:4.12'
