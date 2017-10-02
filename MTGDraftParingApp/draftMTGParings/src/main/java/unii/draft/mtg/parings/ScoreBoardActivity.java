@@ -215,7 +215,7 @@ public class ScoreBoardActivity extends BaseActivity {
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(setIntent);
     }
-
+//onActivityResult is triggered faster than onResume
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -225,7 +225,10 @@ public class ScoreBoardActivity extends BaseActivity {
                     mDraftName = data.getExtras().getString(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME);
                 }
             } else if (requestCode == BaseConfig.DRAFT_PLAYERS_DROPPED) {
-                mAdapter.notifyDataSetChanged();
+                if (mAdapter != null) {
+                    mAdapter.notifyDataSetChanged();
+                }
+
             }
         }
     }
@@ -291,7 +294,8 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     private void setListGuideActions(
-            ImageView dropPlayerButton, ImageView saveDraft, ImageView shareContent, ImageView information) {
+            ImageView dropPlayerButton, ImageView saveDraft, ImageView shareContent, ImageView
+            information) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 

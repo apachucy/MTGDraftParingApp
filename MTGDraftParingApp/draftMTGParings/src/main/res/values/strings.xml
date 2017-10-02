@@ -223,7 +223,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="settings_menu_item_other">Other</string>
     <string name="settings_menu_item_time">Time</string>
     <string name="dialog_scoreboard_info_title">Explanation</string>
-    <string name="dialog_scoreboard_info_body" translatable="false">All Statistic will change after each game\n<b>Points</b>\n1 for draw, 3 for winning\n<b>PMW</b>Player match win %\n<b>OMW</b>Opponents match win %\n<b>PGW</b>Player game win %\n<b>OMW</b>Opponents game win %\nSo who is better?\nFirst criterion is point criterion (big points or PMW) then there is a check how good opponents played (OMW) if there is a tie to this point next is check with PGW and at the end there is a comparison who win a game with who</string>
+    <string name="dialog_scoreboard_info_body" translatable="false">All Statistic will be updated after each game and are represented by Points, PMW, OMW,PGW, OGW.\nEach player get Points at the end of match 1 for a draw, 3 for winning and 0 for losing.\nPMW represents Player match win and OMW is a term used for opponents match win %. PGW and OGW represent statistic after each game - small points.\nPGW - player game wins, OGW - opponents game wins.\nSo who is better player?\nFirst criterion are sum of total points (big points and PMW) then there is a check how good opponents played (OMW) if there is a tie to this point next is check with PGW and at the end there is a comparison who win a game with who</string>
 
     <string name="dialog_load_not_ended_draft_title">Load previous draft</string>
     <string name="dialog_load_not_ended_draft_body">Your previous draft was not finished. Do you want to resume it?</string>

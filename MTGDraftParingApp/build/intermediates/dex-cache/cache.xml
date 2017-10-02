@@ -21,12 +21,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.6.2\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a637ea73d78e58f13decdc721b01817d39941f10">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-crashlytics-2.6.2_588257c5c5eb9b0e755346b0d2154fdafe7e0ab8.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.3.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
         <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.3.1_413513667440cdad6c6d4af98ef53280eafd6845.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\design\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-design-25.3.1_6f295f6deedef9b4c60b4abba626b9c36c2aab8d.jar" />
     </item>
     <item
         is-multidex="false"
@@ -39,12 +57,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-v13\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8531f2d46b35de75e6130f25830e0c2c0d6bb98c">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-support-v13-25.3.1_5f6cced10db031b9e5ed48328ea7c2884cfbf814.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.3.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="914f5d3e3ace66080e59613708f06d129a222e25">
         <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-25.3.1_8277aa86f2f1c4000d57a58c026e98715a20168a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\transition\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-transition-25.3.1_bffe88e1d6189aec0d4d80aff0e7d99bc6e5a2fc.jar" />
     </item>
     <item
         is-multidex="false"
@@ -57,6 +93,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.googlecode.combinatoricslib\combinatoricslib\2.1\63506ed6a511575b1cec97032e7ff8bf2e948888\combinatoricslib-2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="63506ed6a511575b1cec97032e7ff8bf2e948888">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\combinatoricslib-2.1_d6f570000b4ab10f005bf765cde3bf10bdcc50d5.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.3.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -66,12 +111,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.github.worker8\tourguide\1.0.14-SNAPSHOT\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="35af7e9533758e83fd2864f0bc9ce14551c580ef">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.github.worker8-tourguide-1.0.14-SNAPSHOT_71f03f1040b967974845f033d1efd73e3df5be5c.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.google.dagger\dagger\2.0.2\de8416eda7b2fd7c25836b140c39e1cbf10542f6\dagger-2.0.2.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="de8416eda7b2fd7c25836b140c39e1cbf10542f6">
         <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\dagger-2.0.2_bafbfe0929edcecc43448f4ed3b75729aef99c6a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.11\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e3e366ad917b1fd4de5f1a0626d4e9af903dba52">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-crashlytics-core-2.3.11_c7a81a03da51d952cbd186a1e7c3f29c4199b7f2.jar" />
     </item>
     <item
         is-multidex="false"
@@ -93,12 +156,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.11\jars\classes.jar"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.3.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="e3e366ad917b1fd4de5f1a0626d4e9af903dba52">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-crashlytics-core-2.3.11_c7a81a03da51d952cbd186a1e7c3f29c4199b7f2.jar" />
+        revision="25.0.3"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.3.1_3d181ebfb5050b9971c091e474b9206571f11298.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\javax.inject-1_5c4f0765699bffb9eabfed4e609a4969f198da0a.jar" />
     </item>
     <item
         is-multidex="false"
@@ -117,6 +189,15 @@
         revision="25.0.3"
         sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
         <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\butterknife-7.0.1_ef256bb740446048b520d5ac3f7f479ee2a602ec.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-compat\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.3.1_01553119f25cc64acc692a8cd2f4d2c04301cd67.jar" />
     </item>
     <item
         is-multidex="false"
@@ -147,42 +228,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.crashlytics.sdk.android\answers\1.3.9\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="e3376f705dc1863a8782faf275e56f188b8129eb">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-answers-1.3.9_3841a8db030a98448bf3c140845690fe1b087133.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.github.worker8\tourguide\1.0.14-SNAPSHOT\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="35af7e9533758e83fd2864f0bc9ce14551c580ef">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.github.worker8-tourguide-1.0.14-SNAPSHOT_71f03f1040b967974845f033d1efd73e3df5be5c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\javax.inject-1_5c4f0765699bffb9eabfed4e609a4969f198da0a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\libs\greendao-2.1.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="9414c1d4578673dac83a23119009624fd695726d">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\greendao-2.1.0_544b62223ac7c689b3801690a75ad24add5e81ad.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.3.13\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -192,12 +237,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.google.dagger\dagger\2.0.2\de8416eda7b2fd7c25836b140c39e1cbf10542f6\dagger-2.0.2.jar"
+        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.3.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="de8416eda7b2fd7c25836b140c39e1cbf10542f6">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\dagger-2.0.2_bafbfe0929edcecc43448f4ed3b75729aef99c6a.jar" />
+        revision="25.0.3"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.3.1_dd7a027b09d119d53f20c4f21ce9e106b6d38173.jar" />
     </item>
     <item
         is-multidex="false"
@@ -234,159 +279,6 @@
         revision="25.0.3"
         sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
         <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\support-annotations-25.3.1_acce577ed05cb9a1604adcd54830a77057b34aad.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.6.2\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="a637ea73d78e58f13decdc721b01817d39941f10">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-crashlytics-2.6.2_588257c5c5eb9b0e755346b0d2154fdafe7e0ab8.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\design\25.3.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-design-25.3.1_6f295f6deedef9b4c60b4abba626b9c36c2aab8d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-v13\25.3.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="8531f2d46b35de75e6130f25830e0c2c0d6bb98c">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-support-v13-25.3.1_5f6cced10db031b9e5ed48328ea7c2884cfbf814.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\library-2.4.0_a3cc3eaefa34d63a62a83f17fe287740d19c62c6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\butterknife-7.0.1_ef256bb740446048b520d5ac3f7f479ee2a602ec.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\transition\25.3.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-transition-25.3.1_bffe88e1d6189aec0d4d80aff0e7d99bc6e5a2fc.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.crashlytics.sdk.android\beta\1.2.2\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="b42cf2134829f715edfa2adaf0ee246631322dba">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-beta-1.2.2_c73f7c14636985656fcbcbc5c830174a82e21e37.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\gson-2.7_8b53e8835b7c191a2baa82461532f16578c667b0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.github.worker8\tourguide\1.0.14-SNAPSHOT\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="35af7e9533758e83fd2864f0bc9ce14551c580ef">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.github.worker8-tourguide-1.0.14-SNAPSHOT_71f03f1040b967974845f033d1efd73e3df5be5c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.11\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="e3e366ad917b1fd4de5f1a0626d4e9af903dba52">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-crashlytics-core-2.3.11_c7a81a03da51d952cbd186a1e7c3f29c4199b7f2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\net.i2p.android.ext\floatingactionbutton\1.9.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="7c5e4db194c6ec3e62b70759ef913381ea4903d1">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\net.i2p.android.ext-floatingactionbutton-1.9.0_88666396e8eb51de66f2b342cbf6a4dc717cd3ca.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.3.13\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="23e3acde10f4cf52778f8dc88107fb96459f2392">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\io.fabric.sdk.android-fabric-1.3.13_e2f7d63762c22504ee4bc65700c87e7fdc283435.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.3.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.3.1_3d181ebfb5050b9971c091e474b9206571f11298.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Unii\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\javax.inject-1_5c4f0765699bffb9eabfed4e609a4969f198da0a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-compat\25.3.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.3.1_01553119f25cc64acc692a8cd2f4d2c04301cd67.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.3.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.3.1_dd7a027b09d119d53f20c4f21ce9e106b6d38173.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.6.2\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a637ea73d78e58f13decdc721b01817d39941f10">
-        <dex dex="G:\Workspace\Android Studio\MTGDraftParingApp\MTGDraftParingApp\draftMTGParings\build\intermediates\pre-dexed\debug\com.crashlytics.sdk.android-crashlytics-2.6.2_588257c5c5eb9b0e755346b0d2154fdafe7e0ab8.jar" />
     </item>
 
 </items>
