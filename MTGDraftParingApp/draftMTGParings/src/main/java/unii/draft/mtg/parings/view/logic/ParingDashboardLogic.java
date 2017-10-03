@@ -28,7 +28,7 @@ public class ParingDashboardLogic {
     }
 
     public void removeLastGameResult(IParingAlgorithm paringAlgorithm) {
-        List<Player> playerList = paringAlgorithm.getSortedPlayerList();
+        List<Player> playerList = paringAlgorithm.getSortedFilteredPlayerList(false);
 
         for (Player player : playerList) {
             if (paringAlgorithm.getPlayerWithBye() != null
@@ -104,7 +104,7 @@ public class ParingDashboardLogic {
 
 
     private void updatePlayerPoints(IParingAlgorithm paringAlgorithm, List<Game> gameList) {
-        List<Player> playerList = paringAlgorithm.getSortedPlayerList();
+        List<Player> playerList = paringAlgorithm.getSortedFilteredPlayerList(false);
 
 
         for (Player player : playerList) {
