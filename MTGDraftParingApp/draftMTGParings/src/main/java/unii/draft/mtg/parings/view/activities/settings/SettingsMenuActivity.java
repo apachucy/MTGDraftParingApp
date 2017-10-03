@@ -79,6 +79,7 @@ public class SettingsMenuActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle == null || !bundle.containsKey(BundleConst.BUNDLE_KEY_SETTINGS_FRAGMENT)) {
             finish();
+            return;
         }
         int selectedSettings = bundle.getInt(BundleConst.BUNDLE_KEY_SETTINGS_FRAGMENT);
         Fragment fragment;
