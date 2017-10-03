@@ -39,12 +39,12 @@ public class ParingDashboardLogic {
                 // player
                 // with bye
                 player.setMatchPoints(player.getMatchPoints() - BaseConfig.MATCH_WIN);
-                return;
+                continue;
             }
 
             List<Game> playedGames = player.getPlayedGame();
             if (playedGames == null || playedGames.isEmpty() || playedGames.size() == 0) {
-                return;
+                continue;
             }
 
             Game lastGame = playedGames.get(playedGames.size() - 1);
