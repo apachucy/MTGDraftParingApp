@@ -45,10 +45,7 @@ public class GamePreferences implements IGamePreferences {
     @Override
     public boolean isEmpty() {
         String draftStatus = mSharedPreferences.getString(GamePreferencesConst.CURRENT_DRAFT_STATUS, null);
-        if (draftStatus == null || draftStatus.isEmpty()) {
-            return true;
-        }
-        return false;
+        return draftStatus == null || draftStatus.isEmpty();
     }
 
     @Override

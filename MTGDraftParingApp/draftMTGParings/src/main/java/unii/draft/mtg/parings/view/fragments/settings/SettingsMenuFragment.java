@@ -81,7 +81,7 @@ public class SettingsMenuFragment extends BaseFragment {
                 ImageView imageView = (ImageView) itemView.findViewById(R.id.row_settings_chooser_image);
 
                 ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(getActivity(), (View) imageView, "settingsImage");
+                        makeSceneTransitionAnimation(getActivity(), imageView, "settingsImage");
                 bundle.putAll(options.toBundle());
             }
             intent.putExtras(bundle);

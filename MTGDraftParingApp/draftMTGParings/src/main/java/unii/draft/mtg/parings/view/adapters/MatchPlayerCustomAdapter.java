@@ -40,7 +40,7 @@ public class MatchPlayerCustomAdapter extends RecyclerView.Adapter<RecyclerView.
         }
 
         ViewHolder viewHolder = (ViewHolder) holder;
-        Game game = (Game) mPlayerGame.get(position);
+        Game game = mPlayerGame.get(position);
         viewHolder.player1TextView.setText(game.getPlayerNameA());
         viewHolder.player2TextView.setText(game.getPlayerNameB());
     }
