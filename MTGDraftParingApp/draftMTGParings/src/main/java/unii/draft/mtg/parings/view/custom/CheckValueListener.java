@@ -6,5 +6,5 @@ public interface CheckValueListener {
 	 * 
 	 * @return
 	 */
-	public String getCheckedValue();
+    String getCheckedValue();
 }

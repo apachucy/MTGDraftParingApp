@@ -7,24 +7,24 @@ public interface IStatisticCalculation {
 	/**
 	 * calculate player match win %
 	 */
-	public void calculatePMW();
+    void calculatePMW();
 	
 	/**
 	 * calculate oponents match win %
 	 */
-	public void calculateOMW();
+    void calculateOMW();
 	
 	/**
 	 * calculate player game win %
 	 */
-	public void calculatePGW();
+    void calculatePGW();
 	
 	/**
 	 * calculate oponents game win %
 	 */
-	public void calculateOGW();
+    void calculateOGW();
 	/**
 	 * calculate all statistics
 	 */
-	public void calculateAll();
+    void calculateAll();
 }

@@ -7,5 +7,5 @@ import java.util.ArrayList;
  */
 public interface IPlayerList {
 
-    public ArrayList<String> getPlayerList();
+    ArrayList<String> getPlayerList();
 }
