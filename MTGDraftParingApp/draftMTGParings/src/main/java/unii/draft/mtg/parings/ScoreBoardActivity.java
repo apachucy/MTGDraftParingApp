@@ -113,7 +113,7 @@ public class ScoreBoardActivity extends BaseActivity {
 
         showInfoDialog(getString(R.string.dialog_warning_title),
                 getString(R.string.dialog_warning_go_back_body),
-                getString(R.string.possitive),
+                getString(R.string.positive),
                 mOnEditRoundButtonClick);
     }
 

@@ -87,7 +87,7 @@ public class DraftSettingsFragment extends BaseFragment {
     void onSaveDraftResultsViewClicked() {
         List<String> options = new ArrayList<>();
         options.add(getString(R.string.negative));
-        options.add(getString(R.string.possitive));
+        options.add(getString(R.string.positive));
 
         showRadioButtonListDialog(getActivity(), getString(R.string.settings_save_draft_result_dialog_title), options,
                 getString(R.string.dialog_positive), getString(R.string.dialog_negative),
@@ -111,7 +111,7 @@ public class DraftSettingsFragment extends BaseFragment {
         if (mode == 0) {
             option = getString(R.string.negative);
         } else {
-            option = getString(R.string.possitive);
+            option = getString(R.string.positive);
         }
         mSaveDraftResultButton.setText(getString(R.string.text_save_results_after_draft, option));
     }

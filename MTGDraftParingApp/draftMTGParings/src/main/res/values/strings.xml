@@ -13,23 +13,16 @@
     <string name="text_end_round">End</string>
     <string name="warning_empty_field">Cannot be empty</string>
     <string name="warning_need_players">Please add players</string>
-    <string name="title_activity_parings">ParingsActivity</string>
     <string name="text_vs">vs</string>
-    <string name="text_win">Wins:</string>
-    <string name="text_0">0</string>
-    <string name="text_1">1</string>
-    <string name="text_2">2</string>
+    <string name="text_0" translatable="false">0</string>
+    <string name="text_1" translatable="false">1</string>
+    <string name="text_2" translatable="false">2</string>
     <string name="text_from">from</string>
     <string name="text_round">Round :</string>
     <string name="text_time">To start counter press Start</string>
-    <string name="title_activity_player_position">PlayerPositionActivity</string>
-    <string name="text_next">Next game</string>
     <string name="text_after_game">Results after round :</string>
-    <string name="title_activity_settings">SettingsActivity</string>
     <string name="text_winner">Winner:</string>
     <!-- Settings -->
-    <string name="toggle_button_on">ON</string>
-    <string name="toggle_button_off">OFF</string>
     <string name="text_display_counter">Display round time:</string>
     <string name="text_time_round">Time per round[m]: %1$s</string>
     <string name="text_vibration">Turn vibration:</string>
@@ -38,8 +31,6 @@
     <string name="text_first_vibration">First vibration[m]: %1$s</string>
     <string name="text_second_vibration">Second vibration[m]: %1$s</string>
     <string name="text_duration_vibration">Duration[s]: %1$s</string>
-    <string name="text_save">Save</string>
-    <string name="toast_saved">Changes saved</string>
 
     <!-- Dialog Fragment -->
     <!-- Dialog Start -->
@@ -80,8 +71,6 @@
 
     <!-- Help/Showcase start screen -->
     <string name="help_title">Help</string>
-     <string name="help_message">Tool to organize booster draft of MTG.
-Pairings are calculate with Swiss-System tournament. Check settings in menu for configuration your own draft. </string>
     <string name="tutorial_info">Info about used libraries</string>
     <string name="tutorial_settings">Configure your draft before play </string>
     <string name="tutorial_hour_glass">Press for countdown</string>
@@ -97,17 +86,13 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <!-- List Draw -->
     <string name="text_draw">Draw</string>
 
-    <!-- Help/Showcase player list -->
-
-
     <!-- Create personal parings-->
     <string name="text_personal_parings">Create manual parings:  %1$s</string>
     <string name="text_save_results_after_draft">Save Results after draft: %1$s</string>
-    <string name="possitive">Yes</string>
+    <string name="positive">Yes</string>
     <string name="negative">No</string>
     <string name="activity_paring_add_paring">Add Paring</string>
     <string name="activity_paring_clean_paring">Clean Parings</string>
-    <string name="activity_paring_play_round">Play</string>
     <string name="activity_paring_warning_empty_list">No more players for parings</string>
     <string name="activity_paring_warning_equal_names">Wrong paring</string>
     <string name="activity_paring_warning_paring_not_finished">Please end all possible parings for players</string>
@@ -135,14 +120,13 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
     <string name="warning_drop_player">You cannot remove players when draft ended</string>
     <string name="settings_clean_history">Clean history</string>
-    <string name="settings_remove_text">Remove</string>
     <string name="settings_other">Other settings</string>
     <string name="settings_display_scoreboards">Display score boards</string>
     <string name="settings_display_players_list">Display players list</string>
     <string name="settings_sittings_option" translatable="false">Sittings: %1$s</string>
     <string name="settings_reset_tour_guide">Reset Tour Guide and display help</string>
     <string name="settings_reset_tour_guide_dialog_title">Do you want to reset help?</string>
-    <string name="settings_reset_tour_guide_dialog_content">Help will be reset in this aplication</string>
+    <string name="settings_reset_tour_guide_dialog_content">Help will be reset in this application</string>
     <string name="settings_reset_tour_guide_message">Tour Guide was reset</string>
 
     <string name="history_score_board_row_draft_name">Draft name: %1$s</string>
@@ -158,7 +142,7 @@ Pairings are calculate with Swiss-System tournament. Check settings in menu for 
     <!--Modify App UI -->
     <string name="action_countdown">Countdown</string>
     <string name="action_open_life_app">Open Life App</string>
-    <string name="message_action_countdown_started">Countdown...</string>
+    <string name="message_action_countdown_started">Countdown…</string>
     <string name="message_action_countdown_cancel">Cancelled countdown</string>
     <!--Open Intent -->
     <string name="chooser_intent_title_life_counter">Choose life counter application</string>

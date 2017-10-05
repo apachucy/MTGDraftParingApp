@@ -180,7 +180,7 @@ public class GameMenuFragment extends BaseFragment {
         if (isPreviousDraftNotEnded) {
             //display dialog that can kill this application and move to scoreboard :)
             showDialogWithTwoOptions(getActivity(), getString(R.string.dialog_load_not_ended_draft_title), getString(R.string.dialog_load_not_ended_draft_body),
-                    getString(R.string.possitive), getString(R.string.negative), mDialogLoadDraftClickListener);
+                    getString(R.string.positive), getString(R.string.negative), mDialogLoadDraftClickListener);
         }
 
         mListAdapter = new ArrayAdapter<>(mActivity, R.layout.row_player_name,

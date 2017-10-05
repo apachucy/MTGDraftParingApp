@@ -11,23 +11,13 @@
     <string name="text_end_round">Koniec</string>
     <string name="warning_empty_field">Pole nie może być puste</string>
     <string name="warning_need_players">Dodaj graczy</string>
-    <string name="title_activity_parings">ParingsActivity</string>
     <string name="text_vs">vs</string>
-    <string name="text_win">Wygrane:</string>
-    <string name="text_0">0</string>
-    <string name="text_1">1</string>
-    <string name="text_2">2</string>
     <string name="text_from">z</string>
     <string name="text_round">Runda :</string>
     <string name="text_time">Aby rozpocząć odliczanie naciśnij start</string>
-    <string name="title_activity_player_position">PlayerPositionActivity</string>
-    <string name="text_next">Dalej</string>
     <string name="text_after_game">Wyniki po rundzie :</string>
-    <string name="title_activity_settings">SettingsActivity</string>
     <string name="text_winner">Zwycięzca:</string>
     <!-- Settings -->
-    <string name="toggle_button_on">ON</string>
-    <string name="toggle_button_off">OFF</string>
     <string name="text_display_counter">Wyświetl czas:</string>
     <string name="text_time_round">Czas na rundę[m]: %1$s</string>
     <string name="text_vibration">Włącz wibracje:</string>
@@ -35,8 +25,6 @@
     <string name="text_first_vibration">Pierwsza wibracja[m]: %1$s</string>
     <string name="text_second_vibration">Druga wibracja[m]: %1$s</string>
     <string name="text_duration_vibration">Czas trwania wibracji[s]: %1$s</string>
-    <string name="text_save">Zapisz</string>
-    <string name="toast_saved">Zmiany zostały zapisane</string>
 
     <!-- Dialog Fragment -->
     <!-- Dialog Start -->
@@ -59,8 +47,6 @@
 
     <!-- Help/Showcase -->
     <string name="help_title">Pomoc</string>
-    <string name="help_message">Narzędzie do ogranizacji booster draftów  MTG.
-Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu lepszej konfiguracji aplikacji. </string>
     <!-- Headers -->
     <string name="header_player_position_name">Gracz</string>
     <string name="header_player_position_points">Punkty</string>
@@ -76,7 +62,6 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="text_personal_parings">Stwórz własne paringi:  %1$s</string>
     <string name="activity_paring_add_paring">Dodaj Paring</string>
     <string name="activity_paring_clean_paring">Usuń Paringi</string>
-    <string name="activity_paring_play_round">Graj</string>
     <string name="activity_paring_warning_empty_list">Nie ma więcej zawodników do paringów</string>
     <string name="activity_paring_warning_equal_names">Złe paring</string>
     <string name="activity_paring_warning_paring_not_finished">Proszę skończ parowanie zawodników</string>
@@ -101,7 +86,6 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="settings_other">Pozostałe ustawienia</string>
     <string name="settings_display_scoreboards">Wyświetl listę draftów</string>
     <string name="settings_clean_history">Usuń wszystkie drafty</string>
-    <string name="settings_remove_text">Usuń</string>
     <string name="warning_save_dashboard">Dopiero po wszystkich rozgrywkach możesz zapisać draft</string>
     <string name="action_countdown">Odliczanie</string>
     <string name="message_action_countdown_cancel">Odwołano odliczanie</string>
@@ -175,7 +159,7 @@ Pairingi są wybierane za pomocą Swiss Systemu. Zerknij na ustawienia w celu le
     <string name="settings_dialog_round_first_vibration_hint">Propozycja: 5 minut</string>
     <string name="select_player_manual_title">Wybierz zawodnika</string>
     <string name="select_player_manual_add">Dodaj</string>
-    <string name="possitive">Tak</string>
+    <string name="positive">Tak</string>
     <string name="settings_pairing_mode_tournament">Turniej</string>
     <string name="negative">Nie</string>
     <string name="settings_save_draft_result_dialog_title">Czy zapisać wyniki draftu:</string>

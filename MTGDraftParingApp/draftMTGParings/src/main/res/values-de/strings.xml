@@ -11,23 +11,13 @@
     <string name="text_end_round">Ende</string>
     <string name="warning_empty_field">Das Feld darf nicht leer sein</string>
     <string name="warning_need_players">Spieler hinzufügen</string>
-    <string name="title_activity_parings">ParingsActivity</string>
     <string name="text_vs">gegen</string>
-    <string name="text_win">Gewinne:</string>
-    <string name="text_0">0</string>
-    <string name="text_1">1</string>
-    <string name="text_2">2</string>
     <string name="text_from">mit</string>
     <string name="text_round">Runde :</string>
     <string name="text_time">Um den Countdown zu starten, drücken Sie Start</string>
-    <string name="title_activity_player_position">PlayerPositionActivity</string>
-    <string name="text_next">Weiter</string>
     <string name="text_after_game">Ergebnisse nach Runde :</string>
-    <string name="title_activity_settings">SettingsActivity</string>
     <string name="text_winner">Gewinner:</string>
     <!-- Settings -->
-    <string name="toggle_button_on">ON</string>
-    <string name="toggle_button_off">OFF</string>
     <string name="text_display_counter">Vorstellungszeiten:</string>
     <string name="text_time_round">Zeit pro Runde[m]: %1$s</string>
     <string name="text_vibration">Vibration-switch:</string>
@@ -35,8 +25,7 @@
     <string name="text_first_vibration">Erste Vibration[m]: %1$s</string>
     <string name="text_second_vibration">Zweite Vibration[m]: %1$s</string>
     <string name="text_duration_vibration">Die Dauer der Vibrationen[s]: %1$s</string>
-    <string name="text_save">Speichern</string>
-    <string name="toast_saved">Änderungen wurden gespeichert</string>
+
 
     <!-- Dialog Fragment -->
     <!-- Dialog Start -->
@@ -59,8 +48,6 @@
 
     <!-- Help/Showcase -->
     <string name="help_title">Hilfe</string>
-    <string name="help_message">Die App zur Unterstützung des Spiels MTG.
-Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Optionen um die Appskonfiguration zu bessern.</string>
     <!-- Headers -->
     <string name="header_player_position_name">Spieler</string>
     <string name="header_player_position_points">Punkte</string>
@@ -76,7 +63,6 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="text_personal_parings">Erstellen Sie Ihre eigenem Paring:  %1$s</string>
     <string name="activity_paring_add_paring">Hinzufügen Paring</string>
     <string name="activity_paring_clean_paring">Löschen Paring</string>
-    <string name="activity_paring_play_round">Spielen</string>
     <string name="activity_paring_warning_empty_list">Es gibt keine weitere Spieler zu Paring durchführen</string>
     <string name="activity_paring_warning_equal_names">Schlecht Paring</string>
     <string name="activity_paring_warning_paring_not_finished">Bitte beenden Sie Paarung Spieler</string>
@@ -101,7 +87,6 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="settings_other">Anderen Konfigurationen</string>
     <string name="settings_display_scoreboards">Draftliste</string>
     <string name="settings_clean_history">Löschen alle Draft</string>
-    <string name="settings_remove_text">Löschen</string>
     <string name="warning_save_dashboard">Nach allen Wettbewerben können einen Entwurf zu speichern.</string>
     <string name="action_countdown">Countdown</string>
     <string name="message_action_countdown_cancel">Countdown wurde annulieren</string>
@@ -113,7 +98,7 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="validation_dialog_body">Bitte setzen Sie alle Spielergebnisse </string>
     <string name="validation_dialog_title">Verifikation</string>
     <string name="action_remove_player">Entferne den Spieler</string>
-    <string name="drop_players_item">%2$s punkte: 2$d</string>
+    <string name="drop_players_item">%1$s punkte: %2$d</string>
     <string name="drop_player_info_text">Um einen Spieler zu löschen musst du ihn markieren und anschließend auf "Speichern" drücken. Bitte mit bedacht nutzen, da man die Aktion nicht rückgängig machen kann.</string>
     <string name="warning_drop_player">Du kannst keine Spieler nach einem beendeten Draft entfernen</string>
     <string name="help_drop_player">Wenn es nötig wird, kannst du einen Spieler entfernen. </string>
@@ -175,7 +160,7 @@ Pairing werden mit dem Schweizer System ausgewählt. Schauen Sie sich die Option
     <string name="tutorial_life_app">Öffnen Sie Ihr Leben für diese Runde zu zählen</string>
     <string name="select_player_manual_title">Spieler auswählen</string>
     <string name="select_player_manual_add">Add</string>
-    <string name="possitive">Ja</string>
+    <string name="positive">Ja</string>
     <string name="settings_pairing_mode_tournament">Turnier</string>
     <string name="negative">Nicht</string>
     <string name="settings_save_draft_result_dialog_title">Haben Sie Draft-Picks sparen:</string>
