@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.database.model;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 
 import java.util.Map;
 
@@ -26,15 +27,21 @@ import unii.draft.mtg.parings.database.model.PlayerDraftJoinTableDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    @NonNull
     private final DaoConfig playerDaoConfig;
+    @NonNull
     private final DaoConfig draftDaoConfig;
+    @NonNull
     private final DaoConfig playerDraftJoinTableDaoConfig;
 
+    @NonNull
     private final PlayerDao playerDao;
+    @NonNull
     private final DraftDao draftDao;
+    @NonNull
     private final PlayerDraftJoinTableDao playerDraftJoinTableDao;
 
-    public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
+    public DaoSession(SQLiteDatabase db, IdentityScopeType type, @NonNull Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
 
@@ -62,14 +69,17 @@ public class DaoSession extends AbstractDaoSession {
         playerDraftJoinTableDaoConfig.getIdentityScope().clear();
     }
 
+    @NonNull
     public PlayerDao getPlayerDao() {
         return playerDao;
     }
 
+    @NonNull
     public DraftDao getDraftDao() {
         return draftDao;
     }
 
+    @NonNull
     public PlayerDraftJoinTableDao getPlayerDraftJoinTableDao() {
         return playerDraftJoinTableDao;
     }

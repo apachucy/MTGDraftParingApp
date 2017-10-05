@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.view.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +28,9 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         mContext = context;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_paring_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -71,7 +74,7 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         return mGameList.size();
     }
 
-    private void setCheckBoxes(int position, ViewHolder viewHolder) {
+    private void setCheckBoxes(int position, @NonNull ViewHolder viewHolder) {
 
         switch (mGameList.get(position).getPlayerAPoints()) {
             case 0:
@@ -113,25 +116,30 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public class EmptyViewHolder extends RecyclerView.ViewHolder {
 
-        public EmptyViewHolder(View itemView) {
+        public EmptyViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        @Nullable
         @Bind(R.id.row_leftPlayerTextView)
         TextView playerLeftTextView;
+        @Nullable
         @Bind(R.id.row_rightPlayerTextView)
         TextView playerRightTextView;
+        @Nullable
         @Bind(R.id.row_leftPlayerRadioGroup)
         RadioGroup playerLeftRadioGroup;
+        @Nullable
         @Bind(R.id.row_rightPlayerRadioGroup)
         RadioGroup playerRightRadioGroup;
+        @Nullable
         @Bind(R.id.row_drawRadioGroup)
         RadioGroup drawRadioGroup;
 
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 

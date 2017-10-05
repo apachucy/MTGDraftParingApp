@@ -145,6 +145,9 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     }
 
     private String playerAchievementToString(Integer key, Integer value) {
+        if( value > 1){
+            return getString(R.string.history_detail_player_overall_count_positions, key, value);
+        }
         return getString(R.string.history_detail_player_overall_count_position, key, value);
     }
 

@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.buisness.share.scoreboard;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -18,8 +19,9 @@ public class ShareDataContent implements IShareData {
         mContext = context;
     }
 
+    @Nullable
     @Override
-    public String getPlayerWithPoints(List<Player> players) {
+    public String getPlayerWithPoints(@Nullable List<Player> players) {
         if (players == null || players.isEmpty()) {
             return null;
         }
@@ -32,11 +34,11 @@ public class ShareDataContent implements IShareData {
     }
 
 
-    private String winnerToString(Player player) {
+    private String winnerToString(@NonNull Player player) {
         return mContext.getString(R.string.shared_data_formatted_winner, player.getPlayerName());
     }
 
-    private String playerToString(Player player) {
+    private String playerToString(@NonNull Player player) {
         return mContext.getString(R.string.shared_data_formatted_player, player.getPlayerName(), player.getMatchPoints());
     }
 }

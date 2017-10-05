@@ -2,6 +2,8 @@ package unii.draft.mtg.parings.view.adapters;
 
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +27,15 @@ public class DetailHistoryPlayerAdapter extends RecyclerView.Adapter<DetailHisto
         mDraftList = list;
     }
 
+    @NonNull
     @Override
-    public DetailHistoryPlayerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DetailHistoryPlayerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_detail_history_player, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(DetailHistoryPlayerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DetailHistoryPlayerAdapter.ViewHolder holder, int position) {
         PlayerDraft selectedDraft = mDraftList.get(position);
 
         holder.mDraftNameTextView.setText(selectedDraft.getDraftName());
@@ -46,12 +49,14 @@ public class DetailHistoryPlayerAdapter extends RecyclerView.Adapter<DetailHisto
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @Nullable
         @Bind(R.id.history_detail_player_draft_name)
         TextView mDraftNameTextView;
+        @Nullable
         @Bind(R.id.history_detail_player_draft_position)
         TextView mPlayerDraftPositionTextView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 

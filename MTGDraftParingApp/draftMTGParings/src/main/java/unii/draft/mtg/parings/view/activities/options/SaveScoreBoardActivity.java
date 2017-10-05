@@ -2,6 +2,8 @@ package unii.draft.mtg.parings.view.activities.options;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,9 +18,11 @@ import unii.draft.mtg.parings.util.config.BundleConst;
 
 
 public class SaveScoreBoardActivity extends BaseActivity {
+    @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
+    @Nullable
     @Bind(R.id.save_score_boardTextInputLayout)
     TextInputLayout mScoreBoardTextInput;
 
@@ -43,7 +47,7 @@ public class SaveScoreBoardActivity extends BaseActivity {
     }
 
     @Override
-    protected void injectDependencies(ActivityComponent activityComponent) {
+    protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 

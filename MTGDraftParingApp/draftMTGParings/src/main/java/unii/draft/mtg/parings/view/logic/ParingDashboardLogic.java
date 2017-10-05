@@ -3,6 +3,7 @@ package unii.draft.mtg.parings.view.logic;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,12 @@ public class ParingDashboardLogic {
     }
 
 
-    public void addGameResult(IParingAlgorithm paringAlgorithm, List<Game> gameList) {
+    public void addGameResult(@NonNull IParingAlgorithm paringAlgorithm, @NonNull List<Game> gameList) {
         updateGameResults(gameList);
         updatePlayerPoints(paringAlgorithm, gameList);
     }
 
-    public void removeLastGameResult(IParingAlgorithm paringAlgorithm) {
+    public void removeLastGameResult(@NonNull IParingAlgorithm paringAlgorithm) {
         List<Player> playerList = paringAlgorithm.getSortedFilteredPlayerList(false);
 
         for (Player player : playerList) {
@@ -77,7 +78,7 @@ public class ParingDashboardLogic {
         }
     }
 
-    public boolean validateDataSet(List<Game> gameList) {
+    public boolean validateDataSet(@NonNull List<Game> gameList) {
         boolean isAllGamePointsSet = true;
         for (Game game : gameList) {
             //IF PLAYER HAS name check points value
@@ -88,7 +89,7 @@ public class ParingDashboardLogic {
         return isAllGamePointsSet;
     }
 
-    private void updateGameResults(List<Game> gameList) {
+    private void updateGameResults(@NonNull List<Game> gameList) {
         for (Game g : gameList) {
             if (g.getPlayerAPoints() > g.getPlayerBPoints()) {
                 g.setWinner(g.getPlayerNameA());
@@ -103,7 +104,7 @@ public class ParingDashboardLogic {
     }
 
 
-    private void updatePlayerPoints(IParingAlgorithm paringAlgorithm, List<Game> gameList) {
+    private void updatePlayerPoints(@NonNull IParingAlgorithm paringAlgorithm, @NonNull List<Game> gameList) {
         List<Player> playerList = paringAlgorithm.getSortedFilteredPlayerList(false);
 
 
@@ -155,7 +156,8 @@ public class ParingDashboardLogic {
 
     }
 
-    public String[] getPlayerNameList(List<Game> gameList) {
+    @NonNull
+    public String[] getPlayerNameList(@NonNull List<Game> gameList) {
         List<String> playerNameList = new ArrayList<>();
         for (Game game : gameList) {
             //do not add dummy players!

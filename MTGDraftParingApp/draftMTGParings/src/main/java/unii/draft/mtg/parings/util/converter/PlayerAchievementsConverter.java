@@ -2,6 +2,8 @@ package unii.draft.mtg.parings.util.converter;
 
 
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +15,9 @@ import unii.draft.mtg.parings.database.model.PlayerDraftJoinTable;
 import unii.draft.mtg.parings.logic.pojo.PlayerAchievements;
 
 public class PlayerAchievementsConverter implements Converter<PlayerAchievements, Player> {
+    @NonNull
     @Override
-    public PlayerAchievements convert(Player player) {
+    public PlayerAchievements convert(@NonNull Player player) {
         int draftPlayed = player.getPlayers().size();
         @SuppressLint("UseSparseArrays") Map<Integer, Integer> playerPositionInDraft = new HashMap<>();
         List<PlayerDraftJoinTable> temp = new ArrayList<>();
@@ -44,6 +47,7 @@ public class PlayerAchievementsConverter implements Converter<PlayerAchievements
         return new PlayerAchievements(player, playerPositionInDraft, draftPlayed);
     }
 
+    @Nullable
     @Override
     public PlayerAchievements convert(Player player, String data) {
         return null;

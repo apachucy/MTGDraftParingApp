@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.logic.dagger;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -36,6 +37,7 @@ public class ApplicationModule implements IApplicationModule {
         this.mHasApplicationComponent = applicationComponent;
     }
 
+    @NonNull
     @Override
     @Provides
     @Singleton
@@ -43,6 +45,7 @@ public class ApplicationModule implements IApplicationModule {
         return new SharedPreferencesManager(mContext);
     }
 
+    @NonNull
     @Provides
     @Named(ALGORITHM_MANUAL)
     @Singleton
@@ -52,6 +55,7 @@ public class ApplicationModule implements IApplicationModule {
     }
 
 
+    @NonNull
     @Provides
     @Named(ALGORITHM_AUTOMATIC)
     @Singleton
@@ -61,6 +65,7 @@ public class ApplicationModule implements IApplicationModule {
     }
 
 
+    @NonNull
     @Override
     @Provides
     @Singleton
@@ -68,6 +73,7 @@ public class ApplicationModule implements IApplicationModule {
         return new AlgorithmChooser(mHasApplicationComponent.getComponent());
     }
 
+    @NonNull
     @Override
     @Provides
     @Singleton
@@ -75,6 +81,7 @@ public class ApplicationModule implements IApplicationModule {
         return new RandomSittingGenerator();
     }
 
+    @NonNull
     @Override
     @Provides
     @Singleton
@@ -82,6 +89,7 @@ public class ApplicationModule implements IApplicationModule {
         return new ShareDataContent(mContext);
     }
 
+    @NonNull
     @Override
     @Provides
     @Singleton

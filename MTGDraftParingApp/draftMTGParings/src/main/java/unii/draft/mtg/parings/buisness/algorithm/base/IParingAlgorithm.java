@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.buisness.algorithm.base;
 
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 import unii.draft.mtg.parings.logic.pojo.Game;
@@ -57,6 +59,7 @@ public interface IParingAlgorithm {
 
     void setPlayerWithBye(Player playerWithBye);
 
+    @Nullable
     Player getPlayer(String playerName);
 
     int playedRound();

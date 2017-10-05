@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.buisness.algorithm.base;
 
+import android.support.annotation.NonNull;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class PlayersComparator implements Comparator<Player> {
 	 * -by comparing score in match between them<br>
 	 */
 	@Override
-	public int compare(Player lhs, Player rhs) {
+	public int compare(@NonNull Player lhs, @NonNull Player rhs) {
 
 		if (lhs.getMatchPoints() > rhs.getMatchPoints()) {
 			return LEFT;
@@ -54,7 +56,7 @@ public class PlayersComparator implements Comparator<Player> {
 	 * @param rhs
 	 * @return
 	 */
-	private int compareOMW(Player lhs, Player rhs) {
+	private int compareOMW(@NonNull Player lhs, @NonNull Player rhs) {
 		float lhsOMW = lhs.getOponentsMatchOveralWins();
 		float rhsOMW = rhs.getOponentsMatchOveralWins();
 		if (lhsOMW > rhsOMW) {
@@ -68,7 +70,7 @@ public class PlayersComparator implements Comparator<Player> {
 		}
 	}
 
-	private int compareGamePoints(Player lhs, Player rhs) {
+	private int compareGamePoints(@NonNull Player lhs, @NonNull Player rhs) {
 		// small points divided by max game played per matcher and rounds played
 		float lhsSmallPoints = lhs.getPlayerGamesOverallWin();// ((float)
 																// lhs.getGamePoints())
@@ -104,7 +106,7 @@ public class PlayersComparator implements Comparator<Player> {
 		return EQUAL;
 	}
 
-	private int playedBefore(Player playerA, Player playerB) {
+	private int playedBefore(@NonNull Player playerA, @NonNull Player playerB) {
 		List<Game> games = playerA.getPlayedGame();
 		Game game = null;
 		for (Game g : games) {
@@ -120,7 +122,7 @@ public class PlayersComparator implements Comparator<Player> {
 		}
 	}
 
-	private int compareGamePointsInMatch(Player playerA, Game g) {
+	private int compareGamePointsInMatch(@NonNull Player playerA, @NonNull Game g) {
 		int compareWinGame = comparePlayerAWinGame(g);
 		if (compareWinGame == EQUAL) {
 			return EQUAL;
@@ -149,7 +151,7 @@ public class PlayersComparator implements Comparator<Player> {
 	 *            played game
 	 * @return
 	 */
-	private int comparePlayerAWinGame(Game g) {
+	private int comparePlayerAWinGame(@NonNull Game g) {
 		if (g.getWinner().equals(g.getPlayerNameA())) {
 			return LEFT;
 		} else if (g.getWinner().equals(g.getPlayerNameB())) {

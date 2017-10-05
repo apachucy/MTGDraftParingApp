@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.view.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,14 +34,15 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<HistoryScoreB
 
     }
 
+    @NonNull
     @Override
-    public HistoryScoreBoardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HistoryScoreBoardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_history_score_board, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(HistoryScoreBoardAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HistoryScoreBoardAdapter.ViewHolder holder, int position) {
         Draft selectedDraft = mDraftList.get(position);
         List<Player> playerList = mDatabaseHelper.getAllPlayersInDraft(selectedDraft.getId());
         holder.draftTitleTextView.setText(mContext.getString(R.string.history_score_board_row_draft_name, mDraftList.get(position).getDraftName()));
@@ -55,19 +58,24 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<HistoryScoreB
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @Nullable
         @Bind(R.id.history_score_board_titleTextView)
         TextView draftTitleTextView;
+        @Nullable
         @Bind(R.id.history_score_board_playerWonTextView)
         TextView playerWonTextView;
+        @Nullable
         @Bind(R.id.history_score_board_dateTextView)
         TextView draftDateTextView;
+        @Nullable
         @Bind(R.id.history_score_board_roundsTextView)
         TextView draftRoundsTextView;
+        @Nullable
         @Bind(R.id.history_score_board_countPlayerTextView)
         TextView draftPlayerCountTextView;
         View itemView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             this.itemView = itemView;

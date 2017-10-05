@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.view.fragments.settings;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,21 +23,27 @@ import unii.draft.mtg.parings.view.fragments.BaseFragment;
 public class TimeSettingsFragment extends BaseFragment {
 
 
+    @Nullable
     @Bind(R.id.settings_useCounter)
     CheckBox mUseTimeCounterCheckBox;
 
+    @Nullable
     @Bind(R.id.settings_useVibration)
     CheckBox mUseVibrationCheckBox;
 
+    @Nullable
     @Bind(R.id.settings_setTimeCounter)
     Button mSetTimeCounterTextView;
 
+    @Nullable
     @Bind(R.id.settings_firstVibration)
     Button mSetFirstVibrationTextView;
 
+    @Nullable
     @Bind(R.id.settings_secondVibration)
     Button mSetSecondVibrationTextView;
 
+    @Nullable
     @Bind(R.id.settings_durationVibration)
     Button mDurationVibrationTextView;
 
@@ -46,7 +53,7 @@ public class TimeSettingsFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_time, container, false);
         ButterKnife.bind(this, view);
         injectDependencies();
@@ -225,10 +232,12 @@ public class TimeSettingsFragment extends BaseFragment {
         return timeInMs * BaseConfig.DEFAULT_TIME_SECOND;
     }
 
+    @NonNull
     private String stringAsSec(long timeInMs) {
         return timeInMs / BaseConfig.DEFAULT_TIME_SECOND + "";
     }
 
+    @NonNull
     private String stringAsMinutes(long timeInMs) {
         return timeInMs / BaseConfig.DEFAULT_TIME_MINUT + "";
     }

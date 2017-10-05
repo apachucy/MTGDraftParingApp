@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.view.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,12 +32,13 @@ public class SittingsFragment extends BaseFragment {
     @Inject
     ISittingGenerator mSittingsGenerator;
 
+    @Nullable
     @Bind(R.id.table_sittingsRecyclerView)
     RecyclerView mRecyclerView;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sittings, container, false);
         ButterKnife.bind(this, view);
         injectDependencies();
@@ -58,7 +60,8 @@ public class SittingsFragment extends BaseFragment {
         getActivityComponent().inject(this);
     }
 
-    private List<String> getPlayerNameList(List<Player> playerList) {
+    @NonNull
+    private List<String> getPlayerNameList(@NonNull List<Player> playerList) {
         List<String> playerNameList = new ArrayList<>();
         for (Player player : playerList) {
             playerNameList.add(player.getPlayerName());

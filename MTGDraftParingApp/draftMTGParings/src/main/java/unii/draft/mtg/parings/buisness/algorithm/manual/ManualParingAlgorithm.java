@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.buisness.algorithm.manual;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class ManualParingAlgorithm extends BaseAlgorithm {
         return playerList;
     }
 
+    @NonNull
     @Override
     public List<Player> getSortedFilteredPlayerList(boolean dropped) {
         List<Player> playerList = getFilteredPlayerList(dropped);

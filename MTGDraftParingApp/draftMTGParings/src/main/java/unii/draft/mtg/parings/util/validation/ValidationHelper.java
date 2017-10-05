@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.util.validation;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 
@@ -44,8 +45,8 @@ public class ValidationHelper {
      * @return true if reference is null or when there are no text <br>
      * in other case return false<br>
      */
-    public static boolean isEditTextEmpty(EditText editText, String warning,
-                                          Drawable drawable) {
+    public static boolean isEditTextEmpty(@Nullable EditText editText, String warning,
+                                          @Nullable Drawable drawable) {
         // reference is null
         if (editText == null) {
             return true;
@@ -65,7 +66,7 @@ public class ValidationHelper {
         return false;
     }
 
-    public static boolean isTextInputFieldEmpty(TextInputLayout textInputLayout, String warning) {
+    public static boolean isTextInputFieldEmpty(@Nullable TextInputLayout textInputLayout, String warning) {
         // reference is null
         if (textInputLayout == null || textInputLayout.getEditText() == null) {
             return true;
@@ -81,7 +82,7 @@ public class ValidationHelper {
         return false;
     }
 
-    public static boolean isTextEmpty(String text) {
+    public static boolean isTextEmpty(@Nullable String text) {
         return text == null || text.trim().equals("")
                 || text.trim().equals(" ");
     }

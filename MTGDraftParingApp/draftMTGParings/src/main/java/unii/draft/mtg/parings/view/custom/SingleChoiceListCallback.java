@@ -2,6 +2,8 @@ package unii.draft.mtg.parings.view.custom;
 
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +17,7 @@ public class SingleChoiceListCallback implements MaterialDialog.ListCallbackSing
     private String mName;
     private Context mContext;
 
-    public SingleChoiceListCallback(Context context, TextView textView) {
+    public SingleChoiceListCallback(Context context, @NonNull TextView textView) {
         mTextView = textView;
         mName = "";
         mContext = context;
@@ -23,7 +25,7 @@ public class SingleChoiceListCallback implements MaterialDialog.ListCallbackSing
     }
 
     @Override
-    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+    public boolean onSelection(MaterialDialog dialog, View itemView, int which, @Nullable CharSequence text) {
         if (text == null || text.length() == 0) {
             return true;
         }

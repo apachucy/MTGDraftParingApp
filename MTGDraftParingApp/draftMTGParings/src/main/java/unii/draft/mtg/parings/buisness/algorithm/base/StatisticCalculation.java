@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.buisness.algorithm.base;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
@@ -70,7 +72,7 @@ public class StatisticCalculation implements IStatisticCalculation {
     /**
      * Calculate Player overall match % win
      */
-    private void calculatePMW(Player player) {
+    private void calculatePMW(@NonNull Player player) {
         float pmw = player.getMatchPoints()
                 / (float) (mParingAlgorithm.getCurrentRound() * BaseConfig.MAX_MATCH);
 
@@ -88,7 +90,7 @@ public class StatisticCalculation implements IStatisticCalculation {
      *
      * @param player
      */
-    private void calculateOMW(Player player) {
+    private void calculateOMW(@NonNull Player player) {
         float omw = 0f;
         for (Game g : player.getPlayedGame()) {
             if (g.getPlayerNameA().equals(player.getPlayerName())) {
@@ -109,7 +111,7 @@ public class StatisticCalculation implements IStatisticCalculation {
         player.setOponentsMatchOveralWins(omw);
     }
 
-    private void calculatePGW(Player player) {
+    private void calculatePGW(@NonNull Player player) {
         float pgw = 0f;
         int gamesPlayed = gamesPlayed(player);
         // in case of bye
@@ -125,7 +127,7 @@ public class StatisticCalculation implements IStatisticCalculation {
         player.setPlayerGamesOverallWin(pgw);
     }
 
-    private void calculateOGW(Player player) {
+    private void calculateOGW(@NonNull Player player) {
         float ogw = 0f;
         for (Game g : player.getPlayedGame()) {
             if (!g.getPlayerNameA().equals(player.getPlayerName())) {
@@ -160,7 +162,7 @@ public class StatisticCalculation implements IStatisticCalculation {
 
     }
 
-    private int gamesPlayed(Player player) {
+    private int gamesPlayed(@NonNull Player player) {
         int gamesPlayed = 0;
         for (Game g : player.getPlayedGame()) {
             gamesPlayed += g.getGamesPlayed();

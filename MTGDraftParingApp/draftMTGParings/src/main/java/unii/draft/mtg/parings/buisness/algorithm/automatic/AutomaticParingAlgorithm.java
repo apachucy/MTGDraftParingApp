@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.buisness.algorithm.automatic;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import org.paukov.combinatorics.Factory;
 import org.paukov.combinatorics.Generator;
@@ -20,6 +22,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         super(context);
     }
 
+    @Nullable
     @Override
     public List<Game> getParings() {
         /**
@@ -65,7 +68,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         return gameList;
     }
 
-    private List<Game> generateParingsWithPlayersOtherThanLastPlayed(Generator<Player> allPermutation, List<Game> gameList, List<Player> filteredPlayerList) {
+    private List<Game> generateParingsWithPlayersOtherThanLastPlayed(@NonNull Generator<Player> allPermutation, @NonNull List<Game> gameList, @NonNull List<Player> filteredPlayerList) {
         for (ICombinatoricsVector<Player> playersPermutation : allPermutation) {
             gameList.clear();
             List<Player> playerListPermutation = playersPermutation.getVector();
@@ -103,7 +106,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
     }
 
     private List<Game> generateParings
-    (Generator<Player> allPermutation, List<Game> gameList, List<Player> filteredPlayerList) {
+    (@NonNull Generator<Player> allPermutation, @NonNull List<Game> gameList, @NonNull List<Player> filteredPlayerList) {
         for (ICombinatoricsVector<Player> playersPermutation : allPermutation) {
             gameList.clear();
             List<Player> playerListPermutation = playersPermutation.getVector();
@@ -139,7 +142,8 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         return null;
     }
 
-    private Generator<Player> generatePermutations(List<Player> playerList) {
+    @NonNull
+    private Generator<Player> generatePermutations(@NonNull List<Player> playerList) {
         ICombinatoricsVector<Player> originalVector = Factory.createVector(playerList);
         Generator<Player> generatedPermutation = Factory.createPermutationGenerator(originalVector);
         return generatedPermutation;
@@ -152,6 +156,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
         return playerList;
     }
 
+    @NonNull
     @Override
     public List<Player> getSortedFilteredPlayerList(boolean dropped) {
         List<Player> playerList = getFilteredPlayerList(dropped);
@@ -174,7 +179,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
      * so make parings at random
      */
 
-    private void calculatePairAtStart(List<Player> playerList) {
+    private void calculatePairAtStart(@NonNull List<Player> playerList) {
         Random random = new Random();
         // swap element at random
         for (int i = 0; i < getDefaultRandomSeed(); i++) {
@@ -189,7 +194,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
      * and move player<br>
      * with bye to last position
      */
-    private void movePlayerWithByeOnLastPosition(List<Player> playerList) {
+    private void movePlayerWithByeOnLastPosition(@NonNull List<Player> playerList) {
 
         int playerPosition = 0;
         for (int i = playerList.size() - 1; i >= 0; i--) {

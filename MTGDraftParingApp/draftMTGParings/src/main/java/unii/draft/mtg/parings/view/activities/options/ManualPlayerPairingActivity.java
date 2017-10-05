@@ -1,8 +1,9 @@
 package unii.draft.mtg.parings.view.activities.options;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,18 +40,25 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     private List<Game> mGameList;
     private RecyclerView.Adapter mRecyclerMatchPlayerAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    @Nullable
     private SingleChoiceListCallback mSelectPlayer1Action;
+    @Nullable
     private SingleChoiceListCallback mSelectPlayer2Action;
 
+    @Nullable
     @Bind(R.id.matchPlayer_firstPlayerButton)
     Button mPlayer1TextView;
+    @Nullable
     @Bind(R.id.matchPlayer_secondPlayerButton)
     Button mPlayer2TextView;
+    @Nullable
     @Bind(R.id.matchPlayer_PlayersList)
     RecyclerView mRecyclerMatchPlayerView;
+    @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
+    @Nullable
     @Bind(R.id.floating_action_button_next)
     FloatingActionButton mFloatingActionButton;
 
@@ -71,7 +79,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
 
 
     @Override
-    protected void injectDependencies(ActivityComponent activityComponent) {
+    protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 
@@ -139,7 +147,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         showSingleChoiceList(this, getString(R.string.select_player_manual_title), mPlayerNameList, getString(R.string.select_player_manual_add), mSelectPlayer2Action);
     }
 
-    @OnClick(R.id.matchPlayer_cleanButton)
+    @OnClick(R.id.matchPlayer_cleanParingButton)
     void onCleanButtonClicked() {
         mGameList.clear();
         mRecyclerMatchPlayerAdapter.notifyDataSetChanged();
@@ -153,7 +161,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.matchPlayer_ParingButton)
+    @OnClick(R.id.matchPlayer_addParingButton)
     void onParingButtonClicked() {
         if (canAddPlayers()) {
             mGameList.add(new Game(mSelectPlayer1Action.getCurrentName(),
@@ -211,7 +219,8 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     }
 
 
-    private List<String> getPlayerNameList(List<Player> playerList) {
+    @NonNull
+    private List<String> getPlayerNameList(@NonNull List<Player> playerList) {
         List<String> playerNameList = new ArrayList<>();
         for (Player player : playerList) {
             playerNameList.add(player.getPlayerName());
@@ -234,6 +243,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
                 getString(R.string.dialog_start_button), mDialogButtonClickListener);
     }
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {

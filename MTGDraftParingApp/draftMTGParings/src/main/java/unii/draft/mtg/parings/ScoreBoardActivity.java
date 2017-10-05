@@ -3,6 +3,7 @@ package unii.draft.mtg.parings;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -61,19 +62,25 @@ public class ScoreBoardActivity extends BaseActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     // help library
+    @Nullable
     private TourGuide mTutorialHandler = null;
 
     private List<Player> mPlayerList;
     private List<IAdapterItem> mPlayerScoreBoardList;
+    @Nullable
     private String mDraftName;
 
+    @Nullable
     @Bind(R.id.player_position_roundTextView)
     TextView mRoundTextView;
+    @Nullable
     @Bind(R.id.player_position_winnerTextView)
     TextView mWinnerTextView;
 
+    @Nullable
     @Bind(R.id.player_position_playerListView)
     RecyclerView mRecyclerView;
+    @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
@@ -175,19 +182,19 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
+    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         mDraftName = savedInstanceState.getString(BUNDLE_KEY_DRAFT_SAVED_NAME);
     }
 
     // invoked when the activity may be temporarily destroyed, save the instance state here
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString(BUNDLE_KEY_DRAFT_SAVED_NAME, mDraftName);
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
         getMenuInflater().inflate(R.menu.dashboard, menu);
@@ -217,7 +224,7 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 //onActivityResult is triggered faster than onResume
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
 
         if (resultCode == RESULT_OK) {
             if (requestCode == BaseConfig.DRAFT_NAME_SET) {
@@ -234,7 +241,7 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     @Override
-    protected void injectDependencies(ActivityComponent activityComponent) {
+    protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 
@@ -255,6 +262,7 @@ public class ScoreBoardActivity extends BaseActivity {
 
     }
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mOnDialogButtonClick = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -268,6 +276,7 @@ public class ScoreBoardActivity extends BaseActivity {
         }
     };
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mOnEditRoundButtonClick = new MaterialDialog.SingleButtonCallback() {
 
         @Override
@@ -279,7 +288,7 @@ public class ScoreBoardActivity extends BaseActivity {
         }
     };
 
-    private void saveDraft(String draftName) {
+    private void saveDraft(@Nullable String draftName) {
         String tempDraftName;
         SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
         String currentDateAndTime = sdf.format(new Date());
@@ -294,7 +303,7 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     private void setListGuideActions(
-            ImageView dropPlayerButton, ImageView saveDraft, ImageView shareContent, ImageView
+            @NonNull ImageView dropPlayerButton, @NonNull ImageView saveDraft, @NonNull ImageView shareContent, @NonNull ImageView
             information) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
@@ -373,7 +382,7 @@ public class ScoreBoardActivity extends BaseActivity {
         });
     }
 
-    private void initData(Bundle savedInstanceState) {
+    private void initData(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             // Restore value of members from saved state
             mDraftName = savedInstanceState.getString(BUNDLE_KEY_DRAFT_SAVED_NAME);
@@ -388,6 +397,7 @@ public class ScoreBoardActivity extends BaseActivity {
                 getString(R.string.dialog_start_button), mDialogButtonClickListener);
     }
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

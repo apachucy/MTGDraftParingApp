@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.util.config;
 
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class SettingsMenuItems {
     private List<SettingsMenu> mSettingsMenuList;
 
 
-    public SettingsMenuItems(Context context) {
+    public SettingsMenuItems(@NonNull Context context) {
         mSettingsMenuList = new ArrayList<>();
 
         //draft

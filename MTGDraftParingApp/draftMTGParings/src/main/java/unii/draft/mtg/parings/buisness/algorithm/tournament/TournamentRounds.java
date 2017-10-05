@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.buisness.algorithm.tournament;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class TournamentRounds {
     }
 
     //todo: read from a file
+    @NonNull
     public List<MaxRounds> createRounds() {
         List<MaxRounds> maxRoundsList = new ArrayList<>();
         //from: http://magic.wizards.com/en/game-info/products/magic-online/swiss-pairings
