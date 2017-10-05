@@ -104,7 +104,7 @@
 
 
                 <Button
-                    android:id="@+id/matchPlayer_cleanButton"
+                    android:id="@+id/matchPlayer_cleanParingButton"
                     style="@style/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,14 +113,14 @@
                     android:text="@string/activity_paring_clean_paring" />
 
                 <Button
-                    android:id="@+id/matchPlayer_ParingButton"
+                    android:id="@+id/matchPlayer_addParingButton"
                     style="@style/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/button_padding"
                     android:layout_marginTop="@dimen/button_padding"
-                    android:layout_toEndOf="@id/matchPlayer_cleanButton"
-                    android:layout_toRightOf="@id/matchPlayer_cleanButton"
+                    android:layout_toEndOf="@id/matchPlayer_cleanParingButton"
+                    android:layout_toRightOf="@id/matchPlayer_cleanParingButton"
                     android:text="@string/activity_paring_add_paring" />
 
             </RelativeLayout>

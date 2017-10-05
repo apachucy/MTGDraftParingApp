@@ -19,7 +19,6 @@
     <string name="text_2" translatable="false">2</string>
     <string name="text_from">from</string>
     <string name="text_round">Round :</string>
-    <string name="text_time">To start counter press Start</string>
     <string name="text_after_game">Results after round :</string>
     <string name="text_winner">Winner:</string>
     <!-- Settings -->
@@ -201,7 +200,9 @@
     <string name="history_player_wins_drafts">Wins: %1$d</string>
     <string name="history_player_overall_places">Places in drafts:</string>
     <string name="history_player_overall_played">Played in drafts:</string>
-    <string name="history_detail_player_overall_count_position">Place %1$d: %2$d times</string>
+    <string name="history_detail_player_overall_count_position">Place %1$d: %2$d time</string>
+    <string name="history_detail_player_overall_count_positions">Place %1$d: %2$d times</string>
+
     <string name="settings_menu_item_draft" translatable="false">Draft</string>
     <string name="settings_menu_item_history">History</string>
     <string name="settings_menu_item_other">Other</string>

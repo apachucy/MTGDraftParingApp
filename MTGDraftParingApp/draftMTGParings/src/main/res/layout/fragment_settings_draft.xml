@@ -39,5 +39,5 @@
         style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_personal_parings" />
+        android:text="@string/settings_save_draft_result_dialog_title" />
 </LinearLayout>

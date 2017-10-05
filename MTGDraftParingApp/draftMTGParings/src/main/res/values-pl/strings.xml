@@ -14,36 +14,36 @@
     <string name="text_vs">vs</string>
     <string name="text_from">z</string>
     <string name="text_round">Runda :</string>
-    <string name="text_time">Aby rozpocząć odliczanie naciśnij start</string>
     <string name="text_after_game">Wyniki po rundzie :</string>
     <string name="text_winner">Zwycięzca:</string>
     <!-- Settings -->
-    <string name="text_display_counter">Wyświetl czas:</string>
+    <string name="text_display_counter">Licznik czasu</string>
+    <string name="text_use_counter_detail">Pozwala na rozpoczęcie odliczania do końca danej rundy</string>
     <string name="text_time_round">Czas na rundę[m]: %1$s</string>
-    <string name="text_vibration">Włącz wibracje:</string>
-    <string name="text_vibration_detail">Informują użytkowników o kończącym się czasie rozgrywki</string>
+    <string name="text_vibration">Włącz wibracje</string>
+    <string name="text_vibration_detail">Informują one użytkowników o kończącym się czasie rundy</string>
     <string name="text_first_vibration">Pierwsza wibracja[m]: %1$s</string>
     <string name="text_second_vibration">Druga wibracja[m]: %1$s</string>
-    <string name="text_duration_vibration">Czas trwania wibracji[s]: %1$s</string>
+    <string name="text_duration_vibration">Długość wibracji[s]: %1$s</string>
 
     <!-- Dialog Fragment -->
     <!-- Dialog Start -->
-    <string name="dialog_start_title">Rozpoczęcie gry</string>
-    <string name="dialog_start_message">Aby zacząć naciśnij przycisk\nLiczba graczy: %1$d\nLiczba rund: %2$d</string>
+    <string name="dialog_start_title">Rozpoczęcie turnieju</string>
+    <string name="dialog_start_message">Aby zacząć naciśnij przycisk\nLiczba zawodników: %1$d\nLiczba rund: %2$d</string>
     <string name="dialog_start_button">Zamknij</string>
     <!-- Dialog Game End -->
-    <string name="dialog_end_title">Gra zakończona</string>
+    <string name="dialog_end_title">Koniec Turnieju</string>
     <string name="dialog_end_message">Naciśnij zamknij aby wyjść z aplikacji</string>
     <!-- Dialog Algorithm Problem -->
-    <string name="dialog_error_algorithm_title">Błąd</string>
-    <string name="dialog_error_algorithm__message">Nie można sparować zawodników.\n Uruchom ponownie aplikację.</string>
+    <string name="dialog_error_algorithm_title">Błąd algorytmu</string>
+    <string name="dialog_error_algorithm__message">Obecne ustawienia nie pozwalają na sparowanie zawodników.\n Uruchom ponownie aplikację.</string>
     <!-- Dialog Warning Paring -->
     <string name="dialog_warning_title">Ostrzeżenie</string>
-    <string name="dialog_warning_message">Dodano za dużo rund albo za mało graczy.\n Dodaj graczy albo zmniejsz liczbę rund.</string>
+    <string name="dialog_warning_message">Nie można rozpocząć rozgrywki.\nDodano za dużo rund albo za mało graczy.\n Dodaj graczy albo zmniejsz liczbę rund.</string>
 
     <!-- Dialog Info -->
     <string name="dialog_info_title">Informacje</string>
-    <string name="dialog_info_message">Fanowska wersja aplikacji do liczenia paringów podczas draftowania w MTG</string>
+    <string name="dialog_info_message">Fanowska wersja aplikacji do liczenia paringów podczas draftowania w MTG\nPewnie są też inne zastosowania, ale to jest najważniejsze ;)</string>
 
     <!-- Help/Showcase -->
     <string name="help_title">Pomoc</string>
@@ -64,16 +64,16 @@
     <string name="activity_paring_clean_paring">Usuń Paringi</string>
     <string name="activity_paring_warning_empty_list">Nie ma więcej zawodników do paringów</string>
     <string name="activity_paring_warning_equal_names">Złe paring</string>
-    <string name="activity_paring_warning_paring_not_finished">Proszę skończ parowanie zawodników</string>
+    <string name="activity_paring_warning_paring_not_finished">Aby przejść dalej skończ parowanie zawodników</string>
     <string name="activity_paring_warning_bye">Ostatni zawodnik posiada już bye</string>
     <string name="warning_player_name_added">Ten zawodnik został już dodany</string>
     <string name="select_player1">Wybierz 1szego gracza</string>
     <string name="select_player2">Wybierz 2giego gracza</string>
-    <string name="spinner_empty_player_list">Koniec zawodników</string>
+    <string name="spinner_empty_player_list">Brak zawodników</string>
     <string name="tutorial_info">Infromacje na temat wykorzystanych bibliotek</string>
-    <string name="tutorial_settings">Konfiguracja ustawień draftu</string>
+    <string name="tutorial_settings">Konfiguracja aplikacji</string>
     <string name="action_save">Zapisz draft</string>
-    <string name="action_show_list">Wyświetl listę draftów</string>
+    <string name="action_show_list">Wyświetl listę rozegranych draftów</string>
     <string name="activity_save_score_board_info_small_text">Lista rozegranych draftów znajduje się w ustawieniach</string>
     <string name="activity_save_score_board_info_text">Nazwa draftu</string>
     <string name="activity_save_score_board_save">Zapisz</string>
@@ -87,22 +87,22 @@
     <string name="settings_display_scoreboards">Wyświetl listę draftów</string>
     <string name="settings_clean_history">Usuń wszystkie drafty</string>
     <string name="warning_save_dashboard">Dopiero po wszystkich rozgrywkach możesz zapisać draft</string>
-    <string name="action_countdown">Odliczanie</string>
+    <string name="action_countdown">Odliczanie do końca rundy</string>
     <string name="message_action_countdown_cancel">Odwołano odliczanie</string>
-    <string name="message_action_countdown_started">Odliczanie...</string>
+    <string name="message_action_countdown_started">Odliczanie&#8230;</string>
     <string name="chooser_dialog_button_name">Pobierz</string>
     <string name="chooser_dialog_title_life_counter">Pobierz LifeCounterApp</string>
     <string name="chooser_intent_title_life_counter">Wybierz aplikację do liczenia pkt życia</string>
     <string name="chooser_dialog_body_life_counter">Żeby wykonać tę akcję\npobierz aplikację do liczenia pkt życia</string>
     <string name="validation_dialog_title">Walidacja</string>
-    <string name="validation_dialog_body">Proszę wpisać wszystkie wyniki z gier</string>
+    <string name="validation_dialog_body">Aby przejść dalej wprowadź wszystkie wyniki z rundy</string>
     <string name="action_remove_player">Usuń zawodnika</string>
     <string name="drop_players_item">%1$s punkty: %2$d</string>
-    <string name="drop_player_info_text">Żeby usunąć zawodników zaznacz ich a następnie naciśnij przycisk zapisz. Proszę używać z rozwagą, gdyż  akcji nie da się cofnąć.</string>
+    <string name="drop_player_info_text">Żeby usunąć zawodników zaznacz ich a następnie naciśnij przycisk zapisz. Proszę używać z rozwagą, gdyż akcji nie da się cofnąć.</string>
     <string name="help_drop_player">Jeżeli zajdzie potrzeba możesz usunąc gracza</string>
     <string name="warning_drop_player">Nie możesz usunąć graczy po skończonym drafcie</string>
     <string name="settings_rate_me">Proszę, oceń tą aplikację</string>
-    <string name="settings_rate_me_error">Nie można otworzyć Google play, zainstaluj market</string>
+    <string name="settings_rate_me_error">Nie można otworzyć Google Play, zainstaluj market</string>
     <string name="settings_counter_off">Odblokuj odliczanie w ustawieniach</string>
     <string name="dialog_negative">Anuluj</string>
     <string name="dialog_positive">Ok</string>
@@ -110,7 +110,7 @@
     <string name="settings_sittings_dialog_title">Wybierz opcje sittingów:</string>
     <string name="settings_sittings_none">brak</string>
     <string name="settings_sittings_random">losowe</string>
-    <string name="settings_reset_tour_guide_message">Pomoc została zresetowana</string>
+    <string name="settings_reset_tour_guide_message">Pomoc została zresetowana do ustawień początkowych</string>
     <string name="settings_reset_tour_guide">Zresetuj pomoc</string>
     <string name="action_calculate_mana">Otwórz Mana Calculator</string>
     <string name="action_open_life_app">Otwórz Life App</string>
@@ -123,18 +123,17 @@
     <string name="history_player_detail_place">Miejsce %1$d / %2$d</string>
     <string name="history_player_played_drafts">Drafty rozegrane: %1$d</string>
     <string name="history_score_board_row_draft_name">Nazwa draftu: %1$s</string>
-    <string name="message_player_list_not_exists">Brak listy graczy o wyświetlenia</string>
+    <string name="message_player_list_not_exists">Brak zawodników do wyświetlenia</string>
     <string name="no_players_from_history">Brak zapisanych zawodników</string>
     <string name="select_player_name">Wybrano: %1$s</string>
-    <string name="settings_check_other_apps">Sprawdź pozostałe aplikacje</string>
+    <string name="settings_check_other_apps">Sprawdź moje pozostałe aplikacje</string>
     <string name="settings_content_description">Wybierz ustawienia</string>
-    <string name="settings_developer_account_error">Nie można otworzyć przeglądarki, zainstaluj jakąś i spróbuj ponownie</string>
-    <string name="settings_dialog_round_duration_vibration_content">Wybierz długość trwania wibracji</string>
+    <string name="settings_developer_account_error">Nie można otworzyć przeglądarki, zainstaluj dowolną i spróbuj ponownie</string>
+    <string name="settings_dialog_round_duration_vibration_content">Wybierz czas trwania wibracji</string>
     <string name="settings_dialog_round_duration_vibration_hint">Propozycja: 5 sekund</string>
-    <string name="settings_dialog_round_duration_vibration_title">Długość trwania wibracji</string>
+    <string name="settings_dialog_round_duration_vibration_title">Czas trwania wibracji</string>
     <string name="tutorial_life_app">Otwórz aplikację do liczenia życia dla tej rundy</string>
     <string name="tutorial_hour_glass">Naciśnij aby rozpocząć odliczanie</string>
-    <string name="text_use_counter_detail">Pozwala na rozpoczęcie odliczania w danej rundzie</string>
     <string name="settings_reset_tour_guide_dialog_title">Czy chcesz zresetować pomoc?</string>
     <string name="settings_reset_tour_guide_dialog_content">Pomoc zostanie zresetowana w aplikacji</string>
     <string name="settings_pairing_mode_manual">Ręcznie</string>
@@ -146,7 +145,7 @@
     <string name="settings_idea_box">Skrzynka pomysłów</string>
     <string name="settings_idea_box_error">Nie można znaleźć klienta e-mail, zainstaluj jakiegoś i spróbuj później</string>
     <string name="settings_history_remove_clean_history_dialog_title">Czy chcesz skasować całą historię?</string>
-    <string name="settings_history_remove_clean_history_dialog_body">Cała historia zostanie skasowana</string>
+    <string name="settings_history_remove_clean_history_dialog_body">Cała historia zostanie usunięta</string>
     <string name="settings_display_players_list">Wyświetl listę zawodników</string>
     <string name="settings_dialog_round_time_title">Ustaw czas rundy</string>
     <string name="settings_dialog_round_time_hint">Proponowany czas rundy: 50 minut</string>
@@ -164,13 +163,15 @@
     <string name="negative">Nie</string>
     <string name="settings_save_draft_result_dialog_title">Czy zapisać wyniki draftu:</string>
     <string name="text_save_results_after_draft">Zapisz wyniki draftu: %1$s</string>
-    <string name="history_detail_player_overall_count_position">Miejsce %1$d: %2$d razy</string>
+    <string name="history_detail_player_overall_count_position">Miejsce %1$d: %2$d raz</string>
+    <string name="history_detail_player_overall_count_positions">Miejsce %1$d: %2$d razy</string>
+
     <string name="history_player_overall_places">Miejsca w draftach:</string>
     <string name="history_player_overall_played">Udział w draftach:</string>
     <string name="history_player_wins_drafts">Wygranych: %1$d</string>
     <string name="history_score_board_row_draft_count_players">Zawodników: %1$d</string>
     <string name="history_score_board_row_draft_rounds">Rundy: %1$d</string>
-    <string name="help_information_scoreboard">Co znaczy: PMG, PGW&#8230;</string>
+    <string name="help_information_scoreboard">Co oznaczają skróty: PMG, PGW&#8230;</string>
     <string name="dialog_scoreboard_info_title">Wyjaśnienie</string>
     <string name="dialog_warning_go_back_body">Czy napewno chcesz zedytować poprzednią rundę?</string>
     <string name="dialog_load_not_ended_draft_body">Twój ostatni draft się nie skończył. Czy chcesz go wczytać?</string>

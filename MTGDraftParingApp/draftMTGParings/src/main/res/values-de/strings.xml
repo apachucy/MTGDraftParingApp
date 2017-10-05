@@ -14,7 +14,6 @@
     <string name="text_vs">gegen</string>
     <string name="text_from">mit</string>
     <string name="text_round">Runde :</string>
-    <string name="text_time">Um den Countdown zu starten, drücken Sie Start</string>
     <string name="text_after_game">Ergebnisse nach Runde :</string>
     <string name="text_winner">Gewinner:</string>
     <!-- Settings -->
@@ -165,7 +164,9 @@
     <string name="negative">Nicht</string>
     <string name="settings_save_draft_result_dialog_title">Haben Sie Draft-Picks sparen:</string>
     <string name="text_save_results_after_draft">Speichern Sie die Draft-Picks: %1$s</string>
-    <string name="history_detail_player_overall_count_position">Platz %1$d / %2$d vielfrach</string>
+    <string name="history_detail_player_overall_count_position">Platz %1$d / %2$d mal</string>
+    <string name="history_detail_player_overall_count_positions">Platz %1$d / %2$d mal</string>
+
     <string name="history_player_overall_places">Platz in drafts:</string>
     <string name="history_player_overall_played">Teilnahme an drafts:</string>
     <string name="history_player_wins_drafts">Won: %1$d</string>
