@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/background"
     android:layout_width="match_parent"
@@ -6,20 +7,25 @@
     android:keepScreenOn="true"
     tools:context=".view.activities.options.ManualPlayerPairingActivity">
 
-    <view
-        android:id="@+id/toolbar"
-        style="@style/toolbar"
-        class="android.support.v7.widget.Toolbar"
-        android:layout_width="fill_parent"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/toolbar"
-       >
+        android:layout_below="@id/toolbar_layout">
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -83,8 +89,8 @@
 
             <Button
                 android:id="@+id/matchPlayer_secondPlayerButton"
-                android:layout_width="fill_parent"
                 style="@style/buttonBorderless"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/matchPlayer_player2TextView"
                 android:layout_centerHorizontal="true"
