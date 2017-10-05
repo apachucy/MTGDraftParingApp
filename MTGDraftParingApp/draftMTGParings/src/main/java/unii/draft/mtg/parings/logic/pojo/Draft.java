@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.logic.pojo;
 
 
+import android.support.annotation.NonNull;
+
 public class Draft {
     private String draftName;
     private String draftDate;
@@ -8,7 +10,7 @@ public class Draft {
     private Integer numberOfPlayers;
     private String winnerName;
 
-    public Draft(String winnerName, unii.draft.mtg.parings.database.model.Draft draft) {
+    public Draft(String winnerName, @NonNull unii.draft.mtg.parings.database.model.Draft draft) {
         this.draftDate = draft.getDraftDate();
         this.draftName = draft.getDraftName();
         this.draftRounds = draft.getDraftRounds();

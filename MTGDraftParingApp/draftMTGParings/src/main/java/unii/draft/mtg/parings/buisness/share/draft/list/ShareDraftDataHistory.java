@@ -2,6 +2,8 @@ package unii.draft.mtg.parings.buisness.share.draft.list;
 
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -16,8 +18,9 @@ public class ShareDraftDataHistory implements IShareDraftHistory {
         mContext = context;
     }
 
+    @Nullable
     @Override
-    public String getDraftListToString(List<Draft> draftList) {
+    public String getDraftListToString(@Nullable List<Draft> draftList) {
         if (draftList == null || draftList.isEmpty()) {
             return null;
         }
@@ -28,7 +31,7 @@ public class ShareDraftDataHistory implements IShareDraftHistory {
         return drafts;
     }
 
-    private String getDraftToString(Draft draft) {
+    private String getDraftToString(@NonNull Draft draft) {
         return mContext.getString(R.string.shared_data_formatted_draft, draft.getDraftName(), draft.getWinnerName(), draft.getNumberOfPlayers(), draft.getDraftRounds());
     }
 }

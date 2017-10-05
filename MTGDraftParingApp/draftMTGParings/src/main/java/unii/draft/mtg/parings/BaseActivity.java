@@ -3,6 +3,7 @@ package unii.draft.mtg.parings;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +28,7 @@ import unii.draft.mtg.parings.view.custom.IActivityHandler;
 public abstract class BaseActivity extends ActionBarActivity implements IActivityHandler, HasComponent<ActivityComponent> {
 
     private ActivityComponent mActivityComponent;
+    @Nullable
     private MaterialDialog mMaterialDialogInstance;
 
     @Override
@@ -39,7 +41,7 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
 
 
     @Override
-    public void showInfoDialog(String title, String body, String positiveText) {
+    public void showInfoDialog(@NonNull String title, @NonNull String body, @NonNull String positiveText) {
         mMaterialDialogInstance = new MaterialDialog.Builder(this)
                 .title(title)
                 .content(body)
@@ -48,7 +50,7 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
     }
 
     @Override
-    public void showInfoDialog(String title, String body, String positiveText, MaterialDialog.SingleButtonCallback positiveAction) {
+    public void showInfoDialog(@NonNull String title, @NonNull String body, @NonNull String positiveText, @NonNull MaterialDialog.SingleButtonCallback positiveAction) {
         mMaterialDialogInstance = new MaterialDialog.Builder(this)
                 .title(title)
                 .content(body)
@@ -56,7 +58,7 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
                 .show();
     }
     @Override
-    public void showSingleChoiceList(Context context, String title, List<String> list, String positiveText, MaterialDialog.ListCallbackSingleChoice singleListCallback) {
+    public void showSingleChoiceList(@NonNull Context context, @NonNull String title, @NonNull List<String> list, @NonNull String positiveText, @NonNull MaterialDialog.ListCallbackSingleChoice singleListCallback) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title).items(list)
                 .itemsCallbackSingleChoice(-1, singleListCallback).backgroundColorRes(R.color.windowBackground)

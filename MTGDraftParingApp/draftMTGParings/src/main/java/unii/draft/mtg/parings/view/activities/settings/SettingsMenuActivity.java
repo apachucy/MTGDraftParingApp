@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.view.activities.settings;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -32,6 +34,7 @@ public class SettingsMenuActivity extends BaseActivity {
     private static final String TAG_FRAGMENT_HISTORY = SettingsMenuActivity.class
             .getName() + "TAG_FRAGMENT_HISTORY";
     private String mCurrentFragment;
+    @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
@@ -46,13 +49,13 @@ public class SettingsMenuActivity extends BaseActivity {
     }
 
     @Override
-    protected void injectDependencies(ActivityComponent activityComponent) {
+    protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
         activityComponent.inject(this);
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.settings, menu);
         setMenuActions((ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView());
@@ -109,7 +112,7 @@ public class SettingsMenuActivity extends BaseActivity {
 
     }
 
-    private void setMenuActions(ImageView aboutButton, ImageView settingsButton) {
+    private void setMenuActions(@NonNull ImageView aboutButton, @NonNull ImageView settingsButton) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 

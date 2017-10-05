@@ -3,6 +3,7 @@ package unii.draft.mtg.parings.view.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 
@@ -18,6 +19,7 @@ import unii.draft.mtg.parings.view.fragments.settings.TimeSettingsFragment;
 
 
 public abstract class BaseFragment extends Fragment {
+    @Nullable
     private MaterialDialog mMaterialDialogInstance;
 
 
@@ -39,15 +41,15 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void showRadioButtonListDialog(Context context, String title, List<String> list, String buttonPositive, String buttonNegative,
-                                             int defaultSelectedValue, MaterialDialog.ListCallbackSingleChoice listCallbackSingleChoice) {
+    protected void showRadioButtonListDialog(@NonNull Context context, @NonNull String title, @NonNull List<String> list, @NonNull String buttonPositive, @NonNull String buttonNegative,
+                                             int defaultSelectedValue, @NonNull MaterialDialog.ListCallbackSingleChoice listCallbackSingleChoice) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title).items(list).itemsCallbackSingleChoice(defaultSelectedValue, listCallbackSingleChoice)
                 .positiveText(buttonPositive).backgroundColorRes(R.color.windowBackground).negativeText(buttonNegative)
                 .show();
     }
 
-    protected void showDialogWithTwoOptions(Context context, String title, String content, String positiveText, String negativeText, MaterialDialog.SingleButtonCallback positiveCallback) {
+    protected void showDialogWithTwoOptions(@NonNull Context context, @NonNull String title, @NonNull String content, @NonNull String positiveText, @NonNull String negativeText, @NonNull MaterialDialog.SingleButtonCallback positiveCallback) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
@@ -56,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
                 .show();
     }
 
-    protected void showMultipleChoiceListDialog(Context context, String title, List<String> data, MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice, String positiveText) {
+    protected void showMultipleChoiceListDialog(@NonNull Context context, @NonNull String title, @NonNull List<String> data, @NonNull MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice, @NonNull String positiveText) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title).items(data)
                 .itemsCallbackMultiChoice(null, listCallbackMultiChoice)
@@ -65,8 +67,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-    protected void showEditTextDialog(Context context, String title, String content, String hint, String lastValue,
-                                      final TimeSettingsFragment.UpdateData updateData) {
+    protected void showEditTextDialog(@NonNull Context context, @NonNull String title, @NonNull String content, String hint, String lastValue,
+                                      @NonNull final TimeSettingsFragment.UpdateData updateData) {
         mMaterialDialogInstance =   new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
@@ -74,7 +76,7 @@ public abstract class BaseFragment extends Fragment {
                 .backgroundColorRes(R.color.windowBackground)
                 .input(hint, lastValue, new MaterialDialog.InputCallback() {
                     @Override
-                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
                         int value = 0;
 
                         try {

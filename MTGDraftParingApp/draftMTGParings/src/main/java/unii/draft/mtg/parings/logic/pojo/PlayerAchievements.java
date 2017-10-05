@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.logic.pojo;
 
 
+import android.support.annotation.NonNull;
+
 import java.util.Map;
 
 import unii.draft.mtg.parings.database.model.*;
@@ -11,7 +13,7 @@ public class PlayerAchievements {
     private Map<Integer, Integer> mPlaceInDrafts;
     private Integer mDraftPlayed;
 
-    public PlayerAchievements(unii.draft.mtg.parings.database.model.Player player, Map<Integer, Integer> placeInDrafts, Integer draftPlayed) {
+    public PlayerAchievements(@NonNull unii.draft.mtg.parings.database.model.Player player, Map<Integer, Integer> placeInDrafts, Integer draftPlayed) {
         this.mPlayerId = player.getId();
         this.mPlayerName = player.getPlayerName();
         this.mPlaceInDrafts = placeInDrafts;

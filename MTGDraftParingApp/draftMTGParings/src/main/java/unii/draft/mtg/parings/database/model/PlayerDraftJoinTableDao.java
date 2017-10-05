@@ -4,6 +4,8 @@ import java.util.List;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.Property;
@@ -36,21 +38,21 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
         public final static Property PlayerPlace = new Property(7, Integer.class, "playerPlace", false, "PLAYER_PLACE");
         public final static Property PlayerDraftJoinTableId = new Property(8, Long.class, "playerDraftJoinTableId", false, "PLAYER_DRAFT_JOIN_TABLE_ID");
         public final static Property DraftPlayerJoinTableId = new Property(9, Long.class, "draftPlayerJoinTableId", false, "DRAFT_PLAYER_JOIN_TABLE_ID");
-    };
+    }
 
     private Query<PlayerDraftJoinTable> player_PlayersQuery;
     private Query<PlayerDraftJoinTable> draft_DraftsQuery;
 
-    public PlayerDraftJoinTableDao(DaoConfig config) {
+    public PlayerDraftJoinTableDao(@NonNull DaoConfig config) {
         super(config);
     }
     
-    public PlayerDraftJoinTableDao(DaoConfig config, DaoSession daoSession) {
+    public PlayerDraftJoinTableDao(@NonNull DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
     }
 
     /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
+    public static void createTable(@NonNull SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"PLAYER_DRAFT_JOIN_TABLE\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
@@ -66,7 +68,7 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
     }
 
     /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
+    public static void dropTable(@NonNull SQLiteDatabase db, boolean ifExists) {
         String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"PLAYER_DRAFT_JOIN_TABLE\"";
         db.execSQL(sql);
     }
@@ -74,7 +76,7 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
 
     /** @inheritdoc */
     @Override
-    protected void bindValues(SQLiteStatement stmt, PlayerDraftJoinTable entity) {
+    protected void bindValues(@NonNull SQLiteStatement stmt, @NonNull PlayerDraftJoinTable entity) {
         stmt.clearBindings();
  
         Long id = entity.getId();
@@ -129,14 +131,16 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
     }
 
     /** @inheritdoc */
+    @Nullable
     @Override
-    public Long readKey(Cursor cursor, int offset) {
+    public Long readKey(@NonNull Cursor cursor, int offset) {
         return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     /** @inheritdoc */
+    @Nullable
     @Override
-    public PlayerDraftJoinTable readEntity(Cursor cursor, int offset) {
+    public PlayerDraftJoinTable readEntity(@NonNull Cursor cursor, int offset) {
         PlayerDraftJoinTable entity = new PlayerDraftJoinTable( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // PlayerMatchPoints
@@ -154,7 +158,7 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
      
     /** @inheritdoc */
     @Override
-    public void readEntity(Cursor cursor, PlayerDraftJoinTable entity, int offset) {
+    public void readEntity(@NonNull Cursor cursor, @NonNull PlayerDraftJoinTable entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setPlayerMatchPoints(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
         entity.setPlayerMatchOverallWin(cursor.isNull(offset + 2) ? null : cursor.getFloat(offset + 2));
@@ -169,14 +173,15 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(PlayerDraftJoinTable entity, long rowId) {
+    protected Long updateKeyAfterInsert(@NonNull PlayerDraftJoinTable entity, long rowId) {
         entity.setId(rowId);
         return rowId;
     }
     
     /** @inheritdoc */
+    @Nullable
     @Override
-    public Long getKey(PlayerDraftJoinTable entity) {
+    public Long getKey(@Nullable PlayerDraftJoinTable entity) {
         if(entity != null) {
             return entity.getId();
         } else {

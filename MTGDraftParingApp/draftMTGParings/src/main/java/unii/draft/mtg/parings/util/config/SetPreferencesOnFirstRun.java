@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.util.config;
 
+import android.support.annotation.NonNull;
+
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 
 public class SetPreferencesOnFirstRun {
@@ -9,7 +11,7 @@ public class SetPreferencesOnFirstRun {
 
     }
 
-    public static void defaultSharedPreferencesConfig(ISharedPreferences sharedPreferences) {
+    public static void defaultSharedPreferencesConfig(@NonNull ISharedPreferences sharedPreferences) {
         if (!sharedPreferences.isFirstRun()) {
             return;
         }

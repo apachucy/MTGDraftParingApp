@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.sharedprefrences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.util.config.BaseConfig;
@@ -10,10 +11,11 @@ import unii.draft.mtg.parings.util.config.SettingsPreferencesConst;
 public class SharedPreferencesManager implements ISharedPreferences {
 
     private SharedPreferences mSharedPreferences;
+    @NonNull
     private final Context mContext;
     private static final String SHARED_PREFERENCES_NAME = SettingsPreferencesConst.SETTINGS_SHARED_PREFRENCES;
 
-    public SharedPreferencesManager(Context context) {
+    public SharedPreferencesManager(@NonNull Context context) {
         mContext = context;
         mSharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
     }

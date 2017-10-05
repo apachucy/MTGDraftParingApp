@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import de.greenrobot.dao.AbstractDaoMaster;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
@@ -20,14 +21,14 @@ public class DaoMaster extends AbstractDaoMaster {
     public static final int SCHEMA_VERSION = 3;
 
     /** Creates underlying database table using DAOs. */
-    public static void createAllTables(SQLiteDatabase db, boolean ifNotExists) {
+    public static void createAllTables(@NonNull SQLiteDatabase db, boolean ifNotExists) {
         PlayerDao.createTable(db, ifNotExists);
         DraftDao.createTable(db, ifNotExists);
         PlayerDraftJoinTableDao.createTable(db, ifNotExists);
     }
     
     /** Drops underlying database table using DAOs. */
-    public static void dropAllTables(SQLiteDatabase db, boolean ifExists) {
+    public static void dropAllTables(@NonNull SQLiteDatabase db, boolean ifExists) {
         PlayerDao.dropTable(db, ifExists);
         DraftDao.dropTable(db, ifExists);
         PlayerDraftJoinTableDao.dropTable(db, ifExists);
@@ -40,7 +41,7 @@ public class DaoMaster extends AbstractDaoMaster {
         }
 
         @Override
-        public void onCreate(SQLiteDatabase db) {
+        public void onCreate(@NonNull SQLiteDatabase db) {
             Log.i("greenDAO", "Creating tables for schema version " + SCHEMA_VERSION);
             createAllTables(db, false);
         }
@@ -53,7 +54,7 @@ public class DaoMaster extends AbstractDaoMaster {
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        public void onUpgrade(@NonNull SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.i("greenDAO", "Upgrading schema from version " + oldVersion + " to " + newVersion + " by dropping all tables");
             dropAllTables(db, true);
             onCreate(db);
@@ -67,10 +68,12 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(PlayerDraftJoinTableDao.class);
     }
     
+    @NonNull
     public DaoSession newSession() {
         return new DaoSession(db, IdentityScopeType.Session, daoConfigMap);
     }
     
+    @NonNull
     public DaoSession newSession(IdentityScopeType type) {
         return new DaoSession(db, type, daoConfigMap);
     }

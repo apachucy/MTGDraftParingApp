@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.util;
 
+import android.support.annotation.NonNull;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,7 +25,7 @@ public class AlgorithmChooser {
     @Inject
     ISharedPreferences mSharedPreferences;
 
-    public AlgorithmChooser(ApplicationComponent component) {
+    public AlgorithmChooser(@NonNull ApplicationComponent component) {
         component.inject(this);
     }
 

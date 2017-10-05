@@ -34,7 +34,7 @@ public class HistorySettingsFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_history, container, false);
         ButterKnife.bind(this, view);
         injectDependencies();
@@ -94,6 +94,7 @@ public class HistorySettingsFragment extends BaseFragment {
         getActivityComponent().inject(this);
     }
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mPositiveAction = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

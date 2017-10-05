@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.view.fragments.history;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class HistoryScoreBoardListFragment extends BaseFragment {
     private IDisplayDetailFragment mDisplayHistoryScoreBoardDetail;
     private IShareDraftHistory mShareDraftHistory;
     private List<Draft> mDraftListForShare;
+    @Nullable
     @Bind(R.id.settings_menuRecyclerView)
     RecyclerView mRecyclerView;
 
@@ -65,7 +67,7 @@ public class HistoryScoreBoardListFragment extends BaseFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycle_view, container, false);
         ButterKnife.bind(this, view);
         injectDependencies();
@@ -88,7 +90,7 @@ public class HistoryScoreBoardListFragment extends BaseFragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
                 if (mDraftListForShare == null) {
@@ -117,6 +119,7 @@ public class HistoryScoreBoardListFragment extends BaseFragment {
 
     }
 
+    @NonNull
     private List<Draft> createDraftListForSharing() {
         List<Draft> draftList = new ArrayList<>();
         List<unii.draft.mtg.parings.database.model.Draft> databaseDraftList = mDatabaseHelper.get().getAllDraftList();

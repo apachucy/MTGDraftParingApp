@@ -3,6 +3,7 @@ package unii.draft.mtg.parings.view.custom;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
@@ -33,7 +34,7 @@ public class CounterClass extends CountDownTimer {
      * @param vibrationTime     Time for run each vibration <br>
      *                          set to 0 to not run vibrations <br>
      */
-    public CounterClass(Context context, long millisInFuture,
+    public CounterClass(@Nullable Context context, long millisInFuture,
                         long countDownInterval, TextView textView, long firstVibration,
                         long secondVibration, long vibrationTime) {
         super(millisInFuture, countDownInterval);

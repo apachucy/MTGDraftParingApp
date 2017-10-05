@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.buisness.algorithm.base;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +39,7 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
     }
 
     @Override
-    public void startAlgorithm(List<String> playerNames, int rounds) {
+    public void startAlgorithm(@NonNull List<String> playerNames, int rounds) {
         populatePlayersList(playerNames);
         mDraftDataProvider.setMaxRound(rounds);
         mDraftDataProvider.setCurrentRound(0);
@@ -93,6 +94,7 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         return mDraftDataProvider.getPlayerList();
     }
 
+    @NonNull
     public List<Player> getFilteredPlayerList(boolean dropped) {
         List<Player> filteredPlayerList = new ArrayList<>();
         for (Player player : getDraftStartedPlayerList()) {
@@ -110,7 +112,7 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         Collections.sort(playerList, new PlayersComparator());
     }
 
-    private void populatePlayersList(List<String> players) {
+    private void populatePlayersList(@NonNull List<String> players) {
         List<Player> draftStartedPlayers = new ArrayList<>();
         for (String playerName : players) {
             Player player = new Player(playerName);
@@ -119,6 +121,7 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         mDraftDataProvider.setPlayerList(draftStartedPlayers);
     }
 
+    @Nullable
     @Override
     public Player getPlayer(String playerName) {
         for (Player player : mDraftDataProvider.getPlayerList()) {

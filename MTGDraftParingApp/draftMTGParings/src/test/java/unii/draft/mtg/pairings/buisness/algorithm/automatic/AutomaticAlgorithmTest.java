@@ -1,6 +1,7 @@
 package unii.draft.mtg.pairings.buisness.algorithm.automatic;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
@@ -170,7 +171,8 @@ public class AutomaticAlgorithmTest {
 
     }
 
-    private List<Player> populatePlayersList(List<String> players) {
+    @NonNull
+    private List<Player> populatePlayersList(@NonNull List<String> players) {
         List<Player> draftStartedPlayers = new ArrayList<>();
         for (String playerName : players) {
             Player player = new Player(playerName);
@@ -180,6 +182,7 @@ public class AutomaticAlgorithmTest {
     }
 
 
+    @NonNull
     private Matcher<List<Player>> checkPlayerName(final String playerName) {
         return new BaseMatcher<List<Player>>() {
             @Override
@@ -195,7 +198,7 @@ public class AutomaticAlgorithmTest {
             }
 
             @Override
-            public void describeTo(final Description description) {
+            public void describeTo(@NonNull final Description description) {
                 description.appendText("name should be equals ").appendValue(playerName);
             }
 

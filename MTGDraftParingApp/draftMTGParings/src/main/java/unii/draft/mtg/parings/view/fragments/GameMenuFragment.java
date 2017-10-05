@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,16 +51,20 @@ public class GameMenuFragment extends BaseFragment {
     private ArrayAdapter<String> mListAdapter;
     private Activity mActivity;
     private boolean isPreviousDraftNotEnded;
+    @Nullable
     @Bind(R.id.init_playerList)
     ListView mPlayerList;
 
+    @Nullable
     @Bind(R.id.init_playerNameTextInput)
     TextInputLayout mPlayerNameTextInput;
 
+    @Nullable
     @Bind(R.id.init_roundsTextInput)
     TextInputLayout mRoundsTextInput;
 
 
+    @Nullable
     @Bind(R.id.init_addPlayerFromHistoryButton)
     Button mAddPlayerFromHistoryButton;
 
@@ -83,7 +88,7 @@ public class GameMenuFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game_menu, container, false);
         ButterKnife.bind(this, view);
@@ -158,7 +163,7 @@ public class GameMenuFragment extends BaseFragment {
 
         MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice = new MaterialDialog.ListCallbackMultiChoice() {
             @Override
-            public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+            public boolean onSelection(MaterialDialog dialog, @NonNull Integer[] which, CharSequence[] text) {
 
                 for (Integer aWhich : which) {
                     String playerName = playersNameFromHistory.get(aWhich);
@@ -176,7 +181,7 @@ public class GameMenuFragment extends BaseFragment {
     }
 
 
-    protected void initFragmentView(LayoutInflater inflater) {
+    protected void initFragmentView(@NonNull LayoutInflater inflater) {
         if (isPreviousDraftNotEnded) {
             //display dialog that can kill this application and move to scoreboard :)
             showDialogWithTwoOptions(getActivity(), getString(R.string.dialog_load_not_ended_draft_title), getString(R.string.dialog_load_not_ended_draft_body),
@@ -223,6 +228,7 @@ public class GameMenuFragment extends BaseFragment {
         return playersNameFromHistory.isEmpty();
     }
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mStartGameDialogOnClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -263,7 +269,7 @@ public class GameMenuFragment extends BaseFragment {
     };
 
 
-    private boolean isNameAddedBefore(String playerName) {
+    private boolean isNameAddedBefore(@NonNull String playerName) {
         boolean isAddedBefore = false;
 
         for (String name : mPlayerNameList.getPlayerList()) {
@@ -287,6 +293,7 @@ public class GameMenuFragment extends BaseFragment {
                 getString(R.string.dialog_start_button), mDialogErrorButtonClickListener);
     }
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mDialogErrorButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {
@@ -294,6 +301,7 @@ public class GameMenuFragment extends BaseFragment {
         }
     };
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mDialogLoadDraftClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {

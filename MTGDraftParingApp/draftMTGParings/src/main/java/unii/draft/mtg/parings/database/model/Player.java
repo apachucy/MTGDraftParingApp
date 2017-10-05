@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.database.model;
 
+import android.support.annotation.Nullable;
+
 import java.util.List;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import de.greenrobot.dao.DaoException;
@@ -14,11 +16,14 @@ public class Player {
     private String PlayerName;
 
     /** Used to resolve relations */
+    @Nullable
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
+    @Nullable
     private transient PlayerDao myDao;
 
+    @Nullable
     private List<PlayerDraftJoinTable> Players;
 
     public Player() {
@@ -34,7 +39,7 @@ public class Player {
     }
 
     /** called by internal mechanisms, do not call yourself. */
-    public void __setDaoSession(DaoSession daoSession) {
+    public void __setDaoSession(@Nullable DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getPlayerDao() : null;
     }
@@ -56,6 +61,7 @@ public class Player {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    @Nullable
     public List<PlayerDraftJoinTable> getPlayers() {
         if (Players == null) {
             if (daoSession == null) {

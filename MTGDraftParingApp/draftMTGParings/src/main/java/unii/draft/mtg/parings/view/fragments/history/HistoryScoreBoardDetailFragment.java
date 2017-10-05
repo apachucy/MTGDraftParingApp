@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.view.fragments.history;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     @Inject
     IShareData mShareData;
 
+    @Nullable
     @Bind(R.id.settings_menuRecyclerView)
     RecyclerView mRecyclerView;
 
@@ -61,7 +63,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycle_view, container, false);
         ButterKnife.bind(this, view);
 
@@ -84,7 +86,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
                 shareAction(mShareData.getPlayerWithPoints(mPlayerList));

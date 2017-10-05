@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.buisness.share.draft.list;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -16,8 +18,9 @@ public class SharePlayerAchievementList implements ISharePlayerHistoryList {
     }
 
 
+    @Nullable
     @Override
-    public String getPlayerListToString(List<PlayerAchievements> list) {
+    public String getPlayerListToString(@Nullable List<PlayerAchievements> list) {
         if (list == null || list.isEmpty()) {
             return null;
         }
@@ -28,7 +31,7 @@ public class SharePlayerAchievementList implements ISharePlayerHistoryList {
         return playerAchievementsListToString;
     }
 
-    private String playerAchievementToString(PlayerAchievements player) {
+    private String playerAchievementToString(@NonNull PlayerAchievements player) {
         int wins = 0;
         if (player.getPlaceInDrafts().containsKey(DRAFT_PLACE_1)) {
             wins = player.getPlaceInDrafts().get(DRAFT_PLACE_1);

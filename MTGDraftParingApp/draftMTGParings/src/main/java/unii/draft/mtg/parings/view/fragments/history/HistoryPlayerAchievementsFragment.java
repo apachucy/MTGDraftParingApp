@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.view.fragments.history;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,10 +51,13 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     private unii.draft.mtg.parings.database.model.Player mPlayer;
     private ISharePlayerAchievements mSharePlayerAchievements;
 
+    @Nullable
     @Bind(R.id.history_player_detail_playerAchievementsList)
     RecyclerView mPlayerAchievementRecyclerView;
+    @Nullable
     @Bind(R.id.history_player_detail_playerNameTextView)
     TextView mHistoryPlayerNameTextView;
+    @Nullable
     @Bind(R.id.history_player_detail_playerOverallPositionsList)
     RecyclerView mPlayerPositionOverallRecyclerView;
 
@@ -68,7 +72,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history_player_detail, container, false);
         ButterKnife.bind(this, view);
         injectDependencies();
@@ -90,7 +94,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
                 shareAction(mSharePlayerAchievements.playerAchievementsToString(mPlayer.getPlayerName(), mPlayerOverallList, mPlayerDraftPlayedList));
@@ -144,7 +148,8 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
         return getString(R.string.history_detail_player_overall_count_position, key, value);
     }
 
-    private List<String> createPlayerOverallList(PlayerAchievements playerAchievements) {
+    @NonNull
+    private List<String> createPlayerOverallList(@NonNull PlayerAchievements playerAchievements) {
         List<String> list = new ArrayList<>();
         for (Integer keys : playerAchievements.getPlaceInDrafts().keySet()) {
             list.add(playerAchievementToString(keys, playerAchievements.getPlaceInDrafts().get(keys)));
@@ -152,6 +157,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
         return list;
     }
 
+    @NonNull
     private List<PlayerDraft> createPlayerDraftPlayedList() {
         List<PlayerDraft> playerDraftPlayedList = new ArrayList<>();
         List<Draft> dbDraftList = mDatabaseHelper.get().getAllDraftsForPlayer(mPlayerId);

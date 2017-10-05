@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.view.activities.settings;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,6 +24,7 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayD
     private static final String TAG_FRAGMENT_DETAIL = HistoryScoreBoardActivity.class.getName() + "TAG_FRAGMENT_DETAIL";
     private static String sCurrentFragmentTag;
 
+    @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
@@ -42,7 +45,7 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayD
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_show_list:
                 if (sCurrentFragmentTag.equals(TAG_FRAGMENT_DETAIL)) {
@@ -67,7 +70,7 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayD
 
 
     @Override
-    protected void injectDependencies(ActivityComponent activityComponent) {
+    protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 

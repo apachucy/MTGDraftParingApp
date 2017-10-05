@@ -3,6 +3,8 @@ package unii.draft.mtg.parings.database.model;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.Property;
@@ -25,22 +27,22 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property PlayerName = new Property(1, String.class, "PlayerName", false, "PLAYER_NAME");
-    };
+    }
 
     private DaoSession daoSession;
 
 
-    public PlayerDao(DaoConfig config) {
+    public PlayerDao(@NonNull DaoConfig config) {
         super(config);
     }
     
-    public PlayerDao(DaoConfig config, DaoSession daoSession) {
+    public PlayerDao(@NonNull DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
         this.daoSession = daoSession;
     }
 
     /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
+    public static void createTable(@NonNull SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"PLAYER\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
@@ -48,14 +50,14 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     }
 
     /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
+    public static void dropTable(@NonNull SQLiteDatabase db, boolean ifExists) {
         String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"PLAYER\"";
         db.execSQL(sql);
     }
 
     /** @inheritdoc */
     @Override
-    protected void bindValues(SQLiteStatement stmt, Player entity) {
+    protected void bindValues(@NonNull SQLiteStatement stmt, @NonNull Player entity) {
         stmt.clearBindings();
  
         Long id = entity.getId();
@@ -70,20 +72,22 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     }
 
     @Override
-    protected void attachEntity(Player entity) {
+    protected void attachEntity(@NonNull Player entity) {
         super.attachEntity(entity);
         entity.__setDaoSession(daoSession);
     }
 
     /** @inheritdoc */
+    @Nullable
     @Override
-    public Long readKey(Cursor cursor, int offset) {
+    public Long readKey(@NonNull Cursor cursor, int offset) {
         return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     /** @inheritdoc */
+    @Nullable
     @Override
-    public Player readEntity(Cursor cursor, int offset) {
+    public Player readEntity(@NonNull Cursor cursor, int offset) {
         Player entity = new Player( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // PlayerName
@@ -93,21 +97,22 @@ public class PlayerDao extends AbstractDao<Player, Long> {
      
     /** @inheritdoc */
     @Override
-    public void readEntity(Cursor cursor, Player entity, int offset) {
+    public void readEntity(@NonNull Cursor cursor, @NonNull Player entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setPlayerName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
      }
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(Player entity, long rowId) {
+    protected Long updateKeyAfterInsert(@NonNull Player entity, long rowId) {
         entity.setId(rowId);
         return rowId;
     }
     
     /** @inheritdoc */
+    @Nullable
     @Override
-    public Long getKey(Player entity) {
+    public Long getKey(@Nullable Player entity) {
         if(entity != null) {
             return entity.getId();
         } else {

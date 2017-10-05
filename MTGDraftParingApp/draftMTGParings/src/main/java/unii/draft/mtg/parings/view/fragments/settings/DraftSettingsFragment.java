@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.view.fragments.settings;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +28,13 @@ import unii.draft.mtg.parings.view.fragments.BaseFragment;
 public class DraftSettingsFragment extends BaseFragment {
 
 
+    @Nullable
     @Bind(R.id.settings_sittingsButton)
     Button mSittingsOptionsTextView;
+    @Nullable
     @Bind(R.id.settings_createPairingsChooserButton)
     Button mCreateParingChooserTextView;
+    @Nullable
     @Bind(R.id.settings_saveResultsAfterDraftButton)
     Button mSaveDraftResultButton;
     @Inject
@@ -38,7 +42,7 @@ public class DraftSettingsFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_draft, container, false);
         ButterKnife.bind(this, view);
         injectDependencies();
@@ -145,6 +149,7 @@ public class DraftSettingsFragment extends BaseFragment {
         mCreateParingChooserTextView.setText(getString(R.string.text_personal_parings, pairingOptionName));
     }
 
+    @NonNull
     private MaterialDialog.ListCallbackSingleChoice mSaveDraftResultCallback = new MaterialDialog.ListCallbackSingleChoice() {
         @Override
         public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
@@ -166,6 +171,7 @@ public class DraftSettingsFragment extends BaseFragment {
         }
     };
 
+    @NonNull
     private MaterialDialog.ListCallbackSingleChoice mSittingsCallback = new MaterialDialog.ListCallbackSingleChoice() {
         @Override
         public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
@@ -187,6 +193,7 @@ public class DraftSettingsFragment extends BaseFragment {
         }
     };
 
+    @NonNull
     private MaterialDialog.ListCallbackSingleChoice mPairingTypeCallback = new MaterialDialog.ListCallbackSingleChoice() {
         @Override
         public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {

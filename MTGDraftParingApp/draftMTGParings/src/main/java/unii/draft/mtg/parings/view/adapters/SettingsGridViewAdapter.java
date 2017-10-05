@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.view.adapters;
 
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +29,15 @@ public class SettingsGridViewAdapter extends RecyclerView.Adapter<SettingsGridVi
     }
 
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_settings_chooser, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.mTextMenuTextView.setText(mSettingsMenuList.get(position).getTextMenu());
         holder.mImageMenuImageView.setImageResource(mSettingsMenuList.get(position).getImageResourceId());
     }
@@ -52,12 +55,14 @@ public class SettingsGridViewAdapter extends RecyclerView.Adapter<SettingsGridVi
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @Nullable
         @Bind(R.id.row_settings_chooser_text)
         TextView mTextMenuTextView;
+        @Nullable
         @Bind(R.id.row_settings_chooser_image)
         ImageView mImageMenuImageView;
 
-        public ViewHolder(final View view) {
+        public ViewHolder(@NonNull final View view) {
             super(view);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

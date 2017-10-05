@@ -2,6 +2,8 @@ package unii.draft.mtg.parings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -53,9 +55,11 @@ public class ParingDashboardActivity extends BaseActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Game> mGameList;
     // setting time and count down
+    @Nullable
     private CounterClass mCounterClass;
     private IStatisticCalculation mStatisticCalculation;
     private ParingDashboardLogic mParingDashboardLogic;
+    @Nullable
     private TourGuide mTutorialHandler = null;
 
     private boolean isCountStarted = false;
@@ -63,12 +67,16 @@ public class ParingDashboardActivity extends BaseActivity {
     private boolean isLoaded = false;
     private long mTimerTimeTillEnd = 0;
 
+    @Nullable
     @Bind(R.id.paring_counterTextView)
     TextView mCounterTextView;
+    @Nullable
     @Bind(R.id.paring_roundTextView)
     TextView mRoundTextView;
+    @Nullable
     @Bind(R.id.paring_paringListView)
     RecyclerView mRecyclerView;
+    @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
@@ -104,7 +112,7 @@ public class ParingDashboardActivity extends BaseActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.paring_dashboard, menu);
         setMenuActions((ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView());
@@ -126,7 +134,7 @@ public class ParingDashboardActivity extends BaseActivity {
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
+    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         isPairingsGenerated = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_GENERATED);
         isCountStarted = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_TIMER_ON);
         mTimerTimeTillEnd = savedInstanceState.getLong(BUNDLE_KEY_PAIRINGS_TIMER_TIME);
@@ -134,7 +142,7 @@ public class ParingDashboardActivity extends BaseActivity {
 
     // invoked when the activity may be temporarily destroyed, save the instance state here
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(BUNDLE_KEY_PAIRINGS_GENERATED, isPairingsGenerated);
         outState.putBoolean(BUNDLE_KEY_PAIRINGS_TIMER_ON, isCountStarted);
         outState.putLong(BUNDLE_KEY_PAIRINGS_TIMER_TIME, mTimerTimeTillEnd);
@@ -142,11 +150,11 @@ public class ParingDashboardActivity extends BaseActivity {
     }
 
     @Override
-    protected void injectDependencies(ActivityComponent activityComponent) {
+    protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 
-    private void setMenuActions(ImageView hourGlassButton, ImageView openLifeAppButton) {
+    private void setMenuActions(@NonNull ImageView hourGlassButton, @NonNull ImageView openLifeAppButton) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 
@@ -216,7 +224,7 @@ public class ParingDashboardActivity extends BaseActivity {
     }
 
 
-    private boolean initData(Bundle savedInstanceState) {
+    private boolean initData(@Nullable Bundle savedInstanceState) {
 
         long timePerRound;
         long firstVibration;
@@ -278,6 +286,7 @@ public class ParingDashboardActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
     }
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mDialogButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {
@@ -331,6 +340,7 @@ public class ParingDashboardActivity extends BaseActivity {
         super.onPause();
     }
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mDownloadMTGCounterAppListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {

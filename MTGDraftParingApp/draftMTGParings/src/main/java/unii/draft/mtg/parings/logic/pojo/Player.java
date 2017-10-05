@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.logic.pojo;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class Player  implements IAdapterItem {
      */
     private boolean mDropped;
 
-    public Player(unii.draft.mtg.parings.database.model.Player player, PlayerDraftJoinTable playerDraftJoinTable){
+    public Player(@NonNull unii.draft.mtg.parings.database.model.Player player, @NonNull PlayerDraftJoinTable playerDraftJoinTable){
         mPlayerName = player.getPlayerName();
 
         mPlayerMatchOverallWin = playerDraftJoinTable.getPlayerMatchOverallWin();
@@ -112,6 +114,7 @@ public class Player  implements IAdapterItem {
         mPlayedGame.add(game);
     }
 
+    @NonNull
     public List<String> playedGameWith() {
         List<String> playedGameWith = new ArrayList<String>();
 

@@ -2,6 +2,8 @@ package unii.draft.mtg.parings.util.helper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +24,13 @@ import unii.draft.mtg.parings.util.config.BaseConfig;
 public class DatabaseHelper implements IDatabaseHelper {
     private static final int NO_MATCH = -1;
     private Context mContext;
+    @Nullable
     private DaoMaster.DevOpenHelper mHelper;
     private SQLiteDatabase mDb;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
 
-    public DatabaseHelper(Context context, ApplicationComponent component) {
+    public DatabaseHelper(Context context, @NonNull ApplicationComponent component) {
         component.inject(this);
         mContext = context;
         if (mHelper == null) {
@@ -38,6 +41,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         }
     }
 
+    @NonNull
     @Override
     public Player getPlayer(long draftId, long playerId) {
         unii.draft.mtg.parings.database.model.Player player = mDaoSession.getPlayerDao().load(playerId);
@@ -55,6 +59,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         return player;
     }
 
+    @NonNull
     @Override
     public List<unii.draft.mtg.parings.database.model.Player> getAllPlayerList() {
         List<unii.draft.mtg.parings.database.model.Player> playerList = new ArrayList<>();
@@ -62,6 +67,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         return playerList;
     }
 
+    @NonNull
     @Override
     public List<String> getAllPlayersNames() {
         List<String> playerNameList = new ArrayList<>();
@@ -72,6 +78,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         return playerNameList;
     }
 
+    @NonNull
     @Override
     public List<Player> getAllPlayersInDraft(long draftId) {
         List<PlayerDraftJoinTable> playerDraftJoinTableList = mDaoSession.getPlayerDraftJoinTableDao().queryBuilder()
@@ -86,6 +93,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         return playerList;
     }
 
+    @NonNull
     @Override
     public List<Draft> getAllDraftsForPlayer(long playerId) {
         List<PlayerDraftJoinTable> playerDraftJoinTableList = mDaoSession.getPlayerDraftJoinTableDao().queryBuilder()
@@ -100,6 +108,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         return draftList;
     }
 
+    @NonNull
     @Override
     public List<Draft> getAllDraftList() {
         List<Draft> draftList = new ArrayList<>();
@@ -108,7 +117,7 @@ public class DatabaseHelper implements IDatabaseHelper {
     }
 
     @Override
-    public void saveDraft(List<Player> playerDraftList, String draftName, String draftDate, int numberOfRounds) {
+    public void saveDraft(@NonNull List<Player> playerDraftList, String draftName, String draftDate, int numberOfRounds) {
         long draftId = saveDraftDao(draftName, draftDate, playerDraftList.size(), numberOfRounds);
         int position = 0;
         for (Player player : playerDraftList) {
@@ -166,7 +175,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         } else return NO_MATCH;
     }
 
-    private long savePlayerToDraftDao(long playerId, long draftId, Player player, int position) {
+    private long savePlayerToDraftDao(long playerId, long draftId, @NonNull Player player, int position) {
         PlayerDraftJoinTable playerDraftJoinTable = new PlayerDraftJoinTable();
         playerDraftJoinTable.setDropped(player.isDropped());
         playerDraftJoinTable.setOponentsGamesOverallWin(player.getOponentsGamesOverallWin());

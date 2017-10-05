@@ -1,6 +1,8 @@
 package unii.draft.mtg.parings.view.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +28,9 @@ public class MatchPlayerCustomAdapter extends RecyclerView.Adapter<RecyclerView.
         mPlayerGame = playerGame;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_match_player_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -53,12 +56,14 @@ public class MatchPlayerCustomAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @Nullable
         @Bind(R.id.row_match_player_player1TextView)
         TextView player1TextView;
+        @Nullable
         @Bind(R.id.row_match_player_player2TextView)
         TextView player2TextView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

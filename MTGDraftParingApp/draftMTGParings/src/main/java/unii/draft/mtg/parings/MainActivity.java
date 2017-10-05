@@ -2,6 +2,8 @@ package unii.draft.mtg.parings;
 
 import android.os.Bundle;
 import android.os.Debug;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -38,9 +40,11 @@ public class MainActivity extends BaseActivity implements IPlayerList {
     private static final String TAG_FRAGMENT_SETTINGS = MainActivity.class.getName() + "TAG_FRAGMENT_SETTINGS";
 
     // help library
+    @Nullable
     private TourGuide mTutorialHandler = null;
     private ArrayList<String> mPlayerNameList;
 
+    @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
@@ -49,7 +53,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.settings, menu);
         setMenuActions((ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView());
@@ -81,7 +85,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
 
 
     @Override
-    protected void injectDependencies(ActivityComponent activityComponent) {
+    protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 
@@ -108,7 +112,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
         }
     }
 
-    private void setMenuActions(ImageView aboutButton, ImageView settingsButton) {
+    private void setMenuActions(@NonNull ImageView aboutButton, @NonNull ImageView settingsButton) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 

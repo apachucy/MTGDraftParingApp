@@ -3,6 +3,7 @@ package unii.draft.mtg.parings.view.activities.options;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -41,15 +42,18 @@ public class SittingsActivity extends BaseActivity {
     private static final String TAG_FRAGMENT_SITTINGS = SittingsActivity.class
             .getName() + "TAG_FRAGMENT_SITTINGS";
 
+    @Nullable
     private TourGuide mTutorialHandler = null;
 
     private SittingsLogic mSittingsLogic;
     @Inject
     ISharedPreferences mSharedPreferenceManager;
 
+    @Nullable
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
 
+    @Nullable
     @Bind(R.id.floating_action_button_next)
     FloatingActionButton mFloatingActionButton;
 
@@ -72,7 +76,7 @@ public class SittingsActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.sittings, menu);
         setMenuActions((ImageView) menu.getItem(0).getActionView());
@@ -85,7 +89,7 @@ public class SittingsActivity extends BaseActivity {
     }
 
     @Override
-    protected void injectDependencies(ActivityComponent activityComponent) {
+    protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
 
@@ -119,7 +123,7 @@ public class SittingsActivity extends BaseActivity {
         finish();
     }
 
-    private void setMenuActions(ImageView openManaCalculatorButton) {
+    private void setMenuActions(@NonNull ImageView openManaCalculatorButton) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 
@@ -169,6 +173,7 @@ public class SittingsActivity extends BaseActivity {
     }
 
 
+    @NonNull
     private MaterialDialog.SingleButtonCallback mDownloadMTGManaCalculatorAppListener = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
