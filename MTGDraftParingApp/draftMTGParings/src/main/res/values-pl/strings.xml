@@ -59,7 +59,7 @@
     <string name="text_draw">Remis</string>
 
     <!-- Create personal parings-->
-    <string name="text_personal_parings">Stwórz własne paringi:  %1$s</string>
+    <string name="text_personal_parings">Typ paringów:  %1$s</string>
     <string name="activity_paring_add_paring">Dodaj Paring</string>
     <string name="activity_paring_clean_paring">Usuń Paringi</string>
     <string name="activity_paring_warning_empty_list">Nie ma więcej zawodników do paringów</string>
@@ -136,9 +136,9 @@
     <string name="tutorial_hour_glass">Naciśnij aby rozpocząć odliczanie</string>
     <string name="settings_reset_tour_guide_dialog_title">Czy chcesz zresetować pomoc?</string>
     <string name="settings_reset_tour_guide_dialog_content">Pomoc zostanie zresetowana w aplikacji</string>
-    <string name="settings_pairing_mode_manual">Ręcznie</string>
+    <string name="settings_pairing_mode_manual">Ręczny</string>
     <string name="settings_pairing_mode_dialog_title">Wybierz opcję parowania zawodników</string>
-    <string name="settings_pairing_mode_automatic_with_repeats">Automatycznie z możliwymi powtórzeniami</string>
+    <string name="settings_pairing_mode_automatic_with_repeats">Automatyczny z możliwymi powtórzeniami</string>
     <string name="settings_menu_item_history">Historia</string>
     <string name="settings_menu_item_other">Inne</string>
     <string name="settings_menu_item_time">Czas</string>
@@ -159,7 +159,7 @@
     <string name="select_player_manual_title">Wybierz zawodnika</string>
     <string name="select_player_manual_add">Dodaj</string>
     <string name="positive">Tak</string>
-    <string name="settings_pairing_mode_tournament">Turniej</string>
+    <string name="settings_pairing_mode_tournament">Turniejowy</string>
     <string name="negative">Nie</string>
     <string name="settings_save_draft_result_dialog_title">Czy zapisać wyniki draftu:</string>
     <string name="text_save_results_after_draft">Zapisz wyniki draftu: %1$s</string>

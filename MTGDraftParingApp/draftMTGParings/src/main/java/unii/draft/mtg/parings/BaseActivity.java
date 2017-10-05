@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -25,7 +25,7 @@ import unii.draft.mtg.parings.logic.dagger.HasComponent;
 import unii.draft.mtg.parings.view.custom.IActivityHandler;
 
 
-public abstract class BaseActivity extends ActionBarActivity implements IActivityHandler, HasComponent<ActivityComponent> {
+public abstract class BaseActivity extends AppCompatActivity implements IActivityHandler, HasComponent<ActivityComponent> {
 
     private ActivityComponent mActivityComponent;
     @Nullable
@@ -57,6 +57,7 @@ public abstract class BaseActivity extends ActionBarActivity implements IActivit
                 .positiveText(positiveText).onPositive(positiveAction).backgroundColorRes(R.color.windowBackground)
                 .show();
     }
+
     @Override
     public void showSingleChoiceList(@NonNull Context context, @NonNull String title, @NonNull List<String> list, @NonNull String positiveText, @NonNull MaterialDialog.ListCallbackSingleChoice singleListCallback) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
