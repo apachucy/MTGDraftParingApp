@@ -2,16 +2,23 @@ package unii.draft.mtg.parings.view.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -40,20 +47,25 @@ import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 import unii.draft.mtg.parings.util.validation.ValidationHelper;
 import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivity;
 import unii.draft.mtg.parings.view.activities.options.SittingsActivity;
+import unii.draft.mtg.parings.view.adapters.AddPlayerAdapter;
+import unii.draft.mtg.parings.view.adapters.DividerItemDecorator;
 import unii.draft.mtg.parings.view.custom.IActivityHandler;
 import unii.draft.mtg.parings.view.custom.IPlayerList;
 
 
 public class GameMenuFragment extends BaseFragment {
+    private Paint paint;
 
     private IPlayerList mPlayerNameList;
     private IActivityHandler mActivityHandler;
-    private ArrayAdapter<String> mListAdapter;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     private Activity mActivity;
     private boolean isPreviousDraftNotEnded;
     @Nullable
     @Bind(R.id.init_playerList)
-    ListView mPlayerList;
+    RecyclerView mPlayerList;
 
     @Nullable
     @Bind(R.id.init_playerNameTextInput)
@@ -100,8 +112,9 @@ public class GameMenuFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         ButterKnife.unbind(this);
+        paint = null;
+        super.onDestroy();
     }
 
     @OnClick(R.id.init_addPlayerButton)
@@ -113,7 +126,7 @@ public class GameMenuFragment extends BaseFragment {
             mPlayerNameList.getPlayerList().add(mPlayerNameTextInput.getEditText().getText()
                     .toString());
             mPlayerNameTextInput.getEditText().setText("");
-            mListAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();
 
         } else if (isNameAddedBefore(mPlayerNameTextInput.getEditText().getText()
                 .toString())) {
@@ -169,7 +182,7 @@ public class GameMenuFragment extends BaseFragment {
                     String playerName = playersNameFromHistory.get(aWhich);
                     if (!isNameAddedBefore(playerName)) {
                         mPlayerNameList.getPlayerList().add(playerName);
-                        mListAdapter.notifyDataSetChanged();
+                        mAdapter.notifyDataSetChanged();
                     }
                 }
                 return true;
@@ -187,22 +200,25 @@ public class GameMenuFragment extends BaseFragment {
             showDialogWithTwoOptions(getActivity(), getString(R.string.dialog_load_not_ended_draft_title), getString(R.string.dialog_load_not_ended_draft_body),
                     getString(R.string.positive), getString(R.string.negative), mDialogLoadDraftClickListener);
         }
-
-        mListAdapter = new ArrayAdapter<>(mActivity, R.layout.row_player_name,
-                mPlayerNameList.getPlayerList());
+        mAdapter = new AddPlayerAdapter(mPlayerNameList.getPlayerList());
+        mPlayerList.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mPlayerList.setLayoutManager(mLayoutManager);
+        mPlayerList.addItemDecoration(new DividerItemDecorator(getActivity(), DividerItemDecorator.VERTICAL_LIST));
 
         mPlayerNameTextInput.setHint(getString(R.string.hint_player_name));
         mRoundsTextInput.setHint(getString(R.string.hint_rounds));
         mRoundsTextInput.setErrorEnabled(true);
         mPlayerNameTextInput.setErrorEnabled(true);
-        View header = inflater.inflate(R.layout.header_names, null);
         if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
             mRoundsTextInput.setVisibility(View.GONE);
         }
 
         mAddPlayerFromHistoryButton.setEnabled(!playersNotExistInHistory());
-        mPlayerList.addHeaderView(header);
-        mPlayerList.setAdapter(mListAdapter);
+
+        mPlayerList.setAdapter(mAdapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(removeItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mPlayerList);
     }
 
     @Override
@@ -215,6 +231,7 @@ public class GameMenuFragment extends BaseFragment {
         BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.get().getCurrentAlgorithm();
         isPreviousDraftNotEnded = !baseAlgorithm.isCacheEmpty()
                 && baseAlgorithm.playedRound() < baseAlgorithm.getMaxRound();
+        paint = new Paint();
     }
 
     private boolean isValidRoundEditText() {
@@ -318,4 +335,50 @@ public class GameMenuFragment extends BaseFragment {
             getActivity().finish();
         }
     };
+
+
+    /**
+     * Code base on: https://www.learn2crack.com/2016/02/custom-swipe-recyclerview.html
+     */
+    private ItemTouchHelper.SimpleCallback removeItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+
+            if (direction == ItemTouchHelper.LEFT) {
+                mPlayerNameList.getPlayerList().remove(position);
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mPlayerNameList.getPlayerList().size());
+            }
+        }
+
+        @Override
+        public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+            Bitmap icon;
+            if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+
+                View itemView = viewHolder.itemView;
+                float height = (float) itemView.getBottom() - (float) itemView.getTop();
+                float width = height / 3;
+
+                if (dX < 0) {
+                    paint.setColor(ContextCompat.getColor(getContext(), R.color.red));
+                    RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
+                    c.drawRect(background, paint);
+                    icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_delete_white_36dp);
+                    RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                    c.drawBitmap(icon, null, icon_dest, paint);
+                }
+            }
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
+
 }

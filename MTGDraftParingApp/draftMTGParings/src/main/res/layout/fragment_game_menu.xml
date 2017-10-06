@@ -3,15 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/header_playerNameTextView"
+        style="@style/textView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/init_mainContainer"
+        android:paddingBottom="@dimen/text_view_margin_normal"
+        android:paddingTop="@dimen/text_view_margin_normal"
+        android:text="@string/header_player_position_name"
+        android:textStyle="bold" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/init_playerList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/init_mainContainer" />
+        android:layout_below="@+id/header_playerNameTextView"
+        android:scrollbars="vertical" />
+
 
     <RelativeLayout
         android:id="@+id/init_mainContainer"

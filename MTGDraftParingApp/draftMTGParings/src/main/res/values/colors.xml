@@ -8,6 +8,7 @@
     <color name="grey_dark">#806E62</color>
     <color name="blue_dark">#2C2F56</color>
     <color name="navy_blue_dark">#004F81</color>
+    <color name="red">#d74343</color>
 
     <!--Button colors -->
     <color name="green">#007F00</color>
