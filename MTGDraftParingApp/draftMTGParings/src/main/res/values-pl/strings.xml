@@ -43,17 +43,13 @@
 
     <!-- Dialog Info -->
     <string name="dialog_info_title">Informacje</string>
-    <string name="dialog_info_message">Fanowska wersja aplikacji do liczenia paringów podczas draftowania w MTG\nPewnie są też inne zastosowania, ale to jest najważniejsze ;)</string>
+    <string name="dialog_info_message">Fanowska wersja aplikacji do liczenia paringów podczas draftowania w MTG.\nPewnie są też inne zastosowania, ale to jest najważniejsze ;)</string>
 
     <!-- Help/Showcase -->
     <string name="help_title">Pomoc</string>
     <!-- Headers -->
     <string name="header_player_position_name">Gracz</string>
     <string name="header_player_position_points">Punkty</string>
-    <string name="header_player_position_ogw">OGW%</string>
-    <string name="header_player_position_pgw">PGW%</string>
-    <string name="header_player_position_omw">OMW%</string>
-    <string name="header_player_position_pmw">PMW%</string>
 
     <!-- List Draw -->
     <string name="text_draw">Remis</string>
@@ -61,16 +57,16 @@
     <!-- Create personal parings-->
     <string name="text_personal_parings">Typ paringów:  %1$s</string>
     <string name="activity_paring_add_paring">Dodaj Paring</string>
-    <string name="activity_paring_clean_paring">Usuń Paringi</string>
+    <string name="activity_paring_clear_paring">Usuń Paringi</string>
     <string name="activity_paring_warning_empty_list">Nie ma więcej zawodników do paringów</string>
-    <string name="activity_paring_warning_equal_names">Złe paring</string>
+    <string name="activity_paring_warning_manual_pairing_error">Złe paring. Zresetuj paringi następnie spróbuj jeszcze raz</string>
     <string name="activity_paring_warning_paring_not_finished">Aby przejść dalej skończ parowanie zawodników</string>
     <string name="activity_paring_warning_bye">Ostatni zawodnik posiada już bye</string>
     <string name="warning_player_name_added">Ten zawodnik został już dodany</string>
     <string name="select_player1">Wybierz 1szego gracza</string>
     <string name="select_player2">Wybierz 2giego gracza</string>
     <string name="spinner_empty_player_list">Brak zawodników</string>
-    <string name="tutorial_info">Infromacje na temat wykorzystanych bibliotek</string>
+    <string name="tutorial_info">Infromacje o tej aplikacji</string>
     <string name="tutorial_settings">Konfiguracja aplikacji</string>
     <string name="action_save">Zapisz draft</string>
     <string name="action_show_list">Wyświetl listę rozegranych draftów</string>

@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/button_padding"
                     android:layout_marginTop="@dimen/button_padding"
-                    android:text="@string/activity_paring_clean_paring" />
+                    android:text="@string/activity_paring_clear_paring" />
 
                 <Button
                     android:id="@+id/matchPlayer_addParingButton"

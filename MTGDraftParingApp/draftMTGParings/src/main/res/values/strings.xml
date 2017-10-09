@@ -11,7 +11,7 @@
     <string name="add_players_from_history">Add players from history</string>
     <string name="no_players_from_history">No players in history</string>
     <string name="text_end_round">End</string>
-    <string name="warning_empty_field">Cannot be empty</string>
+    <string name="warning_empty_field">Field cannot be empty</string>
     <string name="warning_need_players">Please add players</string>
     <string name="text_vs">vs</string>
     <string name="text_0" translatable="false">0</string>
@@ -40,16 +40,16 @@
     <string name="dialog_start_button">Close</string>
     <!-- Dialog Game End -->
     <string name="dialog_end_title">Game ended</string>
-    <string name="dialog_end_message">Click close to close application</string>
+    <string name="dialog_end_message">Click \'close\' to close application</string>
     <!-- Dialog Algorithm Problem -->
-    <string name="dialog_error_algorithm_title">Error</string>
+    <string name="dialog_error_algorithm_title">Algorithm error</string>
     <string name="dialog_error_algorithm__message">Cannot pair players.\nPlease reset an app.</string>
     <!-- Dialog Warning Paring -->
     <string name="dialog_warning_title">Warning</string>
     <string name="dialog_warning_message">Too many rounds or too less players.\nPlease add players or decrement number of rounds.</string>
     <!-- Dialog Info -->
     <string name="dialog_info_title">Info</string>
-    <string name="dialog_info_message">Fansite version of the app\nfor paring players in MTG drafts\nHelps from Piotr S. and Szymon Sz.</string>
+    <string name="dialog_info_message">Fansite version of the app for paring players in MTG drafts.\nThere can be other use-cases for this app, but this is main use case:).\nHelps from Piotr S. and Szymon Sz.</string>
     <!-- Dialog Settings-->
     <!-- Time Settings -->
     <string name="settings_dialog_round_time_title">Set round time</string>
@@ -70,33 +70,33 @@
 
     <!-- Help/Showcase start screen -->
     <string name="help_title">Help</string>
-    <string name="tutorial_info">Info about used libraries</string>
+    <string name="tutorial_info">About this application</string>
     <string name="tutorial_settings">Configure your draft before play </string>
     <string name="tutorial_hour_glass">Press for countdown</string>
     <string name="tutorial_life_app">Open life app for this round</string>
     <!-- Headers -->
     <string name="header_player_position_name">Player</string>
     <string name="header_player_position_points">Points</string>
-    <string name="header_player_position_ogw">OGW%</string>
-    <string name="header_player_position_pgw">PGW%</string>
-    <string name="header_player_position_omw">OMW%</string>
-    <string name="header_player_position_pmw">PMW%</string>
+    <string name="header_player_position_ogw" translatable="false">OGW%</string>
+    <string name="header_player_position_pgw" translatable="false">PGW%</string>
+    <string name="header_player_position_omw" translatable="false">OMW%</string>
+    <string name="header_player_position_pmw" translatable="false">PMW%</string>
 
     <!-- List Draw -->
     <string name="text_draw">Draw</string>
 
     <!-- Create personal parings-->
-    <string name="text_personal_parings">Create manual parings:  %1$s</string>
+    <string name="text_personal_parings">Paring type:  %1$s</string>
     <string name="text_save_results_after_draft">Save Results after draft: %1$s</string>
     <string name="positive">Yes</string>
     <string name="negative">No</string>
     <string name="activity_paring_add_paring">Add Paring</string>
-    <string name="activity_paring_clean_paring">Clean Parings</string>
+    <string name="activity_paring_clear_paring">Clear Parings</string>
     <string name="activity_paring_warning_empty_list">No more players for parings</string>
-    <string name="activity_paring_warning_equal_names">Wrong paring</string>
-    <string name="activity_paring_warning_paring_not_finished">Please end all possible parings for players</string>
+    <string name="activity_paring_warning_manual_pairing_error">Wrong paring. Reset parings and try one more time</string>
+    <string name="activity_paring_warning_paring_not_finished">Please finish all parings for players</string>
     <string name="activity_paring_warning_bye">Last player already has a bye</string>
-    <string name="warning_player_name_added">Provided player was previously added</string>
+    <string name="warning_player_name_added">Player with provided name was previously added</string>
     <string name="select_player1">Select 1st player</string>
     <string name="select_player2">Select 2nd player</string>
     <string name="select_player_name">Selected: %1$s</string>
@@ -105,44 +105,44 @@
     <string name="spinner_empty_player_list">No more players</string>
 
     <!--Save Score Board-->
-    <string name="activity_save_score_board_info_text">Score board name</string>
-    <string name="activity_save_score_board_info_small_text">You can watch saved score board using settings</string>
+    <string name="activity_save_score_board_info_text">Scoreboard name</string>
+    <string name="activity_save_score_board_info_small_text">You can watch saved scoreboards using settings</string>
     <string name="activity_save_score_board_save">Save</string>
-    <string name="action_save">Save dashboard</string>
+    <string name="action_save">Save draft</string>
     <string name="action_calculate_mana">Open Mana Calculator</string>
-    <string name="action_share">Share content</string>
+    <string name="action_share">Share scoreboard</string>
     <string name="action_remove_player">Drop player</string>
-    <string name="help_save_dashboard">After Game you can choose name for score board</string>
-    <string name="help_drop_player">If there is a need player can drop a draft</string>
-    <string name="help_share_content">After Game you can share it</string>
+    <string name="help_save_dashboard">After Game you can choose name this tournament</string>
+    <string name="help_drop_player">If there is a need you may drop a player from draft</string>
+    <string name="help_share_content">After the game you can share scoreboard</string>
     <string name="help_information_scoreboard">What means: PMG, PGW&#8230;</string>
-    <string name="warning_save_dashboard">You can save score board after all rounds were played</string>
-    <string name="warning_drop_player">You cannot remove players when draft ended</string>
-    <string name="settings_clean_history">Clean history</string>
+    <string name="warning_save_dashboard">You can chose name for tournament when it will end</string>
+    <string name="warning_drop_player">You cannot remove players after draft ended</string>
+    <string name="settings_clean_history">Clean all history</string>
     <string name="settings_other">Other settings</string>
-    <string name="settings_display_scoreboards">Display score boards</string>
+    <string name="settings_display_scoreboards">Display scoreboards</string>
     <string name="settings_display_players_list">Display players list</string>
     <string name="settings_sittings_option" translatable="false">Sittings: %1$s</string>
     <string name="settings_reset_tour_guide">Reset Tour Guide and display help</string>
     <string name="settings_reset_tour_guide_dialog_title">Do you want to reset help?</string>
     <string name="settings_reset_tour_guide_dialog_content">Help will be reset in this application</string>
-    <string name="settings_reset_tour_guide_message">Tour Guide was reset</string>
+    <string name="settings_reset_tour_guide_message">Tour Guide was reseted</string>
 
     <string name="history_score_board_row_draft_name">Draft name: %1$s</string>
     <string name="history_score_board_row_draft_date">Date: %1$s</string>
     <string name="history_score_board_row_draft_best_player">Won: %1$s</string>
     <string name="history_score_board_row_draft_count_players">Players: %1$d</string>
     <string name="history_score_board_row_draft_rounds">Rounds: %1$d</string>
-    <string name="message_score_boards_removed">All score boards were removed</string>
-    <string name="message_score_board_not_exists">No score board to display</string>
-    <string name="message_player_list_not_exists">No player list to display</string>
-    <string name="message_score_board_saved">Score board successful saved</string>
-    <string name="action_show_list">Show score board list</string>
+    <string name="message_score_boards_removed">All scoreboards were removed</string>
+    <string name="message_score_board_not_exists">No scoreboard to display</string>
+    <string name="message_player_list_not_exists">No players to display</string>
+    <string name="message_score_board_saved">Tournament successful saved</string>
+    <string name="action_show_list">Show scoreboards list</string>
     <!--Modify App UI -->
-    <string name="action_countdown">Countdown</string>
+    <string name="action_countdown">End of round countdown</string>
     <string name="action_open_life_app">Open Life App</string>
     <string name="message_action_countdown_started">Countdown…</string>
-    <string name="message_action_countdown_cancel">Cancelled countdown</string>
+    <string name="message_action_countdown_cancel">Countdown was cancelled</string>
     <!--Open Intent -->
     <string name="chooser_intent_title_life_counter">Choose life counter application</string>
     <string name="chooser_dialog_title_life_counter">Download LifeCounterApp</string>
@@ -160,23 +160,23 @@
     <string name="validation_dialog_button_name" translatable="false">Ok</string>
     <!-- drop player res -->
     <string name="drop_players_item">%1$s points: %2$d</string>
-    <string name="drop_player_info_text">To drop players select them and press save. This action cannot be overriten. Use with caution.</string>
+    <string name="drop_player_info_text">To drop players select them and press \'save\'. This action cannot be overriten. Use with caution.</string>
     <!--Rate me option -->
     <string name="settings_rate_me">Please, rate this app</string>
-    <string name="settings_check_other_apps">Check other apps</string>
+    <string name="settings_check_other_apps">Check my other apps</string>
     <string name="settings_idea_box">Idea box</string>
     <string name="settings_rate_me_error"> Could not open Google Play, please install the market app</string>
     <string name="settings_developer_account_error">Could not open browser, please install one and try this action again </string>
     <string name="settings_idea_box_error">Could not open find e-mail client, please install one and try this action again </string>
 
     <!--Settings -->
-    <string name="settings_content_description">Select Settings Menu</string>
-    <string name="settings_counter_off">To use time counter turn it on in settings screen</string>
+    <string name="settings_content_description">Select settings menu</string>
+    <string name="settings_counter_off">"To use time counter turn it on in settings "</string>
     <string name="settings_sittings_none">none</string>
     <string name="settings_sittings_random">random</string>
     <string name="settings_sittings_dialog_title">Choose Sittings Options:</string>
     <string name="settings_history_remove_clean_history_dialog_title">Do you want to remove all things?</string>
-    <string name="settings_history_remove_clean_history_dialog_body">Draft history will be removed and all players will be removed </string>
+    <string name="settings_history_remove_clean_history_dialog_body">All historical data will be removed</string>
 
     <string name="dialog_positive">Ok</string>
     <string name="dialog_negative">Cancel</string>

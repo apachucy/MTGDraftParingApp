@@ -50,10 +50,6 @@
     <!-- Headers -->
     <string name="header_player_position_name">Spieler</string>
     <string name="header_player_position_points">Punkte</string>
-    <string name="header_player_position_ogw">OGW%</string>
-    <string name="header_player_position_pgw">PGW%</string>
-    <string name="header_player_position_omw">OMW%</string>
-    <string name="header_player_position_pmw">PMW%</string>
 
     <!-- List Draw -->
     <string name="text_draw">Unentschieden</string>
@@ -61,9 +57,9 @@
     <!-- Create personal parings-->
     <string name="text_personal_parings">Erstellen Sie Ihre eigenem Paring:  %1$s</string>
     <string name="activity_paring_add_paring">Hinzufügen Paring</string>
-    <string name="activity_paring_clean_paring">Löschen Paring</string>
+    <string name="activity_paring_clear_paring">Löschen Paring</string>
     <string name="activity_paring_warning_empty_list">Es gibt keine weitere Spieler zu Paring durchführen</string>
-    <string name="activity_paring_warning_equal_names">Schlecht Paring</string>
+    <string name="activity_paring_warning_manual_pairing_error">Schlecht Paring</string>
     <string name="activity_paring_warning_paring_not_finished">Bitte beenden Sie Paarung Spieler</string>
     <string name="activity_paring_warning_bye">Der letzte Spieler hat bereits ein bye</string>
     <string name="warning_player_name_added">Der Spieler wurde bereits hinzugefügt</string>

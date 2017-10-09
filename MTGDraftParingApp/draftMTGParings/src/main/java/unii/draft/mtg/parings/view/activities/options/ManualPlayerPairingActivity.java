@@ -179,7 +179,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
                 mPlayerNameList.get(0).equals(getString(R.string.spinner_empty_player_list))) {
             Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_empty_list), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_equal_names), Toast.LENGTH_LONG).show();
+            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_manual_pairing_error), Toast.LENGTH_LONG).show();
 
         }
     }

@@ -61,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IActivit
     @Override
     public void showSingleChoiceList(@NonNull Context context, @NonNull String title, @NonNull List<String> list, @NonNull String positiveText, @NonNull MaterialDialog.ListCallbackSingleChoice singleListCallback) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
-                .title(title).items(list)
+                .title(title).items(list).itemsDisabledIndices()
                 .itemsCallbackSingleChoice(-1, singleListCallback).backgroundColorRes(R.color.windowBackground)
                 .positiveText(positiveText)
                 .show();
