@@ -14,9 +14,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/table_dropPlayerRecyclerView"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/info_dropPlayerTextView"
+        android:layout_above="@+id/save_dropPlayerButton"
         android:layout_marginBottom="@dimen/standard_margin"
         android:layout_marginTop="@dimen/standard_margin"
         android:scrollbars="vertical" />
@@ -26,7 +27,7 @@
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/table_dropPlayerRecyclerView"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/text_view_margin_settings_small"
         android:text="@string/activity_save_score_board_save" />
