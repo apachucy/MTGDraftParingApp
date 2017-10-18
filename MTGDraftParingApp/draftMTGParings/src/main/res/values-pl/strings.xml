@@ -173,5 +173,7 @@
     <string name="dialog_load_not_ended_draft_body">Twój ostatni draft się nie skończył. Czy chcesz go wczytać?</string>
     <string name="dialog_load_not_ended_draft_title">Wczytać poprzedni draft</string>
     <string name="dialog_start_message_warning_replays">Liczba graczy: %1$d\nLiczba rund: %2$d\nZ tym ustawieniem gracze mogą grać ze sobą więcej niż raz, aby to zmienić przejdź do ustawień!</string>
+    <string name="dialog_cancel_game_body">Czy chcesz skończyć turniej? Może być on wznowiony przed rozpoczęciem następnego turnieju.</string>
+    <string name="dialog_cancel_game_title">Zakończenie turnieju</string>
 
 </resources>

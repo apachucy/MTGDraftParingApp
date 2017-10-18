@@ -218,5 +218,5 @@
 
     <!-- Cancel Game dialog -->
     <string name="dialog_cancel_game_title">Finish tournament</string>
-    <string name="dialog_cancel_game_body">Do you want to finish this tournament?</string>
+    <string name="dialog_cancel_game_body">Do you want to finish this tournament? It can be resumed later.</string>
 </resources>
