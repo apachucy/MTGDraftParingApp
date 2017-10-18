@@ -45,7 +45,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IActivit
         mMaterialDialogInstance = new MaterialDialog.Builder(this)
                 .title(title)
                 .content(body)
-                .positiveText(positiveText).backgroundColorRes(R.color.windowBackground)
+                .positiveText(positiveText)
+                .backgroundColorRes(R.color.windowBackground)
                 .show();
     }
 
@@ -54,14 +55,30 @@ public abstract class BaseActivity extends AppCompatActivity implements IActivit
         mMaterialDialogInstance = new MaterialDialog.Builder(this)
                 .title(title)
                 .content(body)
-                .positiveText(positiveText).onPositive(positiveAction).backgroundColorRes(R.color.windowBackground)
+                .positiveText(positiveText).onPositive(positiveAction)
+                .backgroundColorRes(R.color.windowBackground)
                 .show();
+    }
+
+    @Override
+    public void showInfoDialog(String title, String body, String positiveText, String negativeText, MaterialDialog.SingleButtonCallback positiveAction) {
+        mMaterialDialogInstance = new MaterialDialog.Builder(this)
+                .title(title)
+                .content(body)
+                .negativeText(negativeText)
+                .positiveText(positiveText)
+                .onPositive(positiveAction)
+                .backgroundColorRes(R.color.windowBackground)
+                .show();
+
     }
 
     @Override
     public void showSingleChoiceList(@NonNull Context context, @NonNull String title, @NonNull List<String> list, @NonNull String positiveText, @NonNull MaterialDialog.ListCallbackSingleChoice singleListCallback) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
-                .title(title).items(list).itemsDisabledIndices()
+                .title(title)
+                .items(list)
+                .itemsDisabledIndices()
                 .itemsCallbackSingleChoice(-1, singleListCallback).backgroundColorRes(R.color.windowBackground)
                 .positiveText(positiveText)
                 .show();

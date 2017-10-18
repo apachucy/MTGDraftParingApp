@@ -215,4 +215,8 @@
 
     <!-- Go back dialog -->
     <string name="dialog_warning_go_back_body">Do you really want to edit last round?</string>
+
+    <!-- Cancel Game dialog -->
+    <string name="dialog_cancel_game_title">Finish tournament</string>
+    <string name="dialog_cancel_game_body">Do you want to finish this tournament?</string>
 </resources>

@@ -13,5 +13,8 @@ public interface IActivityHandler {
 
     void showInfoDialog(String title, String body, String positiveText, MaterialDialog.SingleButtonCallback positiveAction);
 
+    void showInfoDialog(String title, String body, String positiveText, String negativeText, MaterialDialog.SingleButtonCallback positiveAction);
+
+
     void showSingleChoiceList(Context context, String title, List<String> list, String positiveText, MaterialDialog.ListCallbackSingleChoice singleListCallback);
 }

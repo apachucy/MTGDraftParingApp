@@ -124,6 +124,11 @@ public class ScoreBoardActivity extends BaseActivity {
                 mOnEditRoundButtonClick);
     }
 
+    @OnClick(R.id.paring_endGame)
+    void onGameEndedButtonClicked() {
+        showInfoDialog(getString(R.string.dialog_cancel_game_title), getString(R.string.dialog_cancel_game_body), getString(R.string.dialog_positive), getString(R.string.dialog_negative), mOnCancelTournamentClick);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -222,7 +227,8 @@ public class ScoreBoardActivity extends BaseActivity {
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(setIntent);
     }
-//onActivityResult is triggered faster than onResume
+
+    //onActivityResult is triggered faster than onResume
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
 
@@ -266,13 +272,25 @@ public class ScoreBoardActivity extends BaseActivity {
     private MaterialDialog.SingleButtonCallback mOnDialogButtonClick = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            dialog.dismiss();
-            if ((mDraftName != null && mSharedPreferenceManager.getSaveDraftResults() == 0) || mSharedPreferenceManager.getSaveDraftResults() == 1) {
-                saveDraft(mDraftName);
-            }
-            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
-            baseAlgorithm.clearCache();
-            finish();
+            closeApplication(dialog);
+        }
+    };
+
+    private void closeApplication(@NonNull MaterialDialog dialog) {
+        dialog.dismiss();
+        if (mSharedPreferenceManager.getSaveDraftResults() == 1) {
+            saveDraft(mDraftName);
+        }
+        BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+        baseAlgorithm.clearCache();
+        finish();
+    }
+
+    @NonNull
+    private MaterialDialog.SingleButtonCallback mOnCancelTournamentClick = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+            closeApplication(materialDialog);
         }
     };
 
