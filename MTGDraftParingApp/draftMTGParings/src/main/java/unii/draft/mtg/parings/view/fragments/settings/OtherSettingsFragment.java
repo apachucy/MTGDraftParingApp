@@ -99,7 +99,7 @@ public class OtherSettingsFragment extends BaseFragment {
     public void onIdeaBoxClicked() {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse(BaseConfig.INTENT_OPEN_EMAIL)); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, BaseConfig.INTENT_EMAIL_RECIPIENT);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{BaseConfig.INTENT_EMAIL_RECIPIENT});
         intent.putExtra(Intent.EXTRA_SUBJECT, BaseConfig.INTENT_EMAIL_SUBJECT);
         if (intent.resolveActivity(getContext().getPackageManager()) != null) {
             startActivity(intent);
