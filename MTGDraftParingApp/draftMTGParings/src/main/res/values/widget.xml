@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Widget res -->
+    <string name="widget_content">Current Round: %1$d\nWinning: %2$s</string>
+    <string name="widget_icon_description">MTG Draft Widget Icon</string>
+    <string name="widget_content_description">MTG Draft who is currently winning description</string>
+    <string name="widget_empty_content">There is no draft started</string>
+
+</resources>

@@ -43,7 +43,6 @@
         <activity
             android:name=".view.activities.settings.HistoryPlayerAchievementsActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".view.activities.options.DropPlayerActivity"
             android:screenOrientation="portrait" />
@@ -55,7 +54,15 @@
             android:name="io.fabric.ApiKey"
             android:value="cf9681571439d7c8941d4f5f36f2603e9681592f" />
 
+        <receiver android:name=".view.widget.DraftWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/draft_widget_provider_info" />
+        </receiver>
     </application>
 
 </manifest>

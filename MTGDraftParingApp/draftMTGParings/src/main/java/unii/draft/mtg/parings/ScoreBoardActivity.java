@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,9 +52,12 @@ import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivit
 import unii.draft.mtg.parings.view.activities.options.SaveScoreBoardActivity;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
+import unii.draft.mtg.parings.view.widget.DraftWidgetProvider;
+import unii.draft.mtg.parings.view.widget.WidgetViewModel;
 
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_DRAFT_SAVED_NAME;
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_LOAD_PREVIOUS_DRAFT;
+import static unii.draft.mtg.parings.view.widget.DraftWidgetProvider.BUNDLE_EXTRA;
 
 
 public class ScoreBoardActivity extends BaseActivity {
@@ -212,6 +217,7 @@ public class ScoreBoardActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        updateWidget();
         super.onDestroy();
     }
 
@@ -423,4 +429,20 @@ public class ScoreBoardActivity extends BaseActivity {
             finish();
         }
     };
+
+    private void updateWidget() {
+        WidgetViewModel widgetViewModel = new WidgetViewModel();
+        widgetViewModel.setCurrentRound(mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
+        widgetViewModel.setWinningPlayer(mPlayerList.get(0).getPlayerName());
+        Intent intent = new Intent(this, DraftWidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+// Use an array and EXTRA_APPWIDGET_IDS instead of AppWidgetManager.EXTRA_APPWIDGET_ID,
+// since it seems the onUpdate() is only fired on that:
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds((new ComponentName(getApplication(), DraftWidgetProvider.class)));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_EXTRA, widgetViewModel);
+        intent.putExtras(bundle);
+        sendBroadcast(intent);
+    }
 }
