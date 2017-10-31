@@ -12,7 +12,7 @@
     <dimen name="player_text_view">50dp</dimen>
     <!-- defaults -->
     <dimen name="standard_margin">15dp</dimen>
-    <dimen name="text_view_margin_settings">20dp</dimen>
+    <dimen name="text_view_margin_settings">10dp</dimen>
     <dimen name="text_view_margin_settings_small">5dp</dimen>
     <dimen name="button_margin_settings">10dp</dimen>
     <dimen name="edit_text_margin_settings">5dp</dimen>
