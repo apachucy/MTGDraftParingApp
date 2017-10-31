@@ -65,12 +65,4 @@
         <item name="android:elevation">@dimen/elevation</item>
     </style>
 
-    <style name="toggleButton" parent="@android:style/Widget.Button.Toggle">
-        <item name="android:background">@drawable/toggle_button_background</item>
-        <item name="android:textColor">@drawable/toggle_button_text_color</item>
-        <item name="android:elevation">@dimen/elevation</item>
-    </style>
-
-
-
 </resources>
