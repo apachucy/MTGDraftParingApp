@@ -10,8 +10,6 @@ import android.widget.RemoteViews;
 
 import unii.draft.mtg.parings.R;
 
-//TODO: prepare better text
-
 /**
  * Implementation of App Widget functionality.
  */
@@ -24,12 +22,12 @@ public class DraftWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (!intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+        if (intent.getAction() != null && !intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
             return;
         }
 
         Bundle bundle = intent.getExtras();
-        if (!bundle.containsKey(BUNDLE_EXTRA)) {
+        if (bundle != null && !bundle.containsKey(BUNDLE_EXTRA)) {
             return;
         }
         updateAppWidget(context, bundle);
