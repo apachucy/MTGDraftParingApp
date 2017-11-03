@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_content">Runde: %1$d\nSiege: %2$s</string>
+    <string name="widget_icon_description">MTG Draft Widget-Symbol</string>
+    <string name="widget_content_description">MTG Draft Widget derzeit gewinnender Spieler</string>
+    <string name="widget_empty_content">Warten auf draft</string>
+</resources>

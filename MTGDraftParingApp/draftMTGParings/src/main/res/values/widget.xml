@@ -5,5 +5,5 @@
     <string name="widget_icon_description">MTG Draft Widget Icon</string>
     <string name="widget_content_description">MTG Draft Widget player that currently is winning</string>
     <string name="widget_empty_content">Waiting on draft</string>
-    <string name="widget_interval">86400000</string>
+    <string name="widget_interval" translatable="false">86400000</string>
 </resources>
