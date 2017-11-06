@@ -27,7 +27,7 @@ public class DraftWidgetProvider extends AppWidgetProvider {
         }
 
         Bundle bundle = intent.getExtras();
-        if (bundle != null && !bundle.containsKey(BUNDLE_EXTRA)) {
+        if (bundle == null || !bundle.containsKey(BUNDLE_EXTRA)) {
             return;
         }
         updateAppWidget(context, bundle);
