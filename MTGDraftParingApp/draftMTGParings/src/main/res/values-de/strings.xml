@@ -176,5 +176,8 @@
     <string name="dialog_start_message_warning_replays">Presse zu starten\nAnzahl der Spieler: %1$d\nAnzahl der Runden: %2$d\nMit dieser Einstellung können die Spieler miteinander spielen mehr als einmal zu gehen, Einstellungen zu ändern</string>
     <string name="dialog_cancel_game_body">Willst du dieses Turnier beenden? Es kann später wieder aufgenommen werden.</string>
     <string name="dialog_cancel_game_title">Ende des Turniers</string>
+    <string name="app_header_path_game">Turnier</string>
+    <string name="app_header_path_configuration">Assistent</string>
+    <string name="app_header_path_history">Historie</string>
 
 </resources>

@@ -175,5 +175,8 @@
     <string name="dialog_start_message_warning_replays">Liczba graczy: %1$d\nLiczba rund: %2$d\nZ tym ustawieniem gracze mogą grać ze sobą więcej niż raz, aby to zmienić przejdź do ustawień!</string>
     <string name="dialog_cancel_game_body">Czy chcesz skończyć turniej? Może być on wznowiony przed rozpoczęciem następnego turnieju.</string>
     <string name="dialog_cancel_game_title">Zakończenie turnieju</string>
+    <string name="app_header_path_game">Turniej</string>
+    <string name="app_header_path_configuration">Asystent</string>
+    <string name="app_header_path_history">Historia</string>
 
 </resources>

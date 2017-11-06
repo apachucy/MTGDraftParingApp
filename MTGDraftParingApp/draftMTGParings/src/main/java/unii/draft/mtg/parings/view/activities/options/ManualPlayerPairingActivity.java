@@ -115,7 +115,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
         mToolBar.setLogo(R.drawable.ic_launcher);
         mToolBar.setLogoDescription(R.string.app_name);
         mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
-        mToolBar.setTitle(R.string.app_name);
+        mToolBar.setTitle(R.string.app_header_path_game);
     }
 
     @Override

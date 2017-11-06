@@ -220,5 +220,8 @@
     <string name="dialog_cancel_game_title">Finish tournament</string>
     <string name="dialog_cancel_game_body">Do you want to finish this tournament? It can be resumed later.</string>
 
-
+    <!--Display information about current view -->
+    <string name="app_header_path_game">Tournament</string>
+    <string name="app_header_path_configuration">Assistant</string>
+    <string name="app_header_path_history">History</string>
 </resources>

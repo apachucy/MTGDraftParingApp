@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
         mToolBar.setLogoDescription(R.string.app_name);
 
         mToolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
-        mToolBar.setTitle(R.string.app_name);
+        mToolBar.setTitle(R.string.app_header_path_configuration);
     }
 
     @Override
