@@ -16,9 +16,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
@@ -27,15 +28,16 @@ import unii.draft.mtg.parings.view.fragments.BaseFragment;
 
 public class DraftSettingsFragment extends BaseFragment {
 
+    private Unbinder mUnbinder;
 
     @Nullable
-    @Bind(R.id.settings_sittingsButton)
+    @BindView(R.id.settings_sittingsButton)
     Button mSittingsOptionsTextView;
     @Nullable
-    @Bind(R.id.settings_createPairingsChooserButton)
+    @BindView(R.id.settings_createPairingsChooserButton)
     Button mCreateParingChooserTextView;
     @Nullable
-    @Bind(R.id.settings_saveResultsAfterDraftButton)
+    @BindView(R.id.settings_saveResultsAfterDraftButton)
     Button mSaveDraftResultButton;
     @Inject
     ISharedPreferences mSharedPreferenceManager;
@@ -44,7 +46,7 @@ public class DraftSettingsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_draft, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder=  ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentView();
         initFragmentData();
@@ -103,7 +105,7 @@ public class DraftSettingsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     private void injectDependencies() {

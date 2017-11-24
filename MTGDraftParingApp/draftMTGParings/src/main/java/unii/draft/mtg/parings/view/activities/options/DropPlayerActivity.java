@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.BaseActivity;
 import unii.draft.mtg.parings.R;
@@ -20,7 +20,7 @@ public class DropPlayerActivity extends BaseActivity {
             .getName() + "TAG_FRAGMENT_DROP_PLAYER";
 
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
     @Override

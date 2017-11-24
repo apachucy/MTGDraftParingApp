@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.database.model.Draft;
@@ -59,19 +59,19 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<HistoryScoreB
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.history_score_board_titleTextView)
+        @BindView(R.id.history_score_board_titleTextView)
         TextView draftTitleTextView;
         @Nullable
-        @Bind(R.id.history_score_board_playerWonTextView)
+        @BindView(R.id.history_score_board_playerWonTextView)
         TextView playerWonTextView;
         @Nullable
-        @Bind(R.id.history_score_board_dateTextView)
+        @BindView(R.id.history_score_board_dateTextView)
         TextView draftDateTextView;
         @Nullable
-        @Bind(R.id.history_score_board_roundsTextView)
+        @BindView(R.id.history_score_board_roundsTextView)
         TextView draftRoundsTextView;
         @Nullable
-        @Bind(R.id.history_score_board_countPlayerTextView)
+        @BindView(R.id.history_score_board_countPlayerTextView)
         TextView draftPlayerCountTextView;
         View itemView;
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.ItemType;
@@ -104,22 +104,22 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.row_playerNameTextView)
+        @BindView(R.id.row_playerNameTextView)
         TextView playerTextView;
         @Nullable
-        @Bind(R.id.row_playerPointTextView)
+        @BindView(R.id.row_playerPointTextView)
         TextView pointTextView;
         @Nullable
-        @Bind(R.id.row_playerOMWTextView)
+        @BindView(R.id.row_playerOMWTextView)
         TextView omwTextView;
         @Nullable
-        @Bind(R.id.row_playerPGWTextView)
+        @BindView(R.id.row_playerPGWTextView)
         TextView pgwTextView;
         @Nullable
-        @Bind(R.id.row_playerOGWTextView)
+        @BindView(R.id.row_playerOGWTextView)
         TextView ogwTextView;
         @Nullable
-        @Bind(R.id.row_playerPMWTextView)
+        @BindView(R.id.row_playerPMWTextView)
         TextView pmwTextView;
 
 

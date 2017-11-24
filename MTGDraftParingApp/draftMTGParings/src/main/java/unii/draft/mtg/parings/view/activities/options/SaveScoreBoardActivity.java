@@ -8,7 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.draft.mtg.parings.BaseActivity;
@@ -19,11 +19,11 @@ import unii.draft.mtg.parings.util.config.BundleConst;
 
 public class SaveScoreBoardActivity extends BaseActivity {
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
     @Nullable
-    @Bind(R.id.save_score_boardTextInputLayout)
+    @BindView(R.id.save_score_boardTextInputLayout)
     TextInputLayout mScoreBoardTextInput;
 
     @OnClick(R.id.save_score_board_acceptButton)

@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.config.BaseConfig;
@@ -24,6 +25,7 @@ import unii.draft.mtg.parings.view.fragments.BaseFragment;
 
 public class OtherSettingsFragment extends BaseFragment {
 
+    private Unbinder mUnbinder;
 
     @Inject
     ISharedPreferences mSharedPreferenceManager;
@@ -33,7 +35,7 @@ public class OtherSettingsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_other, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentData();
         initFragmentView();
@@ -54,7 +56,7 @@ public class OtherSettingsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @OnClick(R.id.settings_resetTourGuideButton)

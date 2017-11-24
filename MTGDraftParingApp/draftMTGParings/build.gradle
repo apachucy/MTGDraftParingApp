@@ -1,19 +1,6 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
-}
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
-
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 26
@@ -26,20 +13,17 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         generatedDensities = []
+
     }
-    apply plugin: 'com.neenbedankt.android-apt'
 
 // This is handled for you by the 2.0+ Gradle Plugin
     aaptOptions {
         additionalParameters "--no-version-vectors"
     }
-
-    buildTypes {
+     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-
         }
     }
 }
@@ -53,7 +37,8 @@ dependencies {
 
     provided "org.projectlombok:lombok:1.16.12"
 
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    apt  'com.jakewharton:butterknife-compiler:8.8.1'
 
     compile('com.github.worker8:tourguide:1.0.14-SNAPSHOT@aar') {
         transitive = true

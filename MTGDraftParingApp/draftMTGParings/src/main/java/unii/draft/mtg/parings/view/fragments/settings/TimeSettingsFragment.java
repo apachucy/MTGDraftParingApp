@@ -11,10 +11,11 @@ import android.widget.CheckBox;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.config.BaseConfig;
@@ -22,29 +23,30 @@ import unii.draft.mtg.parings.view.fragments.BaseFragment;
 
 public class TimeSettingsFragment extends BaseFragment {
 
+    private Unbinder mUnbinder;
 
     @Nullable
-    @Bind(R.id.settings_useCounter)
+    @BindView(R.id.settings_useCounter)
     CheckBox mUseTimeCounterCheckBox;
 
     @Nullable
-    @Bind(R.id.settings_useVibration)
+    @BindView(R.id.settings_useVibration)
     CheckBox mUseVibrationCheckBox;
 
     @Nullable
-    @Bind(R.id.settings_setTimeCounter)
+    @BindView(R.id.settings_setTimeCounter)
     Button mSetTimeCounterTextView;
 
     @Nullable
-    @Bind(R.id.settings_firstVibration)
+    @BindView(R.id.settings_firstVibration)
     Button mSetFirstVibrationTextView;
 
     @Nullable
-    @Bind(R.id.settings_secondVibration)
+    @BindView(R.id.settings_secondVibration)
     Button mSetSecondVibrationTextView;
 
     @Nullable
-    @Bind(R.id.settings_durationVibration)
+    @BindView(R.id.settings_durationVibration)
     Button mDurationVibrationTextView;
 
     @Inject
@@ -55,7 +57,7 @@ public class TimeSettingsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_time, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentView();
         initFragmentData();
@@ -65,7 +67,7 @@ public class TimeSettingsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
 

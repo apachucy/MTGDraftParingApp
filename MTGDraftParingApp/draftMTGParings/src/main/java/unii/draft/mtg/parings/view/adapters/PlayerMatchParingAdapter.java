@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.Game;
@@ -123,19 +123,19 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.row_leftPlayerTextView)
+        @BindView(R.id.row_leftPlayerTextView)
         TextView playerLeftTextView;
         @Nullable
-        @Bind(R.id.row_rightPlayerTextView)
+        @BindView(R.id.row_rightPlayerTextView)
         TextView playerRightTextView;
         @Nullable
-        @Bind(R.id.row_leftPlayerRadioGroup)
+        @BindView(R.id.row_leftPlayerRadioGroup)
         RadioGroup playerLeftRadioGroup;
         @Nullable
-        @Bind(R.id.row_rightPlayerRadioGroup)
+        @BindView(R.id.row_rightPlayerRadioGroup)
         RadioGroup playerRightRadioGroup;
         @Nullable
-        @Bind(R.id.row_drawRadioGroup)
+        @BindView(R.id.row_drawRadioGroup)
         RadioGroup drawRadioGroup;
 
 

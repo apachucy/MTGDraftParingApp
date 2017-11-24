@@ -28,9 +28,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.MainActivity;
 import unii.draft.mtg.parings.ParingDashboardActivity;
@@ -60,24 +61,25 @@ public class GameMenuFragment extends BaseFragment {
     private IActivityHandler mActivityHandler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Unbinder mUnbinder;
 
     private Activity mActivity;
     private boolean isPreviousDraftNotEnded;
     @Nullable
-    @Bind(R.id.init_playerList)
+    @BindView(R.id.init_playerList)
     RecyclerView mPlayerList;
 
     @Nullable
-    @Bind(R.id.init_playerNameTextInput)
+    @BindView(R.id.init_playerNameTextInput)
     TextInputLayout mPlayerNameTextInput;
 
     @Nullable
-    @Bind(R.id.init_roundsTextInput)
+    @BindView(R.id.init_roundsTextInput)
     TextInputLayout mRoundsTextInput;
 
 
     @Nullable
-    @Bind(R.id.init_addPlayerFromHistoryButton)
+    @BindView(R.id.init_addPlayerFromHistoryButton)
     Button mAddPlayerFromHistoryButton;
 
     @Inject
@@ -103,7 +105,7 @@ public class GameMenuFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game_menu, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentData();
         initFragmentView(inflater);
@@ -112,9 +114,9 @@ public class GameMenuFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        ButterKnife.unbind(this);
-        paint = null;
         super.onDestroy();
+        mUnbinder.unbind();
+        paint = null;
     }
 
     @OnClick(R.id.init_addPlayerButton)

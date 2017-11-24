@@ -18,8 +18,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
@@ -37,6 +38,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     private Activity mContext;
     private List<IAdapterItem> mPlayerScoreBoardList;
     private List<Player> mPlayerList;
+    private Unbinder mUnbinder;
 
     @Inject
     Lazy<IDatabaseHelper> mDatabaseHelper;
@@ -45,7 +47,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     IShareData mShareData;
 
     @Nullable
-    @Bind(R.id.settings_menuRecyclerView)
+    @BindView(R.id.settings_menuRecyclerView)
     RecyclerView mRecyclerView;
 
     @SuppressWarnings("deprecation")
@@ -65,7 +67,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycle_view, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
 
         injectDependencies();
         initFragmentData();
@@ -76,7 +78,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @Override

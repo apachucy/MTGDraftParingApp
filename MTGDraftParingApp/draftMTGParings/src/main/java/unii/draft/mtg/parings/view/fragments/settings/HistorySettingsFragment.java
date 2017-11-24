@@ -18,16 +18,18 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import dagger.Lazy;
-import unii.draft.mtg.parings.view.activities.settings.HistoryPlayerAchievementsActivity;
-import unii.draft.mtg.parings.view.activities.settings.HistoryScoreBoardActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.database.model.Draft;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
+import unii.draft.mtg.parings.view.activities.settings.HistoryPlayerAchievementsActivity;
+import unii.draft.mtg.parings.view.activities.settings.HistoryScoreBoardActivity;
 import unii.draft.mtg.parings.view.fragments.BaseFragment;
 
 public class HistorySettingsFragment extends BaseFragment {
 
+    private Unbinder mUnbinder;
 
     @Inject
     Lazy<IDatabaseHelper> mDatabaseHelper;
@@ -36,7 +38,7 @@ public class HistorySettingsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_history, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentData();
         initFragmentView();
@@ -56,7 +58,7 @@ public class HistorySettingsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @OnClick(R.id.settings_removeScoreBoardsButton)

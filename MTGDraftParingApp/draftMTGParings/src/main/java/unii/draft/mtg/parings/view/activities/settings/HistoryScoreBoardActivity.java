@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.BaseActivity;
 import unii.draft.mtg.parings.R;
@@ -25,7 +25,7 @@ public class HistoryScoreBoardActivity extends BaseActivity implements IDisplayD
     private static String sCurrentFragmentTag;
 
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
     @Override

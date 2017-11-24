@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.PlayerAchievements;
@@ -59,13 +59,13 @@ public class HistoryPlayerAdapter extends RecyclerView.Adapter<HistoryPlayerAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.history_score_board_playerTextView)
+        @BindView(R.id.history_score_board_playerTextView)
         TextView mPlayerTextView;
         @Nullable
-        @Bind(R.id.history_score_board_playerInfoTextView)
+        @BindView(R.id.history_score_board_playerInfoTextView)
         TextView mPlayerInfoTextView;
         @Nullable
-        @Bind(R.id.history_score_board_playerDraftWinTextView)
+        @BindView(R.id.history_score_board_playerDraftWinTextView)
         TextView mPlayerDraftWinTextView;
         View itemView;
 

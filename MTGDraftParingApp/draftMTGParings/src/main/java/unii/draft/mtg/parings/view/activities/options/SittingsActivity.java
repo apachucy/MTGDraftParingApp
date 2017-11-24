@@ -17,7 +17,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tourguide.tourguide.Overlay;
@@ -50,11 +50,11 @@ public class SittingsActivity extends BaseActivity {
     ISharedPreferences mSharedPreferenceManager;
 
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
     @Nullable
-    @Bind(R.id.floating_action_button_next)
+    @BindView(R.id.floating_action_button_next)
     FloatingActionButton mFloatingActionButton;
 
     @Override

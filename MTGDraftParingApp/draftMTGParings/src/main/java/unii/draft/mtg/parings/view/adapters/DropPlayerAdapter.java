@@ -12,7 +12,7 @@ import android.widget.CompoundButton;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.Player;
@@ -70,7 +70,7 @@ public class DropPlayerAdapter extends RecyclerView.Adapter<DropPlayerAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.row_drop_playerCheckBox)
+        @BindView(R.id.row_drop_playerCheckBox)
         CheckBox playerNameCheckBox;
 
         public ViewHolder(@NonNull View itemView) {

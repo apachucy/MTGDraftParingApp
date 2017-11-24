@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.PlayerDraft;
@@ -50,10 +50,10 @@ public class DetailHistoryPlayerAdapter extends RecyclerView.Adapter<DetailHisto
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.history_detail_player_draft_name)
+        @BindView(R.id.history_detail_player_draft_name)
         TextView mDraftNameTextView;
         @Nullable
-        @Bind(R.id.history_detail_player_draft_position)
+        @BindView(R.id.history_detail_player_draft_position)
         TextView mPlayerDraftPositionTextView;
 
         public ViewHolder(@NonNull View itemView) {

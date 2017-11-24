@@ -14,8 +14,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
@@ -26,21 +27,21 @@ import unii.draft.mtg.parings.view.adapters.SingleTextViewAdapter;
 public class SittingsFragment extends BaseFragment {
 
     private List<String> mPlayerNameList;
-
+    private Unbinder mUnbinder;
     @Inject
     AlgorithmChooser mAlgorithmChooser;
     @Inject
     ISittingGenerator mSittingsGenerator;
 
     @Nullable
-    @Bind(R.id.table_sittingsRecyclerView)
+    @BindView(R.id.table_sittingsRecyclerView)
     RecyclerView mRecyclerView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sittings, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentData();
         initFragmentView();
@@ -53,7 +54,7 @@ public class SittingsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     private void injectDependencies() {

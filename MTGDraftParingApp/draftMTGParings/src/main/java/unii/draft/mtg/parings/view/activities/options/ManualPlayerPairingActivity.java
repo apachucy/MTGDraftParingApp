@@ -19,7 +19,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.draft.mtg.parings.BaseActivity;
@@ -46,20 +46,20 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     private SingleChoiceListCallback mSelectPlayer2Action;
 
     @Nullable
-    @Bind(R.id.matchPlayer_firstPlayerButton)
+    @BindView(R.id.matchPlayer_firstPlayerButton)
     Button mPlayer1TextView;
     @Nullable
-    @Bind(R.id.matchPlayer_secondPlayerButton)
+    @BindView(R.id.matchPlayer_secondPlayerButton)
     Button mPlayer2TextView;
     @Nullable
-    @Bind(R.id.matchPlayer_PlayersList)
+    @BindView(R.id.matchPlayer_PlayersList)
     RecyclerView mRecyclerMatchPlayerView;
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
     @Nullable
-    @Bind(R.id.floating_action_button_next)
+    @BindView(R.id.floating_action_button_next)
     FloatingActionButton mFloatingActionButton;
 
     @Inject

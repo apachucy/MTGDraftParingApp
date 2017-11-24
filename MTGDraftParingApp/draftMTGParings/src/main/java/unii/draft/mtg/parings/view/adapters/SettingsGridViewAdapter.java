@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.SettingsMenu;
@@ -56,10 +56,10 @@ public class SettingsGridViewAdapter extends RecyclerView.Adapter<SettingsGridVi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.row_settings_chooser_text)
+        @BindView(R.id.row_settings_chooser_text)
         TextView mTextMenuTextView;
         @Nullable
-        @Bind(R.id.row_settings_chooser_image)
+        @BindView(R.id.row_settings_chooser_image)
         ImageView mImageMenuImageView;
 
         public ViewHolder(@NonNull final View view) {

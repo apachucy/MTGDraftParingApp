@@ -13,9 +13,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.pojo.Player;
@@ -28,9 +29,9 @@ import static android.app.Activity.RESULT_OK;
 public class DropPlayerFragment extends BaseFragment {
 
     private List<Player> mNotDroppedPlayerList;
-
+    private Unbinder mUnbinder;
     @Nullable
-    @Bind(R.id.table_dropPlayerRecyclerView)
+    @BindView(R.id.table_dropPlayerRecyclerView)
     RecyclerView mRecyclerView;
 
     @Inject
@@ -40,7 +41,7 @@ public class DropPlayerFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drop_player, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentData();
         initFragmentView();
@@ -52,7 +53,7 @@ public class DropPlayerFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @OnClick(R.id.save_dropPlayerButton)

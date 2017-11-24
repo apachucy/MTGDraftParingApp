@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.Lazy;
 import tourguide.tourguide.Overlay;
@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements IPlayerList {
     private ArrayList<String> mPlayerNameList;
 
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
     @Inject

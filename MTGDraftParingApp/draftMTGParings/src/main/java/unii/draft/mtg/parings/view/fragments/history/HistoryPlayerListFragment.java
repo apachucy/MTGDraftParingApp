@@ -18,8 +18,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.share.draft.list.ISharePlayerHistoryList;
@@ -40,8 +41,10 @@ public class HistoryPlayerListFragment extends BaseFragment {
     private Activity mContext;
     private List<PlayerAchievements> mPlayerList;
     private ISharePlayerHistoryList mDraftListForShare;
+    private Unbinder mUnbinder;
+
     @Nullable
-    @Bind(R.id.settings_menuRecyclerView)
+    @BindView(R.id.settings_menuRecyclerView)
     RecyclerView mRecyclerView;
 
     @Inject
@@ -70,7 +73,7 @@ public class HistoryPlayerListFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycle_view, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentData();
         initFragmentView();
@@ -81,7 +84,7 @@ public class HistoryPlayerListFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @Override

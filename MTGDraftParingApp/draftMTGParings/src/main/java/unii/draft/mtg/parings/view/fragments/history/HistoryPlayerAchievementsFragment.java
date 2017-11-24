@@ -18,8 +18,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.share.draft.detail.player.ISharePlayerAchievements;
@@ -44,6 +45,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Unbinder mUnbinder;
 
     private List<String> mPlayerOverallList;
     private List<PlayerDraft> mPlayerDraftPlayedList;
@@ -52,13 +54,13 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     private ISharePlayerAchievements mSharePlayerAchievements;
 
     @Nullable
-    @Bind(R.id.history_player_detail_playerAchievementsList)
+    @BindView(R.id.history_player_detail_playerAchievementsList)
     RecyclerView mPlayerAchievementRecyclerView;
     @Nullable
-    @Bind(R.id.history_player_detail_playerNameTextView)
+    @BindView(R.id.history_player_detail_playerNameTextView)
     TextView mHistoryPlayerNameTextView;
     @Nullable
-    @Bind(R.id.history_player_detail_playerOverallPositionsList)
+    @BindView(R.id.history_player_detail_playerOverallPositionsList)
     RecyclerView mPlayerPositionOverallRecyclerView;
 
     @Inject
@@ -74,7 +76,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history_player_detail, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder=  ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentData();
         initFragmentView();
@@ -85,7 +87,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @Override

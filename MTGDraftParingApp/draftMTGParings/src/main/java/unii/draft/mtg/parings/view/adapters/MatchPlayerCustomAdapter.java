@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.pojo.Game;
@@ -57,10 +57,10 @@ public class MatchPlayerCustomAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.row_match_player_player1TextView)
+        @BindView(R.id.row_match_player_player1TextView)
         TextView player1TextView;
         @Nullable
-        @Bind(R.id.row_match_player_player2TextView)
+        @BindView(R.id.row_match_player_player2TextView)
         TextView player2TextView;
 
         public ViewHolder(@NonNull View itemView) {

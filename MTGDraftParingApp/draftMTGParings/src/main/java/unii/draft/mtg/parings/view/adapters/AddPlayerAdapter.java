@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import unii.draft.mtg.parings.R;
 
@@ -43,7 +43,7 @@ public class AddPlayerAdapter extends RecyclerView.Adapter<AddPlayerAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.row_player)
+        @BindView(R.id.row_player)
         TextView mPlayerName;
 
         public ViewHolder(@NonNull View itemView) {

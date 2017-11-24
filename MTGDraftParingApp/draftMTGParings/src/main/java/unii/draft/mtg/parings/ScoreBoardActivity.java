@@ -27,7 +27,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.Lazy;
@@ -76,17 +76,17 @@ public class ScoreBoardActivity extends BaseActivity {
     private String mDraftName;
 
     @Nullable
-    @Bind(R.id.player_position_roundTextView)
+    @BindView(R.id.player_position_roundTextView)
     TextView mRoundTextView;
     @Nullable
-    @Bind(R.id.player_position_winnerTextView)
+    @BindView(R.id.player_position_winnerTextView)
     TextView mWinnerTextView;
 
     @Nullable
-    @Bind(R.id.player_position_playerListView)
+    @BindView(R.id.player_position_playerListView)
     RecyclerView mRecyclerView;
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
 

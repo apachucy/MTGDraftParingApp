@@ -22,7 +22,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tourguide.tourguide.Overlay;
@@ -68,16 +68,16 @@ public class ParingDashboardActivity extends BaseActivity {
     private long mTimerTimeTillEnd = 0;
 
     @Nullable
-    @Bind(R.id.paring_counterTextView)
+    @BindView(R.id.paring_counterTextView)
     TextView mCounterTextView;
     @Nullable
-    @Bind(R.id.paring_roundTextView)
+    @BindView(R.id.paring_roundTextView)
     TextView mRoundTextView;
     @Nullable
-    @Bind(R.id.paring_paringListView)
+    @BindView(R.id.paring_paringListView)
     RecyclerView mRecyclerView;
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
     @Inject
