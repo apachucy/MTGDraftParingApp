@@ -111,7 +111,7 @@ public class ParingDashboardLogic {
         for (Player player : playerList) {
             // player has bye
             if (paringAlgorithm.getPlayerWithBye() != null
-                    && player.equals(paringAlgorithm.getPlayerWithBye())) {
+                    && player.getPlayerName().equals(paringAlgorithm.getPlayerWithBye().getPlayerName())) {
                 // set maximum
                 // points
                 // for
