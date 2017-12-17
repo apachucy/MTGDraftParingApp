@@ -28,6 +28,7 @@ import unii.draft.mtg.parings.logic.pojo.ItemHeader;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
+import unii.draft.mtg.parings.util.helper.PlayerNameWithPositionGenerator;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 import unii.draft.mtg.parings.view.fragments.BaseFragment;
@@ -116,7 +117,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         long draftKey = bundle.getLong(BundleConst.BUNDLE_KEY_HISTORY_DRAFT_DETAIL);
         mPlayerList = new ArrayList<>();
 
-        mPlayerList.addAll(mDatabaseHelper.get().getAllPlayersInDraft(draftKey));
+        mPlayerList.addAll(PlayerNameWithPositionGenerator.getListWithNames(mDatabaseHelper.get().getAllPlayersInDraft(draftKey)));
         mPlayerScoreBoardList = new ArrayList<>();
         mPlayerScoreBoardList.add(new ItemHeader());
         mPlayerScoreBoardList.addAll(mPlayerList);

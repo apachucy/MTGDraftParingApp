@@ -6,7 +6,7 @@ package unii.draft.mtg.parings.logic.pojo;
  *
  * @author Arkadiusz Pachucy
  */
-public class Game  {
+public class Game {
 
     /**
      * Game status between two players
@@ -21,23 +21,29 @@ public class Game  {
      * PlayerB
      */
     private String mPlayerBName;
-
     /**
      * PlayerA game points
      */
     private int mPlayerAPoints;
-
     /**
      * PlayerB game points
      */
     private int mPlayerBPoints;
-
-
     private int mGamesPlayed;
     /**
      * In case of a draw 0/1/2
      */
     private int mMatchDraws;
+
+    public Game(Game game) {
+        this.mWinner = game.getWinner();
+        this.mGamesPlayed = game.getGamesPlayed();
+        this.mPlayerAName = game.getPlayerNameA();
+        this.mPlayerBName = game.getPlayerNameB();
+        this.mPlayerAPoints = game.getPlayerAPoints();
+        this.mPlayerBPoints = game.getPlayerBPoints();
+        this.mMatchDraws = game.getDraws();
+    }
 
     public Game(String playerA, String playerB) {
         mPlayerAName = playerA;
@@ -85,7 +91,6 @@ public class Game  {
     }
 
 
-
     public int getDraws() {
         return mMatchDraws;
     }
@@ -113,4 +118,5 @@ public class Game  {
     public void setGamesPlayed(int mGamesPlayed) {
         this.mGamesPlayed = mGamesPlayed;
     }
+
 }

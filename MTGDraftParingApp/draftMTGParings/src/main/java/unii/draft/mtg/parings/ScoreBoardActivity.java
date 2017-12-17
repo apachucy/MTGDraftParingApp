@@ -46,6 +46,7 @@ import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
+import unii.draft.mtg.parings.util.helper.PlayerNameWithPositionGenerator;
 import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
 import unii.draft.mtg.parings.view.activities.options.DropPlayerActivity;
 import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivity;
@@ -166,7 +167,9 @@ public class ScoreBoardActivity extends BaseActivity {
             mPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
             mPlayerScoreBoardList.clear();
             mPlayerScoreBoardList.add(new ItemHeader());
-            mPlayerScoreBoardList.addAll(mPlayerList);
+
+
+            mPlayerScoreBoardList.addAll(PlayerNameWithPositionGenerator.getListWithNames(mPlayerList));
 
             mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
 

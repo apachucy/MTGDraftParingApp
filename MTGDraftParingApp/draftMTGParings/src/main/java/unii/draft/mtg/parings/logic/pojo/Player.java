@@ -9,7 +9,7 @@ import unii.draft.mtg.parings.database.model.PlayerDraftJoinTable;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 
-public class Player  implements IAdapterItem {
+public class Player implements IAdapterItem {
 
     private List<Game> mPlayedGame;
 
@@ -54,7 +54,25 @@ public class Player  implements IAdapterItem {
      */
     private boolean mDropped;
 
-    public Player(@NonNull unii.draft.mtg.parings.database.model.Player player, @NonNull PlayerDraftJoinTable playerDraftJoinTable){
+    public Player(Player player) {
+        this.mPlayedGame = new ArrayList<>();
+
+        this.mPlayerName = player.getPlayerName();
+        this.mGamePoints = player.getGamePoints();
+        this.mMatchPoints = player.getMatchPoints();
+        this.hasBye = player.hasBye();
+        this.mPlayerMatchOverallWin = player.getPlayerMatchOverallWin();
+        this.mOponentsMatchOveralWins = player.getOponentsMatchOveralWins();
+        this.mPlayerGamesOverallWin = player.getPlayerGamesOverallWin();
+        this.mOponentsGamesOverallWin = player.getOponentsGamesOverallWin();
+        this.mDropped = player.isDropped();
+
+        for (Game game : player.getPlayedGame()) {
+            this.mPlayedGame.add(new Game(game));
+        }
+    }
+
+    public Player(@NonNull unii.draft.mtg.parings.database.model.Player player, @NonNull PlayerDraftJoinTable playerDraftJoinTable) {
         mPlayerName = player.getPlayerName();
 
         mPlayerMatchOverallWin = playerDraftJoinTable.getPlayerMatchOverallWin();
