@@ -52,4 +52,7 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="widget_margin">8dp</dimen>
     <dimen name="widget_min_height">40dp</dimen>
     <dimen name="widget_min_width">120dp</dimen>
+
+    <item name="weight_statistic" format="float" type="dimen">0.14</item>
+    <item name="weight_name" format="float" type="dimen">0.30</item>
 </resources>

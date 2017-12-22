@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,16 +9,19 @@
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"
-        android:ellipsize="end" />
+        android:layout_weight="@dimen/weight_name"
+        android:ellipsize="end"
+        android:singleLine="true"
+        tools:text="1.Adrian" />
 
     <TextView
         android:id="@+id/row_playerPointTextView"
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
-        android:gravity="center" />
+        android:layout_weight="@dimen/weight_statistic"
+        android:gravity="center"
+        tools:text="5" />
 
 
     <TextView
@@ -25,32 +29,34 @@
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
-        android:gravity="center" />
+        android:layout_weight="@dimen/weight_statistic"
+        android:gravity="center"
+        tools:text="0.33" />
 
     <TextView
         android:id="@+id/row_playerOMWTextView"
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
-        android:gravity="center" />
+        android:layout_weight="@dimen/weight_statistic"
+        android:gravity="center"
+        tools:text="0.33" />
 
     <TextView
         android:id="@+id/row_playerPGWTextView"
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
-        android:gravity="center" />
+        android:layout_weight="@dimen/weight_statistic"
+        android:gravity="center"
+        tools:text="0.33" />
 
     <TextView
         android:id="@+id/row_playerOGWTextView"
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
-        android:gravity="center" />
-
-
+        android:layout_weight="@dimen/weight_statistic"
+        android:gravity="center"
+        tools:text="0.33" />
 </LinearLayout>

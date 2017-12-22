@@ -8,7 +8,7 @@
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"
+        android:layout_weight="@dimen/weight_name"
         android:text="@string/header_player_position_name"
         android:textStyle="bold" />
 
@@ -17,7 +17,7 @@
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
+        android:layout_weight="@dimen/weight_statistic"
         android:gravity="center"
         android:text="@string/header_player_position_points"
         android:textStyle="bold" />
@@ -27,7 +27,7 @@
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
+        android:layout_weight="@dimen/weight_statistic"
         android:gravity="center"
         android:text="@string/header_player_position_pmw" />
 
@@ -37,7 +37,7 @@
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
+        android:layout_weight="@dimen/weight_statistic"
         android:gravity="center"
         android:text="@string/header_player_position_omw" />
 
@@ -47,7 +47,7 @@
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
+        android:layout_weight="@dimen/weight_statistic"
         android:gravity="center"
         android:text="@string/header_player_position_pgw" />
 
@@ -56,7 +56,7 @@
         style="@style/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
+        android:layout_weight="@dimen/weight_statistic"
         android:gravity="center"
         android:text="@string/header_player_position_ogw" />
 
