@@ -67,6 +67,9 @@ public class Player implements IAdapterItem {
         this.mOponentsGamesOverallWin = player.getOponentsGamesOverallWin();
         this.mDropped = player.isDropped();
 
+        if (player.getPlayedGame() == null) {
+            return;
+        }
         for (Game game : player.getPlayedGame()) {
             this.mPlayedGame.add(new Game(game));
         }

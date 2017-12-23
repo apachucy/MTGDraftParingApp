@@ -41,12 +41,12 @@ public class PlayersComparator implements Comparator<Player> {
         } else if (lhs.getMatchPoints() < rhs.getMatchPoints()) {
             return RIGHT;
         } else {
-           // int byeCompare = compareBye(lhs.hasBye(), rhs.hasBye());
+            // int byeCompare = compareBye(lhs.hasBye(), rhs.hasBye());
             //if (byeCompare == EQUAL) {
-                return compareOMW(lhs, rhs);
-           // } else {
-           //     return byeCompare;
-          //  }
+            return compareOMW(lhs, rhs);
+            // } else {
+            //     return byeCompare;
+            //  }
         }
     }
 
@@ -71,16 +71,10 @@ public class PlayersComparator implements Comparator<Player> {
 
     private int compareGamePoints(@NonNull Player lhs, @NonNull Player rhs) {
         // small points divided by max game played per matcher and rounds played
-        float lhsSmallPoints = lhs.getPlayerGamesOverallWin();// ((float)
-        // lhs.getGamePoints())
-        // /
-        // (MAX_MATCHES*
-        // lhs.getPlayedGame().size());
-        float rhsSmallPoints = rhs.getPlayerGamesOverallWin();// ((float)
-        // rhs.getGamePoints())
-        // /
-        // (MAX_MATCHES*
-        // rhs.getPlayedGame().size());
+        float lhsSmallPoints = lhs.getPlayerGamesOverallWin();
+
+        float rhsSmallPoints = rhs.getPlayerGamesOverallWin();
+
 
         if (lhsSmallPoints > rhsSmallPoints) {
             return LEFT;
@@ -107,6 +101,9 @@ public class PlayersComparator implements Comparator<Player> {
 
     private int playedBefore(@NonNull Player playerA, @NonNull Player playerB) {
         List<Game> games = playerA.getPlayedGame();
+        if (games == null) {
+            return EQUAL;
+        }
         Game game = null;
         for (Game g : games) {
             if (playerB.getPlayerName().equals(g.getPlayerNameA())
