@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.logic.dagger;
 
 import dagger.Subcomponent;
+import unii.draft.mtg.parings.view.activities.options.AddPlayerActivity;
 import unii.draft.mtg.parings.view.activities.options.DropPlayerActivity;
 import unii.draft.mtg.parings.view.activities.settings.HistoryPlayerAchievementsActivity;
 import unii.draft.mtg.parings.view.activities.settings.HistoryScoreBoardActivity;
@@ -17,6 +18,7 @@ import unii.draft.mtg.parings.view.fragments.history.HistoryPlayerAchievementsFr
 import unii.draft.mtg.parings.view.fragments.history.HistoryPlayerListFragment;
 import unii.draft.mtg.parings.view.fragments.history.HistoryScoreBoardDetailFragment;
 import unii.draft.mtg.parings.view.fragments.history.HistoryScoreBoardListFragment;
+import unii.draft.mtg.parings.view.fragments.settings.AddPlayerFragment;
 import unii.draft.mtg.parings.view.fragments.settings.SettingsMenuFragment;
 import unii.draft.mtg.parings.view.fragments.SittingsFragment;
 import unii.draft.mtg.parings.view.fragments.settings.DraftSettingsFragment;
@@ -31,6 +33,7 @@ public interface ActivityComponent {
 
     void inject(SittingsActivity sittingsActivity);
 
+    void inject(AddPlayerActivity addPlayerActivity);
 
     void inject(HistoryPlayerAchievementsActivity historyPlayerAchievementsActivity);
 
@@ -71,5 +74,7 @@ public interface ActivityComponent {
     void inject(HistoryPlayerListFragment historyPlayerListFragment);
 
     void inject(HistoryPlayerAchievementsFragment historyPlayerAchievementsFragment);
+
+    void inject(AddPlayerFragment addPlayerFragment);
 }
 

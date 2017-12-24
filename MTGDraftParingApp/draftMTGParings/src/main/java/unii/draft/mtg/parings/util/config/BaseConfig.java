@@ -17,7 +17,7 @@ public final class BaseConfig {
     @Deprecated
     public static final boolean DEFAULT_MANUAL_PARINGS = false;
     public static final int DEFAULT_TYPE_PAIRINGS = PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS;
-    public static final int DEFAULT_SAVE_DRAFT_RESULT =1;
+    public static final int DEFAULT_SAVE_DRAFT_RESULT = 1;
 
     // time
     public static final boolean DEFAULT_USE_VIBRATION = true;
@@ -49,7 +49,7 @@ public final class BaseConfig {
     public static final String DATABASE_NAME = "DRAFT_SCOREBOARD";
     //Activity result
     public static final int DRAFT_NAME_SET = 1;
-    public static final int DRAFT_PLAYERS_DROPPED = 2;
+    public static final int DRAFT_PLAYERS_MODIFIED = 2;
     //pattern for current date
     public static final String DATE_PATTERN = "yyyy-MM-dd";
     public static final String INTENT_PACKAGE_LIFE_COUNTER_APP = "intent.open.lifecounter";

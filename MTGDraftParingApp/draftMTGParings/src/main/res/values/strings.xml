@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-   <string name="app_name" translatable="false">MTG Draft Calculator</string>
+    <string name="app_name" translatable="false">MTG Draft Calculator</string>
     <string name="action_settings">Settings</string>
     <string name="action_info">Info</string>
+    <string name="action_add_player">Add Player</string>
     <string name="hint_player_name">Player name</string>
     <string name="add_item">Add</string>
     <string name="hint_rounds">Rounds</string>
@@ -118,6 +119,7 @@
     <string name="help_information_scoreboard">What means: PMG, PGW&#8230;</string>
     <string name="warning_save_dashboard">You can chose name for tournament when it will end</string>
     <string name="warning_drop_player">You cannot remove players after draft ended</string>
+    <string name="warning_add_player">Players cannot be added in Tournament Mode</string>
     <string name="settings_clean_history">Clean all history</string>
     <string name="settings_other">Other settings</string>
     <string name="settings_display_scoreboards">Display scoreboards</string>
@@ -224,4 +226,8 @@
     <string name="app_header_path_game">Tournament</string>
     <string name="app_header_path_configuration">Assistant</string>
     <string name="app_header_path_history">History</string>
+
+    <!-- Add player-->
+    <string name="add_player_dialog_title">How it works?</string>
+    <string name="add_player_dialog_body">This feature has two cases:\nOne player is late for first round and no one get bye for this round. So he will receive bye\nWhen you will add more players for draft or player will start game after first round there will be no points for new players</string>
 </resources>

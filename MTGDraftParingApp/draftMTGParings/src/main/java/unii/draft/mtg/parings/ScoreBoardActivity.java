@@ -48,6 +48,7 @@ import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 import unii.draft.mtg.parings.util.helper.PlayerNameWithPositionGenerator;
 import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
+import unii.draft.mtg.parings.view.activities.options.AddPlayerActivity;
 import unii.draft.mtg.parings.view.activities.options.DropPlayerActivity;
 import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivity;
 import unii.draft.mtg.parings.view.activities.options.SaveScoreBoardActivity;
@@ -213,7 +214,7 @@ public class ScoreBoardActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.dashboard, menu);
         setListGuideActions(
                 (ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView(),
-                (ImageView) menu.getItem(2).getActionView(), (ImageView) menu.getItem(3).getActionView());
+                (ImageView) menu.getItem(2).getActionView());
         return true;
     }
 
@@ -226,7 +227,30 @@ public class ScoreBoardActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+
+            case R.id.action_save:
+                if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
+                    Intent intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
+                    startActivityForResult(intent, BaseConfig.DRAFT_NAME_SET);
+                } else {
+                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), Toast.LENGTH_LONG).show();
+                }
+                return true;
+            case R.id.action_add_player:
+                if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
+                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
+                } else if (mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
+                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_add_player), Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(ScoreBoardActivity.this, AddPlayerActivity.class);
+                    startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_MODIFIED);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     @Override
@@ -246,7 +270,7 @@ public class ScoreBoardActivity extends BaseActivity {
                 if (data.getExtras().containsKey(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME)) {
                     mDraftName = data.getExtras().getString(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME);
                 }
-            } else if (requestCode == BaseConfig.DRAFT_PLAYERS_DROPPED) {
+            } else if (requestCode == BaseConfig.DRAFT_PLAYERS_MODIFIED) {
                 if (mAdapter != null) {
                     mAdapter.notifyDataSetChanged();
                 }
@@ -254,6 +278,7 @@ public class ScoreBoardActivity extends BaseActivity {
             }
         }
     }
+
 
     @Override
     protected void injectDependencies(@NonNull ActivityComponent activityComponent) {
@@ -330,18 +355,15 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     private void setListGuideActions(
-            @NonNull ImageView dropPlayerButton, @NonNull ImageView saveDraft, @NonNull ImageView shareContent, @NonNull ImageView
-            information) {
+            @NonNull ImageView dropPlayerButton, @NonNull ImageView information, @NonNull ImageView shareContent) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 
         dropPlayerButton.setPadding(padding, padding, padding, padding);
-        saveDraft.setPadding(padding, padding, padding, padding);
         shareContent.setPadding(padding, padding, padding, padding);
         information.setPadding(padding, padding, padding, padding);
         // set an image
         dropPlayerButton.setImageDrawable(getSingleDrawable(R.drawable.ic_person_minus));
-        saveDraft.setImageDrawable(getSingleDrawable(R.drawable.ic_save));
         shareContent.setImageDrawable(getSingleDrawable(R.drawable.ic_share));
         information.setImageDrawable(getSingleDrawable(R.drawable.ic_info));
 
@@ -349,7 +371,6 @@ public class ScoreBoardActivity extends BaseActivity {
             Sequence sequence = new Sequence.SequenceBuilder().
                     add(
                             bindTourGuideButton(getString(R.string.help_drop_player), dropPlayerButton),
-                            bindTourGuideButton(getString(R.string.help_save_dashboard), saveDraft),
                             bindTourGuideButton(getString(R.string.help_share_content), shareContent),
                             bindTourGuideButton(getString(R.string.help_information_scoreboard), information)
                     ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
@@ -370,18 +391,7 @@ public class ScoreBoardActivity extends BaseActivity {
                     Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
                 } else {
                     Intent intent = new Intent(ScoreBoardActivity.this, DropPlayerActivity.class);
-                    startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_DROPPED);
-                }
-            }
-        });
-        saveDraft.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
-                    Intent intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
-                    startActivityForResult(intent, BaseConfig.DRAFT_NAME_SET);
-                } else {
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), Toast.LENGTH_LONG).show();
+                    startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_MODIFIED);
                 }
             }
         });
