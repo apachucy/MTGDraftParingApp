@@ -268,10 +268,10 @@ public class ParingDashboardActivity extends BaseActivity {
     @Override
     protected void initToolBar() {
         setSupportActionBar(mToolBar);
-        mToolBar.setLogo(R.drawable.ic_launcher);
-        mToolBar.setLogoDescription(R.string.app_name);
+        getSupportActionBar().setLogo(R.drawable.ic_launcher);
+        mToolBar.setLogoDescription(R.string.app_header_path_game);
         mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
-        mToolBar.setTitle(R.string.app_header_path_history);
+        getSupportActionBar().setTitle(R.string.app_header_path_game);
     }
 
 

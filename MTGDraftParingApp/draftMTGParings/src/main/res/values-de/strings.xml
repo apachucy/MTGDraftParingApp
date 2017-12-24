@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MTG Draft Calculator</string>
     <string name="action_settings">Konfigurationen</string>
     <string name="action_info">Informationen</string>
     <string name="hint_player_name">Spielername</string>

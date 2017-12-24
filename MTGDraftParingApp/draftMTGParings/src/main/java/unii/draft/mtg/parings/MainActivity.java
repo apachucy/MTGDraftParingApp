@@ -93,11 +93,11 @@ public class MainActivity extends BaseActivity implements IPlayerList {
     @Override
     protected void initToolBar() {
         setSupportActionBar(mToolBar);
-        mToolBar.setLogo(R.drawable.ic_launcher);
         mToolBar.setLogoDescription(R.string.app_name);
-
         mToolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
-        mToolBar.setTitle(R.string.app_header_path_configuration);
+        getSupportActionBar().setTitle(R.string.app_header_path_configuration);
+        getSupportActionBar().setLogo(R.drawable.ic_launcher);
+
     }
 
     @Override

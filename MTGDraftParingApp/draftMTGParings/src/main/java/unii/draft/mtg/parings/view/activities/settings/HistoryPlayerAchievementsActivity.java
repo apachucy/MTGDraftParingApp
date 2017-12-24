@@ -48,10 +48,10 @@ public class HistoryPlayerAchievementsActivity extends BaseActivity implements I
     @Override
     protected void initToolBar() {
         setSupportActionBar(mToolBar);
-        mToolBar.setLogo(R.drawable.ic_launcher);
-        mToolBar.setLogoDescription(R.string.app_name);
+        getSupportActionBar().setLogo(R.drawable.ic_launcher);
+        mToolBar.setLogoDescription(R.string.app_header_path_history);
         mToolBar.setTitleTextColor(getSingleColor(R.color.white));
-        mToolBar.setTitle(R.string.app_header_path_history);
+        getSupportActionBar().setTitle(R.string.app_header_path_history);
     }
 
     @Override
