@@ -224,7 +224,7 @@ public class ScoreBoardActivity extends BaseActivity {
         MenuItem menuAddPlayer = menu.getItem(3);
         MenuItem menuSave = menu.getItem(4);
         dropPlayer.setVisibility(isNotLastRound() ? View.VISIBLE : View.INVISIBLE);
-        menuAddPlayer.setVisible(isNotLastRound());
+        menuAddPlayer.setVisible(isNotLastRound() && mSharedPreferenceManager.getPairingType() != PairingMode.PAIRING_TOURNAMENT);
         menuSave.setVisible(!isNotLastRound());
     }
 
@@ -243,7 +243,7 @@ public class ScoreBoardActivity extends BaseActivity {
         switch (item.getItemId()) {
 
             case R.id.action_save:
-                if (isNotLastRound()) {
+                if (!isNotLastRound()) {
                     Intent intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
                     startActivityForResult(intent, BaseConfig.DRAFT_NAME_SET);
                 } else {
@@ -251,7 +251,7 @@ public class ScoreBoardActivity extends BaseActivity {
                 }
                 return true;
             case R.id.action_add_player:
-                if (isNotLastRound()) {
+                if (!isNotLastRound()) {
                     Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
                 } else if (mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
                     Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_add_player), Toast.LENGTH_LONG).show();

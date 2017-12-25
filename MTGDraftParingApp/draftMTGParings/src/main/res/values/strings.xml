@@ -118,7 +118,7 @@
     <string name="help_share_content">After the game you can share scoreboard</string>
     <string name="help_information_scoreboard">What means: PMG, PGW&#8230;</string>
     <string name="warning_save_dashboard">You can chose name for tournament when it will end</string>
-    <string name="warning_drop_player">You cannot remove players after draft ended</string>
+    <string name="warning_drop_player">You cannot modify players after draft ended</string>
     <string name="warning_add_player">Players cannot be added in Tournament Mode</string>
     <string name="settings_clean_history">Clean all history</string>
     <string name="settings_other">Other settings</string>

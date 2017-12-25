@@ -95,7 +95,7 @@
     <string name="drop_players_item">%1$s punkty: %2$d</string>
     <string name="drop_player_info_text">Żeby usunąć zawodników zaznacz ich a następnie naciśnij przycisk zapisz. Proszę używać z rozwagą, gdyż akcji nie da się cofnąć.</string>
     <string name="help_drop_player">Jeżeli zajdzie potrzeba możesz usunąc gracza</string>
-    <string name="warning_drop_player">Nie możesz usunąć graczy po skończonym drafcie</string>
+    <string name="warning_drop_player">Nie możesz zmodyfikować graczy po skończonym drafcie</string>
     <string name="settings_rate_me">Proszę, oceń tę aplikację</string>
     <string name="settings_rate_me_error">Nie można otworzyć Google Play, zainstaluj market</string>
     <string name="settings_counter_off">Odblokuj odliczanie w ustawieniach</string>
