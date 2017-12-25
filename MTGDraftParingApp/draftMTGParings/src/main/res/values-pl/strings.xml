@@ -177,5 +177,8 @@
     <string name="app_header_path_game">Turniej</string>
     <string name="app_header_path_configuration">Asystent</string>
     <string name="app_header_path_history">Historia</string>
+    <string name="action_add_player">Dodaj gracza</string>
+    <string name="add_player_dialog_title">Jak to działa</string>
+    <string name="add_player_dialog_body">Ta funkcjonalność ma dwa przypadki: Gracz spóźnia się na pierwszą rundę i nikt nie otrzymał bye na pierwszej rundzie. Otrzyma on więc bye.\nW pozostałym przypadku nowo dodani zawodnicy otrzymaja 0 pkt bez względu na obecną rundę.</string>
 
 </resources>

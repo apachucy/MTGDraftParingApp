@@ -229,5 +229,5 @@
 
     <!-- Add player-->
     <string name="add_player_dialog_title">How it works?</string>
-    <string name="add_player_dialog_body">This feature has two cases:\nOne player is late for first round and no one get bye for this round. So he will receive bye\nWhen you will add more players for draft or player will start game after first round there will be no points for new players</string>
+    <string name="add_player_dialog_body">This feature has two cases: One player is late for first round and no one get bye for this round. So he will receive bye.\n When you will add more players for draft or player will start game after first round there will be no points for new players</string>
 </resources>

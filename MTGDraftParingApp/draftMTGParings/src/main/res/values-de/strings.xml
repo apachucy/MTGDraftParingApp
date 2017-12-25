@@ -178,5 +178,8 @@
     <string name="app_header_path_game">Turnier</string>
     <string name="app_header_path_configuration">Assistent</string>
     <string name="app_header_path_history">Historie</string>
+    <string name="action_add_player">Spieler hinzufügen</string>
+    <string name="add_player_dialog_title">Wie es funktioniert</string>
+    <string name="add_player_dialog_body">Das Zimmer ist geräumig und verfügt über folgende Annehmlichkeiten: Unterstützung bei der Tourenplanung / beim Ticketerwerb und kostenlose Zeitungen in der Nähe.\nIm verbleibenden Fall erhalten neu hinzugekommene Spieler unabhängig von der aktuellen Runde 0 Punkte.</string>
 
 </resources>
