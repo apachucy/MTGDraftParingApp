@@ -212,12 +212,25 @@ public class ScoreBoardActivity extends BaseActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
 
         getMenuInflater().inflate(R.menu.dashboard, menu);
+        controlVisibility(menu);
         setListGuideActions(
                 (ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView(),
                 (ImageView) menu.getItem(2).getActionView());
         return true;
     }
 
+    private void controlVisibility(Menu menu) {
+        ImageView dropPlayer = (ImageView) menu.getItem(0).getActionView();
+        MenuItem menuAddPlayer = menu.getItem(3);
+        MenuItem menuSave = menu.getItem(4);
+        dropPlayer.setVisibility(isNotLastRound() ? View.VISIBLE : View.INVISIBLE);
+        menuAddPlayer.setVisible(isNotLastRound());
+        menuSave.setVisible(!isNotLastRound());
+    }
+
+    private boolean isNotLastRound() {
+        return mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound();
+    }
 
     @Override
     protected void onDestroy() {
@@ -230,7 +243,7 @@ public class ScoreBoardActivity extends BaseActivity {
         switch (item.getItemId()) {
 
             case R.id.action_save:
-                if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
+                if (isNotLastRound()) {
                     Intent intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
                     startActivityForResult(intent, BaseConfig.DRAFT_NAME_SET);
                 } else {
@@ -238,7 +251,7 @@ public class ScoreBoardActivity extends BaseActivity {
                 }
                 return true;
             case R.id.action_add_player:
-                if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
+                if (isNotLastRound()) {
                     Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
                 } else if (mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
                     Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_add_player), Toast.LENGTH_LONG).show();
