@@ -25,16 +25,16 @@
         android:title="@string/action_share"
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_add_player"
-        android:orderInCategory="105"
-        android:title="@string/action_add_player"
-        app:showAsAction="never" />
     <item
         android:id="@+id/action_save"
         android:icon="@drawable/ic_save"
         android:orderInCategory="104"
         android:title="@string/action_save"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_add_player"
+        android:orderInCategory="105"
+        android:title="@string/action_add_player"
+        app:showAsAction="never" />
+
 </menu>
