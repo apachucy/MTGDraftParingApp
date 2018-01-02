@@ -31,7 +31,7 @@ public class GamePreferences implements IGamePreferences {
             return false;
         }
 
-        mSharedPreferences.edit().putString(GamePreferencesConst.CURRENT_DRAFT_STATUS, json).apply();
+        mSharedPreferences.edit().putString(GamePreferencesConst.CURRENT_DRAFT_STATUS, json).commit();
         return true;
     }
 
@@ -54,6 +54,6 @@ public class GamePreferences implements IGamePreferences {
 
     @Override
     public void clean() {
-         mSharedPreferences.edit().remove(GamePreferencesConst.CURRENT_DRAFT_STATUS).commit();
+         mSharedPreferences.edit().clear().commit();
     }
 }

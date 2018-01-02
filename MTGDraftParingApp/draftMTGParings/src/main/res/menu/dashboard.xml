@@ -36,5 +36,9 @@
         android:orderInCategory="105"
         android:title="@string/action_add_player"
         app:showAsAction="never" />
-
+    <item
+        android:id="@+id/action_switch_algorithm"
+        android:orderInCategory="106"
+        android:title="@string/action_switch_algorithm"
+        app:showAsAction="never" />
 </menu>

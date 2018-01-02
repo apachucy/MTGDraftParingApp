@@ -13,6 +13,7 @@ import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.GamePreferences;
 import unii.draft.mtg.parings.sharedprefrences.IGamePreferences;
+import unii.draft.mtg.parings.util.annotation.TODOImprove;
 
 /**
  * Root algorithm for manual and generated parings
@@ -89,6 +90,23 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         mDraftDataProvider.setPlayerList(playerList);
     }
 
+    public DraftDataProvider getDraftDataProvider() {
+        return mDraftDataProvider;
+    }
+
+    /**
+     * This 'copy constructor' exist only for creating new instance of Algorithm that
+     * don't have any runtime data from shared preferences (why it cannot get data? - do not know)
+     * So when changing from manual mode to semi-automatic this will help with using it
+     *
+     * @param draftDataProvider
+     */
+    @TODOImprove
+    public void setDraftDataProvider(DraftDataProvider draftDataProvider) {
+        if (draftDataProvider != null) {
+            mDraftDataProvider = draftDataProvider;
+        }
+    }
 
     public List<Player> getDraftStartedPlayerList() {
         return mDraftDataProvider.getPlayerList();

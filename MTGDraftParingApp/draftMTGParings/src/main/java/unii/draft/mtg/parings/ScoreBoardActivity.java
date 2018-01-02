@@ -36,9 +36,11 @@ import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.base.IApplicationDraftMemoryState;
 import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
+import unii.draft.mtg.parings.logic.pojo.DraftDataProvider;
 import unii.draft.mtg.parings.logic.pojo.ItemHeader;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -223,8 +225,10 @@ public class ScoreBoardActivity extends BaseActivity {
         ImageView dropPlayer = (ImageView) menu.getItem(0).getActionView();
         MenuItem menuAddPlayer = menu.getItem(4);
         MenuItem menuSave = menu.getItem(3);
+        MenuItem menuChangeAlgorithm = menu.getItem(5);
         dropPlayer.setVisibility(!isLastRound() ? View.VISIBLE : View.INVISIBLE);
         menuAddPlayer.setVisible(!isLastRound() && mSharedPreferenceManager.getPairingType() != PairingMode.PAIRING_TOURNAMENT);
+        menuChangeAlgorithm.setVisible(mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_MANUAL);
         menuSave.setVisible(isLastRound());
     }
 
@@ -259,6 +263,10 @@ public class ScoreBoardActivity extends BaseActivity {
                     Intent intent = new Intent(ScoreBoardActivity.this, AddPlayerActivity.class);
                     startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_MODIFIED);
                 }
+                return true;
+            case R.id.action_switch_algorithm:
+                //TODO:Display dialog
+                showInfoDialog(getString(R.string.dialog_title_change_algorithm), getString(R.string.dialog_body_change_algorithm), getString(R.string.positive), getString(R.string.negative), changeAlgorithmType);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -471,4 +479,16 @@ public class ScoreBoardActivity extends BaseActivity {
         intent.putExtras(bundle);
         sendBroadcast(intent);
     }
+
+    @NonNull
+    private MaterialDialog.SingleButtonCallback changeAlgorithmType = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            DraftDataProvider draftDataProvider = ((BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm()).getDraftDataProvider();
+            mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS);
+
+            ((BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm()).setDraftDataProvider(draftDataProvider);
+
+        }
+    };
 }
