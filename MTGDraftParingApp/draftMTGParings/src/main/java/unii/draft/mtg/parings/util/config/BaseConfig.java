@@ -6,12 +6,14 @@ public final class BaseConfig {
     private BaseConfig() {
     }
 
+
     // default time
     public static final long DEFAULT_TIME_SECOND = 1000;
     public static final long DEFAULT_TIME_MINUT = DEFAULT_TIME_SECOND * 60;// 1m
     // Vibration
     public static final long DEFAULT_TIME_PER_ROUND = DEFAULT_TIME_MINUT * 60;// 1h
     public static final long DEFAULT_COUNTER_INTERVAL = DEFAULT_TIME_SECOND;// 1s
+
 
     public static final boolean DEFAULT_DISPLAY_COUNTER_ROUND = true;
     @Deprecated

@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.draft.mtg.parings.BaseActivity;
-import unii.draft.mtg.parings.ParingDashboardActivity;
+import unii.draft.mtg.parings.RoundActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
@@ -212,7 +212,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
                 mAlgorithmChooser.getCurrentAlgorithm().setPlayerWithBye(mAlgorithmChooser.getCurrentAlgorithm().getPlayer(mPlayerNameList.get(0)));
             }
 
-            Intent intent = new Intent(ManualPlayerPairingActivity.this, ParingDashboardActivity.class);
+            Intent intent = new Intent(ManualPlayerPairingActivity.this, RoundActivity.class);
             startActivity(intent);
             finish();
         }

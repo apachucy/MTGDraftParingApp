@@ -1,13 +1,13 @@
 package unii.draft.mtg.parings.logic.dagger;
 
 import dagger.Subcomponent;
+import unii.draft.mtg.parings.RoundActivity;
 import unii.draft.mtg.parings.view.activities.options.AddPlayerActivity;
 import unii.draft.mtg.parings.view.activities.options.DropPlayerActivity;
 import unii.draft.mtg.parings.view.activities.settings.HistoryPlayerAchievementsActivity;
 import unii.draft.mtg.parings.view.activities.settings.HistoryScoreBoardActivity;
 import unii.draft.mtg.parings.MainActivity;
 import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivity;
-import unii.draft.mtg.parings.ParingDashboardActivity;
 import unii.draft.mtg.parings.view.activities.options.SaveScoreBoardActivity;
 import unii.draft.mtg.parings.ScoreBoardActivity;
 import unii.draft.mtg.parings.view.activities.settings.SettingsMenuActivity;
@@ -39,7 +39,7 @@ public interface ActivityComponent {
 
     void inject(ScoreBoardActivity scoreBoardActivity);
 
-    void inject(ParingDashboardActivity paringDashboardActivity);
+    void inject(RoundActivity roundActivity);
 
     void inject(ManualPlayerPairingActivity manualPlayerPairingActivity);
 

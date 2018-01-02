@@ -34,7 +34,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.MainActivity;
-import unii.draft.mtg.parings.ParingDashboardActivity;
+import unii.draft.mtg.parings.RoundActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.ScoreBoardActivity;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
@@ -278,7 +278,7 @@ public class GameMenuFragment extends BaseFragment {
                             ManualPlayerPairingActivity.class);
                 } else {
                     intent = new Intent(mActivity,
-                            ParingDashboardActivity.class);
+                            RoundActivity.class);
 
                 }
                 startActivity(intent);
@@ -330,7 +330,7 @@ public class GameMenuFragment extends BaseFragment {
             if (currentAlgorithm.getCurrentRound() == currentAlgorithm.playedRound()) {
                 intent = new Intent(getActivity(), ScoreBoardActivity.class);
             } else {
-                intent = new Intent(getActivity(), ParingDashboardActivity.class);
+                intent = new Intent(getActivity(), RoundActivity.class);
             }
 
             startActivity(intent);

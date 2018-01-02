@@ -18,6 +18,8 @@ public class CounterClass extends CountDownTimer {
     private long mTimeVibration;
     private Vibrator mVibration;
     private long millisTillFinishWillBeCalled;
+    private Context context;
+
 
     /**
      * @param context           create an instance of vibration class
@@ -42,7 +44,7 @@ public class CounterClass extends CountDownTimer {
         mFirstVibration = firstVibration;
         mSecondVibration = secondVibration;
         mTimeVibration = vibrationTime;
-
+        this.context = context;
         // create Vibration instance only if
         // it will be used
         if (context != null && vibrationTime > 0
@@ -50,6 +52,11 @@ public class CounterClass extends CountDownTimer {
             mVibration = (Vibrator) context
                     .getSystemService(Context.VIBRATOR_SERVICE);
         }
+    }
+
+    public void onCancel() {
+        super.cancel();
+        RingtoneOperator.stopRingtone();
     }
 
     @Override
@@ -88,14 +95,22 @@ public class CounterClass extends CountDownTimer {
                     && BaseConfig.TIME_MARGIN_ERROR + mFirstVibration > millisUntilFinished
                     && mFirstVibration - BaseConfig.TIME_MARGIN_ERROR < millisUntilFinished) {
                 mVibration.vibrate(mTimeVibration);
+                RingtoneOperator.playRingtone(context);
+
+            } else if (RingtoneOperator.isPlaying() &&
+                    (mFirstVibration - mTimeVibration > millisUntilFinished && mSecondVibration - mTimeVibration < millisUntilFinished)) {
+                RingtoneOperator.stopRingtone();
             }
             if (mSecondVibration > 0
                     && BaseConfig.TIME_MARGIN_ERROR + mSecondVibration > millisUntilFinished
                     && mSecondVibration - BaseConfig.TIME_MARGIN_ERROR < millisUntilFinished) {
-
                 mVibration.vibrate(mTimeVibration);
+                RingtoneOperator.playRingtone(context);
+            } else if (RingtoneOperator.isPlaying() && mSecondVibration - mTimeVibration > millisUntilFinished) {
+                RingtoneOperator.stopRingtone();
             }
-
         }
     }
+
+
 }

@@ -115,7 +115,7 @@ public class ScoreBoardActivity extends BaseActivity {
                         ManualPlayerPairingActivity.class);
             } else {
                 intent = new Intent(ScoreBoardActivity.this,
-                        ParingDashboardActivity.class);
+                        RoundActivity.class);
             }
             startActivity(intent);
             finish();
@@ -346,7 +346,7 @@ public class ScoreBoardActivity extends BaseActivity {
 
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            Intent intent = new Intent(ScoreBoardActivity.this, ParingDashboardActivity.class);
+            Intent intent = new Intent(ScoreBoardActivity.this, RoundActivity.class);
             intent.putExtra(BUNDLE_KEY_LOAD_PREVIOUS_DRAFT, true);
             startActivity(intent);
             finish();

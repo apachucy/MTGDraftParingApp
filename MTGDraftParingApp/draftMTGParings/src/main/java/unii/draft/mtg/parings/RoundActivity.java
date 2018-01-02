@@ -49,7 +49,7 @@ import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_PAIRINGS_TIMER_TIME;
 
 
-public class ParingDashboardActivity extends BaseActivity {
+public class RoundActivity extends BaseActivity {
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -181,17 +181,17 @@ public class ParingDashboardActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!mSharedPreferenceManager.displayCounterRound()) {
-                    Toast.makeText(ParingDashboardActivity.this, getString(R.string.settings_counter_off), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RoundActivity.this, getString(R.string.settings_counter_off), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!isCountStarted) {
                     isCountStarted = true;
                     mCounterClass.start();
-                    Toast.makeText(ParingDashboardActivity.this, getString(R.string.message_action_countdown_started), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_started), Toast.LENGTH_SHORT).show();
                 } else {
                     isCountStarted = false;
-                    mCounterClass.cancel();
-                    Toast.makeText(ParingDashboardActivity.this, getString(R.string.message_action_countdown_cancel), Toast.LENGTH_SHORT).show();
+                    mCounterClass.onCancel();
+                    Toast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_cancel), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -291,7 +291,7 @@ public class ParingDashboardActivity extends BaseActivity {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {
             dialog.dismiss();
-            mCounterClass.cancel();
+            mCounterClass.onCancel();
             finish();
         }
     };
@@ -365,12 +365,12 @@ public class ParingDashboardActivity extends BaseActivity {
         mStatisticCalculation.calculateAll();
         mAlgorithmChooser.getCurrentAlgorithm().setPlayedRound(mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
         isPairingsGenerated = false;
-        Intent intent = new Intent(ParingDashboardActivity.this,
+        Intent intent = new Intent(RoundActivity.this,
                 ScoreBoardActivity.class);
         startActivity(intent);
         isCountStarted = false;
         if (mCounterClass != null) {
-            mCounterClass.cancel();
+            mCounterClass.onCancel();
         }
         finish();
     }

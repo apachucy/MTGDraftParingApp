@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ParingDashboardActivity"
+            android:name=".RoundActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ScoreBoardActivity"

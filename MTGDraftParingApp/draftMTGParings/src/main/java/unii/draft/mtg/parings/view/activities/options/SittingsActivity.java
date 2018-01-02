@@ -25,7 +25,7 @@ import tourguide.tourguide.Pointer;
 import tourguide.tourguide.ToolTip;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.BaseActivity;
-import unii.draft.mtg.parings.ParingDashboardActivity;
+import unii.draft.mtg.parings.RoundActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
@@ -116,7 +116,7 @@ public class SittingsActivity extends BaseActivity {
         if (mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_MANUAL) {
             intent = new Intent(this, ManualPlayerPairingActivity.class);
         } else {
-            intent = new Intent(this, ParingDashboardActivity.class);
+            intent = new Intent(this, RoundActivity.class);
 
         }
         startActivity(intent);
