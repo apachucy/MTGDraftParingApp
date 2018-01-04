@@ -182,5 +182,8 @@
     <string name="add_player_dialog_title">Wie es funktioniert</string>
     <string name="add_player_dialog_body">Das Zimmer ist geräumig und verfügt über folgende Annehmlichkeiten: Unterstützung bei der Tourenplanung / beim Ticketerwerb und kostenlose Zeitungen in der Nähe.\nIm verbleibenden Fall erhalten neu hinzugekommene Spieler unabhängig von der aktuellen Runde 0 Punkte.</string>
     <string name="warning_add_player">Spieler können nicht im Turniermodus hinzugefügt werden</string>
+    <string name="action_switch_algorithm">Änderung des Algorithmus</string>
+    <string name="dialog_title_change_algorithm">Änderung des Algorithmus</string>
+    <string name="dialog_body_change_algorithm">Dies ändert den Kopplungsmodus von manuell auf automatisch mit Wiederholungen</string>
 
 </resources>

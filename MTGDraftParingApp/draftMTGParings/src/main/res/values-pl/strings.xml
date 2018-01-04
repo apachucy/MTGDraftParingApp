@@ -181,5 +181,8 @@
     <string name="add_player_dialog_title">Jak to działa</string>
     <string name="add_player_dialog_body">Ta funkcjonalność ma dwa przypadki: Gracz spóźnia się na pierwszą rundę i nikt nie otrzymał bye na pierwszej rundzie. Otrzyma on więc bye.\nW pozostałym przypadku nowo dodani zawodnicy otrzymaja 0 pkt bez względu na obecną rundę.</string>
     <string name="warning_add_player">Zawodnicy nie mogą być dodawani w trybie turniejowym</string>
+    <string name="dialog_title_change_algorithm">Zmiana algorytmu</string>
+    <string name="action_switch_algorithm">Zmień algorytm</string>
+    <string name="dialog_body_change_algorithm">Zmiana algorytmu spowoduję wyłączenie trybu manualnego parowania i przejście na tryb automatyczny z możliwymi powtórzeniami</string>
 
 </resources>
