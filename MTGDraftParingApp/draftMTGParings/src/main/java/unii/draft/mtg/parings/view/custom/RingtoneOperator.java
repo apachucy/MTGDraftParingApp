@@ -14,10 +14,10 @@ public class RingtoneOperator {
 
 
     public static void playRingtone(Context context) {
-        if(ringtone == null || !ringtone.isPlaying()){
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        ringtone = RingtoneManager.getRingtone(context.getApplicationContext(), notification);
-        ringtone.play();
+        if (ringtone == null || !ringtone.isPlaying() && context != null) {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            ringtone = RingtoneManager.getRingtone(context.getApplicationContext(), notification);
+            ringtone.play();
         }
     }
 
