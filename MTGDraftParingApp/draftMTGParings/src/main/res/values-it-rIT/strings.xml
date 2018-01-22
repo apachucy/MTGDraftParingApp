@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">impostazioni</string>
+    <string name="action_info">Info</string>
+    <string name="action_add_player">Aggiungi giocatore</string>
+    <string name="hint_player_name">Nome del giocatore</string>
+    <string name="add_item">Inserisci</string>
+    <string name="hint_rounds">Round</string>
+    <string name="start_game">Start</string>
+    <string name="add_players_from_history">Aggiungi giocatori dallo storico</string>
+    <string name="no_players_from_history">Nessun giocatore nello storico</string>
+    <string name="text_end_round">Fine</string>
+    <string name="warning_empty_field">Il campo non può essere vuoto</string>
+    <string name="warning_need_players">Per favore aggiungi giocatori</string>
+    <string name="text_vs">vs</string>
+
+    <string name="text_from">a partire dal</string>
+    <string name="text_round">Round :</string>
+    <string name="text_after_game">Risultati dopo il round:</string>
+    <string name="text_winner">Vincitore:</string>
+    <!-- Settings -->
+    <string name="text_display_counter">Visualizza il tempo del round:</string>
+    <string name="text_time_round">Tempo del round[m]: %1$s</string>
+    <string name="text_vibration">Attiva vibrazione:</string>
+    <string name="text_vibration_detail">Permetti vibrazione per informare la fine del round</string>
+    <string name="text_use_counter_detail">Permetti il conto alla rovescia del round</string>
+    <string name="text_first_vibration">Prima vibrazione[m]: %1$s</string>
+    <string name="text_second_vibration">Seconda vibrazione[m]: %1$s</string>
+    <string name="text_duration_vibration">Durata [s]: %1$s</string>
+
+    <!-- Dialog Fragment -->
+    <!-- Dialog Start -->
+    <string name="dialog_start_title">Inizio del gioco</string>
+    <string name="dialog_start_message">Per iniziare i lavori premere il pulsante\nNumero di giocatori: %1$d\nNumero di round: %2$d</string>
+    <string name="dialog_start_message_warning_replays">Per iniziare i lavori premere il pulsante\nNumero di giocatori: %1$d\nNumero di round: %2$d\nCon questa impostazione il giocatore può essere abbinato più di una volta, per cambiare andare alle impostazioni!</string>
+
+    <string name="dialog_start_button">Chiuso</string>
+    <!-- Dialog Game End -->
+    <string name="dialog_end_title">Il torneo è finito</string>
+    <string name="dialog_end_message">Fai clic su Chiudi per chiudere l\'applicazione</string>
+    <!-- Dialog Algorithm Problem -->
+    <string name="dialog_error_algorithm_title">Errore algoritmo</string>
+    <string name="dialog_error_algorithm__message">Non è possibile accoppiare i giocatori.\nSi prega di resetare l’app.</string>
+    <!-- Dialog Warning Paring -->
+    <string name="dialog_warning_title">Attenzione</string>
+    <string name="dialog_warning_message">Troppi round o troppi pochi giocatori.\nPer favore aggiungi giocatori o decrementa il numero di round.</string>
+    <!-- Dialog Info -->
+    <string name="dialog_info_title">Info</string>
+    <string name="dialog_info_message">Versione per i fan della app per creare i parings nei draft di MTG.\n Ci possono essere altri casi d\'uso per questa app, ma questo è l\'uso principale :).\nAiuto da Piotr S., Szymon Sz., Davide B.</string>
+    <!-- Dialog Settings-->
+    <!-- Time Settings -->
+    <string name="settings_dialog_round_time_title">Imposta il tempo del round</string>
+    <string name="settings_dialog_round_time_content">Tempo per il round in minuti</string>
+    <string name="settings_dialog_round_time_hint">Tempo per il round impostato: 50 minuti</string>
+    <!--Vibration -->
+    <string name="settings_dialog_round_first_vibration_title">Imposta la prima vibrazione</string>
+    <string name="settings_dialog_round_first_vibration_content">Imposta il tempo prima della fine del round, quando dovrebbe attivarsi la prima vibrazione</string>
+    <string name="settings_dialog_round_first_vibration_hint">Impostato a 5 minuti</string>
+
+    <string name="settings_dialog_round_second_vibration_title">Imposta la seconda vibrazione</string>
+    <string name="settings_dialog_round_second_vibration_content">Imposta il tempo prima della fine del round, quando dovrebbe attivarsi la seconda vibrazione.\nSarà salvato solo quando è impostato un tempo inferiore rispetto alla prima vibrazione
+</string>
+    <string name="settings_dialog_round_second_vibration_hint">Impostato a 1 minuto</string>
+
+    <string name="settings_dialog_round_duration_vibration_title">Imposta la durata della vibrazione</string>
+    <string name="settings_dialog_round_duration_vibration_content">Imposta il tempo della vibrazione</string>
+    <string name="settings_dialog_round_duration_vibration_hint">Impostato a: 5 secondi</string>
+
+    <!-- Help/Showcase start screen -->
+    <string name="help_title">Aiuto</string>
+    <string name="tutorial_info">Informazioni su questa applicazione</string>
+    <string name="tutorial_settings">Configura il draft prima di giocare</string>
+    <string name="tutorial_hour_glass">Premere per il conto alla rovescia</string>
+    <string name="tutorial_life_app">App Open Life per questo round</string>
+    <!-- Headers -->
+    <string name="header_player_position_name">Giocatore</string>
+    <string name="header_player_position_points">Punti</string>
+
+    <!-- List Draw -->
+    <string name="text_draw">Pareggio</string>
+
+    <!-- Create personal parings-->
+    <string name="text_personal_parings">Tipo di parings: %1$s</string>
+    <string name="text_save_results_after_draft">Salva risultati dopo il draft: %1$s</string>
+    <string name="positive">Si</string>
+    <string name="negative">No</string>
+    <string name="activity_paring_add_paring">Aggiungi Parings</string>
+    <string name="activity_paring_clear_paring">Resetta Paringss</string>
+    <string name="activity_paring_warning_empty_list">Niente più giocatori per i parings</string>
+    <string name="activity_paring_warning_manual_pairing_error">Errore parings. Inserisci nuovamente i risultati e prova ancora una volta</string>
+    <string name="activity_paring_warning_paring_not_finished">Per favore, inserisci i risultati per tutti giocatori</string>
+    <string name="activity_paring_warning_bye">L\'ultimo giocatore ha già avuto un bye</string>
+    <string name="warning_player_name_added">Il giocatore con il nome fornito è stato precedentemente aggiunto</string>
+    <string name="select_player1">Seleziona il 1° giocatore</string>
+    <string name="select_player2">Seleziona il 2° giocatore</string>
+    <string name="select_player_name">Selezionato: %1$s</string>
+    <string name="select_player_manual_title">Seleziona Giocatore</string>
+    <string name="select_player_manual_add">Inserisci</string>
+    <string name="spinner_empty_player_list">Niente più giocatori</string>
+
+    <!--Save Score Board-->
+    <string name="activity_save_score_board_info_text">Nome nella schermata classifica</string>
+    <string name="activity_save_score_board_info_small_text">Puoi guardare le classifiche salvate usando le impostazioni</string>
+    <string name="activity_save_score_board_save">Salva</string>
+    <string name="action_save">Salva il draft</string>
+    <string name="action_calculate_mana">Apri Mana Calculator</string>
+    <string name="action_share">Condividi la classifica</string>
+    <string name="action_remove_player">Ritira giocatore</string>
+    <string name="help_save_dashboard">Dopo il turno puoi scegliere un nome per questo torneo</string>
+    <string name="help_drop_player">Se c\'è un bisogno puoi ritirare un giocatore dal draft</string>
+    <string name="help_share_content">Puoi scegliere il nome per il torneo quando finirà</string>
+    <string name="help_information_scoreboard">Cosa significa: PMG, PGW&#8230;</string>
+    <string name="warning_save_dashboard">Puoi scegliere il nome per il torneo quando finirà</string>
+    <string name="warning_drop_player">Non puoi modificare i giocatori dopo che il draft è concluso</string>
+    <string name="warning_add_player">I giocatori non possono essere aggiunti in modalità Torneo</string>
+    <string name="settings_clean_history">Pulisci tutta la cronologia</string>
+    <string name="settings_other">Altre impostazioni</string>
+    <string name="settings_display_scoreboards">Mostra classifiche</string>
+    <string name="settings_display_players_list">Mostra la lista dei giocatori</string>
+    <string name="settings_reset_tour_guide">Reimposta la Tour Guide e visualizza l’aiuto</string>
+    <string name="settings_reset_tour_guide_dialog_title">Vuoi reimpostare l’aiuto?</string>
+    <string name="settings_reset_tour_guide_dialog_content">La guida verrà ripristinata in questa applicazione</string>
+    <string name="settings_reset_tour_guide_message">La guida Tour è stata resettata</string>
+
+    <string name="history_score_board_row_draft_name">Nome Draft: %1$s</string>
+    <string name="history_score_board_row_draft_date">Data: %1$s</string>
+    <string name="history_score_board_row_draft_best_player">Ha vinto: %1$s</string>
+    <string name="history_score_board_row_draft_count_players">Giocatori: %1$d</string>
+    <string name="history_score_board_row_draft_rounds">Round: %1$d</string>
+    <string name="message_score_boards_removed">Tutti le classifiche sono state rimosse</string>
+    <string name="message_score_board_not_exists">Nessuna classifica da mostrare</string>
+    <string name="message_player_list_not_exists">Nessun giocatore da mostrare</string>
+    <string name="message_score_board_saved">Torneo salvato con successo</string>
+    <string name="action_show_list">Mostra la lista delel classifiche</string>
+    <!--Modify App UI -->
+    <string name="action_countdown">Fine del conto alla rovescia del round</string>
+    <string name="action_open_life_app">Open Life App</string>
+    <string name="message_action_countdown_started">Conto alla rovescia…</string>
+    <string name="message_action_countdown_cancel">Il conto alla rovescia è stato annullato</string>
+    <!--Open Intent -->
+    <string name="chooser_intent_title_life_counter">Scegli l\'applicazione del contatore vite</string>
+    <string name="chooser_dialog_title_life_counter">Scarica  LifeCounterApp</string>
+    <string name="chooser_dialog_body_life_counter">Per gestire questa azione\nsi prega di scaricare l\'applicazione per il conteggio delle vite</string>
+
+    <string name="chooser_intent_title_mana_calculator">Scegli l\'applicazione del calcolatore di mana</string>
+    <string name="chooser_dialog_title_mana_calculator">Scarica ManaCalculatorApp</string>
+    <string name="chooser_dialog_body_mana_calculator">Per gestire questa azione\nper favore scarica l\'applicazione per il calcolo del mana</string>
+    <string name="chooser_dialog_button_name">Download</string>
+
+    <!-- Show validation dialog-->
+    <string name="validation_dialog_title">Validazione</string>
+    <string name="validation_dialog_body">Si prega di inserire tutti i risultati del round</string>
+    <!-- drop player res -->
+    <string name="drop_players_item">%1$s punti: %2$d</string>
+    <string name="drop_player_info_text">Per ritirare i giocatori selezionali e premi \'salva \'. Questa azione non può essere annulata. Usare con cautela.</string>
+    <!--Rate me option -->
+    <string name="settings_rate_me">Per vavore, valuta l’App</string>
+    <string name="settings_check_other_apps">Controlla le mie altre App</string>
+    <string name="settings_idea_box">Idea box</string>
+    <string name="settings_rate_me_error">Impossibile aprire Google Play, installa l\'app</string>
+    <string name="settings_developer_account_error">Impossibile aprire il browser, installane uno e riprova con questa azione</string>
+    <string name="settings_idea_box_error">Impossibile aprire il client di posta elettronica, installarne uno e riprovare</string>
+
+    <!--Settings -->
+    <string name="settings_content_description">Seleziona il menu delle impostazioni</string>
+    <string name="settings_counter_off">"Per utilizzare il contatore del tempo, attivarlo nelle impostazioni "</string>
+    <string name="settings_sittings_none">nessuno</string>
+    <string name="settings_sittings_random">casuale</string>
+    <string name="settings_sittings_dialog_title">Scegli le opzioni per i sittings:</string>
+    <string name="settings_history_remove_clean_history_dialog_title">Vuoi rimuovere tutto?</string>
+    <string name="settings_history_remove_clean_history_dialog_body">Tutti i dati saranno rimossi</string>
+
+    <string name="dialog_positive">Ok</string>
+    <string name="dialog_negative">Annulla</string>
+
+    <string name="settings_pairing_mode_manual">Manuale</string>
+    <string name="settings_pairing_mode_tournament">Torneo</string>
+    <string name="settings_pairing_mode_automatic_with_repeats">Automatico con ripetizioni</string>
+    <string name="settings_pairing_mode_dialog_title">Scegli le opzioni per i Parings:</string>
+    <string name="settings_save_draft_result_dialog_title">I risultati del draft devono essere salvati:</string>
+    <string name="player_sittings_description">Sittings prima del 1° round</string>
+
+    <string name="history_player_played_drafts">Draft svolti: %1$d</string>
+    <string name="history_player_detail_place">Posto: %1$d / %2$d</string>
+    <string name="history_player_wins_drafts">Vittorie: %1$d</string>
+    <string name="history_player_overall_places">Luoghi dei draft:</string>
+    <string name="history_player_overall_played">Giocati nel draft:</string>
+    <string name="history_detail_player_overall_count_position">Posto %1$d: %2$d Volte</string>
+    <string name="history_detail_player_overall_count_positions">Posto %1$d: %2$d Volte</string>
+
+    <string name="settings_menu_item_history">Cronologia</string>
+    <string name="settings_menu_item_other">Altro</string>
+    <string name="settings_menu_item_time">Tempo</string>
+    <string name="dialog_scoreboard_info_title">Spiegazione</string>
+
+    <string name="dialog_load_not_ended_draft_title">Carica draft precedente</string>
+    <string name="dialog_load_not_ended_draft_body">Il draft precedente non è stato concluso. Vuoi riprenderlo?</string>
+
+    <!-- Go back dialog -->
+    <string name="dialog_warning_go_back_body">Vuoi davvero modificare l\'ultimo round?</string>
+
+    <!-- Cancel Game dialog -->
+    <string name="dialog_cancel_game_title">Termina torneo</string>
+    <string name="dialog_cancel_game_body">Vuoi terminare questo torneo? Può essere ripreso più tardi.</string>
+
+    <!--Display information about current view -->
+    <string name="app_header_path_game">Torneo</string>
+    <string name="app_header_path_configuration">Assistente</string>
+    <string name="app_header_path_history">Cronologia</string>
+
+    <!-- Add player-->
+    <string name="add_player_dialog_title">Come funziona?</string>
+    <string name="add_player_dialog_body">Questa funzione ha due casi: un giocatore è in ritardo per il primo turno ma nessuno prenderebbe il bye per questo round. Quindi lui riceverà il bye\n. Quando aggiungerai più giocatori per il draft o il giocatore inizierà la partita dopo il primo round non ci saranno punti per i nuovi giocatori    Cambia dell\'algoritmo switch algorithm
+</string>
+    <!-- -->
+    <string name="action_switch_algorithm">Cambia dell\'algoritmo</string>
+
+    <string name="dialog_title_change_algorithm">Cambiamento dell\'algoritmo</string>
+    <string name="dialog_body_change_algorithm">Questo cambierà la modalità di associazione da manuale a automatica con ripetizioni</string>
+</resources>
