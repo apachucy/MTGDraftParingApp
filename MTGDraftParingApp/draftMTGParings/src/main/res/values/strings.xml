@@ -236,4 +236,9 @@
 
     <string name="dialog_title_change_algorithm">Algorithm change</string>
     <string name="dialog_body_change_algorithm">This will change pairing mode from manual to automatic with repeats</string>
+
+    <string name="settings_used_libraries">Great libraries in app</string>
+    <string name="dialog_used_libraries_title">Used libraries</string>
+    <string name="dialog_used_libraries_body" translatable="false">Tourguide: https://github.com/worker8/TourGuide\nMaterial dialogs: https://github.com/afollestad/material-dialogs\nFancyToast: https://github.com/Shashank02051997/FancyToast-Android\nCombinatoricslib: https://github.com/dpaukov/combinatoricslib </string>
+
 </resources>

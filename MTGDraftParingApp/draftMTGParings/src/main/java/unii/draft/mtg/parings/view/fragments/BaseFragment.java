@@ -49,6 +49,15 @@ public abstract class BaseFragment extends Fragment {
                 .show();
     }
 
+    protected void showDialog(@NonNull Context context, @NonNull String title, @NonNull String content, @NonNull String positiveText) {
+        mMaterialDialogInstance = new MaterialDialog.Builder(context)
+                .title(title)
+                .content(content)
+                .positiveText(positiveText)
+                .backgroundColorRes(R.color.windowBackground)
+                .show();
+    }
+
     protected void showDialogWithTwoOptions(@NonNull Context context, @NonNull String title, @NonNull String content, @NonNull String positiveText, @NonNull String negativeText, @NonNull MaterialDialog.SingleButtonCallback positiveCallback) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title)
@@ -69,7 +78,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected void showEditTextDialog(@NonNull Context context, @NonNull String title, @NonNull String content, String hint, String lastValue,
                                       @NonNull final TimeSettingsFragment.UpdateData updateData) {
-        mMaterialDialogInstance =   new MaterialDialog.Builder(context)
+        mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
                 .inputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED)

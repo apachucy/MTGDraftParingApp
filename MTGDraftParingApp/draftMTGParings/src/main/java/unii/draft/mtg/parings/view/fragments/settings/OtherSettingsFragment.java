@@ -113,6 +113,11 @@ public class OtherSettingsFragment extends BaseFragment {
 
     }
 
+    @OnClick(R.id.settings_usedLibrariesButton)
+    public void onUsedLibrariesClicked() {
+        showDialog(getContext(), getString(R.string.dialog_used_libraries_title), getString(R.string.dialog_used_libraries_body), getString(R.string.positive));
+    }
+
     private void injectDependencies() {
         getActivityComponent().inject(this);
     }
