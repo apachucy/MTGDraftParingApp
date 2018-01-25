@@ -83,6 +83,7 @@ public class DraftSettingsFragment extends BaseFragment {
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_automatic_with_repeats));
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_manual));
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_tournament));
+        pairingsOptionList.add(getString(R.string.settings_pairing_mode_round_robin));
         showRadioButtonListDialog(getActivity(), getString(R.string.settings_pairing_mode_dialog_title), pairingsOptionList,
                 getString(R.string.dialog_positive), getString(R.string.dialog_negative),
                 mSharedPreferenceManager.getPairingType(), mPairingTypeCallback);

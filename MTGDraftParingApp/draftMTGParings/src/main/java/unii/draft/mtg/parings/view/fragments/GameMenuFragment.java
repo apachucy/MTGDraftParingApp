@@ -265,7 +265,11 @@ public class GameMenuFragment extends BaseFragment {
             if (mRoundsTextInput.getVisibility() == View.VISIBLE && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
                 rounds = Integer.parseInt(mRoundsTextInput.getEditText().getText().toString());
             } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
-                rounds = new TournamentRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
+                if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
+                    rounds = new TournamentRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
+                } else {
+                    rounds = new RoundRobinRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
+                }
             }
 
             if (rounds != 0) {

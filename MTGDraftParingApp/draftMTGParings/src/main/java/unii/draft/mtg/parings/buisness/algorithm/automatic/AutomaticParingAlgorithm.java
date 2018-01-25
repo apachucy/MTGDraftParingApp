@@ -16,7 +16,9 @@ import java.util.Random;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
+
 public class AutomaticParingAlgorithm extends BaseAlgorithm {
+    private final static int BYE_COUNTER_MIN_VALUE = 999;
 
     public AutomaticParingAlgorithm(Context context) {
         super(context);
@@ -106,7 +108,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
     }
 
     private List<Game> generateParings
-    (@NonNull Generator<Player> allPermutation, @NonNull List<Game> gameList, @NonNull List<Player> filteredPlayerList) {
+            (@NonNull Generator<Player> allPermutation, @NonNull List<Game> gameList, @NonNull List<Player> filteredPlayerList) {
         for (ICombinatoricsVector<Player> playersPermutation : allPermutation) {
             gameList.clear();
             List<Player> playerListPermutation = playersPermutation.getVector();
@@ -197,14 +199,34 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
     private void movePlayerWithByeOnLastPosition(@NonNull List<Player> playerList) {
 
         int playerPosition = 0;
+        int byeCounter = BYE_COUNTER_MIN_VALUE;
         for (int i = playerList.size() - 1; i >= 0; i--) {
             if (!playerList.get(i).hasBye()) {
-                playerList.get(i).setHasBye(true);
-                setPlayerWithBye(playerList.get(i));
+                Player player = playerList.get(i);
+                player.setHasBye(true);
+                player.increaseBye();
+                setPlayerWithBye(player);
+                playerPosition = i;
+                break;
+            }
+            if (byeCounter > playerList.get(i).getNumberOfGamesWithBye()) {
+                byeCounter = playerList.get(i).getNumberOfGamesWithBye();
+            }
+        }
+        //find issue while creating round robin
+        //when all players will have a bye
+        //we will increase byes and check for players who has less byes
+        for (int i = playerList.size() - 1; i >= 0; i--) {
+            if (playerList.get(i).getNumberOfGamesWithBye() == byeCounter) {
+                Player player = playerList.get(i);
+                player.setHasBye(true);
+                player.increaseBye();
+                setPlayerWithBye(player);
                 playerPosition = i;
                 break;
             }
         }
+
         // move player with bye on last position
         // swapping with other players
         for (int i = playerPosition; i + 1 < playerList.size(); i++) {

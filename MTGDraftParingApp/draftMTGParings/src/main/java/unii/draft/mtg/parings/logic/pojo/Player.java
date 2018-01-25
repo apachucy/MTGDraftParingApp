@@ -31,6 +31,10 @@ public class Player implements IAdapterItem {
     private boolean hasBye;
 
     /**
+     * Counting how many bye player had
+     */
+    private int mGameWithBye;
+    /**
      * Match Overall win in draft - should not be less than 0.33
      */
     private float mPlayerMatchOverallWin;
@@ -97,6 +101,7 @@ public class Player implements IAdapterItem {
         mOponentsMatchOveralWins = BaseConfig.MIN_OVERALL_VALUE;
         mPlayerGamesOverallWin = BaseConfig.MIN_OVERALL_VALUE;
         mOponentsGamesOverallWin = BaseConfig.MIN_OVERALL_VALUE;
+        mGameWithBye = 0;
     }
 
     public int getMatchPoints() {
@@ -206,4 +211,16 @@ public class Player implements IAdapterItem {
     public void setDropped(boolean dropped) {
         this.mDropped = dropped;
     }
+
+    public int getNumberOfGamesWithBye() {
+        return mGameWithBye;
+    }
+
+    public void increaseBye() {
+        mGameWithBye++;
+    }
+
+   /* public void setGameWithBye(int mGameWithBye) {
+        this.mGameWithBye = mGameWithBye;
+    }*/
 }
