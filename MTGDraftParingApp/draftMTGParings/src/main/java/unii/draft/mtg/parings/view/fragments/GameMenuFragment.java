@@ -34,12 +34,13 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.MainActivity;
-import unii.draft.mtg.parings.RoundActivity;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.RoundActivity;
 import unii.draft.mtg.parings.ScoreBoardActivity;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.roundrobin.RoundRobinRounds;
 import unii.draft.mtg.parings.buisness.algorithm.tournament.TournamentRounds;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -155,7 +156,12 @@ public class GameMenuFragment extends BaseFragment {
                 if (mRoundsTextInput.getVisibility() == View.VISIBLE && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
                     rounds = Integer.parseInt(mRoundsTextInput.getEditText().getText().toString());
                 } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
-                    rounds = new TournamentRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
+                    int players = mPlayerNameList.getPlayerList().size();
+                    if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
+                        rounds = new TournamentRounds().getMaxRound(players);
+                    } else {
+                        rounds = new RoundRobinRounds().getMaxRound(players);
+                    }
                 }
 
                 String textBody = getString(R.string.dialog_start_message, mPlayerNameList.getPlayerList().size(), rounds);
@@ -212,7 +218,7 @@ public class GameMenuFragment extends BaseFragment {
         mRoundsTextInput.setHint(getString(R.string.hint_rounds));
         mRoundsTextInput.setErrorEnabled(true);
         mPlayerNameTextInput.setErrorEnabled(true);
-        if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
+        if (isGameInTournamentMode()) {
             mRoundsTextInput.setVisibility(View.GONE);
         }
 
@@ -234,6 +240,10 @@ public class GameMenuFragment extends BaseFragment {
         isPreviousDraftNotEnded = !baseAlgorithm.isCacheEmpty()
                 && baseAlgorithm.playedRound() < baseAlgorithm.getMaxRound();
         paint = new Paint();
+    }
+
+    private boolean isGameInTournamentMode() {
+        return mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_ROBIN;
     }
 
     private boolean isValidRoundEditText() {

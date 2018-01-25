@@ -7,7 +7,7 @@ import java.util.List;
 
 import unii.draft.mtg.parings.logic.pojo.MaxRounds;
 
-public class TournamentRounds {
+public class TournamentRounds implements unii.draft.mtg.parings.buisness.algorithm.base.TournamentRounds {
     private List<MaxRounds> tournamentRounds;
     private int MAX_ROUNDS = 13;
 

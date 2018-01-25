@@ -185,6 +185,7 @@
 
     <string name="settings_pairing_mode_manual">Manual</string>
     <string name="settings_pairing_mode_tournament">Tournament</string>
+    <string name="settings_pairing_mode_round_robin">Round Robin</string>
     <string name="settings_pairing_mode_automatic_with_repeats">Automatic with repeats</string>
     <string name="settings_pairing_mode_dialog_title">Choose Pairing Options:</string>
     <string name="settings_save_draft_result_dialog_title">Should draft results be saved:</string>

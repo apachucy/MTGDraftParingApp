@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.buisness.algorithm.annotation.PairingModeNotation;
 import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -46,7 +47,7 @@ public class DraftSettingsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_draft, container, false);
-        mUnbinder=  ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentView();
         initFragmentData();
@@ -132,7 +133,7 @@ public class DraftSettingsFragment extends BaseFragment {
         mSittingsOptionsTextView.setText(getString(R.string.settings_sittings_option, sittingsOptionName));
     }
 
-    private void setPairingOptionText(int mode) {
+    private void setPairingOptionText(@PairingModeNotation int mode) {
         String pairingOptionName;
         switch (mode) {
             case PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS:
@@ -143,6 +144,10 @@ public class DraftSettingsFragment extends BaseFragment {
                 break;
             case PairingMode.PAIRING_TOURNAMENT:
                 pairingOptionName = getString(R.string.settings_pairing_mode_tournament);
+                break;
+
+            case PairingMode.PAIRING_ROUND_ROBIN:
+                pairingOptionName = getString(R.string.settings_pairing_mode_round_robin);
                 break;
             default:
                 pairingOptionName = getString(R.string.settings_pairing_mode_automatic_with_repeats);
@@ -208,6 +213,9 @@ public class DraftSettingsFragment extends BaseFragment {
                     break;
                 case PairingMode.PAIRING_TOURNAMENT:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_TOURNAMENT);
+                    break;
+                case PairingMode.PAIRING_ROUND_ROBIN:
+                    mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_ROUND_ROBIN);
                     break;
                 default:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS);

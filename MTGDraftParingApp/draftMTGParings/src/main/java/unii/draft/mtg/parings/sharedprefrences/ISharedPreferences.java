@@ -1,5 +1,6 @@
 package unii.draft.mtg.parings.sharedprefrences;
 
+import unii.draft.mtg.parings.buisness.algorithm.annotation.PairingModeNotation;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 
 public interface ISharedPreferences {
@@ -118,13 +119,14 @@ public interface ISharedPreferences {
     boolean areManualParings();
 
 
+    @PairingModeNotation
     int getPairingType();
 
     int getSaveDraftResults();
 
     void setSaveDraftResults(int shouldSave);
 
-    void setPairingType(int pairingType);
+    void setPairingType(@PairingModeNotation int pairingType);
 
     /**
      * Choose if parings should be manual or by algorithm

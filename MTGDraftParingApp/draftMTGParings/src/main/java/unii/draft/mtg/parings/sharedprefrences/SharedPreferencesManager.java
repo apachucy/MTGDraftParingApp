@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
+import unii.draft.mtg.parings.buisness.algorithm.annotation.PairingModeNotation;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.util.config.SettingsPreferencesConst;
@@ -138,6 +139,7 @@ public class SharedPreferencesManager implements ISharedPreferences {
     }
 
     @Override
+    @PairingModeNotation
     public int getPairingType() {
         return mSharedPreferences.getInt(SettingsPreferencesConst.PAIRINGS_TYPE, BaseConfig.DEFAULT_TYPE_PAIRINGS);
     }
@@ -154,7 +156,7 @@ public class SharedPreferencesManager implements ISharedPreferences {
     }
 
     @Override
-    public void setPairingType(int pairingType) {
+    public void setPairingType(@PairingModeNotation int pairingType) {
         mSharedPreferences.edit().putInt(SettingsPreferencesConst.PAIRINGS_TYPE, pairingType).apply();
     }
 

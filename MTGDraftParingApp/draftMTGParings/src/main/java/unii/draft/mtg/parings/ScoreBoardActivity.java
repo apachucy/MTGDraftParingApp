@@ -227,7 +227,7 @@ public class ScoreBoardActivity extends BaseActivity {
         MenuItem menuSave = menu.getItem(3);
         MenuItem menuChangeAlgorithm = menu.getItem(5);
         dropPlayer.setVisibility(!isLastRound() ? View.VISIBLE : View.INVISIBLE);
-        menuAddPlayer.setVisible(!isLastRound() && mSharedPreferenceManager.getPairingType() != PairingMode.PAIRING_TOURNAMENT);
+        menuAddPlayer.setVisible(!isLastRound() && !isGameInTournamentMode());
         menuChangeAlgorithm.setVisible(mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_MANUAL);
         menuSave.setVisible(isLastRound());
     }
@@ -257,7 +257,7 @@ public class ScoreBoardActivity extends BaseActivity {
             case R.id.action_add_player:
                 if (isLastRound()) {
                     Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
-                } else if (mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
+                } else if (isGameInTournamentMode()) {
                     Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_add_player), Toast.LENGTH_LONG).show();
                 } else {
                     Intent intent = new Intent(ScoreBoardActivity.this, AddPlayerActivity.class);
@@ -265,7 +265,6 @@ public class ScoreBoardActivity extends BaseActivity {
                 }
                 return true;
             case R.id.action_switch_algorithm:
-                //TODO:Display dialog
                 showInfoDialog(getString(R.string.dialog_title_change_algorithm), getString(R.string.dialog_body_change_algorithm), getString(R.string.positive), getString(R.string.negative), changeAlgorithmType);
                 return true;
             default:
@@ -361,6 +360,11 @@ public class ScoreBoardActivity extends BaseActivity {
         }
     };
 
+
+    private boolean isGameInTournamentMode() {
+        return mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_TOURNAMENT || mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_ROUND_ROBIN;
+    }
+
     private void saveDraft(@Nullable String draftName) {
         String tempDraftName;
         SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
@@ -374,6 +378,8 @@ public class ScoreBoardActivity extends BaseActivity {
         Toast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), Toast.LENGTH_LONG).show();
 
     }
+
+
 
     private void setListGuideActions(
             @NonNull ImageView dropPlayerButton, @NonNull ImageView information, @NonNull ImageView shareContent) {
