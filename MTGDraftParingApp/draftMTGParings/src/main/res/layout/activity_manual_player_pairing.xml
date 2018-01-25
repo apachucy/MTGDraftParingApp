@@ -142,7 +142,6 @@
                 android:layout_below="@id/matchPlayer_buttonHolder"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:clipToPadding="false"
-                android:paddingBottom="@dimen/footer_height"
                 android:scrollbars="vertical" />
         </RelativeLayout>
 
@@ -154,6 +153,7 @@
             android:layout_margin="@dimen/floating_button_margin"
             android:src="@drawable/ic_navigate_next"
             app:layout_anchor="@id/matchPlayer_PlayersList"
-            app:layout_anchorGravity="bottom|right|end" />
+            app:layout_anchorGravity="bottom|right|end"
+            app:layout_behavior="unii.draft.mtg.parings.view.custom.ScrollAwareFABBehavior" />
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
