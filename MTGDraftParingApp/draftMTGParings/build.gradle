@@ -10,8 +10,8 @@ android {
         applicationId "unii.draft.mtg.parings"
         versionCode 59
         versionName "1.3.11-italian"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion 19
+        targetSdkVersion 27
         generatedDensities = []
 
     }
