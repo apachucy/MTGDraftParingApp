@@ -9,10 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.draft.mtg.parings.BaseActivity;
-import unii.draft.mtg.parings.RoundActivity;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.RoundActivity;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.logic.pojo.Game;
@@ -177,9 +177,9 @@ public class ManualPlayerPairingActivity extends BaseActivity {
 
         } else if (mPlayerNameList == null || mPlayerNameList.isEmpty() ||
                 mPlayerNameList.get(0).equals(getString(R.string.spinner_empty_player_list))) {
-            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_empty_list), Toast.LENGTH_LONG).show();
+            FancyToast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_empty_list), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
         } else {
-            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_manual_pairing_error), Toast.LENGTH_LONG).show();
+            FancyToast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_manual_pairing_error), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
 
         }
     }
@@ -202,9 +202,9 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     void onStartGameButtonClicked() {
 
         if (!mPlayerNameList.isEmpty() && mPlayerNameList.size() > 1) {
-            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_paring_not_finished), Toast.LENGTH_LONG).show();
+            FancyToast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_paring_not_finished), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
         } else if (mPlayerNameList.size() > 1 && mAlgorithmChooser.getCurrentAlgorithm().getPlayer(mPlayerNameList.get(0)).hasBye()) {
-            Toast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_bye), Toast.LENGTH_LONG).show();
+            FancyToast.makeText(ManualPlayerPairingActivity.this, getString(R.string.activity_paring_warning_bye), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
         } else {
             mAlgorithmChooser.getCurrentAlgorithm().setPlayerGameList(mGameList);
             //someone has a bye

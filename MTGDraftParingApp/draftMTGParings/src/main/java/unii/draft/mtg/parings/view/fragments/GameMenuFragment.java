@@ -19,10 +19,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.List;
 
@@ -141,9 +141,9 @@ public class GameMenuFragment extends BaseFragment {
     void onStartGameClick() {
         if (isValidRoundEditText()) {
             if (mPlayerNameList.getPlayerList().isEmpty() || mPlayerNameList.getPlayerList().size() < 2) {
-                Toast.makeText(mActivity,
+                FancyToast.makeText(mActivity,
                         getString(R.string.warning_need_players),
-                        Toast.LENGTH_LONG).show();
+                        FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                 // if number of player where bigger than
                 // round ask user to change it
             } else if (mRoundsTextInput.getVisibility() == View.VISIBLE && Integer.parseInt(mRoundsTextInput.getEditText().getText()
@@ -177,7 +177,7 @@ public class GameMenuFragment extends BaseFragment {
     @OnClick(R.id.init_addPlayerFromHistoryButton)
     public void onAddPlayersFromHistoryClicked() {
         if (playersNotExistInHistory()) {
-            Toast.makeText(getContext(), getString(R.string.no_players_from_history), Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getContext(), getString(R.string.no_players_from_history), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
             return;
         }
         final List<String> playersNameFromHistory = mDatabaseHelper.get().getAllPlayersNames();

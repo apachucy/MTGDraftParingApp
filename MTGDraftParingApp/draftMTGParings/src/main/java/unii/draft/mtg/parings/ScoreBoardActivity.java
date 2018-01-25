@@ -15,10 +15,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,7 +36,6 @@ import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.base.IApplicationDraftMemoryState;
 import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
@@ -251,14 +250,14 @@ public class ScoreBoardActivity extends BaseActivity {
                     Intent intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
                     startActivityForResult(intent, BaseConfig.DRAFT_NAME_SET);
                 } else {
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), Toast.LENGTH_LONG).show();
+                    FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                 }
                 return true;
             case R.id.action_add_player:
                 if (isLastRound()) {
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
+                    FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                 } else if (isGameInTournamentMode()) {
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_add_player), Toast.LENGTH_LONG).show();
+                    FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.warning_add_player), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                 } else {
                     Intent intent = new Intent(ScoreBoardActivity.this, AddPlayerActivity.class);
                     startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_MODIFIED);
@@ -375,10 +374,9 @@ public class ScoreBoardActivity extends BaseActivity {
             tempDraftName = draftName;
         }
         mDatabaseHelper.get().saveDraft(mPlayerList, tempDraftName, currentDateAndTime, mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
-        Toast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), Toast.LENGTH_LONG).show();
+        FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
 
     }
-
 
 
     private void setListGuideActions(
@@ -415,7 +413,7 @@ public class ScoreBoardActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), Toast.LENGTH_LONG).show();
+                    FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.warning_drop_player), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                 } else {
                     Intent intent = new Intent(ScoreBoardActivity.this, DropPlayerActivity.class);
                     startActivityForResult(intent, BaseConfig.DRAFT_PLAYERS_MODIFIED);
@@ -433,7 +431,7 @@ public class ScoreBoardActivity extends BaseActivity {
                     sendIntent.setType(BaseConfig.INTENT_SHARE_DATA_TYPE);
                     startActivity(sendIntent);
                 } else {
-                    Toast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), Toast.LENGTH_LONG).show();
+                    FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), FancyToast.LENGTH_LONG, FancyToast.INFO, false).show();
 
                 }
             }

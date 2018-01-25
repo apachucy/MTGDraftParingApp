@@ -8,10 +8,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import javax.inject.Inject;
 
@@ -78,7 +78,7 @@ public class OtherSettingsFragment extends BaseFragment {
                 startActivity(intent);
             } else {
                 //display error msg
-                Toast.makeText(getContext(), getString(R.string.settings_rate_me_error), Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(getContext(), getString(R.string.settings_rate_me_error), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
 
             }
 
@@ -93,7 +93,7 @@ public class OtherSettingsFragment extends BaseFragment {
             startActivity(intent);
         } else {
             //display error msg
-            Toast.makeText(getContext(), getString(R.string.settings_developer_account_error), Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getContext(), getString(R.string.settings_developer_account_error), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
 
@@ -107,7 +107,7 @@ public class OtherSettingsFragment extends BaseFragment {
             startActivity(intent);
         } else {
             //display error msg
-            Toast.makeText(getContext(), getString(R.string.settings_idea_box_error), Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getContext(), getString(R.string.settings_idea_box_error), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
 
         }
 
@@ -122,7 +122,7 @@ public class OtherSettingsFragment extends BaseFragment {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
             mSharedPreferenceManager.resetGuideTour();
-            Toast.makeText(getActivity(), getString(R.string.settings_reset_tour_guide_message), Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getActivity(), getString(R.string.settings_reset_tour_guide_message), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
         }
     };
 }

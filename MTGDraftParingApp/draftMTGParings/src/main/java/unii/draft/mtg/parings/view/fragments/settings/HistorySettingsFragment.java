@@ -7,10 +7,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.List;
 
@@ -73,7 +73,7 @@ public class HistorySettingsFragment extends BaseFragment {
     void onDisplayScoreBoardsClicked() {
         List<Draft> draftList = mDatabaseHelper.get().getAllDraftList();
         if (draftList == null || draftList.size() == 0) {
-            Toast.makeText(getActivity(), getString(R.string.message_score_board_not_exists), Toast.LENGTH_LONG).show();
+            FancyToast.makeText(getActivity(), getString(R.string.message_score_board_not_exists), FancyToast.LENGTH_LONG, FancyToast.INFO, false).show();
         } else {
             Intent intent = new Intent(getActivity(), HistoryScoreBoardActivity.class);
             startActivity(intent);
@@ -85,7 +85,7 @@ public class HistorySettingsFragment extends BaseFragment {
     void onDisplayPlayerHistoryClicked() {
         List<unii.draft.mtg.parings.database.model.Player> playerList = mDatabaseHelper.get().getAllPlayerList();
         if (playerList == null || playerList.size() == 0) {
-            Toast.makeText(getActivity(), getString(R.string.message_player_list_not_exists), Toast.LENGTH_LONG).show();
+            FancyToast.makeText(getActivity(), getString(R.string.message_player_list_not_exists), FancyToast.LENGTH_LONG, FancyToast.INFO, false).show();
             return;
         }
         Intent intent = new Intent(getActivity(), HistoryPlayerAchievementsActivity.class);
@@ -101,7 +101,7 @@ public class HistorySettingsFragment extends BaseFragment {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
             mDatabaseHelper.get().cleanDatabase();
-            Toast.makeText(getActivity(), getString(R.string.message_score_boards_removed), Toast.LENGTH_LONG).show();
+            FancyToast.makeText(getActivity(), getString(R.string.message_score_boards_removed), FancyToast.LENGTH_LONG, FancyToast.INFO, false).show();
         }
     };
 }

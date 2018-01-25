@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.List;
 
@@ -181,17 +181,17 @@ public class RoundActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!mSharedPreferenceManager.displayCounterRound()) {
-                    Toast.makeText(RoundActivity.this, getString(R.string.settings_counter_off), Toast.LENGTH_SHORT).show();
+                    FancyToast.makeText(RoundActivity.this, getString(R.string.settings_counter_off), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
                     return;
                 }
                 if (!isCountStarted) {
                     isCountStarted = true;
                     mCounterClass.start();
-                    Toast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_started), Toast.LENGTH_SHORT).show();
+                    FancyToast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_started), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
                 } else {
                     isCountStarted = false;
                     mCounterClass.onCancel();
-                    Toast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_cancel), Toast.LENGTH_SHORT).show();
+                    FancyToast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_cancel), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
                 }
             }
         });
