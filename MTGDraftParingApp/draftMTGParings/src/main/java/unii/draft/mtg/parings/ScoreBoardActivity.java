@@ -232,6 +232,8 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     private boolean isLastRound() {
+
+
         return mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound();
     }
 
@@ -451,6 +453,12 @@ public class ScoreBoardActivity extends BaseActivity {
         }
 
         mPlayerScoreBoardList = new ArrayList<>();
+
+        //TODO: Refactor  All component - onCreate/onResume for all App states
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
+            BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+            baseAlgorithm.isLoadCachedDraftWasNeeded();
+        }
     }
 
     private void displayErrorDialog() {
