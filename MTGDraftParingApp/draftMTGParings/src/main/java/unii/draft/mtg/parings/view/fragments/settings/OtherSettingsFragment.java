@@ -113,9 +113,15 @@ public class OtherSettingsFragment extends BaseFragment {
 
     }
 
+    @OnClick(R.id.settings_helpWithAppButton)
+    public void onHelpWithAnAppClicked() {
+        showDialog(getContext(), getString(R.string.dialog_help_with_app_title), getString(R.string.dialog_help_with_app_body), getString(R.string.dialog_positive));
+
+    }
+
     @OnClick(R.id.settings_usedLibrariesButton)
     public void onUsedLibrariesClicked() {
-        showDialog(getContext(), getString(R.string.dialog_used_libraries_title), getString(R.string.dialog_used_libraries_body), getString(R.string.positive));
+        showDialog(getContext(), getString(R.string.dialog_used_libraries_title), getString(R.string.dialog_used_libraries_body), getString(R.string.dialog_positive));
     }
 
     private void injectDependencies() {

@@ -240,5 +240,7 @@
     <string name="settings_used_libraries">Great libraries in app</string>
     <string name="dialog_used_libraries_title">Used libraries</string>
     <string name="dialog_used_libraries_body" translatable="false">Tourguide: https://github.com/worker8/TourGuide\nMaterial dialogs: https://github.com/afollestad/material-dialogs\nFancyToast: https://github.com/Shashank02051997/FancyToast-Android\nCombinatoricslib: https://github.com/dpaukov/combinatoricslib </string>
-
+    <string name="settings_help_with_app">You may help with this app</string>
+    <string name="dialog_help_with_app_title">Help with this application</string>
+    <string name="dialog_help_with_app_body" translatable="false">You may help with this application:\nIf you would like to have an app in your language you may help with translation\nIf you have an idea of an extenstion write me an e-mail\nIf you like it you may propagate it within your friends\nDevelopers likes to be appreciated so drop a rate on Google Play :)</string>
 </resources>

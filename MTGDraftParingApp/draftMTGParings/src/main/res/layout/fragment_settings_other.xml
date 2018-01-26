@@ -54,4 +54,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_used_libraries" />
+
+    <Button
+        android:id="@+id/settings_helpWithAppButton"
+        style="@style/buttonBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_help_with_app" />
 </LinearLayout>
