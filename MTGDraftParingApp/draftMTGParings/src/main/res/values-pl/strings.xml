@@ -184,5 +184,10 @@
     <string name="dialog_title_change_algorithm">Zmiana algorytmu</string>
     <string name="action_switch_algorithm">Zmień algorytm</string>
     <string name="dialog_body_change_algorithm">Zmiana algorytmu spowoduję wyłączenie trybu manualnego parowania i przejście na tryb automatyczny z możliwymi powtórzeniami</string>
+    <string name="settings_pairing_mode_round_robin">Algorytm Karuzelowy</string>
+    <string name="settings_used_libraries">Biblioteki wykorzystane w aplikacji</string>
+    <string name="dialog_used_libraries_title">Wykorzystane biblioteki</string>
+    <string name="settings_help_with_app">Możesz pomóc w rozwoju aplikacji</string>
+    <string name="dialog_help_with_app_title">"Możesz pomóc "</string>
 
 </resources>

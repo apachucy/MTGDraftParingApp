@@ -217,4 +217,9 @@
 
     <string name="dialog_title_change_algorithm">Cambiamento dell\'algoritmo</string>
     <string name="dialog_body_change_algorithm">Questo cambierà la modalità di associazione da manuale a automatica con ripetizioni</string>
+    <string name="settings_pairing_mode_round_robin">Round Robin</string>
+    <string name="settings_used_libraries">Ottime librerie in app</string>
+    <string name="dialog_used_libraries_title">Librerie usate</string>
+    <string name="dialog_help_with_app_title">Aiuto con questa applicazione</string>
+    <string name="settings_help_with_app">Puoi aiutare con questa app</string>
 </resources>

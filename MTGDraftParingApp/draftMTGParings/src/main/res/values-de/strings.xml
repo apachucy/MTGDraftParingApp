@@ -185,5 +185,10 @@
     <string name="action_switch_algorithm">Änderung des Algorithmus</string>
     <string name="dialog_title_change_algorithm">Änderung des Algorithmus</string>
     <string name="dialog_body_change_algorithm">Dies ändert den Kopplungsmodus von manuell auf automatisch mit Wiederholungen</string>
+    <string name="settings_pairing_mode_round_robin">Round Robin</string>
+    <string name="settings_used_libraries">Große Bibliotheken in der App</string>
+    <string name="dialog_used_libraries_title">Benutzte Bibliotheken</string>
+    <string name="dialog_help_with_app_title">Hilfe mit dieser Anwendung</string>
+    <string name="settings_help_with_app">Sie können mit dieser App helfen</string>
 
 </resources>
