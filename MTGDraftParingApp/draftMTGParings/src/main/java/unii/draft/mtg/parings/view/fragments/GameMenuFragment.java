@@ -238,7 +238,7 @@ public class GameMenuFragment extends BaseFragment {
     protected void initFragmentData() {
         BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.get().getCurrentAlgorithm();
         isPreviousDraftNotEnded = !baseAlgorithm.isCacheEmpty()
-                && baseAlgorithm.playedRound() < baseAlgorithm.getMaxRound();
+                && baseAlgorithm.playedRound() < baseAlgorithm.getMaxRound() && baseAlgorithm.getCurrentRound() > 0;
         paint = new Paint();
     }
 

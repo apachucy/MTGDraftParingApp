@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId "unii.draft.mtg.parings"
-        versionCode 60
-        versionName "1.4.0-RoundRobin"
+        versionCode 61
+        versionName "1.4.1-RoundRobin"
         minSdkVersion 19
         targetSdkVersion 27
         generatedDensities = []
