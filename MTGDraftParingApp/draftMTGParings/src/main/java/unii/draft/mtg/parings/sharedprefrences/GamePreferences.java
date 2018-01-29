@@ -12,7 +12,7 @@ import unii.draft.mtg.parings.util.config.GamePreferencesConst;
 
 
 public class GamePreferences implements IGamePreferences {
-    private SharedPreferences mSharedPreferences;
+    private final SharedPreferences mSharedPreferences;
     @NonNull
     private final Context mContext;
     private static final String SHARED_PREFERENCES_NAME = GamePreferencesConst.GAME_PREFERENCES_NAME;
@@ -30,8 +30,9 @@ public class GamePreferences implements IGamePreferences {
         if (json == null) {
             return false;
         }
-
-        mSharedPreferences.edit().putString(GamePreferencesConst.CURRENT_DRAFT_STATUS, json).commit();
+        synchronized (mSharedPreferences) {
+            mSharedPreferences.edit().putString(GamePreferencesConst.CURRENT_DRAFT_STATUS, json).apply();
+        }
         return true;
     }
 
@@ -39,7 +40,10 @@ public class GamePreferences implements IGamePreferences {
     @Override
     public DraftDataProvider getDraftDataProvider() {
         Gson gson = new Gson();
-        String json = mSharedPreferences.getString(GamePreferencesConst.CURRENT_DRAFT_STATUS, null);
+        String json = null;
+        synchronized (mSharedPreferences) {
+            json = mSharedPreferences.getString(GamePreferencesConst.CURRENT_DRAFT_STATUS, null);
+        }
         if (json == null) {
             return null;
         }
@@ -48,12 +52,17 @@ public class GamePreferences implements IGamePreferences {
 
     @Override
     public boolean isEmpty() {
-        String draftStatus = mSharedPreferences.getString(GamePreferencesConst.CURRENT_DRAFT_STATUS, null);
+        String draftStatus = null;
+        synchronized (mSharedPreferences) {
+            draftStatus = mSharedPreferences.getString(GamePreferencesConst.CURRENT_DRAFT_STATUS, null);
+        }
         return draftStatus == null || draftStatus.isEmpty();
     }
 
     @Override
     public void clean() {
-         mSharedPreferences.edit().clear().commit();
+        synchronized (mSharedPreferences) {
+            mSharedPreferences.edit().clear().apply();
+        }
     }
 }

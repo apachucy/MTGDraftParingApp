@@ -19,6 +19,7 @@ import unii.draft.mtg.parings.logic.pojo.Player;
 
 public class AutomaticParingAlgorithm extends BaseAlgorithm {
     private final static int BYE_COUNTER_MIN_VALUE = 999;
+    private final static int NOT_FOUND = -1;
 
     public AutomaticParingAlgorithm(Context context) {
         super(context);
@@ -198,33 +199,11 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
      */
     private void movePlayerWithByeOnLastPosition(@NonNull List<Player> playerList) {
 
-        int playerPosition = 0;
-        int byeCounter = BYE_COUNTER_MIN_VALUE;
-        for (int i = playerList.size() - 1; i >= 0; i--) {
-            if (!playerList.get(i).hasBye()) {
-                Player player = playerList.get(i);
-                player.setHasBye(true);
-                player.increaseBye();
-                setPlayerWithBye(player);
-                playerPosition = i;
-                break;
-            }
-            if (byeCounter > playerList.get(i).getNumberOfGamesWithBye()) {
-                byeCounter = playerList.get(i).getNumberOfGamesWithBye();
-            }
-        }
-        //find issue while creating round robin
-        //when all players will have a bye
-        //we will increase byes and check for players who has less byes
-        for (int i = playerList.size() - 1; i >= 0; i--) {
-            if (playerList.get(i).getNumberOfGamesWithBye() == byeCounter) {
-                Player player = playerList.get(i);
-                player.setHasBye(true);
-                player.increaseBye();
-                setPlayerWithBye(player);
-                playerPosition = i;
-                break;
-            }
+        int playerPosition = positionOfPlayerWithoutBye(playerList);
+
+        if (playerPosition == NOT_FOUND) {
+            int smallestBye = smallestByeNumber(playerList);
+            playerPosition = positionOfPlayerWithoutBye(playerList, smallestBye);
         }
 
         // move player with bye on last position
@@ -235,4 +214,46 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
 
     }
 
+
+    private int positionOfPlayerWithoutBye(@NonNull List<Player> playerList, int smallestByeNumber) {
+        int playerPosition = NOT_FOUND;
+        for (int i = playerList.size() - 1; i >= 0; i--) {
+            if (playerList.get(i).getNumberOfGameWithBye() == smallestByeNumber) {
+                setByeForPlayer(playerList.get(i));
+                playerPosition = i;
+                return playerPosition;
+            }
+        }
+        return playerPosition;
+    }
+
+    private int smallestByeNumber(@NonNull List<Player> playerList) {
+
+        int byeNumber = BYE_COUNTER_MIN_VALUE;
+        for (int i = playerList.size() - 1; i >= 0; i--) {
+            int playersBye = playerList.get(i).getNumberOfGameWithBye();
+            if (playerList.get(i).getNumberOfGameWithBye() < byeNumber) {
+                byeNumber = playersBye;
+            }
+        }
+        return byeNumber;
+    }
+
+    private int positionOfPlayerWithoutBye(@NonNull List<Player> playerList) {
+        int playerPosition = NOT_FOUND;
+        for (int i = playerList.size() - 1; i >= 0; i--) {
+            if (!playerList.get(i).hasBye()) {
+                setByeForPlayer(playerList.get(i));
+                playerPosition = i;
+                return playerPosition;
+            }
+        }
+        return playerPosition;
+    }
+
+    private void setByeForPlayer(Player player) {
+        player.setHasBye(true);
+        player.increaseBye();
+        setPlayerWithBye(player);
+    }
 }

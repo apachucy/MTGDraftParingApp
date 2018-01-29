@@ -70,6 +70,7 @@ public class Player implements IAdapterItem {
         this.mPlayerGamesOverallWin = player.getPlayerGamesOverallWin();
         this.mOponentsGamesOverallWin = player.getOponentsGamesOverallWin();
         this.mDropped = player.isDropped();
+        this.mGameWithBye = player.getNumberOfGameWithBye();
 
         if (player.getPlayedGame() == null) {
             return;
@@ -88,6 +89,7 @@ public class Player implements IAdapterItem {
         mOponentsMatchOveralWins = playerDraftJoinTable.getOponentsMatchOveralWins();
         mMatchPoints = playerDraftJoinTable.getPlayerMatchPoints();
         mDropped = playerDraftJoinTable.getDropped();
+        mGameWithBye = 0;
     }
 
 
@@ -212,15 +214,16 @@ public class Player implements IAdapterItem {
         this.mDropped = dropped;
     }
 
-    public int getNumberOfGamesWithBye() {
+    public int getNumberOfGameWithBye() {
         return mGameWithBye;
+    }
+
+    public void setNumberOfGameWithBye(int gamesWithBye) {
+        mGameWithBye = gamesWithBye;
     }
 
     public void increaseBye() {
         mGameWithBye++;
     }
 
-   /* public void setGameWithBye(int mGameWithBye) {
-        this.mGameWithBye = mGameWithBye;
-    }*/
 }
