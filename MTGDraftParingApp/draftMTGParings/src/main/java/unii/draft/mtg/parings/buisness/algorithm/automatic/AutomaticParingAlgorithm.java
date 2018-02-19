@@ -56,6 +56,8 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
             setPlayerWithBye(filteredPlayerList.get(filteredPlayerList.size() - 1));
             addedPlayers.remove(getPlayerWithBye());
 
+        } else {
+            setPlayerWithBye(null);
         }
         // Game list should have size players/2
         gameList = new ArrayList<>(filteredPlayerList.size() / 2);
