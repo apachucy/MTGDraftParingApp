@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId "unii.draft.mtg.parings"
-        versionCode 62
-        versionName "1.4.3-RoundRobin-fix"
+        versionCode 64
+        versionName "1.4.5-drop-player-fix"
         minSdkVersion 19
         targetSdkVersion 27
         generatedDensities = []
@@ -20,7 +20,7 @@ android {
     aaptOptions {
         additionalParameters "--no-version-vectors"
     }
-     buildTypes {
+    buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -38,7 +38,7 @@ dependencies {
     provided "org.projectlombok:lombok:1.16.12"
 
     compile 'com.jakewharton:butterknife:8.8.1'
-    apt  'com.jakewharton:butterknife-compiler:8.8.1'
+    apt 'com.jakewharton:butterknife-compiler:8.8.1'
 
     compile('com.github.worker8:tourguide:1.0.14-SNAPSHOT@aar') {
         transitive = true
@@ -47,7 +47,7 @@ dependencies {
 
     compile('com.afollestad.material-dialogs:core:0.9.6.0') {
         transitive = true
-     //   exclude group: 'com.android.support'
+        //   exclude group: 'com.android.support'
     }
     //dagger
     provided 'javax.annotation:jsr250-api:1.0'
