@@ -65,6 +65,7 @@
                 android:layout_below="@+id/paring_textContainer"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:clipToPadding="false"
+                android:paddingBottom="@dimen/footer_height"
                 android:scrollbars="vertical" />
         </RelativeLayout>
 

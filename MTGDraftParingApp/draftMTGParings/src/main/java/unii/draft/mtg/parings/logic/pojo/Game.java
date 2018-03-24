@@ -35,6 +35,20 @@ public class Game {
      */
     private int mMatchDraws;
 
+    private int mRound;
+
+
+    public Game(unii.draft.mtg.parings.database.model.Game game, String playerAName, String playerBName) {
+        this.mWinner = game.getWinner();
+        this.mGamesPlayed = game.getGames();
+        this.mPlayerAName = playerAName;
+        this.mPlayerBName = playerBName;
+        this.mPlayerAPoints = game.getPlayerAPoints();
+        this.mPlayerBPoints = game.getPlayerBPoints();
+        this.mMatchDraws = game.getDraws();
+        this.mRound = game.getRound();
+    }
+
     public Game(Game game) {
         this.mWinner = game.getWinner();
         this.mGamesPlayed = game.getGamesPlayed();
@@ -43,11 +57,13 @@ public class Game {
         this.mPlayerAPoints = game.getPlayerAPoints();
         this.mPlayerBPoints = game.getPlayerBPoints();
         this.mMatchDraws = game.getDraws();
+        this.mRound = game.getRound();
     }
 
-    public Game(String playerA, String playerB) {
+    public Game(String playerA, String playerB, int round) {
         mPlayerAName = playerA;
         mPlayerBName = playerB;
+        mRound = round;
     }
 
     public String getWinner() {
@@ -119,4 +135,7 @@ public class Game {
         this.mGamesPlayed = mGamesPlayed;
     }
 
+    public int getRound() {
+        return mRound;
+    }
 }

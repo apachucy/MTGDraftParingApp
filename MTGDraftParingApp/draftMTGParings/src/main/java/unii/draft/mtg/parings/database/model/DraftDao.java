@@ -3,8 +3,6 @@ package unii.draft.mtg.parings.database.model;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.Property;
@@ -30,22 +28,22 @@ public class DraftDao extends AbstractDao<Draft, Long> {
         public final static Property DraftDate = new Property(2, String.class, "DraftDate", false, "DRAFT_DATE");
         public final static Property DraftRounds = new Property(3, Integer.class, "DraftRounds", false, "DRAFT_ROUNDS");
         public final static Property NumberOfPlayers = new Property(4, Integer.class, "NumberOfPlayers", false, "NUMBER_OF_PLAYERS");
-    }
+    };
 
     private DaoSession daoSession;
 
 
-    public DraftDao(@NonNull DaoConfig config) {
+    public DraftDao(DaoConfig config) {
         super(config);
     }
     
-    public DraftDao(@NonNull DaoConfig config, DaoSession daoSession) {
+    public DraftDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
         this.daoSession = daoSession;
     }
 
     /** Creates the underlying database table. */
-    public static void createTable(@NonNull SQLiteDatabase db, boolean ifNotExists) {
+    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DRAFT\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
@@ -56,14 +54,14 @@ public class DraftDao extends AbstractDao<Draft, Long> {
     }
 
     /** Drops the underlying database table. */
-    public static void dropTable(@NonNull SQLiteDatabase db, boolean ifExists) {
+    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
         String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"DRAFT\"";
         db.execSQL(sql);
     }
 
     /** @inheritdoc */
     @Override
-    protected void bindValues(@NonNull SQLiteStatement stmt, @NonNull Draft entity) {
+    protected void bindValues(SQLiteStatement stmt, Draft entity) {
         stmt.clearBindings();
  
         Long id = entity.getId();
@@ -93,22 +91,20 @@ public class DraftDao extends AbstractDao<Draft, Long> {
     }
 
     @Override
-    protected void attachEntity(@NonNull Draft entity) {
+    protected void attachEntity(Draft entity) {
         super.attachEntity(entity);
         entity.__setDaoSession(daoSession);
     }
 
     /** @inheritdoc */
-    @Nullable
     @Override
-    public Long readKey(@NonNull Cursor cursor, int offset) {
+    public Long readKey(Cursor cursor, int offset) {
         return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     /** @inheritdoc */
-    @Nullable
     @Override
-    public Draft readEntity(@NonNull Cursor cursor, int offset) {
+    public Draft readEntity(Cursor cursor, int offset) {
         Draft entity = new Draft( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // DraftName
@@ -121,7 +117,7 @@ public class DraftDao extends AbstractDao<Draft, Long> {
      
     /** @inheritdoc */
     @Override
-    public void readEntity(@NonNull Cursor cursor, @NonNull Draft entity, int offset) {
+    public void readEntity(Cursor cursor, Draft entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setDraftName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDraftDate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
@@ -131,15 +127,14 @@ public class DraftDao extends AbstractDao<Draft, Long> {
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(@NonNull Draft entity, long rowId) {
+    protected Long updateKeyAfterInsert(Draft entity, long rowId) {
         entity.setId(rowId);
         return rowId;
     }
     
     /** @inheritdoc */
-    @Nullable
     @Override
-    public Long getKey(@Nullable Draft entity) {
+    public Long getKey(Draft entity) {
         if(entity != null) {
             return entity.getId();
         } else {
@@ -152,5 +147,5 @@ public class DraftDao extends AbstractDao<Draft, Long> {
     protected boolean isEntityUpdateable() {
         return true;
     }
-
+    
 }

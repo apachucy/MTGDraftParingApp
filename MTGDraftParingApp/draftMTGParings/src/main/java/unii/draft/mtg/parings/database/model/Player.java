@@ -1,7 +1,5 @@
 package unii.draft.mtg.parings.database.model;
 
-import android.support.annotation.Nullable;
-
 import java.util.List;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import de.greenrobot.dao.DaoException;
@@ -16,15 +14,14 @@ public class Player {
     private String PlayerName;
 
     /** Used to resolve relations */
-    @Nullable
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    @Nullable
     private transient PlayerDao myDao;
 
-    @Nullable
     private List<PlayerDraftJoinTable> Players;
+    private List<Game> PlayerAInGame;
+    private List<Game> PlayerBInGame;
 
     public Player() {
     }
@@ -39,7 +36,7 @@ public class Player {
     }
 
     /** called by internal mechanisms, do not call yourself. */
-    public void __setDaoSession(@Nullable DaoSession daoSession) {
+    public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getPlayerDao() : null;
     }
@@ -61,7 +58,6 @@ public class Player {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    @Nullable
     public List<PlayerDraftJoinTable> getPlayers() {
         if (Players == null) {
             if (daoSession == null) {
@@ -81,6 +77,50 @@ public class Player {
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     public synchronized void resetPlayers() {
         Players = null;
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<Game> getPlayerAInGame() {
+        if (PlayerAInGame == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            GameDao targetDao = daoSession.getGameDao();
+            List<Game> PlayerAInGameNew = targetDao._queryPlayer_PlayerAInGame(id);
+            synchronized (this) {
+                if(PlayerAInGame == null) {
+                    PlayerAInGame = PlayerAInGameNew;
+                }
+            }
+        }
+        return PlayerAInGame;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetPlayerAInGame() {
+        PlayerAInGame = null;
+    }
+
+    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
+    public List<Game> getPlayerBInGame() {
+        if (PlayerBInGame == null) {
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            GameDao targetDao = daoSession.getGameDao();
+            List<Game> PlayerBInGameNew = targetDao._queryPlayer_PlayerBInGame(id);
+            synchronized (this) {
+                if(PlayerBInGame == null) {
+                    PlayerBInGame = PlayerBInGameNew;
+                }
+            }
+        }
+        return PlayerBInGame;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    public synchronized void resetPlayerBInGame() {
+        PlayerBInGame = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

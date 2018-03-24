@@ -6,15 +6,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -24,11 +28,15 @@ import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
+import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.ItemHeader;
 import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.logic.pojo.Round;
 import unii.draft.mtg.parings.util.config.BundleConst;
+import unii.draft.mtg.parings.util.converter.SparseArrayToArrayListConverter;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 import unii.draft.mtg.parings.util.helper.PlayerNameWithPositionGenerator;
+import unii.draft.mtg.parings.view.adapters.ExpandableListAdapter;
 import unii.draft.mtg.parings.view.adapters.IAdapterItem;
 import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 import unii.draft.mtg.parings.view.fragments.BaseFragment;
@@ -40,7 +48,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     private List<IAdapterItem> mPlayerScoreBoardList;
     private List<Player> mPlayerList;
     private Unbinder mUnbinder;
-
+    private ExpandableListAdapter mExpandableRoundAdapter;
     @Inject
     Lazy<IDatabaseHelper> mDatabaseHelper;
 
@@ -50,6 +58,10 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
     @Nullable
     @BindView(R.id.settings_menuRecyclerView)
     RecyclerView mRecyclerView;
+
+    @Nullable
+    @BindView(R.id.settings_roundExpandableListView)
+    ExpandableListView mExpandableListView;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -67,7 +79,7 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recycle_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_history_scoreboard, container, false);
         mUnbinder = ButterKnife.bind(this, view);
 
         injectDependencies();
@@ -106,6 +118,8 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(adapter);
+
+        mExpandableListView.setAdapter(mExpandableRoundAdapter);
     }
 
     @Override
@@ -121,6 +135,22 @@ public class HistoryScoreBoardDetailFragment extends BaseFragment {
         mPlayerScoreBoardList = new ArrayList<>();
         mPlayerScoreBoardList.add(new ItemHeader());
         mPlayerScoreBoardList.addAll(mPlayerList);
+        List<Game> gameList = mDatabaseHelper.get().getAllGamesForDraft(draftKey);
+        SparseArray<Round> rounds = new SparseArray<>();
+        for (Game game : gameList) {
+            if (rounds.get(game.getRound()) == null) {
+                List<Game> roundGames = new ArrayList<>();
+                roundGames.add(game);
+                Round round = new Round(game.getRound(), roundGames);
+                rounds.put(game.getRound(), round);
+            } else {
+                Round round = rounds.get(game.getRound());
+                round.getGameList().add(game);
+            }
+
+        }
+
+        mExpandableRoundAdapter = new ExpandableListAdapter(SparseArrayToArrayListConverter.asList(rounds), getContext());
     }
 
     private void injectDependencies() {

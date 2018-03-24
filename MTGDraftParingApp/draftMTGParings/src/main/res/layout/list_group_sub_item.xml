@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+    android:paddingTop="@dimen/text_view_margin_settings"
+    android:paddingBottom="@dimen/text_view_margin_settings"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/group_players_names"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        tools:text="Arek vs Zbyszek" />
+
+    <TextView
+        android:id="@+id/group_players_results"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        tools:text="1-1-1" />
+</LinearLayout>

@@ -375,7 +375,7 @@ public class ScoreBoardActivity extends BaseActivity {
         } else {
             tempDraftName = draftName;
         }
-        mDatabaseHelper.get().saveDraft(mPlayerList, tempDraftName, currentDateAndTime, mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
+        mDatabaseHelper.get().saveDraft(mPlayerList, tempDraftName, currentDateAndTime, mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() + 1);
         FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
 
     }

@@ -95,7 +95,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
                         Player player1 = filteredPlayerList.get(i);
                         Player player2 = playerListPermutation.get(paringPartner);
                         Game game = new Game(player1.getPlayerName(),
-                                player2.getPlayerName());
+                                player2.getPlayerName(), getCurrentRound()+1);
                         gameList.add(game);
                         playerListPermutation.remove(player1);
                         playerListPermutation.remove(player2);
@@ -133,7 +133,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
                         Player player1 = filteredPlayerList.get(i);
                         Player player2 = playerListPermutation.get(paringPartner);
                         Game game = new Game(player1.getPlayerName(),
-                                player2.getPlayerName());
+                                player2.getPlayerName(), getCurrentRound()+1);
                         gameList.add(game);
                         playerListPermutation.remove(player1);
                         playerListPermutation.remove(player2);

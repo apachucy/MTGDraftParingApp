@@ -7,6 +7,7 @@ import java.util.List;
 
 import unii.draft.mtg.parings.database.model.Draft;
 import unii.draft.mtg.parings.database.model.PlayerDraftJoinTable;
+import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
 public interface IDatabaseHelper {
@@ -38,5 +39,12 @@ public interface IDatabaseHelper {
     void cleanDatabase();
 
     long getPlayerPlaceInDraft(long draftId, long playerId);
+
+
+    List<Game> getAllGamesForDraft(long draftId);
+
+    List<Game> getAllGamesForPlayer(long playerId);
+
+    Game getGameForPlayersAndDraft(long draftId, long playerAId, long playerBId, int round);
 
 }

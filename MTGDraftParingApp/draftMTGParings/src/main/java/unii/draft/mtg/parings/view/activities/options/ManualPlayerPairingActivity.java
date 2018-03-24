@@ -165,7 +165,7 @@ public class ManualPlayerPairingActivity extends BaseActivity {
     void onParingButtonClicked() {
         if (canAddPlayers()) {
             mGameList.add(new Game(mSelectPlayer1Action.getCurrentName(),
-                    mSelectPlayer2Action.getCurrentName()));
+                    mSelectPlayer2Action.getCurrentName(), mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() + 1));
             mPlayerNameList.remove(mSelectPlayer1Action.getCurrentName());
             mPlayerNameList.remove(mSelectPlayer2Action.getCurrentName());
             if (mPlayerNameList.isEmpty()) {

@@ -8,16 +8,15 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import unii.draft.mtg.parings.database.model.DaoMaster;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.database.model.Draft;
-import unii.draft.mtg.parings.database.model.DraftDao;
+import unii.draft.mtg.parings.database.model.GameDao;
 import unii.draft.mtg.parings.database.model.PlayerDao;
 import unii.draft.mtg.parings.database.model.PlayerDraftJoinTable;
 import unii.draft.mtg.parings.database.model.PlayerDraftJoinTableDao;
 import unii.draft.mtg.parings.logic.dagger.ApplicationComponent;
+import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 
@@ -126,8 +125,19 @@ public class DatabaseHelper implements IDatabaseHelper {
                 playerId = savePlayerDao(player.getPlayerName());
             }
             savePlayerToDraftDao(playerId, draftId, player, position);
+            for (Game game : player.getPlayedGame()) {
+                long playerIdA = getPlayerId(game.getPlayerNameA());
+                long playerIdB = getPlayerId(game.getPlayerNameB());
+                if (playerIdB != NO_MATCH && playerIdA != NO_MATCH
+                        && NO_MATCH == getIdForGame(draftId, playerIdA, playerIdB, game.getRound())
+                        && NO_MATCH == getIdForGame(draftId, playerIdB, playerIdA, game.getRound())) {
+                    saveGameToDraft(game, draftId, playerIdA, playerIdB);
+                }
+            }
             position++;
         }
+
+
     }
 
     @Override
@@ -146,6 +156,63 @@ public class DatabaseHelper implements IDatabaseHelper {
     public long getPlayerPlaceInDraft(long draftId, long playerId) {
         PlayerDraftJoinTable playerDraftJoinTable = mDaoSession.getPlayerDraftJoinTableDao().queryBuilder().where(PlayerDraftJoinTableDao.Properties.PlayerDraftJoinTableId.eq(playerId), PlayerDraftJoinTableDao.Properties.DraftPlayerJoinTableId.eq(draftId)).build().unique();
         return playerDraftJoinTable.getPlayerPlace();
+    }
+
+    @Override
+    public List<Game> getAllGamesForDraft(long draftId) {
+        List<unii.draft.mtg.parings.database.model.Game> loadedGames = mDaoSession.getGameDao().queryBuilder().where(GameDao.Properties.DraftGameJoinTableId.eq(draftId)).build().list();
+        List<Game> convertedGames = new ArrayList<>();
+
+        for (unii.draft.mtg.parings.database.model.Game game : loadedGames) {
+            String playerAName = getPlayer(game.getPlayerAGameJoinTableId()).getPlayerName();
+            String playerBName = getPlayer(game.getPlayerBGameJoinTableId()).getPlayerName();
+            convertedGames.add(new Game(game, playerAName, playerBName));
+        }
+
+        return convertedGames;
+    }
+
+    @Override
+    public List<Game> getAllGamesForPlayer(long playerId) {
+        List<unii.draft.mtg.parings.database.model.Game> loadedGames = mDaoSession.getGameDao().queryBuilder().whereOr(GameDao.Properties.PlayerAGameJoinTableId.eq(playerId), GameDao.Properties.PlayerBGameJoinTableId.eq(playerId)).build().list();
+        List<Game> convertedGames = new ArrayList<>();
+
+        for (unii.draft.mtg.parings.database.model.Game game : loadedGames) {
+            String playerAName = getPlayer(game.getPlayerAGameJoinTableId()).getPlayerName();
+            String playerBName = getPlayer(game.getPlayerBGameJoinTableId()).getPlayerName();
+            convertedGames.add(new Game(game, playerAName, playerBName));
+        }
+
+        return convertedGames;
+    }
+
+    private long getIdForGame(long draftId, long playerAId, long playerBId, int round) {
+        unii.draft.mtg.parings.database.model.Game loadedGame = mDaoSession.getGameDao().queryBuilder().where(GameDao.Properties.PlayerAGameJoinTableId.eq(playerAId),
+                GameDao.Properties.PlayerBGameJoinTableId.eq(playerBId),
+                GameDao.Properties.DraftGameJoinTableId.eq(draftId),
+                GameDao.Properties.Round.eq(round)).build().unique();
+
+        if (loadedGame == null) {
+            return NO_MATCH;
+        }
+        return loadedGame.getId();
+    }
+
+    @Override
+    public Game getGameForPlayersAndDraft(long draftId, long playerAId, long playerBId, int round) {
+        unii.draft.mtg.parings.database.model.Game loadedGame = mDaoSession.getGameDao().queryBuilder().where(GameDao.Properties.PlayerAGameJoinTableId.eq(playerAId),
+                GameDao.Properties.PlayerBGameJoinTableId.eq(playerBId),
+                GameDao.Properties.DraftGameJoinTableId.eq(draftId),
+                GameDao.Properties.Round.eq(round)).build().unique();
+
+        String playerAName = getPlayer(playerAId).getPlayerName();
+        String playerBName = getPlayer(playerBId).getPlayerName();
+
+        if (loadedGame == null) {
+            return new Game(playerAName, playerBName, round);
+        }
+
+        return new Game(loadedGame, playerAName, playerBName);
     }
 
 
@@ -173,6 +240,24 @@ public class DatabaseHelper implements IDatabaseHelper {
         if (player != null) {
             return player.getId();
         } else return NO_MATCH;
+    }
+
+    private long saveGameToDraft(Game game, long draftId, long playerAId, long playerBId) {
+        unii.draft.mtg.parings.database.model.Game saveGame = new unii.draft.mtg.parings.database.model.Game();
+        saveGame.setDraftGameJoinTableId(draftId);
+        saveGame.setPlayerAGameJoinTableId(playerAId);
+        saveGame.setPlayerBGameJoinTableId(playerBId);
+        saveGame.setDraws(game.getDraws());
+        saveGame.setRound(game.getRound());
+        saveGame.setWinner(game.getWinner());
+
+        saveGame.setPlayerAPoints(game.getPlayerAPoints());
+        saveGame.setPlayerBPoints(game.getPlayerBPoints());
+
+        saveGame.setGames(game.getGamesPlayed());
+        mDaoSession.getGameDao().insert(saveGame);
+        return saveGame.getId();
+
     }
 
     private long savePlayerToDraftDao(long playerId, long draftId, @NonNull Player player, int position) {
