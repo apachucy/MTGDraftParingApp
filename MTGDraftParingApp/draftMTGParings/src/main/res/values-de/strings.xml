@@ -190,5 +190,12 @@
     <string name="dialog_used_libraries_title">Benutzte Bibliotheken</string>
     <string name="dialog_help_with_app_title">Hilfe mit dieser Anwendung</string>
     <string name="settings_help_with_app">Sie können mit dieser App helfen</string>
+    <string name="history_group_round">Runde:%1$d</string>
+    <string name="lose">verpassen</string>
+    <string name="draw">unentschieden</string>
+    <string name="win">sieg</string>
+    <string name="history_player_statistics">Spielerstatistiken</string>
+    <string name="history_player_rivalisation">Historische Spielergebnisse</string>
+    <string name="history_pie_chart_title">Spieler %1$s sieg/unetschieden/verpassen statistik für alle Spiele</string>
 
 </resources>

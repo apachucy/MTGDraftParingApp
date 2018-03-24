@@ -67,25 +67,51 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        ViewHolderGroup group;
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group_item, null);
+            group = new ViewHolderGroup();
+            group.roundTextView = convertView.findViewById(R.id.group_round_number);
+            convertView.setTag(group);
+        } else {
+            group = (ViewHolderGroup) convertView.getTag();
         }
 
-        TextView round = convertView
-                .findViewById(R.id.group_round_number);
 
-        round.setText(context.getString(R.string.history_group_round, roundList.get(groupPosition).getNumber()));
+        group.roundTextView.setText(context.getString(R.string.history_group_round, roundList.get(groupPosition).getNumber()));
         return convertView;
+    }
+
+    static class ViewHolderGroup {
+        TextView roundTextView;
+    }
+
+    static class ViewHolderItem {
+        TextView playersTextView;
+        TextView resultsTextView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        ViewHolderItem resultViewHolderItem;
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group_sub_item, null);
+            resultViewHolderItem = new ViewHolderItem();
+            resultViewHolderItem.playersTextView = convertView.findViewById(R.id.group_players_names);
+            resultViewHolderItem.resultsTextView = convertView.findViewById(R.id.group_players_results);
+            convertView.setTag(resultViewHolderItem);
+
+        } else {
+            resultViewHolderItem = (ViewHolderItem) convertView.getTag();
+        }
+        convertView.setVisibility(View.VISIBLE);
+        if (groupPosition > roundList.size() - 1 || childPosition > roundList.get(groupPosition).getGameList().size() - 1) {
+            convertView.setVisibility(View.GONE);
+            return convertView;
         }
 
         Game game = roundList.get(groupPosition).getGameList().get(childPosition);
@@ -97,17 +123,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         } else {
             looser = game.getWinner().equals(game.getPlayerNameA()) ? game.getPlayerNameB() : game.getPlayerNameA();
         }
-        TextView playerNames = convertView
-                .findViewById(R.id.group_players_names);
 
-        playerNames.setText(context.getString(R.string.history_group_players_name, winner, looser));
+
+        resultViewHolderItem.playersTextView.setText(context.getString(R.string.history_group_players_name, winner, looser));
 
         int pointsWinner = game.getWinner().equals(game.getPlayerNameA()) ? game.getPlayerAPoints() : game.getPlayerBPoints();
 
         int pointsLooser = game.getWinner().equals(game.getPlayerNameA()) ? game.getPlayerBPoints() : game.getPlayerAPoints();
 
-        TextView playerPoints = convertView.findViewById(R.id.group_players_results);
-        playerPoints.setText(context.getString(R.string.history_group_player_results, pointsWinner, game.getDraws(), pointsLooser));
+        resultViewHolderItem.resultsTextView.setText(context.getString(R.string.history_group_player_results, pointsWinner, game.getDraws(), pointsLooser));
         return convertView;
     }
 

@@ -246,6 +246,12 @@
 
     <!-- more history -->
     <string name="history_group_round">Round: %1$d</string>
-    <string name="history_group_players_name">%1$s vs %2$s</string>
-    <string name="history_group_player_results">%1$d-%2$d-%3$d</string>
+    <string name="history_group_players_name" translatable="false">%1$s vs %2$s</string>
+    <string name="history_group_player_results" translatable="false">%1$d-%2$d-%3$d</string>
+    <string name="history_player_rivalisation">Historial game results</string>
+    <string name="history_pie_chart_title">Player %1$s win/draw/lose statistic for all games</string>
+    <string name="history_player_statistics">Player statistics</string>
+    <string name="win">win</string>
+    <string name="draw">draw</string>
+    <string name="lose">lose</string>
 </resources>

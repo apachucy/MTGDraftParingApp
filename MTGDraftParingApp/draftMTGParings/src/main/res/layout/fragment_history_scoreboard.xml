@@ -14,7 +14,7 @@
     <ExpandableListView
         android:id="@+id/settings_roundExpandableListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/text_view_margin_normal"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="@dimen/expandable_divider_height"

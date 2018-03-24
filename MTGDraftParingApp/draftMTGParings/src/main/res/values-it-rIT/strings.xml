@@ -222,4 +222,11 @@
     <string name="dialog_used_libraries_title">Librerie usate</string>
     <string name="dialog_help_with_app_title">Aiuto con questa applicazione</string>
     <string name="settings_help_with_app">Puoi aiutare con questa app</string>
+    <string name="history_group_round">Round: %1$d</string>
+    <string name="lose">perdere</string>
+    <string name="draw">pareggio</string>
+    <string name="win">vincere</string>
+    <string name="history_player_statistics">Statistiche del giocatore</string>
+    <string name="history_player_rivalisation">Risultati del gioco storici</string>
+    <string name="history_pie_chart_title">Giocatore %1$s vincere/pareggio/perdere statistica per tutti i giochi</string>
 </resources>

@@ -42,8 +42,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/history_player_detail_playerAchievementsList"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.6"
+            android:layout_height="wrap_content"
             android:padding="@dimen/text_view_padding"
             android:scrollbars="vertical" />
     </LinearLayout>

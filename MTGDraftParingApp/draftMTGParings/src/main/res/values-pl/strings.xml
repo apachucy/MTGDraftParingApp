@@ -189,5 +189,12 @@
     <string name="dialog_used_libraries_title">Wykorzystane biblioteki</string>
     <string name="settings_help_with_app">Możesz pomóc w rozwoju aplikacji</string>
     <string name="dialog_help_with_app_title">"Możesz pomóc "</string>
+    <string name="history_group_round">Runda: %1$d</string>
+    <string name="history_player_rivalisation">Historyczne wyniki gier</string>
+    <string name="history_player_statistics">Statystki</string>
+    <string name="win">zwycięstwa</string>
+    <string name="draw">remisy</string>
+    <string name="lose">por</string>
+    <string name="history_pie_chart_title">Gracz %1$s zwycięstwa/remisty/porażki, czyli statystyka dla wszystkich gier</string>
 
 </resources>

@@ -15,7 +15,7 @@ import unii.draft.mtg.parings.BaseActivity;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.util.config.BundleConst;
-import unii.draft.mtg.parings.view.fragments.history.HistoryPlayerAchievementsFragment;
+import unii.draft.mtg.parings.view.fragments.history.HistoryPlayerFragment;
 import unii.draft.mtg.parings.view.fragments.history.HistoryPlayerListFragment;
 import unii.draft.mtg.parings.view.fragments.history.IDisplayDetailFragment;
 
@@ -62,12 +62,12 @@ public class HistoryPlayerAchievementsActivity extends BaseActivity implements I
 
     @Override
     public void displayDetailView(Long detailKey) {
-        Fragment historyPlayerAchievementsFragment = new HistoryPlayerAchievementsFragment();
+        Fragment historyPlayerFragment = new HistoryPlayerFragment();
         Bundle bundle = new Bundle();
         bundle.putLong(BundleConst.BUNDLE_KEY_PLAYER_DRAFT_DETAIL, detailKey);
-        historyPlayerAchievementsFragment.setArguments(bundle);
+        historyPlayerFragment.setArguments(bundle);
         sCurrentFragmentTag = TAG_FRAGMENT_DETAIL;
-        replaceFragments(historyPlayerAchievementsFragment, TAG_FRAGMENT_DETAIL, R.id.content_frame);
+        replaceFragments(historyPlayerFragment, TAG_FRAGMENT_DETAIL, R.id.content_frame);
     }
 
     @Override
