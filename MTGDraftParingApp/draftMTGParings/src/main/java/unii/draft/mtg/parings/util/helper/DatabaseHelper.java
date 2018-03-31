@@ -11,6 +11,7 @@ import java.util.List;
 import unii.draft.mtg.parings.database.model.DaoMaster;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.database.model.Draft;
+import unii.draft.mtg.parings.database.model.DraftDao;
 import unii.draft.mtg.parings.database.model.GameDao;
 import unii.draft.mtg.parings.database.model.PlayerDao;
 import unii.draft.mtg.parings.database.model.PlayerDraftJoinTable;
@@ -213,6 +214,22 @@ public class DatabaseHelper implements IDatabaseHelper {
         }
 
         return new Game(loadedGame, playerAName, playerBName);
+    }
+
+    @Override
+    public void removeDraft(Draft draft) {
+        removeDraft(draft.getId());
+    }
+
+    @Override
+    public void removeDraft(long draftId) {
+        List<unii.draft.mtg.parings.database.model.Game> loadedGames = mDaoSession.getGameDao().queryBuilder().where(GameDao.Properties.DraftGameJoinTableId.eq(draftId)).build().list();
+        for (unii.draft.mtg.parings.database.model.Game game : loadedGames) {
+            mDaoSession.getGameDao().delete(game);
+        }
+
+        Draft draft = mDaoSession.getDraftDao().queryBuilder().where(DraftDao.Properties.Id.eq(draftId)).build().unique();
+        mDaoSession.getDraftDao().delete(draft);
     }
 
 

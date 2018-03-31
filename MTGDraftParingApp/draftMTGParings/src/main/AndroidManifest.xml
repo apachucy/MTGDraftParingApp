@@ -14,11 +14,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.SplashScreenActivity"
-            android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,7 +44,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activities.settings.HistoryScoreBoardActivity"
-            android:screenOrientation="portrait" />
+            android:label=""
+            android:icon="@mipmap/ic_history_game"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.activities.settings.SettingsMenuActivity"
             android:screenOrientation="portrait" />

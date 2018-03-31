@@ -1,11 +1,18 @@
 package unii.draft.mtg.parings.view.fragments.history;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,8 +40,11 @@ import unii.draft.mtg.parings.view.adapters.DividerItemDecorator;
 import unii.draft.mtg.parings.view.adapters.HistoryScoreBoardAdapter;
 import unii.draft.mtg.parings.view.fragments.BaseFragment;
 
-public class HistoryScoreBoardListFragment extends BaseFragment {
+import static unii.draft.mtg.parings.view.adapters.HistoryScoreBoardAdapter.VIEW_TYPE_EMPTY_LIST_PLACEHOLDER;
 
+public class HistoryScoreBoardListFragment extends BaseFragment {
+    private Paint mPaint;
+    private HistoryScoreBoardAdapter mAdapter;
     private Activity mContext;
     private IDisplayDetailFragment mDisplayHistoryScoreBoardDetail;
     private IShareDraftHistory mShareDraftHistory;
@@ -84,6 +94,7 @@ public class HistoryScoreBoardListFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        mPaint = null;
     }
 
     @Override
@@ -111,15 +122,19 @@ public class HistoryScoreBoardListFragment extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecorator(mContext, DividerItemDecorator.VERTICAL_LIST));
-        RecyclerView.Adapter adapter = new HistoryScoreBoardAdapter(mContext, mDatabaseHelper.get(), mDisplayHistoryScoreBoardDetail);
-        mRecyclerView.setAdapter(adapter);
+        mAdapter = new HistoryScoreBoardAdapter(mContext, mDatabaseHelper.get(), mDisplayHistoryScoreBoardDetail);
+        mRecyclerView.setAdapter(mAdapter);
+        if (mAdapter.getItemViewType(0) == VIEW_TYPE_EMPTY_LIST_PLACEHOLDER) {
+            return;
+        }
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(removeItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
     protected void initFragmentData() {
         mShareDraftHistory = new ShareDraftDataHistory(getContext());
-
-
+        mPaint = new Paint();
     }
 
     @NonNull
@@ -137,4 +152,44 @@ public class HistoryScoreBoardListFragment extends BaseFragment {
         getActivityComponent().inject(this);
     }
 
+    /**
+     * Code base on: https://www.learn2crack.com/2016/02/custom-swipe-recyclerview.html
+     */
+    private ItemTouchHelper.SimpleCallback removeItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            if (direction == ItemTouchHelper.LEFT && viewHolder instanceof HistoryScoreBoardAdapter.ViewHolder) {
+                mAdapter.removeItem(position);
+            }
+        }
+
+        @Override
+        public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+            Bitmap icon;
+            if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+
+                View itemView = viewHolder.itemView;
+                float height = (float) itemView.getBottom() - (float) itemView.getTop();
+                float width = height / 3;
+
+                if (dX < 0) {
+                    mPaint.setColor(ContextCompat.getColor(getContext(), R.color.red));
+                    RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
+                    c.drawRect(background, mPaint);
+                    icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_delete_white_36dp);
+                    RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                    c.drawBitmap(icon, null, icon_dest, mPaint);
+                }
+            }
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
 }

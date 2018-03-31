@@ -194,7 +194,9 @@
     <string name="history_player_statistics">Statystki</string>
     <string name="win">zwycięstwa</string>
     <string name="draw">remisy</string>
-    <string name="lose">por</string>
+    <string name="lose">porażki</string>
     <string name="history_pie_chart_title">Gracz %1$s zwycięstwa/remisty/porażki, czyli statystyka dla wszystkich gier</string>
+    <string name="app_history">Historia rozgrywek</string>
+    <string name="empty_view">Najpierw rozegraj parę gier, aby później było co wspominać ;)</string>
 
 </resources>

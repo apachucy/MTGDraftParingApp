@@ -47,4 +47,7 @@ public interface IDatabaseHelper {
 
     Game getGameForPlayersAndDraft(long draftId, long playerAId, long playerBId, int round);
 
+    void removeDraft(Draft draft);
+
+    void removeDraft(long draftId);
 }
