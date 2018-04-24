@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.logic.dagger;
 
 import dagger.Subcomponent;
 import unii.draft.mtg.parings.RoundActivity;
+import unii.draft.mtg.parings.view.activities.DraftRoundHistoryActivity;
 import unii.draft.mtg.parings.view.activities.options.AddPlayerActivity;
 import unii.draft.mtg.parings.view.activities.options.DropPlayerActivity;
 import unii.draft.mtg.parings.view.activities.settings.HistoryPlayerAchievementsActivity;
@@ -85,5 +86,7 @@ public interface ActivityComponent {
     void inject(HistoryPlayerFragment historyPlayerFragment);
 
     void inject(HistoryPlayerChartsFragment historyPlayerChartsFragment);
+
+    void inject(DraftRoundHistoryActivity activity);
 }
 

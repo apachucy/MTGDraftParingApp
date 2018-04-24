@@ -41,4 +41,12 @@
         android:orderInCategory="106"
         android:title="@string/action_switch_algorithm"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_round_history"
+        android:icon="@drawable/ic_access_time_white_24dp"
+        android:orderInCategory="107"
+        android:title="@string/action_round_history"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="always" />
 </menu>

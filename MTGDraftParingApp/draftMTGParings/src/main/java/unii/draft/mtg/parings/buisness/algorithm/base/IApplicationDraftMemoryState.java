@@ -1,5 +1,7 @@
 package unii.draft.mtg.parings.buisness.algorithm.base;
 
+import unii.draft.mtg.parings.sharedprefrences.IGamePreferences;
+
 public interface IApplicationDraftMemoryState {
     boolean cacheDraft();
 
@@ -8,4 +10,6 @@ public interface IApplicationDraftMemoryState {
     void clearCache();
 
     boolean isCacheEmpty();
+
+    IGamePreferences getInstance();
 }

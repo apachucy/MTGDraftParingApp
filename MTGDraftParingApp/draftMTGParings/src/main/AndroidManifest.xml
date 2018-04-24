@@ -19,6 +19,7 @@
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -44,8 +45,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activities.settings.HistoryScoreBoardActivity"
-            android:label=""
             android:icon="@mipmap/ic_history_game"
+            android:label="@string/app_history"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,6 +67,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activities.options.AddPlayerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.DraftRoundHistoryActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

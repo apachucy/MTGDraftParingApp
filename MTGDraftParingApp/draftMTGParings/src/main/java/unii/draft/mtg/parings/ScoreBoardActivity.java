@@ -49,6 +49,7 @@ import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 import unii.draft.mtg.parings.util.helper.PlayerNameWithPositionGenerator;
 import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
+import unii.draft.mtg.parings.view.activities.DraftRoundHistoryActivity;
 import unii.draft.mtg.parings.view.activities.options.AddPlayerActivity;
 import unii.draft.mtg.parings.view.activities.options.DropPlayerActivity;
 import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivity;
@@ -216,7 +217,7 @@ public class ScoreBoardActivity extends BaseActivity {
         controlVisibility(menu);
         setListGuideActions(
                 (ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView(),
-                (ImageView) menu.getItem(2).getActionView());
+                (ImageView) menu.getItem(2).getActionView(), (ImageView) menu.getItem(6).getActionView());
         return true;
     }
 
@@ -232,8 +233,6 @@ public class ScoreBoardActivity extends BaseActivity {
     }
 
     private boolean isLastRound() {
-
-
         return mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() >= mAlgorithmChooser.getCurrentAlgorithm().getMaxRound();
     }
 
@@ -382,24 +381,26 @@ public class ScoreBoardActivity extends BaseActivity {
 
 
     private void setListGuideActions(
-            @NonNull ImageView dropPlayerButton, @NonNull ImageView information, @NonNull ImageView shareContent) {
+            @NonNull ImageView dropPlayerButton, @NonNull ImageView information, @NonNull ImageView shareContent, @NonNull ImageView showRoundHistory) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 
         dropPlayerButton.setPadding(padding, padding, padding, padding);
         shareContent.setPadding(padding, padding, padding, padding);
         information.setPadding(padding, padding, padding, padding);
+        showRoundHistory.setPadding(padding, padding, padding, padding);
         // set an image
         dropPlayerButton.setImageDrawable(getSingleDrawable(R.drawable.ic_person_minus));
         shareContent.setImageDrawable(getSingleDrawable(R.drawable.ic_share));
         information.setImageDrawable(getSingleDrawable(R.drawable.ic_info));
-
+        showRoundHistory.setImageDrawable(getSingleDrawable(R.drawable.ic_access_time_white_24dp));
         if (mSharedPreferenceManager.showGuideTourOnScoreBoardScreen()) {
             Sequence sequence = new Sequence.SequenceBuilder().
                     add(
                             bindTourGuideButton(getString(R.string.help_drop_player), dropPlayerButton),
                             bindTourGuideButton(getString(R.string.help_share_content), shareContent),
-                            bindTourGuideButton(getString(R.string.help_information_scoreboard), information)
+                            bindTourGuideButton(getString(R.string.help_information_scoreboard), information),
+                            bindTourGuideButton(getString(R.string.round_history), showRoundHistory)
                     ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -433,7 +434,7 @@ public class ScoreBoardActivity extends BaseActivity {
                     sendIntent.setType(BaseConfig.INTENT_SHARE_DATA_TYPE);
                     startActivity(sendIntent);
                 } else {
-                    FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.warning_save_dashboard), FancyToast.LENGTH_LONG, FancyToast.INFO, false).show();
+                    FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.help_share_content), FancyToast.LENGTH_LONG, FancyToast.INFO, false).show();
 
                 }
             }
@@ -442,6 +443,14 @@ public class ScoreBoardActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 showInfoDialog(getString(R.string.dialog_scoreboard_info_title), getString(R.string.dialog_scoreboard_info_body), getString(R.string.dialog_positive));
+            }
+        });
+
+        showRoundHistory.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScoreBoardActivity.this, DraftRoundHistoryActivity.class);
+                startActivity(intent);
             }
         });
     }
