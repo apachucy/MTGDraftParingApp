@@ -138,4 +138,20 @@ public class Game {
     public int getRound() {
         return mRound;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Game)) {
+            return false;
+        }
+
+        Game gameConverted = (Game) obj;
+        if (this.getRound() == gameConverted.getRound() &&
+                (this.getPlayerNameA().equals(gameConverted.getPlayerNameA()) || this.getPlayerNameA().equals(gameConverted.getPlayerNameB())
+                        && this.getPlayerNameB().equals(gameConverted.getPlayerNameA()) || this.getPlayerNameB().equals(gameConverted.getPlayerNameB())
+                        && this.getWinner().equals(gameConverted.getWinner()) && this.getDraws() == gameConverted.getDraws())) {
+            return true;
+        }
+        return false;
+    }
 }

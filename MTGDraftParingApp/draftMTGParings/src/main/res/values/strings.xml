@@ -257,4 +257,7 @@
     <string name="draw">draw</string>
     <string name="lose">lose</string>
     <string name="empty_view">Play some games to see history :)</string>
+    <string name="scoreboard">Scoreboard</string>
+    <string name="round_history">Round History</string>
+    <string name="action_round_history" translatable="false">@string/round_history</string>
 </resources>

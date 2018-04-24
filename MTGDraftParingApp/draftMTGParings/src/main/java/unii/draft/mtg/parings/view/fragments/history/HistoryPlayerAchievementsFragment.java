@@ -76,7 +76,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history_player_detail, container, false);
-        mUnbinder=  ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         injectDependencies();
         initFragmentData();
         initFragmentView();
@@ -147,7 +147,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     }
 
     private String playerAchievementToString(Integer key, Integer value) {
-        if( value > 1){
+        if (value > 1) {
             return getString(R.string.history_detail_player_overall_count_positions, key, value);
         }
         return getString(R.string.history_detail_player_overall_count_position, key, value);

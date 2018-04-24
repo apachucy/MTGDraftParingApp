@@ -113,7 +113,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IActivit
     protected void replaceFragments(Fragment fragment, String tag, int container) {
         Fragment fragmentFound = getSupportFragmentManager().findFragmentByTag(tag);
         if (fragmentFound != null) {
-            getSupportFragmentManager().beginTransaction().show(fragmentFound).commit();
+            getSupportFragmentManager().beginTransaction().show(fragmentFound).commitAllowingStateLoss();
         } else {
             hideKeyboard();
             getSupportFragmentManager().beginTransaction()

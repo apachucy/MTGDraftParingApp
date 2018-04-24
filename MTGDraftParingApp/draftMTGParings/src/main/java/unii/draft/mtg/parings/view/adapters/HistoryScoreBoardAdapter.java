@@ -111,6 +111,9 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<RecyclerView.
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (mDraftList.size() == 0) {
+                        return;
+                    }
                     mDisplayHistoryScoreBoardDetail.displayDetailView(mDraftList.get(getAdapterPosition()).getId());
                 }
             });

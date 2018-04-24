@@ -102,7 +102,9 @@ public class DatabaseHelper implements IDatabaseHelper {
 
         for (PlayerDraftJoinTable playerDraftJoinTable : playerDraftJoinTableList) {
             Draft draft = mDaoSession.getDraftDao().load(playerDraftJoinTable.getDraftPlayerJoinTableId());
-            draftList.add(draft);
+            if (draft != null) {
+                draftList.add(draft);
+            }
         }
 
         return draftList;
@@ -165,8 +167,15 @@ public class DatabaseHelper implements IDatabaseHelper {
         List<Game> convertedGames = new ArrayList<>();
 
         for (unii.draft.mtg.parings.database.model.Game game : loadedGames) {
-            String playerAName = getPlayer(game.getPlayerAGameJoinTableId()).getPlayerName();
-            String playerBName = getPlayer(game.getPlayerBGameJoinTableId()).getPlayerName();
+            unii.draft.mtg.parings.database.model.Player playerA = getPlayer(game.getPlayerAGameJoinTableId());
+            unii.draft.mtg.parings.database.model.Player playerB = getPlayer(game.getPlayerBGameJoinTableId());
+
+            if (playerA == null || playerB == null) {
+                continue;
+            }
+
+            String playerAName = playerA.getPlayerName();
+            String playerBName = playerB.getPlayerName();
             convertedGames.add(new Game(game, playerAName, playerBName));
         }
 
@@ -179,8 +188,15 @@ public class DatabaseHelper implements IDatabaseHelper {
         List<Game> convertedGames = new ArrayList<>();
 
         for (unii.draft.mtg.parings.database.model.Game game : loadedGames) {
-            String playerAName = getPlayer(game.getPlayerAGameJoinTableId()).getPlayerName();
-            String playerBName = getPlayer(game.getPlayerBGameJoinTableId()).getPlayerName();
+            unii.draft.mtg.parings.database.model.Player playerA = getPlayer(game.getPlayerAGameJoinTableId());
+            unii.draft.mtg.parings.database.model.Player playerB = getPlayer(game.getPlayerBGameJoinTableId());
+
+            if (playerA == null || playerB == null) {
+                continue;
+            }
+
+            String playerAName = playerA.getPlayerName();
+            String playerBName = playerB.getPlayerName();
             convertedGames.add(new Game(game, playerAName, playerBName));
         }
 
@@ -230,6 +246,12 @@ public class DatabaseHelper implements IDatabaseHelper {
 
         Draft draft = mDaoSession.getDraftDao().queryBuilder().where(DraftDao.Properties.Id.eq(draftId)).build().unique();
         mDaoSession.getDraftDao().delete(draft);
+
+        List<PlayerDraftJoinTable> playerDraftJoinTableList = draft.getDrafts();
+
+        for (PlayerDraftJoinTable playerDraftJoinTable : playerDraftJoinTableList) {
+            mDaoSession.getPlayerDraftJoinTableDao().delete(playerDraftJoinTable);
+        }
     }
 
 

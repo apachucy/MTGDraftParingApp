@@ -199,5 +199,7 @@
     <string name="history_pie_chart_title">Spieler %1$s sieg/unetschieden/verpassen statistik für alle Spiele</string>
     <string name="app_history">Turniergeschichte</string>
     <string name="empty_view">Spiele ein paar Spiele um Geschichte zu sehen :)</string>
+    <string name="scoreboard">Anzeigetafel</string>
+    <string name="round_history">Runde Geschichte</string>
 
 </resources>

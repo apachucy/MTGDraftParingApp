@@ -231,4 +231,6 @@
     <string name="history_pie_chart_title">Giocatore %1$s vincere/pareggio/perdere statistica per tutti i giochi</string>
     <string name="app_history">Storia del torneo</string>
     <string name="empty_view">Gioca con alcuni giochi per vedere la storia :)</string>
+    <string name="scoreboard">Tabellone Segnapunti</string>
+    <string name="round_history">Storia circolare</string>
 </resources>

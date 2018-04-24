@@ -19,6 +19,7 @@ import unii.draft.mtg.parings.util.annotation.TODOImprove;
  * Root algorithm for manual and generated parings
  */
 public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDraftMemoryState {
+    //TODO: make me a variable in Dagger2!
     private DraftDataProvider mDraftDataProvider;
     private IGamePreferences mGamePreferences;
 
@@ -208,4 +209,8 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
         return false;
     }
 
+    @Override
+    public IGamePreferences getInstance() {
+        return mGamePreferences;
+    }
 }
