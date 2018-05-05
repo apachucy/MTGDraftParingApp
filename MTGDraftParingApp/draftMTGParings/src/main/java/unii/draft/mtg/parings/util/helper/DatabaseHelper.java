@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.dao.AbstractDao;
 import unii.draft.mtg.parings.database.model.DaoMaster;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.database.model.Draft;
@@ -150,9 +151,11 @@ public class DatabaseHelper implements IDatabaseHelper {
 
     @Override
     public void cleanDatabase() {
-        mDaoSession.getPlayerDraftJoinTableDao().deleteAll();
-        mDaoSession.getPlayerDao().deleteAll();
-        mDaoSession.getDraftDao().deleteAll();
+        mDaoSession.clear();
+
+        for (AbstractDao abstractDao : mDaoSession.getAllDaos()){
+            abstractDao.deleteAll();
+        }
     }
 
     @Override
