@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
+import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
@@ -27,19 +28,22 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
 
     @Nullable
     @Override
-    public List<Game> getParings() {
+    public List<Game> getParings(int sittingsMode) {
         /**
          * If current played round is bigger than finished round
          * load last generated game
          */
         if (getCurrentRound() > playedRound()) {
-            return super.getParings();
+            return super.getParings(0);
         }
         List<Player> filteredPlayerList = getFilteredPlayerList(false);
         List<Game> gameList = null;
         if (getCurrentRound() == 0) {
-            calculatePairAtStart(filteredPlayerList);
-
+            if (sittingsMode == SittingsMode.SITTINGS_RANDOM) {
+                sittingsPairingAtStart(filteredPlayerList);
+            } else {
+                calculatePairAtStart(filteredPlayerList);
+            }
         } else if (getCurrentRound() < getMaxRound()) {
             sortPlayers(filteredPlayerList);
 
@@ -95,7 +99,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
                         Player player1 = filteredPlayerList.get(i);
                         Player player2 = playerListPermutation.get(paringPartner);
                         Game game = new Game(player1.getPlayerName(),
-                                player2.getPlayerName(), getCurrentRound()+1);
+                                player2.getPlayerName(), getCurrentRound() + 1);
                         gameList.add(game);
                         playerListPermutation.remove(player1);
                         playerListPermutation.remove(player2);
@@ -133,7 +137,7 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
                         Player player1 = filteredPlayerList.get(i);
                         Player player2 = playerListPermutation.get(paringPartner);
                         Game game = new Game(player1.getPlayerName(),
-                                player2.getPlayerName(), getCurrentRound()+1);
+                                player2.getPlayerName(), getCurrentRound() + 1);
                         gameList.add(game);
                         playerListPermutation.remove(player1);
                         playerListPermutation.remove(player2);
@@ -193,6 +197,23 @@ public class AutomaticParingAlgorithm extends BaseAlgorithm {
             Collections.swap(playerList, swapA, swapB);
         }
     }
+
+    private void sittingsPairingAtStart(@NonNull List<Player> playerList) {
+        int pivot = playerList.size() / 2;
+        List<Player> firstSubList = new ArrayList<>(playerList.subList(0, pivot));
+        List<Player> secondSubList = new ArrayList<>(playerList.subList(pivot + 1, playerList.size() - 1));
+        playerList.clear();
+
+        for (int i = 0; i < secondSubList.size(); i++) {
+            if (i < firstSubList.size()) {
+                playerList.add(firstSubList.get(i));
+            }
+            if (i < secondSubList.size()) {
+                playerList.add(secondSubList.get(i));
+            }
+        }
+    }
+
 
     /**
      * sort list of players <br>

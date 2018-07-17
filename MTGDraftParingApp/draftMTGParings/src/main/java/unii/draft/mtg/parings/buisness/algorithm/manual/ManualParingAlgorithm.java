@@ -19,13 +19,13 @@ public class ManualParingAlgorithm extends BaseAlgorithm {
 
 
     @Override
-    public List<Game> getParings() {
+    public List<Game> getParings(int sittingsMode) {
         /**
          * If current played round is bigger than finished round
          * load last generated game
          */
         if (getCurrentRound() > playedRound()) {
-            return super.getParings();
+            return super.getParings(0);
         }
         setCurrentRound(getCurrentRound() + 1);
         return getGameRoundList();

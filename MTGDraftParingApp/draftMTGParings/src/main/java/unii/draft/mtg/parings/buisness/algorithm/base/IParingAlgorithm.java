@@ -16,9 +16,10 @@ public interface IParingAlgorithm {
      * get actual paring in form of <br>
      * list of{@link Game}
      *
+     * @param sittingsType check: {@linkplain unii.draft.mtg.parings.buisness.sittings.SittingsMode}
      * @return game list or in case of error null
      */
-    List<Game> getParings();
+    List<Game> getParings(int sittingsType);
 
     /**
      * getting current rounds
