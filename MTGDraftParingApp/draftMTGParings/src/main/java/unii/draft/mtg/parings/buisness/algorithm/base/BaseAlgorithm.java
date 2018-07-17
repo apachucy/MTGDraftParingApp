@@ -51,7 +51,7 @@ public abstract class BaseAlgorithm implements IParingAlgorithm, IApplicationDra
     }
 
     @Override
-    public List<Game> getParings() {
+    public List<Game> getParings(int sittingsMode) {
         return mDraftDataProvider.getParingGameList();
     }
 

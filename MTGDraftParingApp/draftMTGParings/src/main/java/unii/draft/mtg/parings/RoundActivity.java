@@ -309,7 +309,7 @@ public class RoundActivity extends BaseActivity {
                 } else if (baseAlgorithm.isLoadCachedDraftWasNeeded() || isPairingsGenerated) {
                     mGameList = ((BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm()).getGameRoundList();
                 } else {
-                    mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings();
+                    mGameList = mAlgorithmChooser.getCurrentAlgorithm().getParings(mSharedPreferenceManager.getGeneratedSittingMode());
                     isPairingsGenerated = true;
                     //save round in sharedPreferences
                     baseAlgorithm.cacheDraft();

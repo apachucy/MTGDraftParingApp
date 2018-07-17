@@ -74,7 +74,7 @@ public class AutomaticAlgorithmTest {
         objectUnderTest.setDraftStartedPlayersList(populatePlayersList(playerNames));
         objectUnderTest.setCurrentRound(0);
         //when
-        List<Game> gameList = objectUnderTest.getParings();
+        List<Game> gameList = objectUnderTest.getParings(0);
         //then
         assertNotNull(gameList);
         assertEquals(gameList.size(), 2);
@@ -97,7 +97,7 @@ public class AutomaticAlgorithmTest {
         objectUnderTest.setDraftStartedPlayersList(populatePlayersList(playerNames));
         objectUnderTest.setCurrentRound(0);
         //when
-        List<Game> gameList = objectUnderTest.getParings();
+        List<Game> gameList = objectUnderTest.getParings(0);
         //then
         assertNotNull(gameList);
         assertEquals(gameList.size(), 2);
