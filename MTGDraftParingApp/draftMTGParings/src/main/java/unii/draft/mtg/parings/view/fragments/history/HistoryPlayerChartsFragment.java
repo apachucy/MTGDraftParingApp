@@ -31,9 +31,10 @@ import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 import unii.draft.mtg.parings.view.fragments.BaseFragment;
 
-import static com.github.mikephil.charting.utils.ColorTemplate.JOYFUL_COLORS;
+import static com.github.mikephil.charting.utils.ColorTemplate.MATERIAL_COLORS;
 
 public class HistoryPlayerChartsFragment extends BaseFragment {
+    private static final int ANIMATE_CHART_MILS = 1500;
     private Unbinder mUnbinder;
     private Long mPlayerId;
     private unii.draft.mtg.parings.database.model.Player mPlayer;
@@ -69,6 +70,9 @@ public class HistoryPlayerChartsFragment extends BaseFragment {
     @Override
     protected void initFragmentView() {
         mPieChart.setData(mPieData);
+        mPieChart.getDescription().setEnabled(false);
+        mPieChart.getLegend().setEnabled(false);
+        mPieChart.animateXY(ANIMATE_CHART_MILS, ANIMATE_CHART_MILS);
         playerNameTextView.setText(getString(R.string.history_pie_chart_title, mPlayer.getPlayerName()));
 
 
@@ -93,9 +97,9 @@ public class HistoryPlayerChartsFragment extends BaseFragment {
 
 
     private PieData prepareDataSet(List<PieEntry> entryList) {
-        String dataSetName = getString(R.string.history_player_statistics);
+        String dataSetName = "";
         PieDataSet dataSet = new PieDataSet(entryList, dataSetName);
-        dataSet.setColors(JOYFUL_COLORS);
+        dataSet.setColors(MATERIAL_COLORS);
         dataSet.setValueTextColor(ContextCompat.getColor(getContext(), R.color.navigationBarColor));
         dataSet.setValueTextSize(13f);
         return new PieData(dataSet);

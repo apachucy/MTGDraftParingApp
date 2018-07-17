@@ -7,7 +7,7 @@
     <!-- EditText dimen -->
     <dimen name="edit_text_width">150dp</dimen>
     <dimen name="edit_text_width_big">180dp</dimen>
-
+    <dimen name="settings_edit_text_width">60dp</dimen>
     <dimen name="player_text_view">50dp</dimen>
     <!-- defaults -->
     <dimen name="standard_margin">15dp</dimen>
