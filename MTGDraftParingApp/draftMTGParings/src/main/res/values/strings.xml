@@ -145,7 +145,7 @@
     <!--Modify App UI -->
     <string name="action_countdown">End of round countdown</string>
     <string name="action_open_life_app">Open Life App</string>
-    <string name="message_action_countdown_started">Countdown…</string>
+    <string name="message_action_countdown_started">Countdown&#8230;</string>
     <string name="message_action_countdown_cancel">Countdown was cancelled</string>
     <!--Open Intent -->
     <string name="chooser_intent_title_life_counter">Choose life counter application</string>

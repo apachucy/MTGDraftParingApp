@@ -38,7 +38,7 @@ public class DropPlayerAdapter extends RecyclerView.Adapter<DropPlayerAdapter.Vi
     public void onBindViewHolder(@NonNull final DropPlayerAdapter.ViewHolder holder, final int position) {
         holder.playerNameCheckBox.setOnCheckedChangeListener(null);
         int textColor;
-        holder.playerNameCheckBox.setSelected(mNotDroppedPlayerList.get(position).isDropped());
+        holder.playerNameCheckBox.setSelected(mNotDroppedPlayerList.get(holder.getAdapterPosition()).isDropped());
         if (holder.playerNameCheckBox.isSelected()) {
             textColor = mContext.getResources().getColor(R.color.grey_light);
         } else {
@@ -50,7 +50,7 @@ public class DropPlayerAdapter extends RecyclerView.Adapter<DropPlayerAdapter.Vi
         holder.playerNameCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mNotDroppedPlayerList.get(position).setDropped(isChecked);
+                mNotDroppedPlayerList.get(holder.getAdapterPosition()).setDropped(isChecked);
                 int textColor;
                 if (isChecked) {
                     textColor = mContext.getResources().getColor(R.color.grey_light);
