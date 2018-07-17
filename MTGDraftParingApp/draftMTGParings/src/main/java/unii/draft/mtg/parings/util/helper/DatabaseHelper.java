@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.dao.AbstractDao;
+import unii.draft.mtg.parings.buisness.algorithm.base.PlayersComparator;
 import unii.draft.mtg.parings.database.model.DaoMaster;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.database.model.Draft;
@@ -123,7 +124,10 @@ public class DatabaseHelper implements IDatabaseHelper {
     public void saveDraft(@NonNull List<Player> playerDraftList, String draftName, String draftDate, int numberOfRounds) {
         long draftId = saveDraftDao(draftName, draftDate, playerDraftList.size(), numberOfRounds);
         int position = 0;
-        for (Player player : playerDraftList) {
+        int EQUAL = 0;
+        PlayersComparator comparator = new PlayersComparator();
+        for (int playerIndex = 0; playerIndex < playerDraftList.size(); playerIndex++) {
+            Player player = playerDraftList.get(playerIndex);
             long playerId = getPlayerId(player.getPlayerName());
             if (playerId == NO_MATCH) {
                 playerId = savePlayerDao(player.getPlayerName());
@@ -138,7 +142,12 @@ public class DatabaseHelper implements IDatabaseHelper {
                     saveGameToDraft(game, draftId, playerIdA, playerIdB);
                 }
             }
+            //check
+            int nextIndex = playerIndex + 1;
+            Player nextPlayer = nextIndex < playerDraftList.size() ? playerDraftList.get(nextIndex) : null;
+            if (nextPlayer == null || !(comparator.compare(player, nextPlayer) == EQUAL)) {
             position++;
+        }
         }
 
 
