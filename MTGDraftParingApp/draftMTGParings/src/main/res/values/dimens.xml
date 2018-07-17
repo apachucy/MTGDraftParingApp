@@ -8,16 +8,13 @@
     <dimen name="edit_text_width">150dp</dimen>
     <dimen name="edit_text_width_big">180dp</dimen>
 
-    <dimen name="settings_edit_text_width">60dp</dimen>
     <dimen name="player_text_view">50dp</dimen>
     <!-- defaults -->
     <dimen name="standard_margin">15dp</dimen>
     <dimen name="text_view_margin_settings">10dp</dimen>
     <dimen name="text_view_margin_settings_small">5dp</dimen>
     <dimen name="button_margin_settings">10dp</dimen>
-    <dimen name="edit_text_margin_settings">5dp</dimen>
     <dimen name="text_view_margin_normal">10dp</dimen>
-    <dimen name="text_view_player_list">12dp</dimen>
     <dimen name="text_view_point_padding">22dp</dimen>
     <dimen name="text_view_margin_small">3dp</dimen>
     <dimen name="text_view_margin_medium">5dp</dimen>

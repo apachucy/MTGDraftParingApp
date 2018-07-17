@@ -6,6 +6,7 @@ import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import unii.draft.mtg.parings.util.config.BaseConfig;
@@ -62,7 +63,7 @@ public class CounterClass extends CountDownTimer {
     @Override
     public void onFinish() {
         // display formated string
-        String hms = String.format(
+        String hms = String.format(Locale.getDefault(),
                 "%02d:%02d:%02d", 0, 0, 0
         );
 
@@ -77,7 +78,7 @@ public class CounterClass extends CountDownTimer {
     public void onTick(long millisUntilFinished) {
         millisTillFinishWillBeCalled = millisUntilFinished;
         // display formated string
-        String hms = String.format(
+        String hms = String.format(Locale.getDefault(),
                 "%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(millisTillFinishWillBeCalled),
                 TimeUnit.MILLISECONDS.toMinutes(millisTillFinishWillBeCalled)

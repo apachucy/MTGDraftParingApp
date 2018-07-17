@@ -71,7 +71,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.list_group_item, null);
+            convertView = layoutInflater.inflate(R.layout.list_group_item, parent);
             group = new ViewHolderGroup();
             group.roundTextView = convertView.findViewById(R.id.group_round_number);
             convertView.setTag(group);
@@ -99,7 +99,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.list_group_sub_item, null);
+            convertView = layoutInflater.inflate(R.layout.list_group_sub_item, parent);
             resultViewHolderItem = new ViewHolderItem();
             resultViewHolderItem.playersTextView = convertView.findViewById(R.id.group_players_names);
             resultViewHolderItem.resultsTextView = convertView.findViewById(R.id.group_players_results);

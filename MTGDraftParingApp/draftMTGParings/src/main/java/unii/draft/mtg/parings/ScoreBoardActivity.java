@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -368,7 +369,7 @@ public class ScoreBoardActivity extends BaseActivity {
 
     private void saveDraft(@Nullable String draftName) {
         String tempDraftName;
-        SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN);
+        SimpleDateFormat sdf = new SimpleDateFormat(BaseConfig.DATE_PATTERN, Locale.getDefault());
         String currentDateAndTime = sdf.format(new Date());
         if (draftName == null || draftName.isEmpty()) {
             tempDraftName = currentDateAndTime;
