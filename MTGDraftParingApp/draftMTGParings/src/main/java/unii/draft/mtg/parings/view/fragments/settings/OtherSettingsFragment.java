@@ -45,7 +45,6 @@ public class OtherSettingsFragment extends BaseFragment {
 
     @Override
     protected void initFragmentView() {
-
     }
 
     @Override
@@ -121,7 +120,14 @@ public class OtherSettingsFragment extends BaseFragment {
 
     @OnClick(R.id.settings_usedLibrariesButton)
     public void onUsedLibrariesClicked() {
-        showDialog(getContext(), getString(R.string.dialog_used_libraries_title), getString(R.string.dialog_used_libraries_body), getString(R.string.dialog_positive));
+        showDialogWithLink(getContext(), getString(R.string.dialog_used_libraries_title), R.string.dialog_used_libraries_body, getString(R.string.dialog_positive));
+    }
+
+    @OnClick(R.id.settings_fanPageButton)
+    public void onFanPageClicked() {
+        Intent fanPageIntent = new Intent(Intent.ACTION_VIEW);
+        fanPageIntent.setData(Uri.parse("https://www.facebook.com/MTG-Tournament-Calculator-504287586635285/"));
+        startActivity(fanPageIntent);
     }
 
     private void injectDependencies() {
