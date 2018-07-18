@@ -61,4 +61,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_help_with_app" />
+
+    <Button
+        android:id="@+id/settings_fanPageButton"
+        style="@style/buttonBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_fan_page" />
 </LinearLayout>

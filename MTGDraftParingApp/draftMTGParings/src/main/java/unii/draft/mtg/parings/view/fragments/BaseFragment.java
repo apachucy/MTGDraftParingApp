@@ -2,8 +2,10 @@ package unii.draft.mtg.parings.view.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 
@@ -53,6 +55,15 @@ public abstract class BaseFragment extends Fragment {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
+                .positiveText(positiveText)
+                .backgroundColorRes(R.color.windowBackground)
+                .show();
+    }
+
+    protected void showDialogWithLink(@NonNull Context context, @NonNull String title,  @StringRes int content, @NonNull String positiveText) {
+        mMaterialDialogInstance = new MaterialDialog.Builder(context)
+                .title(title)
+                .content(content, true)
                 .positiveText(positiveText)
                 .backgroundColorRes(R.color.windowBackground)
                 .show();
