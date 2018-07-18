@@ -173,10 +173,7 @@
     <string name="settings_pairing_mode_dialog_title">Scegli le opzioni per i Parings:</string>
     <string name="settings_save_draft_result_dialog_title">I risultati del draft devono essere salvati:</string>
     <string name="player_sittings_description">Sittings prima del 1° round</string>
-
-    <string name="history_player_played_drafts">Draft svolti: %1$d</string>
     <string name="history_player_detail_place">Posto: %1$d / %2$d</string>
-    <string name="history_player_wins_drafts">Vittorie: %1$d</string>
     <string name="history_player_overall_places">Luoghi dei draft:</string>
     <string name="history_player_overall_played">Giocati nel draft:</string>
     <string name="history_detail_player_overall_count_position">Posto %1$d: %2$d Volte</string>
