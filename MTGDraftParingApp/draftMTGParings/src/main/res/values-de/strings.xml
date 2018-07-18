@@ -144,7 +144,6 @@
     <string name="tutorial_hour_glass">Presse, den Countdown zu starten</string>
     <string name="chooser_dialog_body_mana_calculator">Bitte laden Sie die Anwendung Mana Calculator</string>
     <string name="chooser_intent_title_mana_calculator">Wählen Sie die Anwendung für das Zählen Mana</string>
-    <string name="history_player_played_drafts">Draft gespielt: %1$d</string>
     <string name="settings_developer_account_error">Sie können nicht einen Web-Browser öffnen, installieren Sie etwas aus und versuchen Sie es erneut</string>
     <string name="settings_dialog_round_first_vibration_title">Legen Sie die zuerst Schwingung</string>
     <string name="tutorial_life_app">Öffnen Sie Ihr Leben für diese Runde zu zählen</string>
@@ -159,7 +158,6 @@
     <string name="history_detail_player_overall_count_positions">Platz %1$d / %2$d mal</string>
     <string name="history_player_overall_places">Platz in drafts:</string>
     <string name="history_player_overall_played">Teilnahme an drafts:</string>
-    <string name="history_player_wins_drafts">Won: %1$d</string>
     <string name="dialog_scoreboard_info_title">Erläuterung</string>
     <string name="help_information_scoreboard">Was es bedeutet: PMG, PGW&#8230;</string>
     <string name="dialog_warning_go_back_body">Willst du die letzte Runde wirklich bearbeiten?</string>

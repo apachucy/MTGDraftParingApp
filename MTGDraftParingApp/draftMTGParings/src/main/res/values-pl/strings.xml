@@ -114,7 +114,6 @@
     <string name="chooser_intent_title_mana_calculator">Wybierz aplikację do liczenia many</string>
     <string name="help_share_content">Po grze możesz się podzielić wynikiem</string>
     <string name="history_player_detail_place">Miejsce %1$d / %2$d</string>
-    <string name="history_player_played_drafts">Drafty rozegrane: %1$d</string>
     <string name="message_player_list_not_exists">Brak zawodników do wyświetlenia</string>
     <string name="no_players_from_history">Brak zapisanych zawodników</string>
     <string name="select_player_name">Wybrano: %1$s</string>
@@ -159,7 +158,6 @@
     <string name="history_detail_player_overall_count_positions">Miejsce %1$d: %2$d razy</string>
     <string name="history_player_overall_places">Miejsca w draftach:</string>
     <string name="history_player_overall_played">Udział w draftach:</string>
-    <string name="history_player_wins_drafts">Wygranych: %1$d</string>
     <string name="help_information_scoreboard">Co oznaczają skróty: PMG, PGW&#8230;</string>
     <string name="dialog_scoreboard_info_title">Wyjaśnienie</string>
     <string name="dialog_warning_go_back_body">Czy napewno chcesz zedytować poprzednią rundę?</string>

@@ -193,9 +193,7 @@
     <string name="shared_data_player_list" translatable="false">Player name: %1$s\nDraft played: %2$d\nWins: %3$d\n</string>
 
 
-    <string name="history_player_played_drafts">Draft played: %1$d</string>
     <string name="history_player_detail_place">Place: %1$d / %2$d</string>
-    <string name="history_player_wins_drafts">Wins: %1$d</string>
     <string name="history_player_overall_places">Places in drafts:</string>
     <string name="history_player_overall_played">Played in drafts:</string>
     <string name="history_detail_player_overall_count_position">Place %1$d: %2$d time</string>

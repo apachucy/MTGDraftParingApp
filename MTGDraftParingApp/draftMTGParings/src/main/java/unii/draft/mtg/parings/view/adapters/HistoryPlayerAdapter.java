@@ -44,12 +44,12 @@ public class HistoryPlayerAdapter extends RecyclerView.Adapter<HistoryPlayerAdap
         PlayerAchievements player = mPlayerList.get(position);
 
         holder.mPlayerTextView.setText(player.getPlayerName());
-        holder.mPlayerInfoTextView.setText(mContext.getString(R.string.history_player_played_drafts, player.getDraftPlayed()));
+        holder.mPlayerInfoTextView.setText(Integer.toString(player.getDraftPlayed()));
         int playerWinsDraft = 0;
         if (player.getPlaceInDrafts().containsKey(PLAYER_PLACE_1)) {
             playerWinsDraft = player.getPlaceInDrafts().get(PLAYER_PLACE_1);
         }
-        holder.mPlayerDraftWinTextView.setText(mContext.getString(R.string.history_player_wins_drafts, playerWinsDraft));
+        holder.mPlayerDraftWinTextView.setText(Integer.toString(playerWinsDraft));
     }
 
     @Override
