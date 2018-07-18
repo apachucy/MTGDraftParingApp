@@ -48,8 +48,10 @@
             android:layout_below="@+id/player_position_roundTextView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/standard_margin"
-            android:drawableLeft="@drawable/ic_cup"
-            android:drawableStart="@drawable/ic_cup"
+            android:drawableEnd="@drawable/ic_cup"
+            android:drawablePadding="@dimen/text_view_padding"
+            android:drawableRight="@drawable/ic_cup"
+            android:gravity="center"
             tools:text="Winner: Arek" />
 
     </RelativeLayout>

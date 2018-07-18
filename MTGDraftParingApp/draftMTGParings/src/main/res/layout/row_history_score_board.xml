@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        tools:text="Test draft" />
 
     <TextView
         android:id="@+id/history_score_board_playerWonTextView"
@@ -22,7 +24,10 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/history_score_board_titleTextView"
         android:drawableLeft="@drawable/ic_cup"
-        android:drawableStart="@drawable/ic_cup" />
+        android:drawablePadding="@dimen/text_view_padding"
+        android:drawableStart="@drawable/ic_cup"
+        android:gravity="center"
+        tools:text="winner" />
 
     <TextView
         android:id="@+id/history_score_board_countPlayerTextView"
@@ -35,7 +40,11 @@
         android:layout_alignTop="@id/history_score_board_playerWonTextView"
         android:layout_below="@+id/history_score_board_titleTextView"
         android:layout_toLeftOf="@id/history_score_board_playerWonTextView"
-        android:layout_toStartOf="@id/history_score_board_playerWonTextView" />
+        android:layout_toStartOf="@id/history_score_board_playerWonTextView"
+        android:drawableEnd="@drawable/ic_people"
+        android:drawablePadding="@dimen/text_view_padding"
+        android:gravity="center"
+        tools:text="5" />
 
     <TextView
         android:id="@+id/history_score_board_roundsTextView"
@@ -44,7 +53,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/history_score_board_playerWonTextView" />
+        android:layout_below="@id/history_score_board_playerWonTextView"
+        android:drawablePadding="@dimen/text_view_padding"
+        android:drawableStart="@drawable/ic_tournament"
+        android:gravity="center"
+
+        tools:text="3" />
 
     <TextView
         android:id="@+id/history_score_board_dateTextView"
@@ -57,7 +71,11 @@
         android:layout_alignTop="@id/history_score_board_roundsTextView"
         android:layout_below="@+id/history_score_board_countPlayerTextView"
         android:layout_toLeftOf="@id/history_score_board_roundsTextView"
-        android:layout_toStartOf="@id/history_score_board_roundsTextView" />
+        android:layout_toStartOf="@id/history_score_board_roundsTextView"
+        android:drawableEnd="@drawable/ic_history_small"
+        android:drawablePadding="@dimen/text_view_padding"
+        android:gravity="center"
+        tools:text="2018-12-06" />
 
 
 </RelativeLayout>

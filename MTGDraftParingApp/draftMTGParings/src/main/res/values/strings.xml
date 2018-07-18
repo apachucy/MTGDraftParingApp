@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name" translatable="false">MTG Draft Calculator</string>
     <string name="app_history">Tournament History</string>
 
@@ -131,12 +130,6 @@
     <string name="settings_reset_tour_guide_dialog_title">Do you want to reset help?</string>
     <string name="settings_reset_tour_guide_dialog_content">Help will be reset in this application</string>
     <string name="settings_reset_tour_guide_message">Tour Guide was reseted</string>
-
-    <string name="history_score_board_row_draft_name">Draft name: %1$s</string>
-    <string name="history_score_board_row_draft_date">Date: %1$s</string>
-    <string name="history_score_board_row_draft_best_player">Won: %1$s</string>
-    <string name="history_score_board_row_draft_count_players">Players: %1$d</string>
-    <string name="history_score_board_row_draft_rounds">Rounds: %1$d</string>
     <string name="message_score_boards_removed">All scoreboards were removed</string>
     <string name="message_score_board_not_exists">No scoreboard to display</string>
     <string name="message_player_list_not_exists">No players to display</string>

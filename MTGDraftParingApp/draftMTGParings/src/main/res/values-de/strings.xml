@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="action_settings">Konfigurationen</string>
     <string name="action_info">Informationen</string>
     <string name="hint_player_name">Spielername</string>
@@ -73,8 +72,6 @@
     <string name="activity_save_score_board_info_text">Draftname</string>
     <string name="activity_save_score_board_save">Speichern</string>
     <string name="help_save_dashboard">Nachdem Sie fertig werden, können Sie Draftname speichern</string>
-    <string name="history_score_board_row_draft_best_player">Gewonnen: %1$s</string>
-    <string name="history_score_board_row_draft_date">Date: %1$s</string>
     <string name="message_score_board_not_exists">Keine Draftliste</string>
     <string name="message_score_board_saved">Draft gespeichert</string>
     <string name="message_score_boards_removed">Alle Draft würden gelöscht</string>
@@ -148,7 +145,6 @@
     <string name="chooser_dialog_body_mana_calculator">Bitte laden Sie die Anwendung Mana Calculator</string>
     <string name="chooser_intent_title_mana_calculator">Wählen Sie die Anwendung für das Zählen Mana</string>
     <string name="history_player_played_drafts">Draft gespielt: %1$d</string>
-    <string name="history_score_board_row_draft_name">Name des Draft-Picks: %1$s</string>
     <string name="settings_developer_account_error">Sie können nicht einen Web-Browser öffnen, installieren Sie etwas aus und versuchen Sie es erneut</string>
     <string name="settings_dialog_round_first_vibration_title">Legen Sie die zuerst Schwingung</string>
     <string name="tutorial_life_app">Öffnen Sie Ihr Leben für diese Runde zu zählen</string>
@@ -161,12 +157,9 @@
     <string name="text_save_results_after_draft">Speichern Sie die Draft-Picks: %1$s</string>
     <string name="history_detail_player_overall_count_position">Platz %1$d / %2$d mal</string>
     <string name="history_detail_player_overall_count_positions">Platz %1$d / %2$d mal</string>
-
     <string name="history_player_overall_places">Platz in drafts:</string>
     <string name="history_player_overall_played">Teilnahme an drafts:</string>
     <string name="history_player_wins_drafts">Won: %1$d</string>
-    <string name="history_score_board_row_draft_count_players">Kandidaten: %1$d</string>
-    <string name="history_score_board_row_draft_rounds">Runde: %1$d</string>
     <string name="dialog_scoreboard_info_title">Erläuterung</string>
     <string name="help_information_scoreboard">Was es bedeutet: PMG, PGW&#8230;</string>
     <string name="dialog_warning_go_back_body">Willst du die letzte Runde wirklich bearbeiten?</string>
