@@ -121,12 +121,6 @@
     <string name="settings_reset_tour_guide_dialog_title">Vuoi reimpostare l’aiuto?</string>
     <string name="settings_reset_tour_guide_dialog_content">La guida verrà ripristinata in questa applicazione</string>
     <string name="settings_reset_tour_guide_message">La guida Tour è stata resettata</string>
-
-    <string name="history_score_board_row_draft_name">Nome Draft: %1$s</string>
-    <string name="history_score_board_row_draft_date">Data: %1$s</string>
-    <string name="history_score_board_row_draft_best_player">Ha vinto: %1$s</string>
-    <string name="history_score_board_row_draft_count_players">Giocatori: %1$d</string>
-    <string name="history_score_board_row_draft_rounds">Round: %1$d</string>
     <string name="message_score_boards_removed">Tutti le classifiche sono state rimosse</string>
     <string name="message_score_board_not_exists">Nessuna classifica da mostrare</string>
     <string name="message_player_list_not_exists">Nessun giocatore da mostrare</string>

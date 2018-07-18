@@ -143,7 +143,7 @@ public class DatabaseHelper implements IDatabaseHelper {
             int nextIndex = playerIndex + 1;
             Player nextPlayer = nextIndex < playerDraftList.size() ? playerDraftList.get(nextIndex) : null;
             if (nextPlayer == null || !(comparator.compare(player, nextPlayer) == EQUAL)) {
-                position++;
+                position = nextIndex;
             }
         }
 

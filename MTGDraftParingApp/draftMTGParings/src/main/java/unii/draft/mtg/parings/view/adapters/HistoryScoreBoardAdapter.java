@@ -35,7 +35,6 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<RecyclerView.
         mDraftList = mDatabaseHelper.getAllDraftList();
 
     }
-//TODO: Make it work
 
     @Override
     public int getItemViewType(int position) {
@@ -66,11 +65,11 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<RecyclerView.
         HistoryScoreBoardAdapter.ViewHolder historyHolder = (ViewHolder) holder;
         Draft selectedDraft = mDraftList.get(position);
         List<Player> playerList = mDatabaseHelper.getAllPlayersInDraft(selectedDraft.getId());
-        historyHolder.draftTitleTextView.setText(mContext.getString(R.string.history_score_board_row_draft_name, mDraftList.get(position).getDraftName()));
-        historyHolder.draftDateTextView.setText(mContext.getString(R.string.history_score_board_row_draft_date, mDraftList.get(position).getDraftDate()));
-        historyHolder.playerWonTextView.setText(mContext.getString(R.string.history_score_board_row_draft_best_player, playerList.get(0).getPlayerName()));
-        historyHolder.draftRoundsTextView.setText(mContext.getString(R.string.history_score_board_row_draft_rounds, selectedDraft.getDraftRounds()));
-        historyHolder.draftPlayerCountTextView.setText(mContext.getString(R.string.history_score_board_row_draft_count_players, selectedDraft.getNumberOfPlayers()));
+        historyHolder.draftTitleTextView.setText(mDraftList.get(position).getDraftName());
+        historyHolder.draftDateTextView.setText(mDraftList.get(position).getDraftDate());
+        historyHolder.playerWonTextView.setText(playerList.get(0).getPlayerName());
+        historyHolder.draftRoundsTextView.setText(Integer.toString(selectedDraft.getDraftRounds()));
+        historyHolder.draftPlayerCountTextView.setText(Integer.toString(selectedDraft.getNumberOfPlayers()));
     }
 
 
