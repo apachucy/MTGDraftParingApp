@@ -6,5 +6,6 @@ public final class PairingMode {
     public static final int PAIRING_MANUAL = 1;
     public static final int PAIRING_TOURNAMENT = 2;
     public static final int PAIRING_ROUND_ROBIN = 3;
+    public static final int PAIRING_ROUND_KNOCK_OUT = 4;
 
 }

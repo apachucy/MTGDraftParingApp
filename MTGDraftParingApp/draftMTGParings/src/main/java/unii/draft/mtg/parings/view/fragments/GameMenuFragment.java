@@ -157,7 +157,7 @@ public class GameMenuFragment extends BaseFragment {
                     rounds = Integer.parseInt(mRoundsTextInput.getEditText().getText().toString());
                 } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
                     int players = mPlayerNameList.getPlayerList().size();
-                    if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
+                    if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT) {
                         rounds = new TournamentRounds().getMaxRound(players);
                     } else {
                         rounds = new RoundRobinRounds().getMaxRound(players);
@@ -243,7 +243,9 @@ public class GameMenuFragment extends BaseFragment {
     }
 
     private boolean isGameInTournamentMode() {
-        return mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_ROBIN;
+        return mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT
+                || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_ROBIN
+                || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT;
     }
 
     private boolean isValidRoundEditText() {
@@ -265,7 +267,7 @@ public class GameMenuFragment extends BaseFragment {
             if (mRoundsTextInput.getVisibility() == View.VISIBLE && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
                 rounds = Integer.parseInt(mRoundsTextInput.getEditText().getText().toString());
             } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
-                if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT) {
+                if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT) {
                     rounds = new TournamentRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
                 } else {
                     rounds = new RoundRobinRounds().getMaxRound(mPlayerNameList.getPlayerList().size());

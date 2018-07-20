@@ -84,6 +84,7 @@ public class DraftSettingsFragment extends BaseFragment {
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_manual));
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_tournament));
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_round_robin));
+        pairingsOptionList.add(getString(R.string.settings_pairing_mode_knock_out));
         showRadioButtonListDialog(getActivity(), getString(R.string.settings_pairing_mode_dialog_title), pairingsOptionList,
                 getString(R.string.dialog_positive), getString(R.string.dialog_negative),
                 mSharedPreferenceManager.getPairingType(), mPairingTypeCallback);
@@ -149,6 +150,9 @@ public class DraftSettingsFragment extends BaseFragment {
 
             case PairingMode.PAIRING_ROUND_ROBIN:
                 pairingOptionName = getString(R.string.settings_pairing_mode_round_robin);
+                break;
+            case PairingMode.PAIRING_ROUND_KNOCK_OUT:
+                pairingOptionName = getString(R.string.settings_pairing_mode_knock_out);
                 break;
             default:
                 pairingOptionName = getString(R.string.settings_pairing_mode_automatic_with_repeats);
@@ -217,6 +221,9 @@ public class DraftSettingsFragment extends BaseFragment {
                     break;
                 case PairingMode.PAIRING_ROUND_ROBIN:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_ROUND_ROBIN);
+                    break;
+                case PairingMode.PAIRING_ROUND_KNOCK_OUT:
+                    mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_ROUND_KNOCK_OUT);
                     break;
                 default:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS);

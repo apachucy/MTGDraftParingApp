@@ -10,6 +10,7 @@ import dagger.Module;
 import dagger.Provides;
 import unii.draft.mtg.parings.buisness.algorithm.automatic.AutomaticParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.elimination.SuddenDeathAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.manual.ManualParingAlgorithm;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.buisness.share.scoreboard.ShareDataContent;
@@ -25,11 +26,9 @@ import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 public class ApplicationModule implements IApplicationModule {
     public static final String ALGORITHM_MANUAL = "algorithm_manual";
     public static final String ALGORITHM_AUTOMATIC = "algorithm_automatic";
-
+    public static final String ALGORITHM_SUDDEN_DEATH = "algorithm_sudden_death";
     private final Context mContext;
     private final HasComponent<ApplicationComponent> mHasApplicationComponent;
-
-
 
 
     public ApplicationModule(Context context, HasComponent<ApplicationComponent> applicationComponent) {
@@ -64,6 +63,14 @@ public class ApplicationModule implements IApplicationModule {
         return new AutomaticParingAlgorithm(mContext);
     }
 
+    @NonNull
+    @Provides
+    @Named(ALGORITHM_SUDDEN_DEATH)
+    @Singleton
+    @Override
+    public IParingAlgorithm provideSuddenDeathAlgorithmManager() {
+        return new SuddenDeathAlgorithm(mContext);
+    }
 
     @NonNull
     @Override
@@ -94,7 +101,7 @@ public class ApplicationModule implements IApplicationModule {
     @Provides
     @Singleton
     public IDatabaseHelper provideDatabaseHelper() {
-        return new DatabaseHelper(mContext,mHasApplicationComponent.getComponent());
+        return new DatabaseHelper(mContext, mHasApplicationComponent.getComponent());
     }
 
 }

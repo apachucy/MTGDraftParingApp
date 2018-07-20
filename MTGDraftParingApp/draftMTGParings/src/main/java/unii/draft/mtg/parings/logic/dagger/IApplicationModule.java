@@ -21,6 +21,9 @@ interface IApplicationModule {
     IParingAlgorithm provideAutomaticAlgorithmManager();
 
     @NonNull
+    IParingAlgorithm provideSuddenDeathAlgorithmManager();
+
+    @NonNull
     AlgorithmChooser provideAlgorithmChooser();
 
     @NonNull
