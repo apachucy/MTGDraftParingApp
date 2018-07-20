@@ -23,6 +23,10 @@ public class AlgorithmChooser {
     IParingAlgorithm mAlgorithmAutomatic;
 
     @Inject
+    @Named(ApplicationModule.ALGORITHM_SUDDEN_DEATH)
+    IParingAlgorithm mAlgorithmSuddenDeath;
+
+    @Inject
     ISharedPreferences mSharedPreferences;
 
     public AlgorithmChooser(@NonNull ApplicationComponent component) {
@@ -32,6 +36,8 @@ public class AlgorithmChooser {
     public IParingAlgorithm getCurrentAlgorithm() {
         if (mSharedPreferences.getPairingType() == PairingMode.PAIRING_MANUAL) {
             return mAlgorithmManual;
+        } else if (mSharedPreferences.getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT) {
+            return mAlgorithmSuddenDeath;
         } else {
             return mAlgorithmAutomatic;
         }

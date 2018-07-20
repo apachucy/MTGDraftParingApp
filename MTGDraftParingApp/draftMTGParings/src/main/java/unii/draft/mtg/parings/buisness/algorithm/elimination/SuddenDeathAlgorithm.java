@@ -1,11 +1,12 @@
-package unii.draft.mtg.parings.buisness.algorithm.automatic;
+package unii.draft.mtg.parings.buisness.algorithm.elimination;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import org.paukov.combinatorics.Generator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import unii.draft.mtg.parings.buisness.algorithm.base.SemiAlgorithm;
@@ -13,14 +14,12 @@ import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
-public class AutomaticParingAlgorithm extends SemiAlgorithm {
+public class SuddenDeathAlgorithm extends SemiAlgorithm {
 
-
-    public AutomaticParingAlgorithm(Context context) {
+    public SuddenDeathAlgorithm(Context context) {
         super(context);
     }
 
-    @Nullable
     @Override
     public List<Game> getParings(int sittingsMode) {
         /**
@@ -39,14 +38,11 @@ public class AutomaticParingAlgorithm extends SemiAlgorithm {
                 calculatePairAtStart(filteredPlayerList);
             }
         } else if (getCurrentRound() < getMaxRound()) {
-            sortPlayers(filteredPlayerList);
-
+            filterDeathPlayer(filteredPlayerList);
         } else {
-            // game should end so return null
             return gameList;
         }
-        List<Player> addedPlayers = new ArrayList<Player>();
-        addedPlayers.addAll(filteredPlayerList);
+        List<Player> addedPlayers = new ArrayList<Player>(filteredPlayerList);
         // someone needs bye
         if (filteredPlayerList.size() % 2 == 1) {
 
@@ -71,5 +67,14 @@ public class AutomaticParingAlgorithm extends SemiAlgorithm {
         return gameList;
     }
 
-
+    private void filterDeathPlayer(@NonNull List<Player> playerList) {
+        Predicate<Player> predicate = new EliminationPredicate();
+        Iterator<Player> iterator = playerList.iterator();
+        while (iterator.hasNext()) {
+            Player player = iterator.next();
+            if (predicate.filter(player)) {
+                iterator.remove();
+            }
+        }
+    }
 }
