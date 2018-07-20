@@ -18,6 +18,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,6 +40,7 @@ import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.util.helper.TourGuideMenuHelper;
+import unii.draft.mtg.parings.view.CounterStates;
 import unii.draft.mtg.parings.view.adapters.PlayerMatchParingAdapter;
 import unii.draft.mtg.parings.view.custom.CounterClass;
 import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
@@ -54,6 +56,7 @@ public class RoundActivity extends BaseActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Game> mGameList;
+    private List<String> mHourGlassActions;
     // setting time and count down
     @Nullable
     private CounterClass mCounterClass;
@@ -62,11 +65,10 @@ public class RoundActivity extends BaseActivity {
     @Nullable
     private TourGuide mTutorialHandler = null;
 
-    private boolean isCountStarted = false;
+    private CounterStates counterState;
     private boolean isPairingsGenerated = false;
     private boolean isLoaded = false;
     private long mTimerTimeTillEnd = 0;
-
     @Nullable
     @BindView(R.id.paring_counterTextView)
     TextView mCounterTextView;
@@ -136,7 +138,7 @@ public class RoundActivity extends BaseActivity {
     @Override
     public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         isPairingsGenerated = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_GENERATED);
-        isCountStarted = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_TIMER_ON);
+        counterState = (CounterStates) savedInstanceState.getSerializable(BUNDLE_KEY_PAIRINGS_TIMER_ON);
         mTimerTimeTillEnd = savedInstanceState.getLong(BUNDLE_KEY_PAIRINGS_TIMER_TIME);
     }
 
@@ -144,7 +146,7 @@ public class RoundActivity extends BaseActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(BUNDLE_KEY_PAIRINGS_GENERATED, isPairingsGenerated);
-        outState.putBoolean(BUNDLE_KEY_PAIRINGS_TIMER_ON, isCountStarted);
+        outState.putSerializable(BUNDLE_KEY_PAIRINGS_TIMER_ON, counterState);
         outState.putLong(BUNDLE_KEY_PAIRINGS_TIMER_TIME, mTimerTimeTillEnd);
         super.onSaveInstanceState(outState);
     }
@@ -184,14 +186,19 @@ public class RoundActivity extends BaseActivity {
                     FancyToast.makeText(RoundActivity.this, getString(R.string.settings_counter_off), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
                     return;
                 }
-                if (!isCountStarted) {
-                    isCountStarted = true;
-                    mCounterClass.start();
+                if (counterState == CounterStates.STOPPED) {
+                    counterState = CounterStates.STARTED;
                     FancyToast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_started), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                    mCounterClass = newCounterClassInstance(mSharedPreferenceManager.getTimePerRound());
+                    mCounterClass.start();
+                    //TODO: fix issue reproduction steps: reset and continue state
+                } else if (counterState == CounterStates.PAUSED) {
+                    mCounterClass = newCounterClassInstance(mTimerTimeTillEnd);
+                    mCounterClass.start();
+                    counterState = CounterStates.STARTED;
+
                 } else {
-                    isCountStarted = false;
-                    mCounterClass.onCancel();
-                    FancyToast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_cancel), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                    showSingleChoiceList(RoundActivity.this, getString(R.string.dialog_timer_title), mHourGlassActions, getString(R.string.positive), mHourGlassesListener);
                 }
             }
         });
@@ -225,43 +232,27 @@ public class RoundActivity extends BaseActivity {
 
 
     private boolean initData(@Nullable Bundle savedInstanceState) {
-
         long timePerRound;
-        long firstVibration;
-        long secondVibration;
-        long vibrationDuration;
-        if (mSharedPreferenceManager.useVibration()) {
-            firstVibration = mSharedPreferenceManager.getFirstVibration();
-            secondVibration = mSharedPreferenceManager.getSecondVibration();
-            vibrationDuration = mSharedPreferenceManager.getVibrationDuration();
-        } else {
-            firstVibration = 0;
-            secondVibration = 0;
-            vibrationDuration = 0;
-        }
-
+        counterState = CounterStates.STOPPED;
 
         if (savedInstanceState != null) {
             // Restore value of members from saved state
             isPairingsGenerated = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_GENERATED);
-            isCountStarted = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_TIMER_ON);
-            mTimerTimeTillEnd = savedInstanceState.getLong(BUNDLE_KEY_PAIRINGS_TIMER_TIME);
+            counterState = (CounterStates) savedInstanceState.getSerializable(BUNDLE_KEY_PAIRINGS_TIMER_TIME);
         }
-        if (isCountStarted) {
+        if (counterState != CounterStates.STOPPED) {
             timePerRound = mTimerTimeTillEnd;
         } else {
             timePerRound = mSharedPreferenceManager.getTimePerRound();
         }
         if (mSharedPreferenceManager.displayCounterRound()) {
-
-            mCounterClass = new CounterClass(this, timePerRound,
-                    BaseConfig.DEFAULT_COUNTER_INTERVAL, mCounterTextView,
-                    firstVibration, secondVibration, vibrationDuration);
-            if (isCountStarted) {
+            mCounterClass = newCounterClassInstance(timePerRound);
+            if (counterState == CounterStates.STARTED) {
                 mCounterClass.start();
             }
         }
         mParingDashboardLogic = new ParingDashboardLogic(this);
+        mHourGlassActions = Arrays.asList(getString(R.string.dialog_timer_cancel), getString(R.string.dialog_timer_pause));
         return true;
     }
 
@@ -292,6 +283,7 @@ public class RoundActivity extends BaseActivity {
         public void onClick(MaterialDialog dialog, DialogAction which) {
             dialog.dismiss();
             mCounterClass.onCancel();
+            counterState = CounterStates.STOPPED;
             finish();
         }
     };
@@ -368,12 +360,53 @@ public class RoundActivity extends BaseActivity {
         Intent intent = new Intent(RoundActivity.this,
                 ScoreBoardActivity.class);
         startActivity(intent);
-        isCountStarted = false;
+        counterState = CounterStates.STOPPED;
         if (mCounterClass != null) {
             mCounterClass.onCancel();
         }
         finish();
     }
 
+    @NonNull
+    private MaterialDialog.ListCallbackSingleChoice mHourGlassesListener = new MaterialDialog.ListCallbackSingleChoice() {
+        @Override
+        public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+            switch (which) {
+                case 0://reset action
+                    mCounterClass.onCancel();
+                    counterState = CounterStates.STOPPED;
+                    FancyToast.makeText(RoundActivity.this, getString(R.string.message_action_countdown_cancel), FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show();
+                    mTimerTimeTillEnd = mSharedPreferenceManager.getTimePerRound();
+                    break;
 
+                case 1://unpause action
+                    counterState = CounterStates.PAUSED;
+                    mTimerTimeTillEnd = mCounterClass.onPause();
+                    mCounterClass.onCancel();
+                    //TODO: add toast
+                    break;
+            }
+            return false;
+        }
+    };
+
+    private CounterClass newCounterClassInstance(long startTime) {
+        long firstVibration;
+        long secondVibration;
+        long vibrationDuration;
+        if (mSharedPreferenceManager.useVibration()) {
+            firstVibration = mSharedPreferenceManager.getFirstVibration();
+            secondVibration = mSharedPreferenceManager.getSecondVibration();
+            vibrationDuration = mSharedPreferenceManager.getVibrationDuration();
+        } else {
+            firstVibration = 0;
+            secondVibration = 0;
+            vibrationDuration = 0;
+        }
+
+        CounterClass counterClass = new CounterClass(RoundActivity.this, startTime,
+                BaseConfig.DEFAULT_COUNTER_INTERVAL, mCounterTextView,
+                firstVibration, secondVibration, vibrationDuration);
+        return counterClass;
+    }
 }

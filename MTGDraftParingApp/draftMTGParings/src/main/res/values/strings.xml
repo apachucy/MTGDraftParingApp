@@ -252,4 +252,9 @@
     <string name="draw">draw</string>
     <string name="lose">lose</string>
     <string name="empty_view">Play some games to see history :)</string>
+
+    <!-- dialog timer-->
+    <string name="dialog_timer_title">What you want to do with timer?</string>
+    <string name="dialog_timer_pause">Pause</string>
+    <string name="dialog_timer_cancel">Cancel</string>
 </resources>
