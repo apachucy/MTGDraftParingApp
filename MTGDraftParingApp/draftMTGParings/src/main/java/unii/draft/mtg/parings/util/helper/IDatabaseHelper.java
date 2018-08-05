@@ -3,6 +3,8 @@ package unii.draft.mtg.parings.util.helper;
 
 import android.support.annotation.NonNull;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import unii.draft.mtg.parings.database.model.Draft;
@@ -50,4 +52,8 @@ public interface IDatabaseHelper {
     void removeDraft(Draft draft);
 
     void removeDraft(long draftId);
+
+    boolean importDatabase(Database database);
+
+    Database exportDatabase();
 }

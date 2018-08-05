@@ -68,5 +68,6 @@ public final class BaseConfig {
     public static final String INTENT_EMAIL_SUBJECT = "[MTGDraftParingApp] Idea for new feature";
     public static final String INTENT_SHARE_DATA_TYPE = "text/plain";
 
+    public static final String EXPORTED_DATABASE_NAME = "MTG_TOURNAMENT_APP_EXPORTED_DATABASE";
 
 }

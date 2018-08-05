@@ -153,7 +153,7 @@ public class DatabaseHelper implements IDatabaseHelper {
     public void cleanDatabase() {
         mDaoSession.clear();
 
-        for (AbstractDao abstractDao : mDaoSession.getAllDaos()){
+        for (AbstractDao abstractDao : mDaoSession.getAllDaos()) {
             abstractDao.deleteAll();
         }
     }
@@ -255,6 +255,27 @@ public class DatabaseHelper implements IDatabaseHelper {
         for (PlayerDraftJoinTable playerDraftJoinTable : playerDraftJoinTableList) {
             mDaoSession.getPlayerDraftJoinTableDao().delete(playerDraftJoinTable);
         }
+    }
+
+    @Override
+    public boolean importDatabase(Database database) {
+        //TODO: make load
+        return false;
+    }
+
+    @Override
+    public Database exportDatabase() {
+        if (mDaoSession.getAllDaos() == null) {
+            return null;
+        }
+        Database localDatabase = new Database();
+        localDatabase.setDatabaseVersion(mDaoMaster.getSchemaVersion());
+        localDatabase.setDraftList(mDaoSession.getDraftDao().loadAll());
+        localDatabase.setGameList(mDaoSession.getGameDao().loadAll());
+        localDatabase.setPlayerDraftJoinTableList(mDaoSession.getPlayerDraftJoinTableDao().loadAll());
+        localDatabase.setPlayerList(mDaoSession.getPlayerDao().loadAll());
+
+        return localDatabase;
     }
 
 
