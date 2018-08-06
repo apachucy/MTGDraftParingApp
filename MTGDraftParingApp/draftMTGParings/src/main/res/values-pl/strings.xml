@@ -192,5 +192,9 @@
     <string name="empty_view">Najpierw rozegraj parę gier, aby później było co wspominać ;)</string>
     <string name="scoreboard">Lista Wyników</string>
     <string name="round_history">Historia Rozgrywki</string>
+    <string name="settings_pairing_mode_knock_out">Nagła śmierć</string>
+    <string name="dialog_timer_cancel">@string/dialog_negative</string>
+    <string name="dialog_timer_pause">Pauza</string>
+    <string name="dialog_timer_title">Co chcesz zrobić z odliczaniem?</string>
 
 </resources>

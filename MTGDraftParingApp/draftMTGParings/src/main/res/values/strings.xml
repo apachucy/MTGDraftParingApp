@@ -256,5 +256,5 @@
     <!-- dialog timer-->
     <string name="dialog_timer_title">What you want to do with timer?</string>
     <string name="dialog_timer_pause">Pause</string>
-    <string name="dialog_timer_cancel">Cancel</string>
+    <string name="dialog_timer_cancel">@string/dialog_negative</string>
 </resources>

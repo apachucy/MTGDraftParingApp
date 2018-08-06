@@ -224,4 +224,8 @@
     <string name="empty_view">Gioca con alcuni giochi per vedere la storia :)</string>
     <string name="scoreboard">Tabellone Segnapunti</string>
     <string name="round_history">Storia circolare</string>
+    <string name="settings_pairing_mode_knock_out">Knock Out</string>
+    <string name="dialog_timer_cancel">@string/dialog_negative</string>
+    <string name="dialog_timer_pause">Pausa</string>
+    <string name="dialog_timer_title">Cosa vuoi fare con il conto alla rovescia?</string>
 </resources>

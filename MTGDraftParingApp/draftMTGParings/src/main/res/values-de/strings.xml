@@ -192,5 +192,9 @@
     <string name="empty_view">Spiele ein paar Spiele um Geschichte zu sehen :)</string>
     <string name="scoreboard">Anzeigetafel</string>
     <string name="round_history">Runde Geschichte</string>
+    <string name="settings_pairing_mode_knock_out">Knock Out</string>
+    <string name="dialog_timer_cancel">@string/dialog_negative</string>
+    <string name="dialog_timer_pause">Pause</string>
+    <string name="dialog_timer_title">"Was willst du mit dem Countdown machen? "</string>
 
 </resources>
