@@ -4,7 +4,6 @@ package unii.draft.mtg.parings.view.fragments.history;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -68,10 +67,11 @@ public class HistoryPlayerFragment extends BaseFragment {
     }
 
     private class PlayerHistoryPagerAdapter extends FragmentStatePagerAdapter {
-        private int PLAYER_FRAGMENTS_SIZE = 3;
+        private int PLAYER_FRAGMENTS_SIZE = 4;
         private final int PLAYER_GENERAL_INFORMATION = 0;
         private final int PLAYER_RIVALISATION = 1;
-        private final int PLAYER_CHARTS = 2;
+        private final int PLAYER_CHARTS_GAMES = 2;
+        private final int PLAYER_CHART_MATCHES = 3;
 
         public PlayerHistoryPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -80,6 +80,9 @@ public class HistoryPlayerFragment extends BaseFragment {
         @Override
         public Fragment getItem(int position) {
             Fragment fragment;
+            Bundle bundle = new Bundle();
+            bundle.putLong(BundleConst.BUNDLE_KEY_PLAYER_DRAFT_DETAIL, mPlayerId);
+
             switch (position) {
                 case PLAYER_GENERAL_INFORMATION:
                     fragment = new HistoryPlayerAchievementsFragment();
@@ -87,15 +90,21 @@ public class HistoryPlayerFragment extends BaseFragment {
                 case PLAYER_RIVALISATION:
                     fragment = new HistoryPlayerRivalisationFragment();
                     break;
-                case PLAYER_CHARTS:
+                case PLAYER_CHARTS_GAMES:
                     fragment = new HistoryPlayerChartsFragment();
+                    bundle.putBoolean(BundleConst.BUNDLE_KEY_GAME_CHART, true);
+                    bundle.putBoolean(BundleConst.BUNDLE_KEY_MATCH_CHART, false);
+
+                    break;
+                case PLAYER_CHART_MATCHES:
+                    fragment = new HistoryPlayerChartsFragment();
+                    bundle.putBoolean(BundleConst.BUNDLE_KEY_MATCH_CHART, true);
+                    bundle.putBoolean(BundleConst.BUNDLE_KEY_GAME_CHART, false);
                     break;
                 default:
                     fragment = new HistoryPlayerAchievementsFragment();
                     break;
             }
-            Bundle bundle = new Bundle();
-            bundle.putLong(BundleConst.BUNDLE_KEY_PLAYER_DRAFT_DETAIL, mPlayerId);
             fragment.setArguments(bundle);
             return fragment;
         }

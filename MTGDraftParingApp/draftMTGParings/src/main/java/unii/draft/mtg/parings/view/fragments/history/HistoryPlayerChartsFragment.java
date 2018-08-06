@@ -25,7 +25,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.R;
+import unii.draft.mtg.parings.database.model.Draft;
 import unii.draft.mtg.parings.logic.pojo.Game;
+import unii.draft.mtg.parings.logic.pojo.Result;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.util.config.BundleConst;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
@@ -39,6 +41,7 @@ public class HistoryPlayerChartsFragment extends BaseFragment {
     private Long mPlayerId;
     private unii.draft.mtg.parings.database.model.Player mPlayer;
     private PieData mPieData;
+    private String mHeaderText;
     @Nullable
     @BindView(R.id.player_statistic_pie_chart)
     PieChart mPieChart;
@@ -73,7 +76,7 @@ public class HistoryPlayerChartsFragment extends BaseFragment {
         mPieChart.getDescription().setEnabled(false);
         mPieChart.getLegend().setEnabled(false);
         mPieChart.animateXY(ANIMATE_CHART_MILS, ANIMATE_CHART_MILS);
-        playerNameTextView.setText(getString(R.string.history_pie_chart_title, mPlayer.getPlayerName()));
+        playerNameTextView.setText(mHeaderText);
 
 
     }
@@ -84,10 +87,21 @@ public class HistoryPlayerChartsFragment extends BaseFragment {
         if (!bundle.containsKey(BundleConst.BUNDLE_KEY_PLAYER_DRAFT_DETAIL)) {
             getActivity().finish();
         }
+
         mPlayerId = bundle.getLong(BundleConst.BUNDLE_KEY_PLAYER_DRAFT_DETAIL);
         mPlayer = mDatabaseHelper.get().getPlayer(mPlayerId);
 
-        mPieData = prepareDataSet(prepareDataFromDatabase());
+
+        Result result = null;
+        if (bundle.containsKey(BundleConst.BUNDLE_KEY_GAME_CHART) && bundle.getBoolean(BundleConst.BUNDLE_KEY_GAME_CHART)) {
+            result = prepareGameResult();
+            mHeaderText = getString(R.string.history_pie_chart_title_games, mPlayer.getPlayerName());
+        } else {
+            result = prepareMatchResult();
+            mHeaderText = getString(R.string.history_pie_chart_title_matches, mPlayer.getPlayerName());
+
+        }
+        mPieData = prepareDataSet(prepareDataFromDatabase(result));
         mPieData.setValueFormatter(new PercentFormatter());
     }
 
@@ -105,12 +119,11 @@ public class HistoryPlayerChartsFragment extends BaseFragment {
         return new PieData(dataSet);
     }
 
-    private List<PieEntry> prepareDataFromDatabase() {
+    private Result prepareGameResult() {
         List<Game> games = mDatabaseHelper.get().getAllGamesForPlayer(mPlayerId);
         float win = 0f;
         float lose = 0f;
         float draw = 0f;
-
         for (Game game : games) {
             if (mPlayer.getPlayerName().equals(game.getWinner())) {
                 win += 1;
@@ -120,21 +133,51 @@ public class HistoryPlayerChartsFragment extends BaseFragment {
                 lose += 1;
             }
         }
-        float total = win + lose + draw;
-        win = win * 100f / total;
-        lose = lose * 100f / total;
-        draw = draw * 100f / total;
+
+        return new Result(win, lose, draw);
+    }
+
+    private Result prepareMatchResult() {
+        List<Draft> drafts = mDatabaseHelper.get().getAllDraftsForPlayer(mPlayerId);
+        float win = 0f;
+        float lose = 0f;
+        float draw = 0f;
+
+        for (Draft draft : drafts) {
+            for (unii.draft.mtg.parings.database.model.Game gamesInDraft : draft.getDraftsInGame()) {
+                List<Game> gameList = mDatabaseHelper.get().getAllGamesForDraft(gamesInDraft.getId());
+                  for (Game game : gameList) {
+                    if (mPlayer.getPlayerName().equals(game.getPlayerNameA()) || mPlayer.getPlayerName().equals(game.getPlayerNameB())) {
+                        if (mPlayer.getPlayerName().equals(gamesInDraft.getWinner())) {
+                            win += 1;
+                        } else if (BaseConfig.DRAW.equals(gamesInDraft.getWinner())) {
+                            draw += 1;
+                        } else {
+                            lose += 1;
+                        }
+                    }
+                }
+            }
+        }
+        return new Result(win, lose, draw);
+    }
+
+    private List<PieEntry> prepareDataFromDatabase(Result result) {
+        float total = result.getWin() + result.getLose() + result.getDraw();
+        float winPercentage = result.getWin() * 100f / total;
+        float losePercentage = result.getLose() * 100f / total;
+        float drawPercentage = result.getDraw() * 100f / total;
         List<PieEntry> pieEntryList = new ArrayList<>();
-        if (win > 0f) {
-            PieEntry pieWin = new PieEntry(win, getResources().getString(R.string.win));
+        if (winPercentage > 0f) {
+            PieEntry pieWin = new PieEntry(winPercentage, getResources().getString(R.string.win));
             pieEntryList.add(pieWin);
         }
-        if (lose > 0f) {
-            PieEntry pieLose = new PieEntry(lose, getResources().getString(R.string.lose));
+        if (losePercentage > 0f) {
+            PieEntry pieLose = new PieEntry(losePercentage, getResources().getString(R.string.lose));
             pieEntryList.add(pieLose);
         }
-        if (draw > 0f) {
-            PieEntry pieDraw = new PieEntry(draw, getResources().getString(R.string.draw));
+        if (drawPercentage > 0f) {
+            PieEntry pieDraw = new PieEntry(drawPercentage, getResources().getString(R.string.draw));
             pieEntryList.add(pieDraw);
         }
         return pieEntryList;

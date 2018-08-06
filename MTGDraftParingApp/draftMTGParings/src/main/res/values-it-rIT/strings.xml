@@ -219,7 +219,7 @@
     <string name="win">vincere</string>
     <string name="history_player_statistics">Statistiche del giocatore</string>
     <string name="history_player_rivalisation">Risultati del gioco storici</string>
-    <string name="history_pie_chart_title">Giocatore %1$s vincere/pareggio/perdere statistica per tutti i giochi</string>
+    <string name="history_pie_chart_title_games">Giocatore %1$s vincere/pareggio/perdere statistica per tutti i giochi</string>
     <string name="app_history">Storia del torneo</string>
     <string name="empty_view">Gioca con alcuni giochi per vedere la storia :)</string>
 </resources>

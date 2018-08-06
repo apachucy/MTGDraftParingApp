@@ -187,7 +187,7 @@
     <string name="win">sieg</string>
     <string name="history_player_statistics">Spielerstatistiken</string>
     <string name="history_player_rivalisation">Historische Spielergebnisse</string>
-    <string name="history_pie_chart_title">Spieler %1$s sieg/unetschieden/verpassen statistik für alle Spiele</string>
+    <string name="history_pie_chart_title_games">Spieler %1$s sieg/unetschieden/verpassen statistik für alle Spiele</string>
     <string name="app_history">Turniergeschichte</string>
     <string name="empty_view">Spiele ein paar Spiele um Geschichte zu sehen :)</string>
 
