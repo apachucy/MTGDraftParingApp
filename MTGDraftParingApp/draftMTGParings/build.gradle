@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId "unii.draft.mtg.parings"
-        versionCode 69
-        versionName "1.5.4-history-fixing"
+        versionCode 70
+        versionName "1.6.0-new-round-type"
         minSdkVersion 19
         targetSdkVersion 27
         generatedDensities = []
@@ -49,6 +49,7 @@ dependencies {
         transitive = true;
     }
     implementation files('libs/greendao-2.1.0.jar')
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
 
 
     //dagger
