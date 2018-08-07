@@ -238,7 +238,7 @@ public class RoundActivity extends BaseActivity {
         if (savedInstanceState != null) {
             // Restore value of members from saved state
             isPairingsGenerated = savedInstanceState.getBoolean(BUNDLE_KEY_PAIRINGS_GENERATED);
-            counterState = (CounterStates) savedInstanceState.getSerializable(BUNDLE_KEY_PAIRINGS_TIMER_TIME);
+            counterState = (CounterStates) savedInstanceState.getSerializable(BUNDLE_KEY_PAIRINGS_TIMER_ON);
         }
         if (counterState != CounterStates.STOPPED) {
             timePerRound = mTimerTimeTillEnd;
