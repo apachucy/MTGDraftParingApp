@@ -394,7 +394,7 @@ public class ScoreBoardActivity extends BaseActivity {
         dropPlayerButton.setImageDrawable(getSingleDrawable(R.drawable.ic_person_minus));
         shareContent.setImageDrawable(getSingleDrawable(R.drawable.ic_share));
         information.setImageDrawable(getSingleDrawable(R.drawable.ic_info));
-        showRoundHistory.setImageDrawable(getSingleDrawable(R.drawable.ic_access_time_white_24dp));
+        showRoundHistory.setImageDrawable(getSingleDrawable(R.drawable.ic_tournament));
         if (mSharedPreferenceManager.showGuideTourOnScoreBoardScreen()) {
             Sequence sequence = new Sequence.SequenceBuilder().
                     add(

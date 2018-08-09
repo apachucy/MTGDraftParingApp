@@ -127,7 +127,7 @@
     <string name="tutorial_hour_glass">Naciśnij aby rozpocząć odliczanie</string>
     <string name="settings_reset_tour_guide_dialog_title">Czy chcesz zresetować pomoc?</string>
     <string name="settings_reset_tour_guide_dialog_content">Pomoc zostanie zresetowana w aplikacji</string>
-    <string name="settings_pairing_mode_manual">Ręczny</string>
+    <string name="settings_pairing_mode_manual">Ręczny - wszystkie akcje są wykonywane przez operatora, można dodać/usunąc gracza podczas gry, tryb ręczny można zmienić w trakcie gry na automatyczny z powtórzeniami</string>
     <string name="settings_pairing_mode_dialog_title">Wybierz opcję parowania zawodników</string>
     <string name="settings_pairing_mode_automatic_with_repeats">Automatyczny z możliwymi powtórzeniami</string>
     <string name="settings_menu_item_history">Historia</string>
@@ -150,7 +150,7 @@
     <string name="select_player_manual_title">Wybierz zawodnika</string>
     <string name="select_player_manual_add">Dodaj</string>
     <string name="positive">Tak</string>
-    <string name="settings_pairing_mode_tournament">Turniejowy</string>
+    <string name="settings_pairing_mode_tournament">Turniejowy - tryb szwajcarski z możliwością usuwania graczy w trakcie gry</string>
     <string name="negative">Nie</string>
     <string name="settings_save_draft_result_dialog_title">Czy zapisać wyniki draftu:</string>
     <string name="text_save_results_after_draft">Zapisz wyniki draftu: %1$s</string>
@@ -176,7 +176,7 @@
     <string name="dialog_title_change_algorithm">Zmiana algorytmu</string>
     <string name="action_switch_algorithm">Zmień algorytm</string>
     <string name="dialog_body_change_algorithm">Zmiana algorytmu spowoduję wyłączenie trybu manualnego parowania i przejście na tryb automatyczny z możliwymi powtórzeniami</string>
-    <string name="settings_pairing_mode_round_robin">Algorytm Karuzelowy</string>
+    <string name="settings_pairing_mode_round_robin">Algorytm Karuzelowy - Round Robin, każdy zagra z każdym ;) </string>
     <string name="settings_used_libraries">Biblioteki wykorzystane w aplikacji</string>
     <string name="dialog_used_libraries_title">Wykorzystane biblioteki</string>
     <string name="settings_help_with_app">Możesz pomóc w rozwoju aplikacji</string>
@@ -192,7 +192,7 @@
     <string name="empty_view">Najpierw rozegraj parę gier, aby później było co wspominać ;)</string>
     <string name="scoreboard">Lista Wyników</string>
     <string name="round_history">Historia Rozgrywki</string>
-    <string name="settings_pairing_mode_knock_out">Nagła śmierć</string>
+    <string name="settings_pairing_mode_knock_out">Nagła śmierć - przegrywając rundę odpadasz z turnieju</string>
     <string name="dialog_timer_cancel">@string/dialog_negative</string>
     <string name="dialog_timer_pause">Pauza</string>
     <string name="dialog_timer_title">Co chcesz zrobić z odliczaniem?</string>

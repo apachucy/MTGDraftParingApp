@@ -178,11 +178,12 @@
     <string name="dialog_positive">Ok</string>
     <string name="dialog_negative">Cancel</string>
 
-    <string name="settings_pairing_mode_manual">Manual</string>
-    <string name="settings_pairing_mode_tournament">Tournament</string>
-    <string name="settings_pairing_mode_round_robin">Round Robin</string>
-    <string name="settings_pairing_mode_knock_out">Knock Out</string>
-    <string name="settings_pairing_mode_automatic_with_repeats">Automatic with repeats</string>
+    <string name="settings_pairing_mode_manual">Manual - all actions are selected by game master, can add/drop players inside the game, can be switched in the middle of game to automatic with repeats</string>
+    <string name="settings_pairing_mode_tournament">Tournament - swiss tournament with dropping player options</string>
+    <string name="settings_pairing_mode_round_robin">Round Robin - each contestant meets all other contestants in rounds</string>
+    <string name="settings_pairing_mode_knock_out">Knock Out - when you lose a round you will be dropped for the game</string>
+    <string name="settings_pairing_mode_automatic_with_repeats">Automatic with repeats - similar to tournament mode but you may play more than one with the same opponent, game master can add/remove player in the middle of game</string>
+
     <string name="settings_pairing_mode_dialog_title">Choose Pairing Options:</string>
     <string name="settings_save_draft_result_dialog_title">Should draft results be saved:</string>
     <string name="player_sittings_position" translatable="false"> %1$d. %2$s</string>
@@ -238,7 +239,7 @@
     <a href="https://github.com/Shashank02051997/FancyToast-Android">FancyToast</a><br/>
     <a href=" https://github.com/dpaukov/combinatoricslib">Combinatoricslib</a>]]></string>
     <string name="settings_help_with_app">You may help with this app</string>
-    <string name="settings_fan_page">Fan page</string>
+    <string name="settings_fan_page" translatable="false">Fan page</string>
     <string name="dialog_help_with_app_title">Help with this application</string>
     <string name="dialog_help_with_app_body" translatable="false">You may help with this application:\nIf you would like to have an app in your language you may help with translation\nIf you have an idea of an extenstion write me an e-mail\nIf you like it you may propagate it within your friends\nDevelopers likes to be appreciated so drop a rate on Google Play :)</string>
 

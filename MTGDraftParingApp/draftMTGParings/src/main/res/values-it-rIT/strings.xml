@@ -167,8 +167,8 @@
     <string name="dialog_positive">Ok</string>
     <string name="dialog_negative">Annulla</string>
 
-    <string name="settings_pairing_mode_manual">Manuale</string>
-    <string name="settings_pairing_mode_tournament">Torneo</string>
+    <string name="settings_pairing_mode_manual">Manuale - tutte le azioni sono selezionate dal maestro di gioco, possono aggiungere/rilasciare giocatori all\'interno del gioco, possono essere commutati nel mezzo del gioco in automatico con ripetizioni</string>
+    <string name="settings_pairing_mode_tournament">Torneo - svizzero con opzioni di lancio del giocatore</string>
     <string name="settings_pairing_mode_automatic_with_repeats">Automatico con ripetizioni</string>
     <string name="settings_pairing_mode_dialog_title">Scegli le opzioni per i Parings:</string>
     <string name="settings_save_draft_result_dialog_title">I risultati del draft devono essere salvati:</string>
@@ -208,7 +208,7 @@
 
     <string name="dialog_title_change_algorithm">Cambiamento dell\'algoritmo</string>
     <string name="dialog_body_change_algorithm">Questo cambierà la modalità di associazione da manuale a automatica con ripetizioni</string>
-    <string name="settings_pairing_mode_round_robin">Round Robin</string>
+    <string name="settings_pairing_mode_round_robin">Round Robin - ogni concorrente incontra tutti gli altri concorrenti nei round</string>
     <string name="settings_used_libraries">Ottime librerie in app</string>
     <string name="dialog_used_libraries_title">Librerie usate</string>
     <string name="dialog_help_with_app_title">Aiuto con questa applicazione</string>
@@ -224,7 +224,7 @@
     <string name="empty_view">Gioca con alcuni giochi per vedere la storia :)</string>
     <string name="scoreboard">Tabellone Segnapunti</string>
     <string name="round_history">Storia circolare</string>
-    <string name="settings_pairing_mode_knock_out">Knock Out</string>
+    <string name="settings_pairing_mode_knock_out">Knock Out - quando perdi un round, sarai eliminato per il gioco</string>
     <string name="dialog_timer_cancel">@string/dialog_negative</string>
     <string name="dialog_timer_pause">Pausa</string>
     <string name="dialog_timer_title">Cosa vuoi fare con il conto alla rovescia?</string>
