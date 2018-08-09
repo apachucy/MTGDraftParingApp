@@ -78,7 +78,6 @@
             android:layout_margin="@dimen/floating_button_margin"
             android:src="@drawable/ic_navigate_next"
             app:layout_anchor="@id/main_content"
-            app:layout_anchorGravity="bottom|right|end"
-            app:layout_behavior="unii.draft.mtg.parings.view.custom.ScrollAwareFABBehavior" />
+            app:layout_anchorGravity="bottom|right|end" />
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
