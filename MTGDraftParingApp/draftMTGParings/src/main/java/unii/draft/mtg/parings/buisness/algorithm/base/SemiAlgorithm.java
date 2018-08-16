@@ -149,6 +149,10 @@ public class SemiAlgorithm extends BaseAlgorithm {
     }
 
     protected void sittingsPairingAtStart(@NonNull List<Player> playerList) {
+        //If there are no more than 3 players this sittings are useless
+        if (playerList.size() < 3) {
+            return;
+        }
         int pivot = playerList.size() / 2;
         List<Player> firstSubList = new ArrayList<>(playerList.subList(0, pivot));
         List<Player> secondSubList = new ArrayList<>(playerList.subList(pivot + 1, playerList.size() - 1));
