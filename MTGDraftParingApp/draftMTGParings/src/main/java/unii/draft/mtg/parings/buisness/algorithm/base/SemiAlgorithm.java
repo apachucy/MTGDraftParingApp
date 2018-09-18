@@ -155,10 +155,12 @@ public class SemiAlgorithm extends BaseAlgorithm {
         }
         int pivot = playerList.size() / 2;
         List<Player> firstSubList = new ArrayList<>(playerList.subList(0, pivot));
-        List<Player> secondSubList = new ArrayList<>(playerList.subList(pivot + 1, playerList.size() - 1));
+        List<Player> secondSubList = new ArrayList<>(playerList.subList(pivot, playerList.size()));
         playerList.clear();
 
-        for (int i = 0; i < secondSubList.size(); i++) {
+        int maxSize = firstSubList.size() > secondSubList.size() ? firstSubList.size() : secondSubList.size();
+
+        for (int i = 0; i < maxSize; i++) {
             if (i < firstSubList.size()) {
                 playerList.add(firstSubList.get(i));
             }
