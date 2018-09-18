@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import unii.draft.mtg.parings.buisness.algorithm.annotation.PairingModeNotation;
+import unii.draft.mtg.parings.buisness.algorithm.annotation.SittingsModeNotation;
 import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.util.config.SettingsPreferencesConst;
@@ -166,12 +167,13 @@ public class SharedPreferencesManager implements ISharedPreferences {
     }
 
     @Override
-    public void setGeneratedSittingMode(int sittingMode) {
+    public void setGeneratedSittingMode(@SittingsModeNotation int sittingMode) {
         mSharedPreferences.edit().putInt(SettingsPreferencesConst.SITTINGS, sittingMode).apply();
 
     }
 
     @Override
+    @SittingsModeNotation
     public int getGeneratedSittingMode() {
         return mSharedPreferences.getInt(SettingsPreferencesConst.SITTINGS, SittingsMode.NO_SITTINGS);
     }

@@ -196,5 +196,6 @@
     <string name="dialog_timer_cancel">@string/dialog_negative</string>
     <string name="dialog_timer_pause">Pauza</string>
     <string name="dialog_timer_title">Co chcesz zrobić z odliczaniem?</string>
+    <string name="settings_sittings_tournament" >Turniej</string>
 
 </resources>

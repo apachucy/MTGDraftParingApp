@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.sharedprefrences;
 
 import unii.draft.mtg.parings.buisness.algorithm.annotation.PairingModeNotation;
+import unii.draft.mtg.parings.buisness.algorithm.annotation.SittingsModeNotation;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 
 public interface ISharedPreferences {
@@ -141,13 +142,14 @@ public interface ISharedPreferences {
      *
      * @param sittingMode
      */
-    void setGeneratedSittingMode(int sittingMode);
+    void setGeneratedSittingMode(@SittingsModeNotation int sittingMode);
 
     /**
      * get sittings mode
      *
      * @return
      */
+    @SittingsModeNotation
     int getGeneratedSittingMode();
 
     void resetGuideTour();

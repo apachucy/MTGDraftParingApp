@@ -71,6 +71,7 @@ public class DraftSettingsFragment extends BaseFragment {
         List<String> sittingsOptionList = new ArrayList<>();
         sittingsOptionList.add(getString(R.string.settings_sittings_none));
         sittingsOptionList.add(getString(R.string.settings_sittings_random));
+        sittingsOptionList.add(getString(R.string.settings_sittings_tournament));
         showRadioButtonListDialog(getActivity(), getString(R.string.settings_sittings_dialog_title), sittingsOptionList,
                 getString(R.string.dialog_positive), getString(R.string.dialog_negative),
                 mSharedPreferenceManager.getGeneratedSittingMode(), mSittingsCallback);
@@ -129,8 +130,12 @@ public class DraftSettingsFragment extends BaseFragment {
         String sittingsOptionName;
         if (mode == SittingsMode.NO_SITTINGS) {
             sittingsOptionName = getString(R.string.settings_sittings_none);
-        } else {
+
+        } else if (mode ==SittingsMode.SITTINGS_RANDOM){
             sittingsOptionName = getString(R.string.settings_sittings_random);
+        }
+        else {
+            sittingsOptionName = getString(R.string.settings_sittings_tournament);
         }
         mSittingsOptionsTextView.setText(getString(R.string.settings_sittings_option, sittingsOptionName));
     }
@@ -194,6 +199,9 @@ public class DraftSettingsFragment extends BaseFragment {
             switch (which) {
                 case SittingsMode.SITTINGS_RANDOM:
                     mSharedPreferenceManager.setGeneratedSittingMode(SittingsMode.SITTINGS_RANDOM);
+                    break;
+                case SittingsMode.SITTINGS_TOURNAMENT:
+                    mSharedPreferenceManager.setGeneratedSittingMode(SittingsMode.SITTINGS_TOURNAMENT);
                     break;
                 case SittingsMode.NO_SITTINGS:
                 default:

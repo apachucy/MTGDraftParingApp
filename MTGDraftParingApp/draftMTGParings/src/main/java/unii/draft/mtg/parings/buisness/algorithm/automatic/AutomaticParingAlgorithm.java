@@ -33,7 +33,7 @@ public class AutomaticParingAlgorithm extends SemiAlgorithm {
         List<Player> filteredPlayerList = getFilteredPlayerList(false);
         List<Game> gameList = null;
         if (getCurrentRound() == 0) {
-            if (sittingsMode == SittingsMode.SITTINGS_RANDOM) {
+            if (sittingsMode == SittingsMode.SITTINGS_TOURNAMENT) {
                 sittingsPairingAtStart(filteredPlayerList);
             } else {
                 calculatePairAtStart(filteredPlayerList);

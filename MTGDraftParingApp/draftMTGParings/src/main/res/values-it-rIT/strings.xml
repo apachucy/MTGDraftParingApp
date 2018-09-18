@@ -228,4 +228,5 @@
     <string name="dialog_timer_cancel">@string/dialog_negative</string>
     <string name="dialog_timer_pause">Pausa</string>
     <string name="dialog_timer_title">Cosa vuoi fare con il conto alla rovescia?</string>
+    <string name="settings_sittings_tournament" >Torneo</string>
 </resources>

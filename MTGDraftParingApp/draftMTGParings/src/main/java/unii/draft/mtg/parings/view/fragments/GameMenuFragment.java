@@ -287,7 +287,7 @@ public class GameMenuFragment extends BaseFragment {
                     }
                 }
                 //set started activity
-                if (mSharedPreferenceManager.get().getGeneratedSittingMode() == SittingsMode.SITTINGS_RANDOM) {
+                if (mSharedPreferenceManager.get().getGeneratedSittingMode() != SittingsMode.NO_SITTINGS) {
                     intent = new Intent(mActivity, SittingsActivity.class);
                 } else if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_MANUAL) {
                     intent = new Intent(mActivity,
