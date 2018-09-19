@@ -58,4 +58,9 @@ public class ManualParingAlgorithm extends BaseAlgorithm {
         super.setPlayerWithBye(playerWithBye);
         getDraftStartedPlayerList().get(getDraftStartedPlayerList().indexOf(super.getPlayerWithBye())).setHasBye(true);
     }
+
+    @Override
+    public void reoderPlayerList(@NonNull List<String> playerNames) {
+
+    }
 }

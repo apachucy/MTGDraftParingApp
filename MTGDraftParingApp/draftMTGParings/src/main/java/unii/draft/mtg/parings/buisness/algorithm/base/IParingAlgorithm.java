@@ -1,5 +1,6 @@
 package unii.draft.mtg.parings.buisness.algorithm.base;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.List;
@@ -68,4 +69,6 @@ public interface IParingAlgorithm {
     void setPlayedRound(int roundsPlayed);
 
     List<Game> getLastPlayedGameList();
+
+    void reoderPlayerList(@NonNull List<String> playerNames);
 }
