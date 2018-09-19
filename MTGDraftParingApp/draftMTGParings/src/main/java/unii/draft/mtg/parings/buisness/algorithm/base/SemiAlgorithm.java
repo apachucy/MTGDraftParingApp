@@ -133,6 +133,24 @@ public class SemiAlgorithm extends BaseAlgorithm {
         super.setPlayerWithBye(playerWithBye);
     }
 
+    @Override
+    public void reoderPlayerList(@NonNull List<String> playerNames) {
+        List<Player> playerList = getDraftStartedPlayerList();
+        List<Player> newSortedList = new ArrayList<>();
+        for (int i = 0; i < playerNames.size(); i++) {
+            String currentName = playerNames.get(i);
+            Player player = null;
+            for (int j = 0; j < playerList.size(); j++) {
+                if (playerList.get(j).getPlayerName().equals(currentName)) {
+                    player = playerList.get(j);
+                    break;
+                }
+            }
+            newSortedList.add(player);
+        }
+        setDraftStartedPlayersList(newSortedList);
+    }
+
     /**
      * Each player has equal point <br>
      * so make parings at random

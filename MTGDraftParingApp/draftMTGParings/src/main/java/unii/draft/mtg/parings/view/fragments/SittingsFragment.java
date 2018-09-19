@@ -20,7 +20,9 @@ import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
+import unii.draft.mtg.parings.buisness.sittings.SittingsMode;
 import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.SingleTextViewAdapter;
 
@@ -32,7 +34,8 @@ public class SittingsFragment extends BaseFragment {
     AlgorithmChooser mAlgorithmChooser;
     @Inject
     ISittingGenerator mSittingsGenerator;
-
+    @Inject
+    ISharedPreferences mSharedPreferenceManager;
     @Nullable
     @BindView(R.id.table_sittingsRecyclerView)
     RecyclerView mRecyclerView;
@@ -88,6 +91,10 @@ public class SittingsFragment extends BaseFragment {
                 base.isLoadCachedDraftWasNeeded();
             }
             mPlayerNameList = mSittingsGenerator.generateSittings(getPlayerNameList(mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList()));
+
+            if (mSharedPreferenceManager.getGeneratedSittingMode() == SittingsMode.SITTINGS_TOURNAMENT) {
+                mAlgorithmChooser.getCurrentAlgorithm().reoderPlayerList(mPlayerNameList);
+            }
         } catch (NullPointerException exception) {
             getActivity().finish();
         } finally {
