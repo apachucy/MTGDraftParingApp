@@ -26,44 +26,57 @@ android {
     }
 }
 
+ext {
+    supportLibVersion = "28.0.0"
+    chartLibrary = "v3.0.3"
+    lombokLibrary = "1.16.12"
+    butterknifeLibrary = "8.8.1"
+    tourgideLibrary = "1.0.14-SNAPSHOT@aar"
+    materialDialogLibrary = "0.9.6.0"
+    daggerLibrary = "2.0.2"
+    gsonLibrary = "2.7"
+    permutationLibrary = "2.1"
+    fancyToastAndroid = "0.1.3"
+
+}
+
 dependencies {
- 
-    implementation 'com.android.support:support-v4:28.0.0'
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
+
+    implementation "com.android.support:support-v4:$supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
+    implementation "com.android.support:cardview-v7:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
 
 
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation "com.github.PhilJay:MPAndroidChart:$chartLibrary"
 
-    annotationProcessor "org.projectlombok:lombok:1.16.12"
-    compileOnly "org.projectlombok:lombok:1.16.12"
+    annotationProcessor "org.projectlombok:lombok:$lombokLibrary"
+    compileOnly "org.projectlombok:lombok:$lombokLibrary"
 
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation "com.jakewharton:butterknife:$butterknifeLibrary"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeLibrary"
 
-  
-    implementation ('com.github.worker8:tourguide:1.0.14-SNAPSHOT@aar') {
+
+    implementation("com.github.worker8:tourguide:$tourgideLibrary") {
         transitive = true;
     }
     implementation files('libs/greendao-2.1.0.jar')
-    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
-
+    implementation "com.afollestad.material-dialogs:commons:$materialDialogLibrary"
 
     //dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
-    implementation 'com.google.dagger:dagger:2.0.2'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.0.2'
+    implementation "com.google.dagger:dagger:$daggerLibrary"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerLibrary"
 
     //save player objects (protect from removing it)
-    implementation 'com.google.code.gson:gson:2.7'
+    implementation "com.google.code.gson:gson:$gsonLibrary"
 
     //permutation library
-    implementation 'com.googlecode.combinatoricslib:combinatoricslib:2.1'
+    implementation "com.googlecode.combinatoricslib:combinatoricslib:$permutationLibrary"
 
     //new toasts
-    implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.3'
+    implementation "com.github.Shashank02051997:FancyToast-Android:$fancyToastAndroid"
 
     //tests
     testImplementation 'junit:junit:4.12'
