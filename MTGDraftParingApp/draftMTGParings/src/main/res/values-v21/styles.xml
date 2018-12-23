@@ -69,7 +69,6 @@
     <!-- Edit Text -->
     <style name="editText" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/black</item>
-        <item name="android:elevation">@dimen/elevation</item>
     </style>
 
     <style name="MenuItemStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
