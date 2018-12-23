@@ -46,7 +46,7 @@ public class DraftWidgetProvider extends AppWidgetProvider {
         widgetViewModel = (WidgetViewModel) bundle.getSerializable(BUNDLE_EXTRA);
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_draft);
-        views.setImageViewResource(R.id.widget_icon, R.drawable.ic_launcher);
+        views.setImageViewResource(R.id.widget_icon, R.mipmap.ic_launcher);
         String widgetData;
         if (widgetViewModel != null) {
             widgetData = context.getString(R.string.widget_content, widgetViewModel.getCurrentRound(), widgetViewModel.getWinningPlayer());
@@ -66,7 +66,7 @@ public class DraftWidgetProvider extends AppWidgetProvider {
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_draft);
 
-        views.setImageViewResource(R.id.widget_icon, R.drawable.ic_launcher);
+        views.setImageViewResource(R.id.widget_icon, R.mipmap.ic_launcher);
         String widgetData;
         if (widgetViewModel != null) {
             widgetData = context.getString(R.string.widget_content, widgetViewModel.getCurrentRound(), widgetViewModel.getWinningPlayer());

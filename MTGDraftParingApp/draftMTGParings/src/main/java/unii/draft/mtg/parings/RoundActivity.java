@@ -259,7 +259,7 @@ public class RoundActivity extends BaseActivity {
     @Override
     protected void initToolBar() {
         setSupportActionBar(mToolBar);
-        getSupportActionBar().setLogo(R.drawable.ic_launcher);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         mToolBar.setLogoDescription(R.string.app_header_path_game);
         mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
         getSupportActionBar().setTitle(R.string.app_header_path_game);

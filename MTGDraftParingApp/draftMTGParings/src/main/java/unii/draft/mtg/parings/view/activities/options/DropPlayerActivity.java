@@ -53,7 +53,7 @@ public class DropPlayerActivity extends BaseActivity {
         setSupportActionBar(mToolBar);
         mToolBar.setLogoDescription(R.string.app_header_path_configuration);
         mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
-        getSupportActionBar().setLogo(R.drawable.ic_launcher);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setTitle(R.string.app_header_path_configuration);
     }
 
