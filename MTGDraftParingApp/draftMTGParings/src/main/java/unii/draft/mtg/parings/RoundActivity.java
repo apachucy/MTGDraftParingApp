@@ -251,7 +251,8 @@ public class RoundActivity extends BaseActivity {
                 mCounterClass.start();
             }
         }
-        mParingDashboardLogic = new ParingDashboardLogic(this);
+        mParingDashboardLogic = new ParingDashboardLogic(this, mSharedPreferenceManager.getPointsForGameWinning(), mSharedPreferenceManager.getPointsForGameDraws(),
+                mSharedPreferenceManager.getPointsForMatchWinning(), mSharedPreferenceManager.getPointsForMatchDraws());
         mHourGlassActions = Arrays.asList(getString(R.string.dialog_timer_cancel), getString(R.string.dialog_timer_pause));
         return true;
     }

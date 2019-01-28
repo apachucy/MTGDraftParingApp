@@ -27,7 +27,7 @@ public class SettingsPreferencesConst {
 
     public static final String PAIRINGS_TYPE = SettingsPreferencesConst.class.getName() + "pairings_type";
     public static final String SITTINGS = SettingsPreferencesConst.class.getName() + "sittings_mode";
-    public static final String SAVE_DRAFT_RESULTS  = SettingsPreferencesConst.class.getName() + "save_draft_results";
+    public static final String SAVE_DRAFT_RESULTS = SettingsPreferencesConst.class.getName() + "save_draft_results";
 
     /**
      * Guide Tour
@@ -37,4 +37,15 @@ public class SettingsPreferencesConst {
     public static final String SHOW_GUIDE_TOUR_ON_SCOREBOARD_SCREEN = SettingsPreferencesConst.class.getName() + "SHOW_GUIDE_TOUR_ON_SCOREBOARD_SCREEN";
     public static final String SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN = SettingsPreferencesConst.class.getName() + "SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN";
 
+
+    /**
+     * Setting:
+     * Point for draws/wins
+     */
+
+    public static final String POINTS_GAME_DRAW = SettingsPreferencesConst.class.getName() + "POINTS_GAME_DRAW";
+    public static final String POINTS_GAME_WIN = SettingsPreferencesConst.class.getName() + "POINTS_GAME_WIN";
+
+    public static final String POINTS_MATCH_DRAW = SettingsPreferencesConst.class.getName() + "POINTS_MATCH_DRAW";
+    public static final String POINTS_MATCH_WIN = SettingsPreferencesConst.class.getName() + "POINTS_MATCH_WIN";
 }

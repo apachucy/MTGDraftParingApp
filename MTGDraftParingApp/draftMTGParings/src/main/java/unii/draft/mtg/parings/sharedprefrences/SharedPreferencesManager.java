@@ -231,5 +231,49 @@ public class SharedPreferencesManager implements ISharedPreferences {
         mSharedPreferences.edit().putBoolean(SettingsPreferencesConst.SHOW_GUIDE_TOUR_ON_SITTINGS_SCREEN, isVisible).apply();
     }
 
+    @Override
+    public void setPointsForGameWinning(int points) {
+        mSharedPreferences.edit().putInt(SettingsPreferencesConst.POINTS_GAME_WIN, points).apply();
+
+    }
+
+    @Override
+    public int getPointsForGameWinning() {
+        return mSharedPreferences.getInt(SettingsPreferencesConst.POINTS_GAME_WIN, BaseConfig.MATCH_WIN);
+    }
+
+    @Override
+    public void setPointsForGameDraws(int points) {
+        mSharedPreferences.edit().putInt(SettingsPreferencesConst.POINTS_GAME_DRAW, points).apply();
+
+    }
+
+    @Override
+    public int getPointsForGameDraws() {
+        return mSharedPreferences.getInt(SettingsPreferencesConst.POINTS_GAME_DRAW, BaseConfig.MATCH_DRAW);
+    }
+
+    @Override
+    public void setPointsForMatchWinning(int points) {
+        mSharedPreferences.edit().putInt(SettingsPreferencesConst.POINTS_MATCH_WIN, points).apply();
+
+    }
+
+    @Override
+    public int getPointsForMatchWinning() {
+        return mSharedPreferences.getInt(SettingsPreferencesConst.POINTS_MATCH_WIN, BaseConfig.MATCH_WIN);
+    }
+
+    @Override
+    public void setPointsForMatchDraws(int points) {
+        mSharedPreferences.edit().putInt(SettingsPreferencesConst.POINTS_MATCH_DRAW, points).apply();
+
+    }
+
+    @Override
+    public int getPointsForMatchDraws() {
+        return mSharedPreferences.getInt(SettingsPreferencesConst.POINTS_MATCH_DRAW, BaseConfig.MATCH_DRAW);
+    }
+
 
 }
