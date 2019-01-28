@@ -265,22 +265,22 @@
     <string name="settings_sittings_tournament" />
 
     <!--Change points for draw and winning -->
-    <string name="dialog_title_game_win_points" translatable="false">Points for winning game</string>
-    <string name="dialog_body_game_win_points" translatable="false">Set particular number of points for winning a single game</string>
-    <string name="dialog_win_points_hint" translatable="false">Default value is 3</string>
-    <string name="button_game_winning_points" translatable="false">Points for winning game: %1$s</string>
+    <string name="dialog_title_game_win_points">Points for winning game</string>
+    <string name="dialog_body_game_win_points">Set particular number of points for winning a single game</string>
+    <string name="dialog_win_points_hint">Default value is 3</string>
+    <string name="button_game_winning_points">Points for winning game: %1$s</string>
 
-    <string name="dialog_title_game_draw_points" translatable="false">Points for draw in game</string>
-    <string name="dialog_body_game_draw_points" translatable="false">Set particular number of points for  a draw in single game</string>
-    <string name="dialog_draw_points_hint" translatable="false">Default value is 1</string>
-    <string name="button_game_draw_points" translatable="false">Points for draw in game: %1$s</string>
+    <string name="dialog_title_game_draw_points">Points for draw in game</string>
+    <string name="dialog_body_game_draw_points">Set particular number of points for  a draw in single game</string>
+    <string name="dialog_draw_points_hint">Default value is 1</string>
+    <string name="button_game_draw_points">Points for draw in game: %1$s</string>
 
-    <string name="dialog_title_match_win_points" translatable="false">Points for winning match</string>
-    <string name="dialog_body_match_win_points" translatable="false">Set particular number of points for winning a match. Match consist of at least one game</string>
-    <string name="button_match_winning_points" translatable="false">Points for winning match: %1$s</string>
+    <string name="dialog_title_match_win_points">Points for winning match</string>
+    <string name="dialog_body_match_win_points">Set particular number of points for winning a match. Match consist of at least one game</string>
+    <string name="button_match_winning_points">Points for winning match: %1$s</string>
 
-    <string name="dialog_title_match_draw_points" translatable="false">Points for draw match </string>
-    <string name="dialog_body_match_draw_points" translatable="false">Set particular number of points for draw in a match. Match consist of at least one game</string>
-    <string name="button_match_draw_points" translatable="false">Points for draw in match: %1$s</string>
+    <string name="dialog_title_match_draw_points">Points for draw match </string>
+    <string name="dialog_body_match_draw_points">Set particular number of points for draw in a match. Match consist of at least one game</string>
+    <string name="button_match_draw_points">Points for draw in match: %1$s</string>
 
 </resources>
