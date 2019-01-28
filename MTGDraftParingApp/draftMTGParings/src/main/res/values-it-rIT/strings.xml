@@ -229,4 +229,24 @@
     <string name="dialog_timer_pause">Pausa</string>
     <string name="dialog_timer_title">Cosa vuoi fare con il conto alla rovescia?</string>
     <string name="settings_sittings_tournament" >Torneo</string>
+
+    <!--Change points for draw and winning -->
+    <string name="dialog_title_game_win_points">Punti per vincere nel gioco</string>
+    <string name="dialog_body_game_win_points">Determina quanti punti il giocatore riceve per un  gioco</string>
+    <string name="dialog_win_points_hint">Il valore predefinito è 3</string>
+    <string name="button_game_winning_points">Punti per vincere nel gioco: %1$s</string>
+
+    <string name="dialog_title_game_draw_points">Punti per l\'estrazione nel gioco</string>
+    <string name="dialog_body_game_draw_points">Imposta quanti punti il giocatore riceve per un pareggio nel gioco</string>
+    <string name="dialog_draw_points_hint">Il valore predefinito è 1</string>
+    <string name="button_game_draw_points">Punti per l\'estrazione nel gioco: %1$s</string>
+
+    <string name="dialog_title_match_win_points">Punti per la vittoria nella partita</string>
+    <string name="dialog_body_match_win_points">Imposta quanti punti il giocatore riceve per aver vinto la partita. La partita consiste di almeno un gioco</string>
+    <string name="button_match_winning_points">Punti per la vittoria nella partita: %1$s</string>
+
+    <string name="dialog_title_match_draw_points">Punti per l\'estrazione nella partita</string>
+    <string name="dialog_body_match_draw_points">Ustaw ile punktów otrzymuje zawodnik za remis w meczu. La partita consiste di almeno un gioco</string>
+    <string name="button_match_draw_points">Punti per l\'estrazione nella partita: %1$s</string>
+
 </resources>
