@@ -43,6 +43,20 @@ public class DraftSettingsFragment extends BaseFragment {
     @Inject
     ISharedPreferences mSharedPreferenceManager;
 
+
+    @Nullable
+    @BindView(R.id.settings_pointsMatchWinButton)
+    Button mMatchWinTextView;
+    @Nullable
+    @BindView(R.id.settings_pointsMatchDrawButton)
+    Button mMatchDrawTextView;
+    @Nullable
+    @BindView(R.id.settings_pointsGameWinButton)
+    Button mGameWinTextView;
+    @Nullable
+    @BindView(R.id.settings_pointsGameDrawButton)
+    Button mGameDrawTextView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +73,11 @@ public class DraftSettingsFragment extends BaseFragment {
         setSittingsOptionsText(mSharedPreferenceManager.getGeneratedSittingMode());
         setPairingOptionText(mSharedPreferenceManager.getPairingType());
         setSaveDraftResults(mSharedPreferenceManager.getSaveDraftResults());
+
+        mMatchWinTextView.setText(getString(R.string.button_match_winning_points, Integer.toString(mSharedPreferenceManager.getPointsForMatchWinning())));
+        mMatchDrawTextView.setText(getString(R.string.button_match_draw_points, Integer.toString(mSharedPreferenceManager.getPointsForMatchDraws())));
+        mGameWinTextView.setText(getString(R.string.button_game_winning_points, Integer.toString(mSharedPreferenceManager.getPointsForGameWinning())));
+        mGameDrawTextView.setText(getString(R.string.button_game_draw_points, Integer.toString(mSharedPreferenceManager.getPointsForGameDraws())));
     }
 
     @Override
@@ -92,6 +111,112 @@ public class DraftSettingsFragment extends BaseFragment {
 
 
     }
+
+
+    @OnClick(R.id.settings_pointsMatchWinButton)
+    void onChangeMatchWinPointClicked() {
+        showEditTextDialog(getContext(),
+                getString(R.string.dialog_title_match_win_points),
+                getString(R.string.dialog_body_match_win_points),
+                getString(R.string.dialog_win_points_hint),
+                Integer.toString(mSharedPreferenceManager.getPointsForMatchWinning()),
+                new UpdateData() {
+                    @Override
+                    public void updateView() {
+                        String newValue = Integer.toString(mSharedPreferenceManager.getPointsForMatchWinning());
+
+                        mMatchWinTextView.setText(getString(R.string.button_match_winning_points, newValue));
+                    }
+
+                    @Override
+                    public void updateSharedPreferences(String newData) {
+                        int newValue = Integer.parseInt(newData);
+                        if (newValue != mSharedPreferenceManager.getPointsForMatchWinning()) {
+                            mSharedPreferenceManager.setPointsForMatchWinning(newValue);
+                        }
+                    }
+                }
+        );
+    }
+
+    @OnClick(R.id.settings_pointsMatchDrawButton)
+    void onChangeMatchDrawPointClicked() {
+        showEditTextDialog(getContext(),
+                getString(R.string.dialog_title_match_draw_points),
+                getString(R.string.dialog_title_match_draw_points),
+                getString(R.string.dialog_draw_points_hint),
+                Integer.toString(mSharedPreferenceManager.getPointsForMatchDraws()),
+                new UpdateData() {
+                    @Override
+                    public void updateView() {
+                        String newValue = Integer.toString(mSharedPreferenceManager.getPointsForMatchDraws());
+
+                        mMatchWinTextView.setText(getString(R.string.button_match_draw_points, newValue));
+                    }
+
+                    @Override
+                    public void updateSharedPreferences(String newData) {
+                        int newValue = Integer.parseInt(newData);
+                        if (newValue != mSharedPreferenceManager.getPointsForMatchDraws()) {
+                            mSharedPreferenceManager.setPointsForMatchDraws(newValue);
+                        }
+                    }
+                }
+        );
+    }
+
+    @OnClick(R.id.settings_pointsGameWinButton)
+    void onChangeGameWinPointClicked() {
+        showEditTextDialog(getContext(),
+                getString(R.string.dialog_title_game_win_points),
+                getString(R.string.dialog_title_game_win_points),
+                getString(R.string.dialog_win_points_hint),
+                Integer.toString(mSharedPreferenceManager.getPointsForGameWinning()),
+                new UpdateData() {
+                    @Override
+                    public void updateView() {
+                        String newValue = Integer.toString(mSharedPreferenceManager.getPointsForGameWinning());
+
+                        mMatchWinTextView.setText(getString(R.string.button_game_winning_points, newValue));
+                    }
+
+                    @Override
+                    public void updateSharedPreferences(String newData) {
+                        int newValue = Integer.parseInt(newData);
+                        if (newValue != mSharedPreferenceManager.getPointsForGameWinning()) {
+                            mSharedPreferenceManager.setPointsForGameWinning(newValue);
+                        }
+                    }
+                }
+        );
+    }
+
+    @OnClick(R.id.settings_pointsGameDrawButton)
+    void onChangeGameDrawPointClicked() {
+        showEditTextDialog(getContext(),
+                getString(R.string.dialog_title_game_draw_points),
+                getString(R.string.dialog_title_game_draw_points),
+                getString(R.string.dialog_draw_points_hint),
+                Integer.toString(mSharedPreferenceManager.getPointsForGameDraws()),
+                new UpdateData() {
+                    @Override
+                    public void updateView() {
+                        String newValue = Integer.toString(mSharedPreferenceManager.getPointsForGameDraws());
+
+                        mMatchWinTextView.setText(getString(R.string.button_game_draw_points, newValue));
+                    }
+
+                    @Override
+                    public void updateSharedPreferences(String newData) {
+                        int newValue = Integer.parseInt(newData);
+                        if (newValue != mSharedPreferenceManager.getPointsForGameDraws()) {
+                            mSharedPreferenceManager.setPointsForGameDraws(newValue);
+                        }
+                    }
+                }
+        );
+    }
+
 
     @OnClick(R.id.settings_saveResultsAfterDraftButton)
     void onSaveDraftResultsViewClicked() {
@@ -131,10 +256,9 @@ public class DraftSettingsFragment extends BaseFragment {
         if (mode == SittingsMode.NO_SITTINGS) {
             sittingsOptionName = getString(R.string.settings_sittings_none);
 
-        } else if (mode ==SittingsMode.SITTINGS_RANDOM){
+        } else if (mode == SittingsMode.SITTINGS_RANDOM) {
             sittingsOptionName = getString(R.string.settings_sittings_random);
-        }
-        else {
+        } else {
             sittingsOptionName = getString(R.string.settings_sittings_tournament);
         }
         mSittingsOptionsTextView.setText(getString(R.string.settings_sittings_option, sittingsOptionName));

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -40,4 +41,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_save_draft_result_dialog_title" />
+
+    <Button
+        android:id="@+id/settings_pointsMatchWinButton"
+        style="@style/buttonBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Match Win Points:" />
+
+    <Button
+        android:id="@+id/settings_pointsMatchDrawButton"
+        style="@style/buttonBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Match Draw Points:" />
+
+    <Button
+        android:id="@+id/settings_pointsGameWinButton"
+        style="@style/buttonBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Game Win Points:" />
+
+    <Button
+        android:id="@+id/settings_pointsGameDrawButton"
+        style="@style/buttonBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Game Draw Points:" />
 </LinearLayout>

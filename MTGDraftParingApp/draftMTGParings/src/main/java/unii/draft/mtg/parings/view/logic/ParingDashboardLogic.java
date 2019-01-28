@@ -17,9 +17,17 @@ import unii.draft.mtg.parings.util.config.BaseConfig;
 
 public class ParingDashboardLogic {
     private Context mContext;
+    private int pointsForGameWinning;
+    private int pointsForGameDraw;
+    private int pointsForMatchWinning;
+    private int pointsForMatchDraw;
 
-    public ParingDashboardLogic(Context context) {
+    public ParingDashboardLogic(Context context, int pointsForGameWinning, int pointsForGameDraw, int pointsForMatchWinning, int pointsForMatchDraw) {
         mContext = context;
+        this.pointsForGameDraw = pointsForGameDraw;
+        this.pointsForGameWinning = pointsForGameWinning;
+        this.pointsForMatchDraw = pointsForMatchDraw;
+        this.pointsForMatchWinning = pointsForMatchWinning;
     }
 
 
@@ -39,7 +47,7 @@ public class ParingDashboardLogic {
                 // for
                 // player
                 // with bye
-                player.setMatchPoints(player.getMatchPoints() - BaseConfig.MATCH_WIN);
+                player.setMatchPoints(player.getMatchPoints() - pointsForMatchWinning);
                 continue;
             }
 
@@ -55,25 +63,25 @@ public class ParingDashboardLogic {
             // draw
             if (lastGame.getWinner().equals(BaseConfig.DRAW)) {
                 player.setMatchPoints(player.getMatchPoints()
-                        - BaseConfig.MATCH_DRAW);
+                        - pointsForMatchDraw);
                 // win match
             } else if (lastGame.getWinner().equals(player.getPlayerName())) {
                 player.setMatchPoints(player.getMatchPoints()
-                        - BaseConfig.MATCH_WIN);
+                        - pointsForMatchWinning);
 
             }
 
             // There was a draw so each player gains 1 point for each draw
             if (lastGame.getDraws() > 0) {
-                player.setGamePoints(player.getGamePoints() - lastGame.getDraws());
+                player.setGamePoints(player.getGamePoints() - lastGame.getDraws() * pointsForGameDraw);
             }
             // add "small" points for a player
             if (player.getPlayerName().equals(lastGame.getPlayerNameA())) {
                 player.setGamePoints(player.getGamePoints()
-                        - lastGame.getPlayerAPoints() * 3);
+                        - lastGame.getPlayerAPoints() * pointsForMatchWinning);
             } else {
                 player.setGamePoints(player.getGamePoints()
-                        - lastGame.getPlayerBPoints() * 3);
+                        - lastGame.getPlayerBPoints() * pointsForMatchWinning);
             }
         }
     }
@@ -126,24 +134,24 @@ public class ParingDashboardLogic {
                     // draw
                     if (game.getWinner().equals(BaseConfig.DRAW)) {
                         player.setMatchPoints(player.getMatchPoints()
-                                + BaseConfig.MATCH_DRAW);
+                                + pointsForMatchDraw);
                         // win match
                     } else if (game.getWinner().equals(player.getPlayerName())) {
                         player.setMatchPoints(player.getMatchPoints()
-                                + BaseConfig.MATCH_WIN);
+                                + pointsForMatchWinning);
 
                     }
                     // add "small" points for a player
                     if (player.getPlayerName().equals(game.getPlayerNameA())) {
                         player.setGamePoints(player.getGamePoints()
-                                + game.getPlayerAPoints() * 3);
+                                + game.getPlayerAPoints() * pointsForGameWinning);
                     } else {
                         player.setGamePoints(player.getGamePoints()
-                                + game.getPlayerBPoints() * 3);
+                                + game.getPlayerBPoints() * pointsForGameWinning);
                     }
                     // There was a draw so each player gains 1 point for each draw
                     if (game.getDraws() > 0) {
-                        player.setGamePoints(player.getGamePoints() + game.getDraws());
+                        player.setGamePoints(player.getGamePoints() + game.getDraws() * pointsForGameDraw);
                     }
                     break;
 

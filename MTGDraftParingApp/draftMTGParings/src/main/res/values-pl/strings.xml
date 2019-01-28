@@ -196,6 +196,26 @@
     <string name="dialog_timer_cancel">@string/dialog_negative</string>
     <string name="dialog_timer_pause">Pauza</string>
     <string name="dialog_timer_title">Co chcesz zrobić z odliczaniem?</string>
-    <string name="settings_sittings_tournament" >Turniej</string>
+    <string name="settings_sittings_tournament">Turniej</string>
+
+
+    <!--Change points for draw and winning -->
+    <string name="dialog_title_game_win_points">Punkty za wygraną grę</string>
+    <string name="dialog_body_game_win_points">Ustaw ile punktów otrzymuje zawodnik za pojedyńczą grę</string>
+    <string name="dialog_win_points_hint">Domyślna wartość to 3</string>
+    <string name="button_game_winning_points">Punkty za wygraną grę: %1$s</string>
+
+    <string name="dialog_title_game_draw_points">Punkty za remis w grze</string>
+    <string name="dialog_body_game_draw_points">Ustaw ile punktów otrzymuje zawodnik za remis w grze</string>
+    <string name="dialog_draw_points_hint">Domyślną wartością jest 1</string>
+    <string name="button_game_draw_points">Punkty za remis w grze: %1$s</string>
+
+    <string name="dialog_title_match_win_points">Punkty za zwycięstwo w meczu</string>
+    <string name="dialog_body_match_win_points">Ustaw ile punktów otrzymuje zawodnik za zwycięstwo w meczu. Mecz składa się co najmniej z jednej gry</string>
+    <string name="button_match_winning_points">Punkty za zwycięstwo w meczu: %1$s</string>
+
+    <string name="dialog_title_match_draw_points">Punkty za remis w meczu</string>
+    <string name="dialog_body_match_draw_points">Ustaw ile punktów otrzymuje zawodnik za remis w meczu. Mecz składa się co najmniej z jednej gry</string>
+    <string name="button_match_draw_points">Punkty za remis w meczu: %1$s</string>
 
 </resources>

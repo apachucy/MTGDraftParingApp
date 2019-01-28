@@ -170,5 +170,21 @@ public interface ISharedPreferences {
 
     void setGuideTourOnSittingsScreen(boolean isVisible);
 
+    void setPointsForGameWinning(int points);
+
+    int getPointsForGameWinning();
+
+    void setPointsForGameDraws(int points);
+
+    int getPointsForGameDraws();
+
+    void setPointsForMatchWinning(int points);
+
+    int getPointsForMatchWinning();
+
+    void setPointsForMatchDraws(int points);
+
+    int getPointsForMatchDraws();
+
 
 }

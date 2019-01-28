@@ -198,4 +198,24 @@
     <string name="dialog_timer_title">"Was willst du mit dem Countdown machen? "</string>
     <string name="settings_sittings_tournament" >Turnier</string>
 
+
+    <!--Change points for draw and winning -->
+    <string name="dialog_title_game_win_points">Punkte, um das Spiel zu gewinnen</string>
+    <string name="dialog_body_game_win_points">Bestimmen Sie, wie viele Punkte der Spieler für ein einzelnes Spiel erhält</string>
+    <string name="dialog_win_points_hint">Der Standardwert ist 3</string>
+    <string name="button_game_winning_points">Punkte, um das Spiel zu gewinnen: %1$s</string>
+
+    <string name="dialog_title_game_draw_points">Punkte für ein Unentschieden im Spiel</string>
+    <string name="dialog_body_game_draw_points">Legen Sie fest, wie viele Punkte der Spieler für ein Unentschieden im Spiel erhält</string>
+    <string name="dialog_draw_points_hint">Der Standardwert ist 1</string>
+    <string name="button_game_draw_points">Punkte für ein Unentschieden im Spiel: %1$s</string>
+
+    <string name="dialog_title_match_win_points">Punkte für den Sieg im Match</string>
+    <string name="dialog_body_match_win_points">Legen Sie fest, wie viele Punkte der Match für den Gewinn des Spiels erhält. Das Match besteht aus mindestens einem Spiel</string>
+    <string name="button_match_winning_points">Punkte für den Sieg im Match: %1$s</string>
+
+    <string name="dialog_title_match_draw_points">Punkte für ein Unentschieden im Match</string>
+    <string name="dialog_body_match_draw_points">Legen Sie fest, wie viele Punkte der Match für die Auslosung im Spiel erhält. Das Match besteht aus mindestens einem Spiel</string>
+    <string name="button_match_draw_points">Punkte für ein Unentschieden im Match: %1$s</string>
+
 </resources>
