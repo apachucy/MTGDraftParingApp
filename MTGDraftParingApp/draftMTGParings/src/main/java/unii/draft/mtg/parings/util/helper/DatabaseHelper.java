@@ -6,7 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import de.greenrobot.dao.AbstractDao;
 import unii.draft.mtg.parings.buisness.algorithm.base.PlayersComparator;
@@ -18,6 +22,8 @@ import unii.draft.mtg.parings.database.model.GameDao;
 import unii.draft.mtg.parings.database.model.PlayerDao;
 import unii.draft.mtg.parings.database.model.PlayerDraftJoinTable;
 import unii.draft.mtg.parings.database.model.PlayerDraftJoinTableDao;
+import unii.draft.mtg.parings.database.populate.DraftExporter;
+import unii.draft.mtg.parings.database.populate.Information;
 import unii.draft.mtg.parings.logic.dagger.ApplicationComponent;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
@@ -147,7 +153,7 @@ public class DatabaseHelper implements IDatabaseHelper {
             Player nextPlayer = nextIndex < playerDraftList.size() ? playerDraftList.get(nextIndex) : null;
             if (nextPlayer == null || !(comparator.compare(player, nextPlayer) == EQUAL)) {
                 position = nextIndex;
-        }
+            }
         }
 
 
@@ -162,7 +168,7 @@ public class DatabaseHelper implements IDatabaseHelper {
     public void cleanDatabase() {
         mDaoSession.clear();
 
-        for (AbstractDao abstractDao : mDaoSession.getAllDaos()){
+        for (AbstractDao abstractDao : mDaoSession.getAllDaos()) {
             abstractDao.deleteAll();
         }
     }
@@ -197,6 +203,31 @@ public class DatabaseHelper implements IDatabaseHelper {
     @Override
     public List<Game> getAllGamesForPlayer(long playerId) {
         List<unii.draft.mtg.parings.database.model.Game> loadedGames = mDaoSession.getGameDao().queryBuilder().whereOr(GameDao.Properties.PlayerAGameJoinTableId.eq(playerId), GameDao.Properties.PlayerBGameJoinTableId.eq(playerId)).build().list();
+        List<Game> convertedGames = new ArrayList<>();
+
+        for (unii.draft.mtg.parings.database.model.Game game : loadedGames) {
+            unii.draft.mtg.parings.database.model.Player playerA = getPlayer(game.getPlayerAGameJoinTableId());
+            unii.draft.mtg.parings.database.model.Player playerB = getPlayer(game.getPlayerBGameJoinTableId());
+
+            if (playerA == null || playerB == null) {
+                continue;
+            }
+
+            String playerAName = playerA.getPlayerName();
+            String playerBName = playerB.getPlayerName();
+            convertedGames.add(new Game(game, playerAName, playerBName));
+        }
+
+        return convertedGames;
+    }
+
+    @Override
+    public List<Game> getAllGamesForPlayerInDraft(long playerId, long draftId) {
+        List<unii.draft.mtg.parings.database.model.Game> loadedGames = mDaoSession.getGameDao().queryBuilder()
+                .where(GameDao.Properties.DraftGameJoinTableId.eq(draftId))
+                .whereOr(GameDao.Properties.PlayerAGameJoinTableId.eq(playerId), GameDao.Properties.PlayerBGameJoinTableId.eq(playerId))
+                .build().list();
+
         List<Game> convertedGames = new ArrayList<>();
 
         for (unii.draft.mtg.parings.database.model.Game game : loadedGames) {
@@ -266,6 +297,51 @@ public class DatabaseHelper implements IDatabaseHelper {
         }
     }
 
+    @Override
+    public List<DraftExporter> exportDraftDatabase() {
+        List<DraftExporter> draftExporterList = new ArrayList<>();
+        List<Draft> draftList = getAllDraftList();
+        for (Draft draft : draftList) {
+            draftExporterList.add(exportDraft(draft));
+        }
+        return draftExporterList;
+    }
+
+
+    private DraftExporter exportDraft(Draft draft) {
+        //TODO: export bye ?
+        List<Player> playerList = new ArrayList<>();
+
+        for (PlayerDraftJoinTable playerDraftJoinTable : draft.getDrafts()) {
+            playerList.add(exportPlayer(draft.getId(),getPlayer(playerDraftJoinTable.getPlayerDraftJoinTableId()), playerDraftJoinTable));
+        }
+        DraftExporter draftExporter = new DraftExporter(playerList, draft.getDraftName(), draft.getDraftDate(), draft.getDraftRounds());
+        return draftExporter;
+    }
+
+    private Player exportPlayer(long draftId, unii.draft.mtg.parings.database.model.Player player, PlayerDraftJoinTable playerDraftJoinTable) {
+        Player oldPlayer = new Player(player, playerDraftJoinTable);
+        oldPlayer.setPlayedGame(getAllGamesForPlayerInDraft(player.getId(),draftId));
+        return oldPlayer;
+    }
+
+    private Game exportGame(unii.draft.mtg.parings.database.model.Game game, String playerAName, String playerBName) {
+        Game playedGame = new Game(game, playerAName, playerBName);
+        return playedGame;
+    }
+
+    @Override
+    public Information importDraftDatabase(@NonNull List<DraftExporter> database) {
+        for (DraftExporter draftExporter : database) {
+            importDraft(draftExporter);
+        }
+        return Information.SUCCESS;
+    }
+
+    public Information importDraft(DraftExporter database) {
+        saveDraft(database.getPlayerList(), database.getDraftName(), database.getDraftDate(), database.getDraftRounds());
+        return Information.SUCCESS;
+    }
 
     private long saveDraftDao(String draftName, String draftDate, int numberOfPlayers, int numberOfRounds) {
         Draft draftToBeSaved = new Draft();

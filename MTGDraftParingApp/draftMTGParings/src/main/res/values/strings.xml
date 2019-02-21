@@ -122,6 +122,8 @@
     <string name="warning_drop_player">You cannot modify players after draft ended</string>
     <string name="warning_add_player">Players cannot be added in Tournament Mode</string>
     <string name="settings_clean_history">Clean all history</string>
+    <string name="settings_save_database" translatable="false">Save to file</string>
+    <string name="settings_load_database" translatable="false">Load from file</string>
     <string name="settings_other">Other settings</string>
     <string name="settings_display_scoreboards">Display scoreboards</string>
     <string name="settings_display_players_list">Display players list</string>
@@ -283,4 +285,10 @@
     <string name="dialog_body_match_draw_points">Set particular number of points for draw in a match. Match consist of at least one game</string>
     <string name="button_match_draw_points">Points for draw in match: %1$s</string>
 
+    <!-- Saving/loading file-->
+    <string name="dialog_save_database" translatable="false">Export database</string>
+    <string name="dialog_save_database_content_success" translatable="false">File with history was saved on phone.\nYou may share it with others.\nFile name is the same as app name.</string>
+    <string name="dialog_import_database" translatable="false">Import database</string>
+    <string name="dialog_import_database_content_success" translatable="false">File with history was imported to app.</string>
+    <string name="dialog_import_database_content_error" translatable="false">There was an issue while importing file.\n Check if:\n App has permission to Read a file\nFile with app name exist in path\nData is not corrupted\nError Type: </string>
 </resources>
