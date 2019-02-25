@@ -25,6 +25,7 @@
         style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_tournament"
         android:text="@string/settings_display_scoreboards" />
 
     <Button
@@ -32,6 +33,7 @@
         style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_people"
         android:text="@string/settings_display_players_list" />
 
     <Button
@@ -39,7 +41,7 @@
         style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_save"
+        android:drawableStart="@drawable/ic_share"
         android:text="@string/settings_save_database" />
 
     <Button
@@ -47,6 +49,7 @@
         style="@style/buttonBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_save"
         android:text="@string/settings_load_database" />
 
     <Button
