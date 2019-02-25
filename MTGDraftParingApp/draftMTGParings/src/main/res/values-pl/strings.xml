@@ -158,7 +158,6 @@
     <string name="history_detail_player_overall_count_positions">Miejsce %1$d: %2$d razy</string>
     <string name="history_player_overall_places">Miejsca w draftach:</string>
     <string name="history_player_overall_played">Udział w draftach:</string>
-    <string name="help_information_scoreboard">Co oznaczają skróty: PMG, PGW&#8230;</string>
     <string name="dialog_scoreboard_info_title">Wyjaśnienie</string>
     <string name="dialog_warning_go_back_body">Czy napewno chcesz zedytować poprzednią rundę?</string>
     <string name="dialog_load_not_ended_draft_body">Twój ostatni draft się nie skończył. Czy chcesz go wczytać?</string>

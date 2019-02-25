@@ -217,8 +217,8 @@ public class ScoreBoardActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.dashboard, menu);
         controlVisibility(menu);
         setListGuideActions(
-                (ImageView) menu.getItem(0).getActionView(), (ImageView) menu.getItem(1).getActionView(),
-                (ImageView) menu.getItem(2).getActionView(), (ImageView) menu.getItem(6).getActionView());
+                (ImageView) menu.getItem(0).getActionView(),
+                (ImageView) menu.getItem(2).getActionView(), (ImageView) menu.getItem(1).getActionView());
         return true;
     }
 
@@ -267,6 +267,10 @@ public class ScoreBoardActivity extends BaseActivity {
                 return true;
             case R.id.action_switch_algorithm:
                 showInfoDialog(getString(R.string.dialog_title_change_algorithm), getString(R.string.dialog_body_change_algorithm), getString(R.string.positive), getString(R.string.negative), changeAlgorithmType);
+                return true;
+
+            case R.id.action_info:
+                showInfoDialog(getString(R.string.dialog_scoreboard_info_title), getString(R.string.dialog_scoreboard_info_body), getString(R.string.dialog_positive));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -382,25 +386,21 @@ public class ScoreBoardActivity extends BaseActivity {
 
 
     private void setListGuideActions(
-            @NonNull ImageView dropPlayerButton, @NonNull ImageView information, @NonNull ImageView shareContent, @NonNull ImageView showRoundHistory) {
+            @NonNull ImageView dropPlayerButton, @NonNull ImageView shareContent, @NonNull ImageView showRoundHistory) {
         // just adding some padding to look better
         int padding = TourGuideMenuHelper.getHelperMenuPadding(getResources().getDisplayMetrics().density);
 
         dropPlayerButton.setPadding(padding, padding, padding, padding);
         shareContent.setPadding(padding, padding, padding, padding);
-        information.setPadding(padding, padding, padding, padding);
         showRoundHistory.setPadding(padding, padding, padding, padding);
         // set an image
         dropPlayerButton.setImageDrawable(getSingleDrawable(R.drawable.ic_person_minus));
         shareContent.setImageDrawable(getSingleDrawable(R.drawable.ic_share));
-        information.setImageDrawable(getSingleDrawable(R.drawable.ic_info));
         showRoundHistory.setImageDrawable(getSingleDrawable(R.drawable.ic_tournament));
         if (mSharedPreferenceManager.showGuideTourOnScoreBoardScreen()) {
             Sequence sequence = new Sequence.SequenceBuilder().
                     add(
                             bindTourGuideButton(getString(R.string.help_drop_player), dropPlayerButton),
-                            bindTourGuideButton(getString(R.string.help_share_content), shareContent),
-                            bindTourGuideButton(getString(R.string.help_information_scoreboard), information),
                             bindTourGuideButton(getString(R.string.round_history), showRoundHistory)
                     ).setDefaultOverlay(new Overlay().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -438,12 +438,6 @@ public class ScoreBoardActivity extends BaseActivity {
                     FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.help_share_content), FancyToast.LENGTH_LONG, FancyToast.INFO, false).show();
 
                 }
-            }
-        });
-        information.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showInfoDialog(getString(R.string.dialog_scoreboard_info_title), getString(R.string.dialog_scoreboard_info_body), getString(R.string.dialog_positive));
             }
         });
 

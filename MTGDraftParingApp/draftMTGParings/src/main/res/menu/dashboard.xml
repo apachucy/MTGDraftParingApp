@@ -12,10 +12,10 @@
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_info"
-        android:icon="@drawable/ic_info"
+        android:id="@+id/action_round_history"
+        android:icon="@drawable/ic_tournament"
         android:orderInCategory="102"
-        android:title="@string/action_info"
+        android:title="@string/action_round_history"
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="always" />
     <item
@@ -42,11 +42,12 @@
         android:title="@string/action_switch_algorithm"
         app:showAsAction="never" />
 
+
     <item
-        android:id="@+id/action_round_history"
-        android:icon="@drawable/ic_access_time_white_24dp"
+        android:id="@+id/action_info"
+        android:icon="@drawable/ic_info"
         android:orderInCategory="107"
-        android:title="@string/action_round_history"
+        android:title="@string/action_info"
         app:actionViewClass="android.widget.ImageView"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 </menu>

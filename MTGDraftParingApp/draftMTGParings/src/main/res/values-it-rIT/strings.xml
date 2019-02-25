@@ -109,7 +109,6 @@
     <string name="help_save_dashboard">Dopo il turno puoi scegliere un nome per questo torneo</string>
     <string name="help_drop_player">Se c\'è un bisogno puoi ritirare un giocatore dal draft</string>
     <string name="help_share_content">Puoi scegliere il nome per il torneo quando finirà</string>
-    <string name="help_information_scoreboard">Cosa significa: PMG, PGW&#8230;</string>
     <string name="warning_save_dashboard">Puoi scegliere il nome per il torneo quando finirà</string>
     <string name="warning_drop_player">Non puoi modificare i giocatori dopo che il draft è concluso</string>
     <string name="warning_add_player">I giocatori non possono essere aggiunti in modalità Torneo</string>
