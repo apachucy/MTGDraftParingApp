@@ -6,11 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import de.greenrobot.dao.AbstractDao;
 import unii.draft.mtg.parings.buisness.algorithm.base.PlayersComparator;
@@ -313,7 +309,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         List<Player> playerList = new ArrayList<>();
 
         for (PlayerDraftJoinTable playerDraftJoinTable : draft.getDrafts()) {
-            playerList.add(exportPlayer(draft.getId(),getPlayer(playerDraftJoinTable.getPlayerDraftJoinTableId()), playerDraftJoinTable));
+            playerList.add(exportPlayer(draft.getId(), getPlayer(playerDraftJoinTable.getPlayerDraftJoinTableId()), playerDraftJoinTable));
         }
         DraftExporter draftExporter = new DraftExporter(playerList, draft.getDraftName(), draft.getDraftDate(), draft.getDraftRounds());
         return draftExporter;
@@ -321,7 +317,7 @@ public class DatabaseHelper implements IDatabaseHelper {
 
     private Player exportPlayer(long draftId, unii.draft.mtg.parings.database.model.Player player, PlayerDraftJoinTable playerDraftJoinTable) {
         Player oldPlayer = new Player(player, playerDraftJoinTable);
-        oldPlayer.setPlayedGame(getAllGamesForPlayerInDraft(player.getId(),draftId));
+        oldPlayer.setPlayedGame(getAllGamesForPlayerInDraft(player.getId(), draftId));
         return oldPlayer;
     }
 
@@ -332,10 +328,14 @@ public class DatabaseHelper implements IDatabaseHelper {
 
     @Override
     public Information importDraftDatabase(@NonNull List<DraftExporter> database) {
-        for (DraftExporter draftExporter : database) {
-            importDraft(draftExporter);
+        try {
+            for (DraftExporter draftExporter : database) {
+                importDraft(draftExporter);
+            }
+            return Information.SUCCESS;
+        } catch (Error e) {
+            return Information.ERROR_DATA_CORRUPTED;
         }
-        return Information.SUCCESS;
     }
 
     public Information importDraft(DraftExporter database) {

@@ -122,7 +122,16 @@ public class HistorySettingsFragment extends BaseFragment {
     void onLoadHistoryClicked() {
         List<DraftExporter> list = new ArrayList<>();
         Information information = mFileOperator.loadToObject(list);
-        mDatabaseHelper.get().importDraftDatabase(list);
+        if (information != Information.SUCCESS) {
+            displayInformation(information);
+            return;
+        }
+        information = mDatabaseHelper.get().importDraftDatabase(list);
+
+        displayInformation(information);
+    }
+
+    private void displayInformation(Information information) {
         String textBody = null;
 
         switch (information) {
