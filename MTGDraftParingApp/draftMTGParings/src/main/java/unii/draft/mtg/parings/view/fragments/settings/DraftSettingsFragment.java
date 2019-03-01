@@ -124,7 +124,6 @@ public class DraftSettingsFragment extends BaseFragment {
                     @Override
                     public void updateView() {
                         String newValue = Integer.toString(mSharedPreferenceManager.getPointsForMatchWinning());
-
                         mMatchWinTextView.setText(getString(R.string.button_match_winning_points, newValue));
                     }
 
@@ -150,8 +149,7 @@ public class DraftSettingsFragment extends BaseFragment {
                     @Override
                     public void updateView() {
                         String newValue = Integer.toString(mSharedPreferenceManager.getPointsForMatchDraws());
-
-                        mMatchWinTextView.setText(getString(R.string.button_match_draw_points, newValue));
+                        mMatchDrawTextView.setText(getString(R.string.button_match_draw_points, newValue));
                     }
 
                     @Override
@@ -176,8 +174,7 @@ public class DraftSettingsFragment extends BaseFragment {
                     @Override
                     public void updateView() {
                         String newValue = Integer.toString(mSharedPreferenceManager.getPointsForGameWinning());
-
-                        mMatchWinTextView.setText(getString(R.string.button_game_winning_points, newValue));
+                        mGameWinTextView.setText(getString(R.string.button_game_winning_points, newValue));
                     }
 
                     @Override
@@ -202,8 +199,7 @@ public class DraftSettingsFragment extends BaseFragment {
                     @Override
                     public void updateView() {
                         String newValue = Integer.toString(mSharedPreferenceManager.getPointsForGameDraws());
-
-                        mMatchWinTextView.setText(getString(R.string.button_game_draw_points, newValue));
+                        mMatchDrawTextView.setText(getString(R.string.button_game_draw_points, newValue));
                     }
 
                     @Override
@@ -276,7 +272,6 @@ public class DraftSettingsFragment extends BaseFragment {
             case PairingMode.PAIRING_TOURNAMENT:
                 pairingOptionName = getString(R.string.settings_pairing_mode_tournament);
                 break;
-
             case PairingMode.PAIRING_ROUND_ROBIN:
                 pairingOptionName = getString(R.string.settings_pairing_mode_round_robin);
                 break;

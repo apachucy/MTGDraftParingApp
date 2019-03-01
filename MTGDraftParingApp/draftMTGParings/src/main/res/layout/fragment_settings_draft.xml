@@ -21,52 +21,63 @@
         android:gravity="center_horizontal"
         android:text="@string/settings_menu_item_draft" />
 
-    <Button
-        android:id="@+id/settings_sittingsButton"
-        style="@style/buttonBorderless"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/settings_createPairingsChooserButton"
-        style="@style/buttonBorderless"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_personal_parings" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/settings_sittingsButton"
+                style="@style/buttonBorderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/settings_createPairingsChooserButton"
+                style="@style/buttonBorderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_personal_parings" />
 
 
-    <Button
-        android:id="@+id/settings_saveResultsAfterDraftButton"
-        style="@style/buttonBorderless"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_save_draft_result_dialog_title" />
+            <Button
+                android:id="@+id/settings_saveResultsAfterDraftButton"
+                style="@style/buttonBorderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_save_draft_result_dialog_title" />
 
-    <Button
-        android:id="@+id/settings_pointsMatchWinButton"
-        style="@style/buttonBorderless"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Match Win Points:" />
+            <Button
+                android:id="@+id/settings_pointsMatchWinButton"
+                style="@style/buttonBorderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Match Win Points:" />
 
-    <Button
-        android:id="@+id/settings_pointsMatchDrawButton"
-        style="@style/buttonBorderless"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Match Draw Points:" />
+            <Button
+                android:id="@+id/settings_pointsMatchDrawButton"
+                style="@style/buttonBorderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Match Draw Points:" />
 
-    <Button
-        android:id="@+id/settings_pointsGameWinButton"
-        style="@style/buttonBorderless"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Game Win Points:" />
+            <Button
+                android:id="@+id/settings_pointsGameWinButton"
+                style="@style/buttonBorderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Game Win Points:" />
 
-    <Button
-        android:id="@+id/settings_pointsGameDrawButton"
-        style="@style/buttonBorderless"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Game Draw Points:" />
+            <Button
+                android:id="@+id/settings_pointsGameDrawButton"
+                style="@style/buttonBorderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Game Draw Points:" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
