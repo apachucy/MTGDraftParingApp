@@ -66,8 +66,6 @@ import static unii.draft.mtg.parings.view.widget.DraftWidgetProvider.BUNDLE_EXTR
 
 
 public class ScoreBoardActivity extends BaseActivity {
-
-
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -93,7 +91,6 @@ public class ScoreBoardActivity extends BaseActivity {
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar mToolBar;
-
 
     @Inject
     AlgorithmChooser mAlgorithmChooser;
@@ -172,7 +169,6 @@ public class ScoreBoardActivity extends BaseActivity {
             mPlayerScoreBoardList.clear();
             mPlayerScoreBoardList.add(new ItemHeader());
 
-
             mPlayerScoreBoardList.addAll(PlayerNameWithPositionGenerator.getListWithNames(mPlayerList));
 
             mAdapter = new PlayerScoreboardAdapter(this, mPlayerScoreBoardList);
@@ -213,7 +209,6 @@ public class ScoreBoardActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
         getMenuInflater().inflate(R.menu.dashboard, menu);
         controlVisibility(menu);
         setListGuideActions(
@@ -246,7 +241,6 @@ public class ScoreBoardActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.action_save:
                 if (isLastRound()) {
                     Intent intent = new Intent(ScoreBoardActivity.this, SaveScoreBoardActivity.class);
@@ -268,14 +262,12 @@ public class ScoreBoardActivity extends BaseActivity {
             case R.id.action_switch_algorithm:
                 showInfoDialog(getString(R.string.dialog_title_change_algorithm), getString(R.string.dialog_body_change_algorithm), getString(R.string.positive), getString(R.string.negative), changeAlgorithmType);
                 return true;
-
             case R.id.action_info:
                 showInfoDialog(getString(R.string.dialog_scoreboard_info_title), getString(R.string.dialog_scoreboard_info_body), getString(R.string.dialog_positive));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     @Override
@@ -289,7 +281,6 @@ public class ScoreBoardActivity extends BaseActivity {
     //onActivityResult is triggered faster than onResume
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
-
         if (resultCode == RESULT_OK) {
             if (requestCode == BaseConfig.DRAFT_NAME_SET) {
                 if (data.getExtras().containsKey(BundleConst.BUNDLE_KEY_SAVED_GAME_NAME)) {
@@ -299,7 +290,6 @@ public class ScoreBoardActivity extends BaseActivity {
                 if (mAdapter != null) {
                     mAdapter.notifyDataSetChanged();
                 }
-
             }
         }
     }
@@ -381,7 +371,6 @@ public class ScoreBoardActivity extends BaseActivity {
         }
         mDatabaseHelper.get().saveDraft(mPlayerList, tempDraftName, currentDateAndTime, mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
         FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
-
     }
 
 
@@ -455,9 +444,7 @@ public class ScoreBoardActivity extends BaseActivity {
             // Restore value of members from saved state
             mDraftName = savedInstanceState.getString(BUNDLE_KEY_DRAFT_SAVED_NAME);
         }
-
         mPlayerScoreBoardList = new ArrayList<>();
-
         //TODO: Refactor  All component - onCreate/onResume for all App states
         if (mAlgorithmChooser.getCurrentAlgorithm() instanceof BaseAlgorithm) {
             BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();

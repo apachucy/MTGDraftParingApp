@@ -6,7 +6,6 @@ import java.util.List;
 
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
-import unii.draft.mtg.parings.util.config.BaseConfig;
 
 public class AddPlayerModel {
 
@@ -15,11 +14,13 @@ public class AddPlayerModel {
     private AlgorithmChooser mAlgorithmChooser;
     private List<String> mAddedPlayers;
     private List<Player> mCurrentPlayerList;
+    private int pointsForBye;
 
-    public AddPlayerModel(AlgorithmChooser algorithmChooser) {
-        mAlgorithmChooser = algorithmChooser;
-        mAddedPlayers = new ArrayList<>();
-        mCurrentPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
+    public AddPlayerModel(AlgorithmChooser algorithmChooser, int pointForBye) {
+        this.mAlgorithmChooser = algorithmChooser;
+        this.mAddedPlayers = new ArrayList<>();
+        this.mCurrentPlayerList = mAlgorithmChooser.getCurrentAlgorithm().getSortedPlayerList();
+        this.pointsForBye = pointForBye;
     }
 
     public List<String> getAddedPlayers() {
@@ -95,7 +96,7 @@ public class AddPlayerModel {
     private Player addLaggard(String userName) {
         Player laggardPlayer = new Player(userName);
         laggardPlayer.setHasBye(true);
-        laggardPlayer.setMatchPoints(BaseConfig.MATCH_WIN);
+        laggardPlayer.setMatchPoints(pointsForBye);
         return laggardPlayer;
     }
 }

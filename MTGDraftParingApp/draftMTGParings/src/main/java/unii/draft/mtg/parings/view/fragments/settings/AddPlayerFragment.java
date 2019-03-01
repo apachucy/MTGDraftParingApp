@@ -20,6 +20,7 @@ import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.model.AddPlayerModel;
+import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.AddPlayerAdapter;
 import unii.draft.mtg.parings.view.adapters.DividerItemDecorator;
@@ -36,6 +37,9 @@ public class AddPlayerFragment extends BaseFragment {
     private RecyclerView.LayoutManager mLayoutManager;
     @Inject
     AlgorithmChooser mAlgorithmChooser;
+    @Inject
+    ISharedPreferences sharedPreferences;
+
     @Nullable
     @BindView(R.id.table_addPlayerRecyclerView)
     RecyclerView mPlayerList;
@@ -63,7 +67,7 @@ public class AddPlayerFragment extends BaseFragment {
                 BaseAlgorithm base = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
                 base.isLoadCachedDraftWasNeeded();
             }
-            mModel = new AddPlayerModel(mAlgorithmChooser);
+            mModel = new AddPlayerModel(mAlgorithmChooser, sharedPreferences.getPointsForMatchWinning());
             mAdapter = new AddPlayerAdapter(mModel.getAddedPlayers());
         } catch (NullPointerException exception) {
             getActivity().finish();

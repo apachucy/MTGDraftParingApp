@@ -125,7 +125,7 @@ public class ParingDashboardLogic {
                 // for
                 // player
                 // with bye
-                player.setMatchPoints(player.getMatchPoints() + BaseConfig.MATCH_WIN);
+                player.setMatchPoints(player.getMatchPoints() + pointsForMatchWinning);
             }
             for (Game game : gameList) {
                 if (player.getPlayerName().equals(game.getPlayerNameA())
