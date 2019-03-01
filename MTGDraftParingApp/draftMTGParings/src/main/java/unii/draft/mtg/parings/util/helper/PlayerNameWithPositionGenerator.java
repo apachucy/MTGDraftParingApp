@@ -21,7 +21,7 @@ public class PlayerNameWithPositionGenerator {
     }
 
     public static List<Player> getListWithNames(List<Player> playerList) {
-       List<Player> playerLocalList = createCopyList(playerList);
+        List<Player> playerLocalList = createCopyList(playerList);
         int positionOnList = 1;
 
         for (int i = 0; i < playerLocalList.size(); i++) {
@@ -30,7 +30,7 @@ public class PlayerNameWithPositionGenerator {
                 int better = sPlayerComparator.compare(playerLocalList.get(i), playerLocalList.get(nextElement));
                 playerLocalList.get(i).setPlayerName(Integer.toString(positionOnList) + ". " + playerLocalList.get(i).getPlayerName());
                 if (better == PlayersComparator.LEFT) {
-                    positionOnList++;
+                    positionOnList = nextElement + 1;
                 }
             }
         }
