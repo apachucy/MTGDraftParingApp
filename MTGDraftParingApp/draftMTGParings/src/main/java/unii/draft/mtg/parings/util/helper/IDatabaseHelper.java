@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import unii.draft.mtg.parings.database.model.Draft;
-import unii.draft.mtg.parings.database.populate.DatabaseHolder;
 import unii.draft.mtg.parings.database.populate.DraftExporter;
 import unii.draft.mtg.parings.database.populate.Information;
 import unii.draft.mtg.parings.logic.pojo.Game;
@@ -54,6 +53,8 @@ public interface IDatabaseHelper {
     void removeDraft(Draft draft);
 
     void removeDraft(long draftId);
+
+    void removePlayer(unii.draft.mtg.parings.database.model.Player player);
 
     List<DraftExporter> exportDraftDatabase();
 

@@ -294,6 +294,14 @@ public class DatabaseHelper implements IDatabaseHelper {
     }
 
     @Override
+    public void removePlayer(unii.draft.mtg.parings.database.model.Player player) {
+        for (PlayerDraftJoinTable table : player.getPlayers()) {
+            mDaoSession.getPlayerDraftJoinTableDao().delete(table);
+        }
+        mDaoSession.getPlayerDao().delete(player);
+    }
+
+    @Override
     public List<DraftExporter> exportDraftDatabase() {
         List<DraftExporter> draftExporterList = new ArrayList<>();
         List<Draft> draftList = getAllDraftList();
@@ -338,7 +346,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         }
     }
 
-    public Information importDraft(DraftExporter database) {
+    private Information importDraft(DraftExporter database) {
         saveDraft(database.getPlayerList(), database.getDraftName(), database.getDraftDate(), database.getDraftRounds());
         return Information.SUCCESS;
     }

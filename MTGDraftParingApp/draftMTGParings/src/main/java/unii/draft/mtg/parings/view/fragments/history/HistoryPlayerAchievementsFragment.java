@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import dagger.Lazy;
 import unii.draft.mtg.parings.R;
@@ -37,6 +41,7 @@ import unii.draft.mtg.parings.view.adapters.DetailHistoryPlayerAdapter;
 import unii.draft.mtg.parings.view.adapters.DividerItemDecorator;
 import unii.draft.mtg.parings.view.adapters.SingleTextViewAdapter;
 import unii.draft.mtg.parings.view.fragments.BaseFragment;
+import unii.draft.mtg.parings.view.fragments.settings.TimeSettingsFragment;
 
 /**
  * TODO: FIX adapter for OverallView or make a generic
@@ -88,6 +93,18 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+    }
+
+
+    @OnClick(R.id.icon_editImageView)
+    void onEditNamePlayerClicked() {
+        showEditTextDialogWithAnyValue(getActivity(), getString(R.string.rename_player_dialog_title), getString(R.string.rename_player_dialog_body), "", mPlayer.getPlayerName(), updateName);
+    }
+
+
+    @OnClick(R.id.icon_deleteImageView)
+    void onRemovePlayerClicked() {
+        showDialogWithTwoOptions(getActivity(), getString(R.string.remove_player_dialog_tile), getString(R.string.remove_player_dialog_body), getString(R.string.positive), getString(R.string.negative), singleButtonCallback);
     }
 
     @Override
@@ -171,8 +188,29 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
             PlayerDraft playerDraft = new PlayerDraft(item.getDraftName(), (int) playerPosition, item.getNumberOfPlayers());
             playerDraftPlayedList.add(playerDraft);
         }
-
-
         return playerDraftPlayedList;
     }
+
+    @NonNull
+    private TimeSettingsFragment.UpdateData updateName = new UpdateData() {
+        @Override
+        public void updateView() {
+            mHistoryPlayerNameTextView.setText(mPlayer.getPlayerName());
+        }
+
+        @Override
+        public void updateSharedPreferences(String newData) {
+            mPlayer.setPlayerName(newData);
+            mDatabaseHelper.get().changePlayerName(mPlayer);
+        }
+    };
+
+    @NonNull
+    private MaterialDialog.SingleButtonCallback singleButtonCallback = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            mDatabaseHelper.get().removePlayer(mPlayer);
+            getActivity().onBackPressed();
+        }
+    };
 }

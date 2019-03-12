@@ -1,19 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/history_player_detail_playerNameTextView"
-        style="@style/textView.settings.bold"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/player_holder"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center" />
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <TextView
+            android:id="@+id/history_player_detail_playerNameTextView"
+            style="@style/textView.settings.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="Player Name" />
+
+        <ImageButton
+            android:id="@+id/icon_editImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:paddingStart="@dimen/text_view_margin_settings"
+            android:paddingEnd="@dimen/text_view_margin_settings"
+            android:src="@drawable/ic_edit" />
+
+        <ImageButton
+            android:id="@+id/icon_deleteImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:src="@drawable/ic_delete" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/history_player_detail_playerNameTextView"
+        android:layout_below="@id/player_holder"
         android:orientation="vertical">
 
         <TextView

@@ -2,7 +2,6 @@ package unii.draft.mtg.parings.view.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -60,7 +59,7 @@ public abstract class BaseFragment extends Fragment {
                 .show();
     }
 
-    protected void showDialogWithLink(@NonNull Context context, @NonNull String title,  @StringRes int content, @NonNull String positiveText) {
+    protected void showDialogWithLink(@NonNull Context context, @NonNull String title, @StringRes int content, @NonNull String positiveText) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content, true)
@@ -117,6 +116,23 @@ public abstract class BaseFragment extends Fragment {
                 }).show();
 
     }
+
+    protected void showEditTextDialogWithAnyValue(@NonNull Context context, @NonNull String title, @NonNull String content, String hint, String lastValue,
+                                                  @NonNull final TimeSettingsFragment.UpdateData updateData) {
+        mMaterialDialogInstance = new MaterialDialog.Builder(context)
+                .title(title)
+                .content(content)
+                .backgroundColorRes(R.color.windowBackground)
+                .input(hint, lastValue, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                        updateData.updateSharedPreferences(input.toString());
+                        updateData.updateView();
+                    }
+                }).show();
+
+    }
+
 
     protected void shareAction(String dataForShare) {
         Intent sendIntent = new Intent();

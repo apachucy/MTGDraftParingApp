@@ -290,4 +290,9 @@
     <string name="dialog_import_database" translatable="false">Import results</string>
     <string name="dialog_import_database_content_success" translatable="false">File with history was imported to app.</string>
     <string name="dialog_import_database_content_error" translatable="false">There was an issue while importing file.\n Check if:\n App has permission to Read a file\nFile with app name exist in path\nData is not corrupted\nError Type: </string>
+    <string name="rename_player_dialog_title" translatable="false">Update player name</string>
+    <string name="rename_player_dialog_body" translatable="false">Do you want to rename player?</string>
+
+    <string name="remove_player_dialog_tile" translatable="false">Remove player</string>
+    <string name="remove_player_dialog_body" translatable="false">Do you want to remove player from history?</string>
 </resources>
