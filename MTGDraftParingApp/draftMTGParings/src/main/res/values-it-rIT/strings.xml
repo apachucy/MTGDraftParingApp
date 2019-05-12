@@ -247,5 +247,6 @@
     <string name="dialog_title_match_draw_points">Punti per l\'estrazione nella partita</string>
     <string name="dialog_body_match_draw_points">Ustaw ile punktów otrzymuje zawodnik za remis w meczu. La partita consiste di almeno un gioco</string>
     <string name="button_match_draw_points">Punti per l\'estrazione nella partita: %1$s</string>
+    <string name="select_all_items">Tutto</string>
 
 </resources>

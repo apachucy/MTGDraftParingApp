@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_settings">Konfigurationen</string>
+    <string name="action_settings">Einstellungen</string>
     <string name="action_info">Informationen</string>
     <string name="hint_player_name">Spielername</string>
-    <string name="add_item">Add</string>
+    <string name="add_item">Hinzufügen</string>
     <string name="hint_rounds">Anzahl der Runden</string>
     <string name="start_game">Start</string>
     <string name="text_end_round">Ende</string>
@@ -15,10 +15,10 @@
     <string name="text_after_game">Ergebnisse nach Runde :</string>
     <string name="text_winner">Gewinner:</string>
     <!-- Settings -->
-    <string name="text_display_counter">Vorstellungszeiten:</string>
+    <string name="text_display_counter">Zeitzähler:</string>
     <string name="text_time_round">Zeit pro Runde[m]: %1$s</string>
-    <string name="text_vibration">Vibration-switch:</string>
-    <string name="text_vibration_detail">Informieren der Benutzer über die Endzeit des Spiels</string>
+    <string name="text_vibration">Vibration einschalten:</string>
+    <string name="text_vibration_detail">sie informieren die Benutzer über das Ende der Runde</string>
     <string name="text_first_vibration">Erste Vibration[m]: %1$s</string>
     <string name="text_second_vibration">Zweite Vibration[m]: %1$s</string>
     <string name="text_duration_vibration">Die Dauer der Vibrationen[s]: %1$s</string>
@@ -27,21 +27,21 @@
     <!-- Dialog Fragment -->
     <!-- Dialog Start -->
     <string name="dialog_start_title">Starten Sie das Spiel</string>
-    <string name="dialog_start_message">Presse zu starten\nAnzahl der Spieler: %1$d\nAnzahl der Runden: %2$d</string>
+    <string name="dialog_start_message">drücke zum Starten\nAnzahl der Spieler: %1$d\nAnzahl der Runden: %2$d</string>
     <string name="dialog_start_button">Enden</string>
     <!-- Dialog Game End -->
-    <string name="dialog_end_title">Das Spiel endete</string>
-    <string name="dialog_end_message">Drücken Sie Enden, um App zu beenden</string>
+    <string name="dialog_end_title">Das Spielende</string>
+    <string name="dialog_end_message">"Ende" drücken zum beenden</string>
     <!-- Dialog Algorithm Problem -->
     <string name="dialog_error_algorithm_title">Fehler</string>
-    <string name="dialog_error_algorithm__message">Spieler können nicht in Paaren kombiniert werden.\n Bitte noch Mal die App starten.</string>
+    <string name="dialog_error_algorithm__message">Spieler können nicht in Paaren kombiniert werden.\n Die App neu starten.</string>
     <!-- Dialog Warning Paring -->
     <string name="dialog_warning_title">Warnung</string>
     <string name="dialog_warning_message">Zu viele Runden oder nicht genügend Spieler vorgelegt.\n Hinzufügen von Spielern oder reduzieren Sie die Anzahl der Runden.</string>
 
     <!-- Dialog Info -->
     <string name="dialog_info_title">Informationen</string>
-    <string name="dialog_info_message">Fansite version of the app\nfor paring players in MTG drafts\nHelps from Piotr S. and Szymon Sz.</string>
+    <string name="dialog_info_message">Fanversion der App zum Zählen der Paarung während drafts in MTG\nes gibt sicherlich andere Anwendungen, die ist aber am wichtigsten\nsie erklärt Paweł B., Piotr und Dorota S.</string>
 
     <!-- Help/Showcase -->
     <string name="help_title">Hilfe</string>
@@ -53,25 +53,25 @@
     <string name="text_draw">Unentschieden</string>
 
     <!-- Create personal parings-->
-    <string name="text_personal_parings">Erstellen Sie Ihre eigenem Paring:  %1$s</string>
-    <string name="activity_paring_add_paring">Hinzufügen Paring</string>
-    <string name="activity_paring_clear_paring">Löschen Paring</string>
-    <string name="activity_paring_warning_empty_list">Es gibt keine weitere Spieler zu Paring durchführen</string>
-    <string name="activity_paring_warning_manual_pairing_error">Schlecht Paring</string>
-    <string name="activity_paring_warning_paring_not_finished">Bitte beenden Sie Paarung Spieler</string>
-    <string name="activity_paring_warning_bye">Der letzte Spieler hat bereits ein bye</string>
+    <string name="text_personal_parings">Typ der Paarung:  %1$s</string>
+    <string name="activity_paring_add_paring">Paarung hinzufügen</string>
+    <string name="activity_paring_clear_paring">Paarung löschen</string>
+    <string name="activity_paring_warning_empty_list">Es gibt keine weitere Spieler zur Paarung </string>
+    <string name="activity_paring_warning_manual_pairing_error">Falsche Paarung, Reset und versuche später</string>
+    <string name="activity_paring_warning_paring_not_finished">bitte beende die Paarung zum Weiterspielen</string>
+    <string name="activity_paring_warning_bye">Der letzte Spieler behält bereits ein bye</string>
     <string name="warning_player_name_added">Der Spieler wurde bereits hinzugefügt</string>
     <string name="select_player1">Den ersten Spieler auswählen</string>
     <string name="select_player2">Den zweiten Spieler auswählen</string>
-    <string name="spinner_empty_player_list">Das Ende der Spieler</string>
-    <string name="tutorial_info">Informationen zu den verwendeten Bibliotheken</string>
-    <string name="tutorial_settings">Draftskonfigurationseinstellungen</string>
-    <string name="action_save">Speichern Draft</string>##
-    <string name="action_show_list">Anzeigen einer Draftliste</string>
+    <string name="spinner_empty_player_list">keim Spieler verfügbar</string>
+    <string name="tutorial_info">Informationen zur Applikation</string>
+    <string name="tutorial_settings">Softwarekonfiguration</string>
+    <string name="action_save">Entwurf speichern</string>
+    <string name="action_show_list">Entwurfliste anzeigen</string>
     <string name="activity_save_score_board_info_small_text">Liste der letzten Draft befindet sich in Konfigurationen</string>
     <string name="activity_save_score_board_info_text">Draftname</string>
     <string name="activity_save_score_board_save">Speichern</string>
-    <string name="help_save_dashboard">Nachdem Sie fertig werden, können Sie Draftname speichern</string>
+    <string name="help_save_dashboard">Nachdem der Entwurf fertig wird, können Sie die Ergebnisse speichern</string>
     <string name="message_score_board_not_exists">Keine Draftliste</string>
     <string name="message_score_board_saved">Draft gespeichert</string>
     <string name="message_score_boards_removed">Alle Draft würden gelöscht</string>
@@ -83,42 +83,42 @@
     <string name="message_action_countdown_cancel">Countdown wurde annulieren</string>
     <string name="message_action_countdown_started">Countdown...</string>
     <string name="chooser_dialog_button_name">Herunterladen</string>
-    <string name="chooser_dialog_title_life_counter">Herunterladen LifeCounterApp</string>
+    <string name="chooser_dialog_title_life_counter">LifeCounterApp herunterladen</string>
     <string name="chooser_dialog_body_life_counter">Downloaden Sie bitte die App zum Punkt des Lebens zählen, damit diese Aktion ausführen</string>
     <string name="chooser_intent_title_life_counter">Wählen Sie bitte die App zum Punkt des Lebens zählen</string>
     <string name="validation_dialog_body">Bitte setzen Sie alle Spielergebnisse </string>
     <string name="validation_dialog_title">Verifikation</string>
     <string name="action_remove_player">Entferne den Spieler</string>
     <string name="drop_players_item">%1$s punkte: %2$d</string>
-    <string name="drop_player_info_text">Um einen Spieler zu löschen musst du ihn markieren und anschließend auf "Speichern" drücken. Bitte mit bedacht nutzen, da man die Aktion nicht rückgängig machen kann.</string>
-    <string name="warning_drop_player">Du kannst keine Spieler nach einem beendeten Draft entfernen</string>
+    <string name="drop_player_info_text">Um einen Spieler zu löschen, markiere ihn und drücke "Speichern". Bitte bedachte, dass die Aktion nicht rückgängig ist. Beim Bedarf kannst du den Spieler löschen</string>
+    <string name="warning_drop_player">Du kannst keinen Spieler nach einem beendeten Entwurf modifizieren</string>
     <string name="help_drop_player">Wenn es nötig wird, kannst du einen Spieler entfernen. </string>
     <string name="settings_rate_me">Bitte, bewerten die App</string>
-    <string name="settings_rate_me_error">Konnte nicht geöffnet Google Play, installieren Sie bitte den Markt App</string>
-    <string name="settings_counter_off">Den Countdown in den Konfigurationen freischalten </string>
+    <string name="settings_rate_me_error">Google Play konnte nicht geöffnet werden, installieren Sie bitte den Markt App</string>
+    <string name="settings_counter_off">Den Countdown in den Konfigurationen freischalten</string>
     <string name="dialog_positive">Ok</string>
     <string name="dialog_negative">Abbrechen</string>
-    <string name="settings_sittings_random">Zufällig</string>
+    <string name="settings_sittings_random">Zufällige</string>
     <string name="settings_sittings_none">Keine</string>
-    <string name="settings_sittings_dialog_title">Wählen Sie bitte die Sittingoption:</string>
+    <string name="settings_sittings_dialog_title">Wählen Sie eine Sittingoption:</string>
     <string name="player_sittings_description">Draft Sitzplätze</string>
-    <string name="settings_reset_tour_guide">Setzen Sie Ihre Hilfe</string>
-    <string name="settings_reset_tour_guide_message">Hilfe wurde zurückgesetzt</string>
+    <string name="settings_reset_tour_guide">Starte die Hilfe neu</string>
+    <string name="settings_reset_tour_guide_message">Hilfe wurde zu den Anfangseinstellungen zurückgesetzt</string>
     <string name="chooser_dialog_title_mana_calculator">Herunterladen ManaCalculatorApp</string>
     <string name="action_calculate_mana">Offen Mana Calculator</string>
     <string name="action_open_life_app">Offen Life App</string>
-    <string name="action_share">Teilst dein Ergebnis</string>
-    <string name="add_players_from_history">Gespeicherte Spieler hinzufügen</string>
+    <string name="action_share">Teile dein Ergebnis</string>
+    <string name="add_players_from_history">Füge gespeicherte Spieler hinzu</string>
     <string name="help_share_content">Nach dem Spiel können Sie das Ergebnis teilen</string>
     <string name="history_player_detail_place">Platz %1$d / %2$d</string>
-    <string name="message_player_list_not_exists">Keine Liste der Spieler zum Zeigen</string>
-    <string name="no_players_from_history">Keine gespeicherten Spilern</string>
+    <string name="message_player_list_not_exists">Keine Spielerliste zum Zeigen</string>
+    <string name="no_players_from_history">Keine gespeicherten Spielern</string>
     <string name="select_player_name">Ausgewählt: %1$s</string>
     <string name="settings_check_other_apps">Überprüfen Sie die anderen Anwendungen</string>
-    <string name="settings_content_description">"Wählen Sie die Einstellungen "</string>
+    <string name="settings_content_description">"Wählen Sie die Einstellungen"</string>
     <string name="settings_dialog_round_duration_vibration_content">Wählen Sie die Dauer der Schwingung</string>
     <string name="settings_dialog_round_duration_vibration_hint">Vorschlag: 5 Sekunden</string>
-    <string name="settings_dialog_round_duration_vibration_title">Die Dauer der Schwingung</string>
+    <string name="settings_dialog_round_duration_vibration_title">Wähle die Vibrationsdauer</string>
     <string name="settings_dialog_round_first_vibration_content">Wählen Sie eine Zeit vor dem Ende des Spiels, wenn Vibrationen ausgeführt werden soll</string>
     <string name="settings_dialog_round_first_vibration_hint">Vorschlag: 5 Minuten</string>
     <string name="settings_dialog_round_second_vibration_title">Legen Sie die zweite Schwingung</string>
@@ -167,31 +167,31 @@
     <string name="dialog_cancel_game_title">Ende des Turniers</string>
     <string name="app_header_path_game">Turnier</string>
     <string name="app_header_path_configuration">Assistent</string>
-    <string name="app_header_path_history">Historie</string>
+    <string name="app_header_path_history">Geschichte</string>
     <string name="action_add_player">Spieler hinzufügen</string>
-    <string name="add_player_dialog_title">Wie es funktioniert</string>
+    <string name="add_player_dialog_title">Wie funktioniert es?</string>
     <string name="add_player_dialog_body">Das Zimmer ist geräumig und verfügt über folgende Annehmlichkeiten: Unterstützung bei der Tourenplanung / beim Ticketerwerb und kostenlose Zeitungen in der Nähe.\nIm verbleibenden Fall erhalten neu hinzugekommene Spieler unabhängig von der aktuellen Runde 0 Punkte.</string>
     <string name="warning_add_player">Spieler können nicht im Turniermodus hinzugefügt werden</string>
     <string name="action_switch_algorithm">Änderung des Algorithmus</string>
     <string name="dialog_title_change_algorithm">Änderung des Algorithmus</string>
     <string name="dialog_body_change_algorithm">Dies ändert den Kopplungsmodus von manuell auf automatisch mit Wiederholungen</string>
-    <string name="settings_pairing_mode_round_robin">Round Robin - jeder Teilnehmer trifft alle anderen Teilnehmer in Runden</string>
+    <string name="settings_pairing_mode_round_robin">Round Robin - jeder spielt mit jedem</string>
     <string name="settings_used_libraries">Große Bibliotheken in der App</string>
     <string name="dialog_used_libraries_title">Benutzte Bibliotheken</string>
     <string name="dialog_help_with_app_title">Hilfe mit dieser Anwendung</string>
-    <string name="settings_help_with_app">Sie können mit dieser App helfen</string>
+    <string name="settings_help_with_app">Du kannst helfen</string>
     <string name="history_group_round">Runde:%1$d</string>
-    <string name="lose">verpassen</string>
-    <string name="draw">unentschieden</string>
-    <string name="win">sieg</string>
-    <string name="history_player_statistics">Spielerstatistiken</string>
+    <string name="lose">Niederlage</string>
+    <string name="draw">Unentschieden</string>
+    <string name="win">Siege</string>
+    <string name="history_player_statistics">historische Spielergebnisse</string>
     <string name="history_player_rivalisation">Historische Spielergebnisse</string>
     <string name="history_pie_chart_title">Spieler %1$s sieg/unetschieden/verpassen statistik für alle Spiele</string>
     <string name="app_history">Turniergeschichte</string>
-    <string name="empty_view">Spiele ein paar Spiele um Geschichte zu sehen :)</string>
-    <string name="scoreboard">Anzeigetafel</string>
-    <string name="round_history">Runde Geschichte</string>
-    <string name="settings_pairing_mode_knock_out">Knock Out - Wenn Sie eine Runde verlieren, werden Sie für das Spiel fallengelassen</string>
+    <string name="empty_view">Erstmal spiele ein paar Spiele, damit du dich an etwas erinnern kannst :)</string>
+    <string name="scoreboard">Ergebnissentafel</string>
+    <string name="round_history">Geschichte der Runde</string>
+    <string name="settings_pairing_mode_knock_out">Knock Out - Wenn du in einer Runde verlierst, dann fällst du aus dem Spiel aus.</string>
     <string name="dialog_timer_cancel">@string/dialog_negative</string>
     <string name="dialog_timer_pause">Pause</string>
     <string name="dialog_timer_title">"Was willst du mit dem Countdown machen? "</string>
@@ -216,5 +216,6 @@
     <string name="dialog_title_match_draw_points">Punkte für ein Unentschieden im Match</string>
     <string name="dialog_body_match_draw_points">Legen Sie fest, wie viele Punkte der Match für die Auslosung im Spiel erhält. Das Match besteht aus mindestens einem Spiel</string>
     <string name="button_match_draw_points">Punkte für ein Unentschieden im Match: %1$s</string>
+    <string name="select_all_items">Alle</string>
 
 </resources>

@@ -8,6 +8,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
@@ -77,12 +78,20 @@ public abstract class BaseFragment extends Fragment {
                 .show();
     }
 
-    protected void showMultipleChoiceListDialog(@NonNull Context context, @NonNull String title, @NonNull List<String> data, @NonNull MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice, @NonNull String positiveText) {
+    protected void showMultipleChoiceListDialog(@NonNull Context context, @NonNull String title, @NonNull final List<String> data, @NonNull MaterialDialog.ListCallbackMultiChoice listCallbackMultiChoice, @NonNull String positiveText, @NonNull String selectAll) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)
                 .title(title).items(data)
                 .itemsCallbackMultiChoice(null, listCallbackMultiChoice)
                 .backgroundColorRes(R.color.windowBackground)
-                .positiveText(positiveText).show();
+                .positiveText(positiveText)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        mMaterialDialogInstance.selectAllIndices();
+                    }
+                })
+                .neutralText(selectAll)
+                .show();
     }
 
 

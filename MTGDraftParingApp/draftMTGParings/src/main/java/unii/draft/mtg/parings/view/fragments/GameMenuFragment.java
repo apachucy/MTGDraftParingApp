@@ -198,7 +198,7 @@ public class GameMenuFragment extends BaseFragment {
         };
 
         showMultipleChoiceListDialog(getContext(), getString(R.string.add_players_from_history), playersNameFromHistory,
-                listCallbackMultiChoice, getString(R.string.add_item));
+                listCallbackMultiChoice, getString(R.string.add_item), getString(R.string.select_all_items));
     }
 
 

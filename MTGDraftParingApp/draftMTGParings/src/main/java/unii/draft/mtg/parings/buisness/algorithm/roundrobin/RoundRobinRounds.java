@@ -11,7 +11,7 @@ public class RoundRobinRounds implements TournamentRounds {
 
     @Override
     public int getMaxRound(int players) {
-        return players - 1;
+        return players % 2 == 0 ? players - 1 : players;
     }
 
 
