@@ -1,7 +1,7 @@
 package unii.draft.mtg.parings.util.helper;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 

@@ -11,7 +11,7 @@
         android:layout_marginStart="@dimen/text_view_margin_normal"
         android:text="@string/history_player_rivalisation" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/settings_menuRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

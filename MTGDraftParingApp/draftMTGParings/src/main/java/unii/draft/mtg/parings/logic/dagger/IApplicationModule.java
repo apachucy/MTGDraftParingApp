@@ -1,7 +1,7 @@
 package unii.draft.mtg.parings.logic.dagger;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;

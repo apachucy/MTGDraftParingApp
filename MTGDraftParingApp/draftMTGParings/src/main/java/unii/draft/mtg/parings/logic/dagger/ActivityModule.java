@@ -1,6 +1,6 @@
 package unii.draft.mtg.parings.logic.dagger;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import dagger.Module;
 

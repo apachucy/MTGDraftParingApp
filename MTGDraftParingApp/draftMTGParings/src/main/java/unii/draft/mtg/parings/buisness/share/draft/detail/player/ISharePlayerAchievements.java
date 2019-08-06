@@ -1,7 +1,7 @@
 package unii.draft.mtg.parings.buisness.share.draft.detail.player;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 

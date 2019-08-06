@@ -1,7 +1,7 @@
 package unii.draft.mtg.parings.buisness.algorithm.automatic;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import org.paukov.combinatorics.Generator;
 

@@ -1,6 +1,6 @@
 package unii.draft.mtg.parings.view.custom;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public interface CheckValueListener {
 	/**

@@ -1,8 +1,8 @@
 package unii.draft.mtg.parings.util.validation;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
+import androidx.annotation.Nullable;
+import com.google.android.material.textfield.TextInputLayout;
 import android.widget.EditText;
 
 /**

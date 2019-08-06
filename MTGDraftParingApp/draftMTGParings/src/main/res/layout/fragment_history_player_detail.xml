@@ -53,7 +53,7 @@
             android:gravity="center"
             android:text="@string/history_player_overall_places" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/history_player_detail_playerOverallPositionsList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:gravity="center"
             android:text="@string/history_player_overall_played" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/history_player_detail_playerAchievementsList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

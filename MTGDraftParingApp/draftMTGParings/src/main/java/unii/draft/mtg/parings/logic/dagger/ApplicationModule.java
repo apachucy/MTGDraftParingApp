@@ -1,7 +1,7 @@
 package unii.draft.mtg.parings.logic.dagger;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

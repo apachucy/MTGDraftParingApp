@@ -3,7 +3,7 @@ package unii.draft.mtg.parings.view.custom;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.TextView;
 
 import java.util.Locale;

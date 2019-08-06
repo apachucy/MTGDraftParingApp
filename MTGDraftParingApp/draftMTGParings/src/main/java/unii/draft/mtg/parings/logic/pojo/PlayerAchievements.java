@@ -1,11 +1,9 @@
 package unii.draft.mtg.parings.logic.pojo;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Map;
-
-import unii.draft.mtg.parings.database.model.*;
 
 public class PlayerAchievements {
     private Long mPlayerId;

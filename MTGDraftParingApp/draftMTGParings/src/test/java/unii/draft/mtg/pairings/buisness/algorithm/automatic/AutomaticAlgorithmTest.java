@@ -1,7 +1,7 @@
 package unii.draft.mtg.pairings.buisness.algorithm.automatic;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;

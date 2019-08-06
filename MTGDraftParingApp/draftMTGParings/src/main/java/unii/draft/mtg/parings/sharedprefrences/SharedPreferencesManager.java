@@ -2,7 +2,7 @@ package unii.draft.mtg.parings.sharedprefrences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import unii.draft.mtg.parings.buisness.algorithm.annotation.PairingModeNotation;
 import unii.draft.mtg.parings.buisness.algorithm.annotation.SittingsModeNotation;

@@ -1,7 +1,7 @@
 package unii.draft.mtg.parings.sharedprefrences;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import unii.draft.mtg.parings.logic.pojo.DraftDataProvider;
 

@@ -1,6 +1,6 @@
 package unii.draft.mtg.parings.util.config;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 

@@ -1,11 +1,9 @@
 package unii.draft.mtg.parings.buisness.algorithm.base;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
-import unii.draft.mtg.parings.buisness.algorithm.base.IStatisticCalculation;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;

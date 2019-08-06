@@ -1,7 +1,7 @@
 package unii.draft.mtg.parings.logic.pojo;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class Draft {
     private String draftName;
