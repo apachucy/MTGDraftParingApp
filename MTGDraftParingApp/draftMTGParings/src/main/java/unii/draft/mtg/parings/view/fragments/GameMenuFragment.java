@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -78,6 +79,9 @@ public class GameMenuFragment extends BaseFragment {
     @BindView(R.id.init_roundsTextInput)
     TextInputLayout mRoundsTextInput;
 
+    @Nullable
+    @BindView(R.id.header_playerNameTextView)
+    TextView playerCounts;
 
     @Nullable
     @BindView(R.id.init_addPlayerFromHistoryButton)
@@ -130,6 +134,8 @@ public class GameMenuFragment extends BaseFragment {
                     .toString());
             mPlayerNameTextInput.getEditText().setText("");
             mAdapter.notifyDataSetChanged();
+
+            changePlayerCount();
 
         } else if (isNameAddedBefore(mPlayerNameTextInput.getEditText().getText()
                 .toString())) {
@@ -328,6 +334,15 @@ public class GameMenuFragment extends BaseFragment {
                 getString(R.string.dialog_start_button), mDialogErrorButtonClickListener);
     }
 
+
+    private void changePlayerCount() {
+        String playersCountText = getString(R.string.header_player_position_name);
+        if (mAdapter.getItemCount() > 0) {
+            playersCountText = playersCountText.concat(" ( " + mAdapter.getItemCount() + " ) ");
+        }
+
+        playerCounts.setText(playersCountText);
+    }
     @NonNull
     private MaterialDialog.SingleButtonCallback mDialogErrorButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
@@ -373,6 +388,7 @@ public class GameMenuFragment extends BaseFragment {
                 mPlayerNameList.getPlayerList().remove(position);
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mPlayerNameList.getPlayerList().size());
+                changePlayerCount();
             }
         }
 
