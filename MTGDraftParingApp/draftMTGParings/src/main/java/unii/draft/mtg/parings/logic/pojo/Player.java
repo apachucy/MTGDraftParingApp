@@ -20,11 +20,11 @@ public class Player implements IAdapterItem {
     /**
      * How many match points player has - main points
      */
-    private int mMatchPoints;
+    private float mMatchPoints;
     /**
      * How many game point player has
      */
-    private int mGamePoints;
+    private float mGamePoints;
     /**
      * Did player has win the game with "bye"
      */
@@ -106,11 +106,11 @@ public class Player implements IAdapterItem {
         mGameWithBye = 0;
     }
 
-    public int getMatchPoints() {
+    public float getMatchPoints() {
         return mMatchPoints;
     }
 
-    public void setMatchPoints(int mPoints) {
+    public void setMatchPoints(float mPoints) {
         this.mMatchPoints = mPoints;
     }
 
@@ -159,11 +159,11 @@ public class Player implements IAdapterItem {
 
     }
 
-    public int getGamePoints() {
+    public float getGamePoints() {
         return mGamePoints;
     }
 
-    public void setGamePoints(int mGamePoints) {
+    public void setGamePoints(float mGamePoints) {
         this.mGamePoints = mGamePoints;
     }
 

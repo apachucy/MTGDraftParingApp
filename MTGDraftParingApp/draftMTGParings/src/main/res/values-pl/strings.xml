@@ -90,7 +90,7 @@
     <string name="validation_dialog_title">Walidacja</string>
     <string name="validation_dialog_body">Aby przejść dalej wprowadź wszystkie wyniki z rundy</string>
     <string name="action_remove_player">Usuń zawodnika</string>
-    <string name="drop_players_item">%1$s punkty: %2$d</string>
+    <string name="drop_players_item">%1$s punkty: %2$f</string>
     <string name="drop_player_info_text">Żeby usunąć zawodników zaznacz ich a następnie naciśnij przycisk zapisz. Proszę używać z rozwagą, gdyż akcji nie da się cofnąć.</string>
     <string name="help_drop_player">Jeżeli zajdzie potrzeba możesz usunąc gracza</string>
     <string name="warning_drop_player">Nie możesz zmodyfikować graczy po skończonym drafcie</string>

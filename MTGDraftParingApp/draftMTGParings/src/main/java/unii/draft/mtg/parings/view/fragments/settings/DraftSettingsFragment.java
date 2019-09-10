@@ -75,9 +75,9 @@ public class DraftSettingsFragment extends BaseFragment {
         setSaveDraftResults(mSharedPreferenceManager.getSaveDraftResults());
 
         mMatchWinTextView.setText(getString(R.string.button_match_winning_points, Integer.toString(mSharedPreferenceManager.getPointsForMatchWinning())));
-        mMatchDrawTextView.setText(getString(R.string.button_match_draw_points, Integer.toString(mSharedPreferenceManager.getPointsForMatchDraws())));
+        mMatchDrawTextView.setText(getString(R.string.button_match_draw_points, Float.toString(mSharedPreferenceManager.getPointsForMatchDraws())));
         mGameWinTextView.setText(getString(R.string.button_game_winning_points, Integer.toString(mSharedPreferenceManager.getPointsForGameWinning())));
-        mGameDrawTextView.setText(getString(R.string.button_game_draw_points, Integer.toString(mSharedPreferenceManager.getPointsForGameDraws())));
+        mGameDrawTextView.setText(getString(R.string.button_game_draw_points, Float.toString(mSharedPreferenceManager.getPointsForGameDraws())));
     }
 
     @Override
@@ -140,21 +140,21 @@ public class DraftSettingsFragment extends BaseFragment {
 
     @OnClick(R.id.settings_pointsMatchDrawButton)
     void onChangeMatchDrawPointClicked() {
-        showEditTextDialog(getContext(),
+        showEditTextDialogWithDecimalValues(getContext(),
                 getString(R.string.dialog_title_match_draw_points),
                 getString(R.string.dialog_title_match_draw_points),
                 getString(R.string.dialog_draw_points_hint),
-                Integer.toString(mSharedPreferenceManager.getPointsForMatchDraws()),
+                Float.toString(mSharedPreferenceManager.getPointsForMatchDraws()),
                 new UpdateData() {
                     @Override
                     public void updateView() {
-                        String newValue = Integer.toString(mSharedPreferenceManager.getPointsForMatchDraws());
+                        String newValue = Float.toString(mSharedPreferenceManager.getPointsForMatchDraws());
                         mMatchDrawTextView.setText(getString(R.string.button_match_draw_points, newValue));
                     }
 
                     @Override
                     public void updateSharedPreferences(String newData) {
-                        int newValue = Integer.parseInt(newData);
+                        float newValue = Float.parseFloat(newData);
                         if (newValue != mSharedPreferenceManager.getPointsForMatchDraws()) {
                             mSharedPreferenceManager.setPointsForMatchDraws(newValue);
                         }
@@ -190,21 +190,21 @@ public class DraftSettingsFragment extends BaseFragment {
 
     @OnClick(R.id.settings_pointsGameDrawButton)
     void onChangeGameDrawPointClicked() {
-        showEditTextDialog(getContext(),
+        showEditTextDialogWithDecimalValues(getContext(),
                 getString(R.string.dialog_title_game_draw_points),
                 getString(R.string.dialog_title_game_draw_points),
                 getString(R.string.dialog_draw_points_hint),
-                Integer.toString(mSharedPreferenceManager.getPointsForGameDraws()),
+                Float.toString(mSharedPreferenceManager.getPointsForGameDraws()),
                 new UpdateData() {
                     @Override
                     public void updateView() {
-                        String newValue = Integer.toString(mSharedPreferenceManager.getPointsForGameDraws());
-                        mMatchDrawTextView.setText(getString(R.string.button_game_draw_points, newValue));
+                        String newValue = Float.toString(mSharedPreferenceManager.getPointsForGameDraws());
+                        mGameDrawTextView.setText(getString(R.string.button_game_draw_points, newValue));
                     }
 
                     @Override
                     public void updateSharedPreferences(String newData) {
-                        int newValue = Integer.parseInt(newData);
+                        float newValue = Float.parseFloat(newData);
                         if (newValue != mSharedPreferenceManager.getPointsForGameDraws()) {
                             mSharedPreferenceManager.setPointsForGameDraws(newValue);
                         }

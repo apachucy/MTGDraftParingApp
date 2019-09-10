@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.ToMany;
 public class DatabaseDaoGenerator {
     public static void main(String args[]) throws Exception {
         //Create schema add version name and set package
-        Schema schema = new Schema(4, "unii.draft.mtg.parings.database.model");
+        Schema schema = new Schema(5, "unii.draft.mtg.parings.database.model");
 
         //add entity - player
         Entity player = schema.addEntity("Player");
@@ -26,7 +26,7 @@ public class DatabaseDaoGenerator {
 
         Entity playerDraftJoinTable = schema.addEntity("PlayerDraftJoinTable");
         playerDraftJoinTable.addIdProperty();
-        playerDraftJoinTable.addIntProperty("PlayerMatchPoints");
+        playerDraftJoinTable.addFloatProperty("PlayerMatchPoints");
         playerDraftJoinTable.addFloatProperty("PlayerMatchOverallWin");
         playerDraftJoinTable.addFloatProperty("OponentsMatchOveralWins");
         playerDraftJoinTable.addFloatProperty("PlayerGamesOverallWin");
@@ -78,6 +78,7 @@ public class DatabaseDaoGenerator {
         //  gamesToGameJoinTable.setName("Games");
 
         //generate
+        //G:/Workspace/Android Studio/MTGDraftParingApp/MTGDraftParingApp/draftMTGParings/src/main/java
         new DaoGenerator().generateAll(schema, "../draftMTGParings/src/main/java");
     }
 }

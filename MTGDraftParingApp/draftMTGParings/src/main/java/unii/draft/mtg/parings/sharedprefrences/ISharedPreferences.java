@@ -174,17 +174,17 @@ public interface ISharedPreferences {
 
     int getPointsForGameWinning();
 
-    void setPointsForGameDraws(int points);
+    void setPointsForGameDraws(float points);
 
-    int getPointsForGameDraws();
+    float getPointsForGameDraws();
 
     void setPointsForMatchWinning(int points);
 
     int getPointsForMatchWinning();
 
-    void setPointsForMatchDraws(int points);
+    void setPointsForMatchDraws(float points);
 
-    int getPointsForMatchDraws();
+    float getPointsForMatchDraws();
 
 
 }

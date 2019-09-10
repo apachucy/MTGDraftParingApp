@@ -127,9 +127,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         resultViewHolderItem.playersTextView.setText(context.getString(R.string.history_group_players_name, winner, looser));
 
-        int pointsWinner = game.getWinner().equals(game.getPlayerNameA()) ? game.getPlayerAPoints() : game.getPlayerBPoints();
+        float pointsWinner = game.getWinner().equals(game.getPlayerNameA()) ? game.getPlayerAPoints() : game.getPlayerBPoints();
 
-        int pointsLooser = game.getWinner().equals(game.getPlayerNameA()) ? game.getPlayerBPoints() : game.getPlayerAPoints();
+        float pointsLooser = game.getWinner().equals(game.getPlayerNameA()) ? game.getPlayerBPoints() : game.getPlayerAPoints();
 
         resultViewHolderItem.resultsTextView.setText(context.getString(R.string.history_group_player_results, pointsWinner, game.getDraws(), pointsLooser));
         return convertView;

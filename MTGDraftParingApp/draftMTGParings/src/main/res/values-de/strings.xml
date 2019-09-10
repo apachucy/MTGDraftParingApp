@@ -89,7 +89,7 @@
     <string name="validation_dialog_body">Bitte setzen Sie alle Spielergebnisse </string>
     <string name="validation_dialog_title">Verifikation</string>
     <string name="action_remove_player">Entferne den Spieler</string>
-    <string name="drop_players_item">%1$s punkte: %2$d</string>
+    <string name="drop_players_item">%1$s punkte: %2$f</string>
     <string name="drop_player_info_text">Um einen Spieler zu löschen, markiere ihn und drücke "Speichern". Bitte bedachte, dass die Aktion nicht rückgängig ist. Beim Bedarf kannst du den Spieler löschen</string>
     <string name="warning_drop_player">Du kannst keinen Spieler nach einem beendeten Entwurf modifizieren</string>
     <string name="help_drop_player">Wenn es nötig wird, kannst du einen Spieler entfernen. </string>

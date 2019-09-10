@@ -125,7 +125,36 @@ public abstract class BaseFragment extends Fragment {
                 }).show();
 
     }
+    protected void showEditTextDialogWithDecimalValues(@NonNull Context context, @NonNull String title, @NonNull String content, String hint, String lastValue,
+                                      @NonNull final TimeSettingsFragment.UpdateData updateData) {
+        mMaterialDialogInstance = new MaterialDialog.Builder(context)
+                .title(title)
+                .content(content)
+                .inputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED)
+                .backgroundColorRes(R.color.windowBackground)
+                .input(hint, lastValue, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
+                        int value = 0;
 
+                        try {
+                            value = Integer.parseInt(input.toString());
+                        } catch (NumberFormatException e) {
+                            value = 0;
+                        } finally {
+                            if (value < 0) {
+                                //noinspection ReturnInsideFinallyBlock
+                                return;
+                            }
+                            updateData.updateSharedPreferences(input.toString());
+                            updateData.updateView();
+                        }
+
+
+                    }
+                }).show();
+
+    }
     protected void showEditTextDialogWithAnyValue(@NonNull Context context, @NonNull String title, @NonNull String content, String hint, String lastValue,
                                                   @NonNull final TimeSettingsFragment.UpdateData updateData) {
         mMaterialDialogInstance = new MaterialDialog.Builder(context)

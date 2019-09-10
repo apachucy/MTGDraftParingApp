@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.util.helper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -329,6 +330,7 @@ public class DatabaseHelper implements IDatabaseHelper {
         return oldPlayer;
     }
 
+    //TODO: use this export
     private Game exportGame(unii.draft.mtg.parings.database.model.Game game, String playerAName, String playerBName) {
         Game playedGame = new Game(game, playerAName, playerBName);
         return playedGame;

@@ -27,7 +27,7 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property PlayerMatchPoints = new Property(1, Integer.class, "PlayerMatchPoints", false, "PLAYER_MATCH_POINTS");
+        public final static Property PlayerMatchPoints = new Property(1, Float.class, "PlayerMatchPoints", false, "PLAYER_MATCH_POINTS");
         public final static Property PlayerMatchOverallWin = new Property(2, Float.class, "PlayerMatchOverallWin", false, "PLAYER_MATCH_OVERALL_WIN");
         public final static Property OponentsMatchOveralWins = new Property(3, Float.class, "OponentsMatchOveralWins", false, "OPONENTS_MATCH_OVERAL_WINS");
         public final static Property PlayerGamesOverallWin = new Property(4, Float.class, "PlayerGamesOverallWin", false, "PLAYER_GAMES_OVERALL_WIN");
@@ -54,7 +54,7 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"PLAYER_DRAFT_JOIN_TABLE\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"PLAYER_MATCH_POINTS\" INTEGER," + // 1: PlayerMatchPoints
+                "\"PLAYER_MATCH_POINTS\" REAL," + // 1: PlayerMatchPoints
                 "\"PLAYER_MATCH_OVERALL_WIN\" REAL," + // 2: PlayerMatchOverallWin
                 "\"OPONENTS_MATCH_OVERAL_WINS\" REAL," + // 3: OponentsMatchOveralWins
                 "\"PLAYER_GAMES_OVERALL_WIN\" REAL," + // 4: PlayerGamesOverallWin
@@ -81,9 +81,9 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
             stmt.bindLong(1, id);
         }
  
-        Integer PlayerMatchPoints = entity.getPlayerMatchPoints();
+        Float PlayerMatchPoints = entity.getPlayerMatchPoints();
         if (PlayerMatchPoints != null) {
-            stmt.bindLong(2, PlayerMatchPoints);
+            stmt.bindDouble(2, PlayerMatchPoints);
         }
  
         Float PlayerMatchOverallWin = entity.getPlayerMatchOverallWin();
@@ -138,7 +138,7 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
     public PlayerDraftJoinTable readEntity(Cursor cursor, int offset) {
         PlayerDraftJoinTable entity = new PlayerDraftJoinTable( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // PlayerMatchPoints
+            cursor.isNull(offset + 1) ? null : cursor.getFloat(offset + 1), // PlayerMatchPoints
             cursor.isNull(offset + 2) ? null : cursor.getFloat(offset + 2), // PlayerMatchOverallWin
             cursor.isNull(offset + 3) ? null : cursor.getFloat(offset + 3), // OponentsMatchOveralWins
             cursor.isNull(offset + 4) ? null : cursor.getFloat(offset + 4), // PlayerGamesOverallWin
@@ -155,7 +155,7 @@ public class PlayerDraftJoinTableDao extends AbstractDao<PlayerDraftJoinTable, L
     @Override
     public void readEntity(Cursor cursor, PlayerDraftJoinTable entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setPlayerMatchPoints(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setPlayerMatchPoints(cursor.isNull(offset + 1) ? null : cursor.getFloat(offset + 1));
         entity.setPlayerMatchOverallWin(cursor.isNull(offset + 2) ? null : cursor.getFloat(offset + 2));
         entity.setOponentsMatchOveralWins(cursor.isNull(offset + 3) ? null : cursor.getFloat(offset + 3));
         entity.setPlayerGamesOverallWin(cursor.isNull(offset + 4) ? null : cursor.getFloat(offset + 4));

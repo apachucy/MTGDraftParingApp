@@ -18,11 +18,11 @@ import unii.draft.mtg.parings.util.config.BaseConfig;
 public class ParingDashboardLogic {
     private Context mContext;
     private int pointsForGameWinning;
-    private int pointsForGameDraw;
+    private float pointsForGameDraw;
     private int pointsForMatchWinning;
-    private int pointsForMatchDraw;
+    private float pointsForMatchDraw;
 
-    public ParingDashboardLogic(Context context, int pointsForGameWinning, int pointsForGameDraw, int pointsForMatchWinning, int pointsForMatchDraw) {
+    public ParingDashboardLogic(Context context, int pointsForGameWinning, float pointsForGameDraw, int pointsForMatchWinning, float pointsForMatchDraw) {
         mContext = context;
         this.pointsForGameDraw = pointsForGameDraw;
         this.pointsForGameWinning = pointsForGameWinning;

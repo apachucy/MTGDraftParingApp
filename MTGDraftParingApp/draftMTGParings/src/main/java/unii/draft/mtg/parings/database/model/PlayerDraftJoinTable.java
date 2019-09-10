@@ -7,7 +7,7 @@ package unii.draft.mtg.parings.database.model;
 public class PlayerDraftJoinTable {
 
     private Long id;
-    private Integer PlayerMatchPoints;
+    private Float PlayerMatchPoints;
     private Float PlayerMatchOverallWin;
     private Float OponentsMatchOveralWins;
     private Float PlayerGamesOverallWin;
@@ -24,7 +24,7 @@ public class PlayerDraftJoinTable {
         this.id = id;
     }
 
-    public PlayerDraftJoinTable(Long id, Integer PlayerMatchPoints, Float PlayerMatchOverallWin, Float OponentsMatchOveralWins, Float PlayerGamesOverallWin, Float OponentsGamesOverallWin, Boolean Dropped, Integer playerPlace, Long playerDraftJoinTableId, Long draftPlayerJoinTableId) {
+    public PlayerDraftJoinTable(Long id, Float PlayerMatchPoints, Float PlayerMatchOverallWin, Float OponentsMatchOveralWins, Float PlayerGamesOverallWin, Float OponentsGamesOverallWin, Boolean Dropped, Integer playerPlace, Long playerDraftJoinTableId, Long draftPlayerJoinTableId) {
         this.id = id;
         this.PlayerMatchPoints = PlayerMatchPoints;
         this.PlayerMatchOverallWin = PlayerMatchOverallWin;
@@ -45,11 +45,11 @@ public class PlayerDraftJoinTable {
         this.id = id;
     }
 
-    public Integer getPlayerMatchPoints() {
+    public Float getPlayerMatchPoints() {
         return PlayerMatchPoints;
     }
 
-    public void setPlayerMatchPoints(Integer PlayerMatchPoints) {
+    public void setPlayerMatchPoints(Float PlayerMatchPoints) {
         this.PlayerMatchPoints = PlayerMatchPoints;
     }
 

@@ -243,14 +243,14 @@ public class SharedPreferencesManager implements ISharedPreferences {
     }
 
     @Override
-    public void setPointsForGameDraws(int points) {
-        mSharedPreferences.edit().putInt(SettingsPreferencesConst.POINTS_GAME_DRAW, points).apply();
+    public void setPointsForGameDraws(float points) {
+        mSharedPreferences.edit().putFloat(SettingsPreferencesConst.POINTS_GAME_DRAW, points).apply();
 
     }
 
     @Override
-    public int getPointsForGameDraws() {
-        return mSharedPreferences.getInt(SettingsPreferencesConst.POINTS_GAME_DRAW, BaseConfig.MATCH_DRAW);
+    public float getPointsForGameDraws() {
+        return mSharedPreferences.getFloat(SettingsPreferencesConst.POINTS_GAME_DRAW, BaseConfig.MATCH_DRAW);
     }
 
     @Override
@@ -265,14 +265,14 @@ public class SharedPreferencesManager implements ISharedPreferences {
     }
 
     @Override
-    public void setPointsForMatchDraws(int points) {
-        mSharedPreferences.edit().putInt(SettingsPreferencesConst.POINTS_MATCH_DRAW, points).apply();
+    public void setPointsForMatchDraws(float points) {
+        mSharedPreferences.edit().putFloat(SettingsPreferencesConst.POINTS_MATCH_DRAW, points).apply();
 
     }
 
     @Override
-    public int getPointsForMatchDraws() {
-        return mSharedPreferences.getInt(SettingsPreferencesConst.POINTS_MATCH_DRAW, BaseConfig.MATCH_DRAW);
+    public float getPointsForMatchDraws() {
+        return mSharedPreferences.getFloat(SettingsPreferencesConst.POINTS_MATCH_DRAW, BaseConfig.MATCH_DRAW);
     }
 
 
