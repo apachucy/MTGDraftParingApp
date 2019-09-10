@@ -13,6 +13,16 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".view.activities.settings.HistoryScoreBoardActivity"
+            android:icon="@mipmap/ic_history_game"
+            android:label="@string/app_history"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.SplashScreenActivity"
             android:screenOrientation="portrait"
@@ -44,16 +54,7 @@
         <activity
             android:name=".view.activities.options.SaveScoreBoardActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.activities.settings.HistoryScoreBoardActivity"
-            android:icon="@mipmap/ic_history_game"
-            android:label="@string/app_history"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
         <activity
             android:name=".view.activities.settings.SettingsMenuActivity"
             android:screenOrientation="portrait" />
@@ -72,10 +73,6 @@
         <activity
             android:name=".view.activities.DraftRoundHistoryActivity"
             android:screenOrientation="portrait" />
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="cf9681571439d7c8941d4f5f36f2603e9681592f" />
 
         <receiver android:name=".view.widget.DraftWidgetProvider">
             <intent-filter>

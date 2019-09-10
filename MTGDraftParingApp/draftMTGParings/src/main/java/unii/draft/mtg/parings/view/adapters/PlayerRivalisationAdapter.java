@@ -40,7 +40,7 @@ public class PlayerRivalisationAdapter extends RecyclerView.Adapter<PlayerRivali
         int playerAWinningPoints = playedGames.get(position).getPlayerAPoints();
         int playerBWinningPoints = playedGames.get(position).getPlayerBPoints();
         int draws = playedGames.get(position).getDraws();
-        holder.mPoints.setText(context.getString(R.string.history_group_player_results, playerAWinningPoints, draws, playerBWinningPoints));
+        holder.mPoints.setText(context.getString(R.string.history_group_player_rivalisation_results, playerAWinningPoints, draws, playerBWinningPoints));
 
     }
 
