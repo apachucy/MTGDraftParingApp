@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_history">Historial de Torneos</string>
+
+    <string name="action_settings">Ajustes</string>
+    <string name="action_info">Información</string>
+    <string name="action_add_player">Ańadir Jugador</string>
+    <string name="hint_player_name">Nombre del jugador</string>
+    <string name="add_item">Ańadir</string>
+    <string name="hint_rounds">Rondas</string>
+    <string name="start_game">Comenzar</string>
+    <string name="add_players_from_history">Ańadir jugadores desde el historial</string>
+    <string name="no_players_from_history">No hay jugadores en el historial</string>
+    <string name="text_end_round">Fin</string>
+    <string name="warning_empty_field">Debes introducir un valor</string>
+    <string name="warning_need_players">Por favor ańade jugadores</string>
+    <string name="text_vs">vs</string>
+    <string name="text_from">de</string>
+    <string name="text_round">Ronda :</string>
+    <string name="text_after_game">Resultados de la Ronda:</string>
+    <string name="text_winner">Ganador:</string>
+    <!-- Settings -->
+    <string name="text_display_counter">Mostrar tiempo de las rondas:</string>
+    <string name="text_time_round">Tiempo por ronda [m]: %1$s</string>
+    <string name="text_vibration">Activar vibración:</string>
+    <string name="text_vibration_detail">Permite que la vibración informe que el tiempo de la ronda ha finalizado</string>
+    <string name="text_use_counter_detail">Permite cuenta atrás para el inicio de la ronda</string>
+    <string name="text_first_vibration">Primer aviso por vibración[m]: %1$s</string>
+    <string name="text_second_vibration">Segundo aviso por vibración[m]: %1$s</string>
+    <string name="text_duration_vibration">Duración[s]: %1$s</string>
+
+    <!-- Dialog Fragment -->
+    <!-- Dialog Start -->
+    <string name="dialog_start_title">Empezar a jugar</string>
+    <string name="dialog_start_message">Para iniciar el emparejamiento pulsa el botón.\nNúmero de jugadores: %1$d\nNúmero de rondas: %2$d</string>
+    <string name="dialog_start_message_warning_replays">Para iniciar el emparejamiento pulsa el botón.\nNúmero de jugadores: %1$d\nNúmero de rondas: %2$d\nCon el modo actual el jugador puede ser emparejado más de una vez. Para cambiar este modo ve a Ajustes.</string>
+
+    <string name="dialog_start_button">Cerrar</string>
+    <!-- Dialog Game End -->
+    <string name="dialog_end_title">Torneo Finalizado</string>
+    <string name="dialog_end_message">Haz click en \'Cerrar\' para salir de la aplicación</string>
+    <!-- Dialog Algorithm Problem -->
+    <string name="dialog_error_algorithm_title">Error de algoritmo</string>
+    <string name="dialog_error_algorithm__message">No se puede emparejar jugadores.\nPor favor reinicia la aplicación.</string>
+    <!-- Dialog Warning Paring -->
+    <string name="dialog_warning_title">Aviso</string>
+    <string name="dialog_warning_message">Hay demasiadas rondas o muy pocos jugadores.n\Por favor ańade más jugadores o disminuye el número de rondas.</string>
+    <!-- Dialog Info -->
+    <string name="dialog_info_title">Info</string>
+    <string name="dialog_info_message">Versión Fansite App para emparejar jugadores en drafts de MTG.n\Se pueden dar otros usos a esta app pero esta es su finalidad principal:)\nColaboración de Siscu Bit</string>
+    <!-- Dialog Settings-->
+    <!-- Time Settings -->
+    <string name="settings_dialog_round_time_title">Establecer tiempo de ronda</string>
+    <string name="settings_dialog_round_time_content">Tiempo por ronda en minutos</string>
+    <string name="settings_dialog_round_time_hint">Tiempo de ronda deseado: 50 minutos</string>
+    <!--Vibration -->
+    <string name="settings_dialog_round_first_vibration_title">Ajustar primer aviso por vibración</string>
+    <string name="settings_dialog_round_first_vibration_content">Establece el tiempo anterior al momento del primer aviso por vibración</string>
+    <string name="settings_dialog_round_first_vibration_hint">Tiempo deseado: 5 minutos</string>
+
+    <string name="settings_dialog_round_second_vibration_title">Establecer segundo aviso por vibración</string>
+    <string name="settings_dialog_round_second_vibration_content">Fija el tiempo anterior al momento del segundo aviso por vibración.n\Sólo se aplicará cuando el tiempo sea inferior al primer aviso por vibración</string>
+    <string name="settings_dialog_round_second_vibration_hint">Tiempo deseado: 1 minuto</string>
+
+    <string name="settings_dialog_round_duration_vibration_title">Duración de la vibración</string>
+    <string name="settings_dialog_round_duration_vibration_content">Establece cuanto tiempo durará la vibración</string>
+    <string name="settings_dialog_round_duration_vibration_hint">Tiempo deseado: 5 segundos</string>
+
+    <!-- Help/Showcase start screen -->
+    <string name="help_title">Ayuda</string>
+    <string name="tutorial_info">Acerca de esta aplicación</string>
+    <string name="tutorial_settings">Configura el draft antes de jugar </string>
+    <string name="tutorial_hour_glass">Pulsa para la cuenta atrás</string>
+    <string name="tutorial_life_app">Abre la pp de vidas para esta ronda</string>
+    <!-- Headers -->
+    <string name="header_player_position_name">Jugador</string>
+    <string name="header_player_position_points">Puntos</string>
+
+    <!-- List Draw -->
+    <string name="text_draw">Empate</string>
+
+    <!-- Create personal parings-->
+    <string name="text_personal_parings">Tipo de emparejamiento:  %1$s</string>
+    <string name="text_save_results_after_draft">Guardar resultados después del draft: %1$s</string>
+    <string name="positive">Ok</string>
+    <string name="negative">No</string>
+    <string name="activity_paring_add_paring">Ańadir emparejamiento</string>
+    <string name="activity_paring_clear_paring">Eliminar emparejamientos</string>
+    <string name="activity_paring_warning_empty_list">No quedan más jugadores para emparejar</string>
+    <string name="activity_paring_warning_manual_pairing_error">Error de emparejamiento. Resetea los emparejamientos y prueba de nuevo</string>
+    <string name="activity_paring_warning_paring_not_finished">Por favor, termina de emparejar a todos los jugadores</string>
+    <string name="activity_paring_warning_bye">El último jugador ya tiene un bye</string>
+    <string name="warning_player_name_added">El jugador con ese nombre ya ha sido ańadido anteriormente</string>
+    <string name="select_player1">Selecciona 1er Jugador</string>
+    <string name="select_player2">Selecciona 2ndo Jugador</string>
+    <string name="select_player_name">Seleccionado: %1$s</string>
+    <string name="select_player_manual_title">Selecciona Jugador</string>
+    <string name="select_player_manual_add">Ańadir</string>
+    <string name="spinner_empty_player_list">No hay más jugadores</string>
+
+    <!--Save Score Board-->
+    <string name="activity_save_score_board_info_text">Nombre de la tabla de puntuaciones</string>
+    <string name="activity_save_score_board_info_small_text">Puedes ver puntuaciones anteriores visitando Ajustes</string>
+    <string name="activity_save_score_board_save">Guardar cambios</string>
+    <string name="action_save">Guardar draft</string>
+    <string name="action_calculate_mana">Open Mana Calculator</string>
+    <string name="action_share">Compartir puntuación</string>
+    <string name="action_remove_player">Retirar jugador</string>
+    <string name="help_save_dashboard">Podrás dar un nombre al torneo después de finalizar el juego</string>
+    <string name="help_drop_player">Si es necesario puedes retirar del draft a un jugador</string>
+    <string name="help_share_content">Podrás compartir el historial de rondas al finalizar el torneo</string>
+    <string name="warning_save_dashboard">Podrás dar un nombre al torneo después de finalizar el juego</string>
+    <string name="warning_drop_player">No puedes modificar jugadores después de finalizar el draft</string>
+    <string name="warning_add_player">En Modo Torneo no pueden ańadirse jugadores</string>
+    <string name="settings_clean_history">Eliminar todo el historial</string>
+
+    <string name="settings_other">Otros Ajustes</string>
+    <string name="settings_display_scoreboards">Mostrar puntuaciones</string>
+    <string name="settings_display_players_list">Mostrar lista de jugadores</string>
+    <string name="settings_reset_tour_guide">Resetear el Asistente de Guía y mostrar la ayuda</string>
+    <string name="settings_reset_tour_guide_dialog_title">Estás seguro que quieres resetear la ayuda?</string>
+    <string name="settings_reset_tour_guide_dialog_content">La ayuda será reiniciada en esta aplicación</string>
+    <string name="settings_reset_tour_guide_message">El Asistente de Guía ha sido reseteado</string>
+    <string name="message_score_boards_removed">Todas las puntuaciones han sido eliminadas</string>
+    <string name="message_score_board_not_exists">No hay puntuaciones para mostrar</string>
+    <string name="message_player_list_not_exists">No hay jugadores para mostrar</string>
+    <string name="message_score_board_saved">Torneo guardado correctamente</string>
+    <string name="action_show_list">Muestra/Mostrar lista de puntuaciones</string>
+    <!--Modify App UI -->
+    <string name="action_countdown">Final de la cuenta atrás de la ronda</string>
+    <string name="action_open_life_app">Open Life App</string>
+    <string name="message_action_countdown_started">Temporizador iniciado&#8230;</string>
+    <string name="message_action_countdown_cancel">Temporizador cancelado</string>
+    <!--Open Intent -->
+    <string name="chooser_intent_title_life_counter">Choose life counter application</string>
+    <string name="chooser_dialog_title_life_counter">Download LifeCounterApp</string>
+    <string name="chooser_dialog_body_life_counter">To handle this action\nplease download application for counting life</string>
+
+    <string name="chooser_intent_title_mana_calculator">Choose mana calculator application</string>
+    <string name="chooser_dialog_title_mana_calculator">Download ManaCalculatorApp</string>
+    <string name="chooser_dialog_body_mana_calculator">To handle this action\nplease download application for mana calculation</string>
+    <string name="chooser_dialog_button_name">Download</string>
+
+    <!-- Show validation dialog-->
+    <string name="validation_dialog_title">Puntuación</string>
+    <string name="validation_dialog_body">Por favor asigna los resultados del juego antes de continuar</string>
+    <!-- drop player res -->
+    <string name="drop_players_item">%1$s Puntos: %2$f</string>
+    <string name="drop_player_info_text">Para retirar un jugador del Torneo seleccionalo y pulsa \'Guardar cambios\'. Esta acción no puede ser revocada. Úsala con cuidado.</string>
+    <!--Rate me option -->
+    <string name="settings_rate_me">Por favor, valora esta app</string>
+    <string name="settings_check_other_apps">Echa un vistazo a mis otras apps</string>
+    <string name="settings_idea_box">Buzón de ideas</string>
+    <string name="settings_rate_me_error"> No se ha podido abrir Google Play, por favor instala el market store</string>
+    <string name="settings_developer_account_error">No se pudo abrir el explorador de internet, por favor instala uno y prueba otra vez </string>
+    <string name="settings_idea_box_error">No se pudo abrir el cliente de email, por favor instala uno y prueba otra vez</string>
+
+    <!--Settings -->
+    <string name="settings_content_description">Selecciona los ajustes del menú</string>
+    <string name="settings_counter_off">"Para usar el temporizador ve a ajustes y actívalo"</string>
+    <string name="settings_sittings_none">ninguno</string>
+    <string name="settings_sittings_random">aleatorio</string>
+    <string name="settings_sittings_dialog_title">Escoge opciones de emparejamiento:</string>
+    <string name="settings_history_remove_clean_history_dialog_title">Deseas eliminar todo?</string>
+    <string name="settings_history_remove_clean_history_dialog_body">Todo el historial de datos será eliminado</string>
+
+    <string name="dialog_positive">Aceptar</string>
+    <string name="dialog_negative">Cancelar</string>
+
+    <string name="settings_pairing_mode_manual">Manual - Todas las acciones son controladas por el master del juego. Se podrá ańadir/eliminar jugadores de la partida. Este modo puede ser cambiado en cualquier momento del juego a automático con repetición.</string>
+    <string name="settings_pairing_mode_tournament">Torneo - Torneo Suizo con opción de eliminación de jugadores.</string>
+    <string name="settings_pairing_mode_round_robin">Ronda Robin - Cada jugador se enfrenta a cada uno de los otros jugadores en rondas distintas.</string>
+    <string name="settings_pairing_mode_knock_out">K.O. - Cuando pierdas una ronda serás eliminado del juego.</string>
+    <string name="settings_pairing_mode_automatic_with_repeats">Automático con repetición - Similar al modo Torneo pero puedes enfrentarte más de una vez con un oponente. El master del juego puede ańadir/eliminar jugadores en medio de la partida.</string>
+
+    <string name="settings_pairing_mode_dialog_title">Escoge opciones de emparejamiento:</string>
+    <string name="settings_save_draft_result_dialog_title">Deben guardarse los resultados del draft:</string>
+
+    <string name="player_sittings_description">Situando antes de la 1ra ronda</string>
+
+    <string name="history_player_detail_place">Posición: %1$d / %2$d</string>
+    <string name="history_player_overall_places">Posiciones en draft:</string>
+    <string name="history_player_overall_played">Jugado en drafts:</string>
+    <string name="history_detail_player_overall_count_position">Posición %1$d: %2$d veces</string>
+    <string name="history_detail_player_overall_count_positions">Posición %1$d: %2$d veces</string>
+
+    <string name="settings_menu_item_history">Historial</string>
+    <string name="settings_menu_item_other">Otros</string>
+    <string name="settings_menu_item_time">Tiempo</string>
+    <string name="dialog_scoreboard_info_title">Explicación</string>
+
+    <string name="dialog_load_not_ended_draft_title">Cargar drafts anteriores</string>
+    <string name="dialog_load_not_ended_draft_body">El anterior draft no ha sido finalizado. Deseas seguir donde lo dejaste?</string>
+
+    <!-- Go back dialog -->
+    <string name="dialog_warning_go_back_body">Seguro que quieres editar la última ronda?</string>
+
+    <!-- Cancel Game dialog -->
+    <string name="dialog_cancel_game_title">Finalizar Torneo</string>
+    <string name="dialog_cancel_game_body">Deseas finalizar este torneo? Puedes reanudarlo más adelante si quieres.</string>
+
+    <!--Display information about current view -->
+    <string name="app_header_path_game">Torneo</string>
+    <string name="app_header_path_configuration">Asistente</string>
+    <string name="app_header_path_history">Historial</string>
+
+    <!-- Add player-->
+    <string name="add_player_dialog_title">Cómo funciona?</string>
+    <string name="add_player_dialog_body">Si un jugador no aparece durante la partida el oponente gana un bye automáticamente que equivale a una victoria.\nEsta opción permite ańadir un jugador extra en cualquier momento del Torneo pero no se le asignarán puntos bye para el resto del draft.</string>
+    <!-- -->
+    <string name="action_switch_algorithm">Cambiar algoritmo</string>
+
+    <string name="dialog_title_change_algorithm">Cambio de algortimo</string>
+    <string name="dialog_body_change_algorithm">Esto cambiará el modo de emparejamiento de manual a automático con repetición</string>
+
+    <string name="settings_used_libraries">Librerías in-app</string>
+    <string name="dialog_used_libraries_title">Librerías usadas</string>
+    <string name="settings_help_with_app">Puedes ayudar con esta app</string>
+    <string name="dialog_help_with_app_title">Ayudame a esta aplicación</string>
+
+    <!-- more history -->
+    <string name="history_group_round">Ronda: %1$d</string>
+    <string name="history_player_rivalisation">Resultados históricos del juego</string>
+    <string name="history_pie_chart_title">Jugador %1$s win/draw/lose estadísticas de todos los </string>
+    <string name="history_player_statistics">Estadísticas del jugador</string>
+    <string name="win">Victoria</string>
+    <string name="draw">Empate</string>
+    <string name="lose">Derrota</string>
+    <string name="empty_view">Echa alguna partida para ver el historial :)</string>
+    <string name="scoreboard">Tabla de puntuaciones</string>
+    <string name="round_history">Historial de Rondas</string>
+
+    <!-- dialog timer-->
+    <string name="dialog_timer_title">Que quieres hacer con el temporizador?</string>
+    <string name="dialog_timer_pause">Pausar</string>
+    <string name="dialog_timer_cancel">@string/dialog_negative</string>
+    <string name="settings_sittings_tournament" />
+
+    <!--Change points for draw and winning -->
+    <string name="dialog_title_game_win_points">Puntos por juego ganado</string>
+    <string name="dialog_body_game_win_points">Establecer número concreto de puntos por ganar un único juego/victoria individual de juego</string>
+    <string name="dialog_win_points_hint">Valor por defecto es 3</string>
+    <string name="button_game_winning_points">Puntos por juego ganado: %1$s</string>
+
+    <string name="dialog_title_game_draw_points">Puntos por juego empatado</string>
+    <string name="dialog_body_game_draw_points">Establece un número de puntos concretos para el empate en juego individual</string>
+    <string name="dialog_draw_points_hint">Valor por defecto es 1</string>
+    <string name="button_game_draw_points">Puntos por empatar una partida: %1$s</string>
+
+    <string name="dialog_title_match_win_points">Puntos por enfrentamiento ganado</string>
+    <string name="dialog_body_match_win_points">Establece un número concreto de puntos por enfrentamiento ganado. Un enfrentamiento consiste en almenos una partida</string>
+    <string name="button_match_winning_points">Puntos por ganar un enfrentamiento: %1$s</string>
+
+    <string name="dialog_title_match_draw_points">Puntos por enfrentamiento empatado</string>
+    <string name="dialog_body_match_draw_points">Establece un número concreto de puntos por un empate en un enfrentamiento. Un enfrentamiento consiste en almenos una partida</string>
+    <string name="button_match_draw_points">Puntos por empate en un enfrentamiento: %1$s</string>
+
+   <string name="select_all_items">Todos</string>
+</resources>

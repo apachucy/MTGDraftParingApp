@@ -191,7 +191,7 @@
     <string name="player_sittings_description">Sitting before 1rst round</string>
 
     <string name="shared_data_formatted_winner" translatable="false">Draft winner is: %1$s\n</string>
-    <string name="shared_data_formatted_player" translatable="false">%1$s scored: %2$d points\n</string>
+    <string name="shared_data_formatted_player" translatable="false">%1$s scored: %2$f points\n</string>
     <string name="shared_data_formatted_draft" translatable="false">Draft name:  %1$s\nDraft winner is: %2$s\nNumber of players: %3$d\nRounds:%4$d\n</string>
     <string name="shared_data_player_list" translatable="false">Player name: %1$s\nDraft played: %2$d\nWins: %3$d\n</string>
 

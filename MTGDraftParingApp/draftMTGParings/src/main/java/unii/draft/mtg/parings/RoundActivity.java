@@ -2,11 +2,13 @@ package unii.draft.mtg.parings;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -283,7 +285,9 @@ public class RoundActivity extends BaseActivity {
         @Override
         public void onClick(MaterialDialog dialog, DialogAction which) {
             dialog.dismiss();
-            mCounterClass.onCancel();
+            if (mCounterClass != null) {
+                mCounterClass.onCancel();
+            }
             counterState = CounterStates.STOPPED;
             finish();
         }

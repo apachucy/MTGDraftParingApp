@@ -1,9 +1,11 @@
 package unii.draft.mtg.parings.view.adapters;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +67,11 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<RecyclerView.
         HistoryScoreBoardAdapter.ViewHolder historyHolder = (ViewHolder) holder;
         Draft selectedDraft = mDraftList.get(position);
         List<Player> playerList = mDatabaseHelper.getAllPlayersInDraft(selectedDraft.getId());
+        if (playerList.isEmpty() || playerList.get(0).getPlayerName() == null
+                || playerList.get(0).getPlayerName().isEmpty()
+                || mDraftList.size() > position) {
+            return;
+        }
         historyHolder.draftTitleTextView.setText(mDraftList.get(position).getDraftName());
         historyHolder.draftDateTextView.setText(mDraftList.get(position).getDraftDate());
         historyHolder.playerWonTextView.setText(playerList.get(0).getPlayerName());

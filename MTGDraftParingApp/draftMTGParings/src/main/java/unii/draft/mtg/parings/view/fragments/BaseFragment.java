@@ -135,10 +135,10 @@ public abstract class BaseFragment extends Fragment {
                 .input(hint, lastValue, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, @NonNull CharSequence input) {
-                        int value = 0;
+                        float value = 0;
 
                         try {
-                            value = Integer.parseInt(input.toString());
+                            value = Float.parseFloat(input.toString());
                         } catch (NumberFormatException e) {
                             value = 0;
                         } finally {

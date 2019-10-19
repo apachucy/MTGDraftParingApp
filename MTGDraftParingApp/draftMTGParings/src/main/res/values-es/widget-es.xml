@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Widget res -->
+    <string name="widget_content">Ronda: %1$d\nVictorias: %2$s</string>
+    <string name="widget_icon_description">MTG Draft Widget Icon</string>
+    <string name="widget_content_description">MTG Draft Widget el jugador que está ganando actualmente</string>
+    <string name="widget_empty_content">Esperando al borrador</string>
+</resources>
