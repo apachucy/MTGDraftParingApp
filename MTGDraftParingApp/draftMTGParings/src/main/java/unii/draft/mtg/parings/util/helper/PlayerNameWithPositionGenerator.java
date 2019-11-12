@@ -36,7 +36,9 @@ public class PlayerNameWithPositionGenerator {
         }
         //set value for last element
         int lastElement = playerLocalList.size() - 1;
-        playerLocalList.get(lastElement).setPlayerName(Integer.toString(positionOnList) + ". " + playerLocalList.get(lastElement).getPlayerName());
+        if (lastElement < playerLocalList.size() && lastElement >= 0) {
+            playerLocalList.get(lastElement).setPlayerName(Integer.toString(positionOnList) + ". " + playerLocalList.get(lastElement).getPlayerName());
+        }
         return playerLocalList;
     }
 

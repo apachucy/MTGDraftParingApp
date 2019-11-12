@@ -69,7 +69,7 @@ public class HistoryScoreBoardAdapter extends RecyclerView.Adapter<RecyclerView.
         List<Player> playerList = mDatabaseHelper.getAllPlayersInDraft(selectedDraft.getId());
         if (playerList.isEmpty() || playerList.get(0).getPlayerName() == null
                 || playerList.get(0).getPlayerName().isEmpty()
-                || mDraftList.size() > position) {
+                || mDraftList.size() <= position) {
             return;
         }
         historyHolder.draftTitleTextView.setText(mDraftList.get(position).getDraftName());

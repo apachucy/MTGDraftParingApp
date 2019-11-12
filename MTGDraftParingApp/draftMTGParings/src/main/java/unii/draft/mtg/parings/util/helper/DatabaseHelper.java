@@ -120,7 +120,7 @@ public class DatabaseHelper implements IDatabaseHelper {
     public List<Draft> getAllDraftList() {
         List<Draft> draftList = new ArrayList<>();
         draftList.addAll(mDaoSession.getDraftDao().loadAll());
-        return draftList;
+    return draftList;
     }
 
     @Override
