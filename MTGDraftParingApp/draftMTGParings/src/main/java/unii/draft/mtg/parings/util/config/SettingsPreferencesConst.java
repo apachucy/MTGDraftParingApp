@@ -43,9 +43,9 @@ public class SettingsPreferencesConst {
      * Point for draws/wins
      */
 
-    public static final String POINTS_GAME_DRAW = SettingsPreferencesConst.class.getName() + "POINTS_GAME_DRAW_FLOAT";
+    public static final String POINTS_GAME_DRAW = SettingsPreferencesConst.class.getName() + "POINTS_GAME_DRAW_FLOAT_";
     public static final String POINTS_GAME_WIN = SettingsPreferencesConst.class.getName() + "POINTS_GAME_WIN";
 
-    public static final String POINTS_MATCH_DRAW = SettingsPreferencesConst.class.getName() + "POINTS_MATCH_DRAW_FLOAT";
+    public static final String POINTS_MATCH_DRAW = SettingsPreferencesConst.class.getName() + "POINTS_MATCH_DRAW_FLOAT_";
     public static final String POINTS_MATCH_WIN = SettingsPreferencesConst.class.getName() + "POINTS_MATCH_WIN";
 }

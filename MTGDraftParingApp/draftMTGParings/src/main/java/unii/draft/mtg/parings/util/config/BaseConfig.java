@@ -31,7 +31,7 @@ public final class BaseConfig {
 
     // DRAW
     public static final String DRAW = "";
-    public static final int MATCH_DRAW = 1;
+    public static final float MATCH_DRAW = 1f;
     public static final int MATCH_WIN = 3;
 
     //TIME MARGIN ERROR

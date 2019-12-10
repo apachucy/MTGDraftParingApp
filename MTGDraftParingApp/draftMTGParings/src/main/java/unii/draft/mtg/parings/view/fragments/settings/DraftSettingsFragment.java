@@ -2,12 +2,13 @@ package unii.draft.mtg.parings.view.fragments.settings;
 
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -154,7 +155,7 @@ public class DraftSettingsFragment extends BaseFragment {
 
                     @Override
                     public void updateSharedPreferences(String newData) {
-                        float newValue = Float.parseFloat(newData);
+                        float newValue = convertSafety(newData);
                         if (newValue != mSharedPreferenceManager.getPointsForMatchDraws()) {
                             mSharedPreferenceManager.setPointsForMatchDraws(newValue);
                         }
@@ -204,7 +205,7 @@ public class DraftSettingsFragment extends BaseFragment {
 
                     @Override
                     public void updateSharedPreferences(String newData) {
-                        float newValue = Float.parseFloat(newData);
+                        float newValue = convertSafety(newData);
                         if (newValue != mSharedPreferenceManager.getPointsForGameDraws()) {
                             mSharedPreferenceManager.setPointsForGameDraws(newValue);
                         }
@@ -213,6 +214,15 @@ public class DraftSettingsFragment extends BaseFragment {
         );
     }
 
+    private float convertSafety(String value) {
+        float numericalValue = 0f;
+        try {
+            numericalValue = Float.parseFloat(value);
+        } catch (NumberFormatException e) {
+            numericalValue = Integer.parseInt(value) * 1.0f;
+        }
+        return numericalValue;
+    }
 
     @OnClick(R.id.settings_saveResultsAfterDraftButton)
     void onSaveDraftResultsViewClicked() {
