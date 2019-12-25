@@ -1,10 +1,12 @@
 package unii.draft.mtg.parings.view.fragments.history;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +49,7 @@ import unii.draft.mtg.parings.view.fragments.settings.TimeSettingsFragment;
  * TODO: FIX adapter for OverallView or make a generic
  */
 public class HistoryPlayerAchievementsFragment extends BaseFragment {
-
+    private final static int NOT_SELECTED = -1;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Unbinder mUnbinder;
@@ -57,7 +59,7 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
     private Long mPlayerId;
     private unii.draft.mtg.parings.database.model.Player mPlayer;
     private ISharePlayerAchievements mSharePlayerAchievements;
-
+    private RecyclerView.Adapter mPlayerPositionAdapter;
     @Nullable
     @BindView(R.id.history_player_detail_playerAchievementsList)
     RecyclerView mPlayerAchievementRecyclerView;
@@ -101,6 +103,41 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
         showEditTextDialogWithAnyValue(getActivity(), getString(R.string.rename_player_dialog_title), getString(R.string.rename_player_dialog_body), "", mPlayer.getPlayerName(), updateName);
     }
 
+    @OnClick(R.id.icon_mergePlayerImageView)
+    void onMergePlayerClicked() {
+        List<String> playerNamesList = mDatabaseHelper.get().getAllPlayersNames();
+        showRadioButtonListDialog(getActivity(), getString(R.string.merge_player_dialog_title), playerNamesList, getString(R.string.dialog_positive), getString(R.string.dialog_negative), NOT_SELECTED, selectedPlayerForMerge);
+    }
+
+    MaterialDialog.ListCallbackSingleChoice selectedPlayerForMerge = new MaterialDialog.ListCallbackSingleChoice() {
+        @Override
+        public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+            if (which == NOT_SELECTED || text == null) {
+                return false;
+            }
+            String playerName = text.toString();
+            Long playerIdToMerge = -1L;
+            for (Player player : mDatabaseHelper.get().getAllPlayerList()) {
+                if (player.getPlayerName().equals(playerName)) {
+                    playerIdToMerge = player.getId();
+                }
+            }
+            if (playerIdToMerge > 0) {
+                mDatabaseHelper.get().mergePlayer(mPlayer.getPlayerName(), mPlayerId, playerIdToMerge);
+
+                mPlayer = mDatabaseHelper.get().getPlayer(mPlayerId);
+
+                Converter<PlayerAchievements, Player> converter = new PlayerAchievementsConverter();
+                PlayerAchievements playerAchievements = converter.convert(mPlayer);
+                mPlayerDraftPlayedList = createPlayerDraftPlayedList();
+                mPlayerOverallList = createPlayerOverallList(playerAchievements);
+                mAdapter.notifyDataSetChanged();
+                mPlayerPositionAdapter.notifyDataSetChanged();
+                return true;
+            }
+            return false;
+        }
+    };
 
     @OnClick(R.id.icon_deleteImageView)
     void onRemovePlayerClicked() {
@@ -132,11 +169,11 @@ public class HistoryPlayerAchievementsFragment extends BaseFragment {
         mPlayerAchievementRecyclerView.addItemDecoration(new DividerItemDecorator(getActivity(), DividerItemDecorator.VERTICAL_LIST));
         mPlayerAchievementRecyclerView.setAdapter(mAdapter);
 
-        RecyclerView.Adapter adapter = new SingleTextViewAdapter(getActivity(), mPlayerOverallList);
+        mPlayerPositionAdapter = new SingleTextViewAdapter(getActivity(), mPlayerOverallList);
         mPlayerPositionOverallRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mPlayerPositionOverallRecyclerView.setLayoutManager(layoutManager);
-        mPlayerPositionOverallRecyclerView.setAdapter(adapter);
+        mPlayerPositionOverallRecyclerView.setAdapter(mPlayerPositionAdapter);
     }
 
     @Override

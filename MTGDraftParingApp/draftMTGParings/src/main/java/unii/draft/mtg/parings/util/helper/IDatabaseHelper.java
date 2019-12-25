@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.util.helper;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 
@@ -59,4 +60,8 @@ public interface IDatabaseHelper {
     List<DraftExporter> exportDraftDatabase();
 
     Information importDraftDatabase(@NonNull List<DraftExporter> database);
+
+    boolean canRenamePlayer(String playerName);
+
+    void mergePlayer(String playerName, long currentId, long previousId);
 }

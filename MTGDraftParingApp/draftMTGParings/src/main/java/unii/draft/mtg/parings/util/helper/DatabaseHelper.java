@@ -120,7 +120,7 @@ public class DatabaseHelper implements IDatabaseHelper {
     public List<Draft> getAllDraftList() {
         List<Draft> draftList = new ArrayList<>();
         draftList.addAll(mDaoSession.getDraftDao().loadAll());
-    return draftList;
+        return draftList;
     }
 
     @Override
@@ -345,6 +345,53 @@ public class DatabaseHelper implements IDatabaseHelper {
             return Information.SUCCESS;
         } catch (Error e) {
             return Information.ERROR_DATA_CORRUPTED;
+        }
+    }
+
+    @Override
+    public boolean canRenamePlayer(String playerName) {
+        for (String name : getAllPlayersNames()) {
+            if (name.equals(playerName)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void mergePlayer(String playerName, long currentId, long previousId) {
+        unii.draft.mtg.parings.database.model.Player playerPrevious = getPlayer(previousId);
+        unii.draft.mtg.parings.database.model.Player playerCurrent = getPlayer(currentId);
+
+        setNewIdForGames(playerPrevious.getPlayerAInGame(), previousId, currentId);
+        setNewIdForGames(playerPrevious.getPlayerBInGame(), previousId, currentId);
+        playerCurrent.setPlayerName(playerName);
+        playerCurrent.getPlayerBInGame().addAll(playerPrevious.getPlayerBInGame());
+        playerCurrent.getPlayerAInGame().addAll(playerPrevious.getPlayerAInGame());
+        List<PlayerDraftJoinTable> tables = mDaoSession.getPlayerDraftJoinTableDao().queryBuilder()
+                .where(PlayerDraftJoinTableDao.Properties.PlayerDraftJoinTableId.eq(previousId)).build().list();
+        for (PlayerDraftJoinTable table : tables) {
+            if (table.getPlayerDraftJoinTableId().equals(previousId)) {
+                table.setPlayerDraftJoinTableId(currentId);
+                mDaoSession.getPlayerDraftJoinTableDao().update(table);
+            }
+        }
+        mDaoSession.getPlayerDao().update(playerCurrent);
+        mDaoSession.getPlayerDao().update(playerPrevious);
+        mDaoSession.getPlayerDao().delete(playerPrevious);
+
+    }
+
+    private void setNewIdForGames(List<unii.draft.mtg.parings.database.model.Game> games, long previousId, long currentId) {
+        for (unii.draft.mtg.parings.database.model.Game game : games) {
+            if (game.getPlayerAGameJoinTableId() == previousId) {
+                game.setPlayerAGameJoinTableId(currentId);
+                mDaoSession.getGameDao().update(game);
+            } else if (game.getPlayerBGameJoinTableId() == previousId) {
+                game.setPlayerBGameJoinTableId(currentId);
+                mDaoSession.getGameDao().update(game);
+
+            }
         }
     }
 

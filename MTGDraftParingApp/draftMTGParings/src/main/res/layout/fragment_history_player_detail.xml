@@ -36,7 +36,18 @@
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:paddingStart="@dimen/text_view_margin_settings"
+            android:paddingEnd="@dimen/text_view_margin_settings"
             android:src="@drawable/ic_delete" />
+
+        <ImageButton
+            android:id="@+id/icon_mergePlayerImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_draft" />
     </LinearLayout>
 
     <LinearLayout
