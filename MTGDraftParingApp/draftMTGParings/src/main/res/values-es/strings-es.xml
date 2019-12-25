@@ -145,7 +145,7 @@
     <string name="validation_dialog_title">Puntuación</string>
     <string name="validation_dialog_body">Por favor asigna los resultados del juego antes de continuar</string>
     <!-- drop player res -->
-    <string name="drop_players_item">%1$s Puntos: %2$f</string>
+    <string name="drop_players_item">%1$s Puntos: %2$s</string>
     <string name="drop_player_info_text">Para retirar un jugador del Torneo seleccionalo y pulsa \'Guardar cambios\'. Esta acción no puede ser revocada. Úsala con cuidado.</string>
     <!--Rate me option -->
     <string name="settings_rate_me">Por favor, valora esta app</string>

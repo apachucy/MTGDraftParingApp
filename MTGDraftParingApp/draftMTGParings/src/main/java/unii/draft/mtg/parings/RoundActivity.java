@@ -200,7 +200,7 @@ public class RoundActivity extends BaseActivity {
                     counterState = CounterStates.STARTED;
 
                 } else {
-                    showSingleChoiceList(RoundActivity.this, getString(R.string.dialog_timer_title), mHourGlassActions, getString(R.string.positive), mHourGlassesListener);
+                    showSingleChoiceList(RoundActivity.this, getString(R.string.dialog_timer_title), mHourGlassActions, getString(R.string.dialog_positive), mHourGlassesListener);
                 }
             }
         });

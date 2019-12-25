@@ -144,7 +144,7 @@
     <string name="validation_dialog_title">Validazione</string>
     <string name="validation_dialog_body">Si prega di inserire tutti i risultati del round</string>
     <!-- drop player res -->
-    <string name="drop_players_item">%1$s punti: %2$f</string>
+    <string name="drop_players_item">%1$s punti: %2$s</string>
     <string name="drop_player_info_text">Per ritirare i giocatori selezionali e premi \'salva \'. Questa azione non può essere annulata. Usare con cautela.</string>
     <!--Rate me option -->
     <string name="settings_rate_me">Per vavore, valuta l’App</string>

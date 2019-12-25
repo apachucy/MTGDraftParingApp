@@ -186,5 +186,5 @@ public interface ISharedPreferences {
 
     float getPointsForMatchDraws();
 
-
+    void resetDrawMatchValue();
 }

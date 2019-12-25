@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import unii.draft.mtg.parings.R;
@@ -131,7 +132,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         float pointsLooser = game.getWinner().equals(game.getPlayerNameA()) ? game.getPlayerBPoints() : game.getPlayerAPoints();
 
-        resultViewHolderItem.resultsTextView.setText(context.getString(R.string.history_group_player_results, pointsWinner, game.getDraws(), pointsLooser));
+        resultViewHolderItem.resultsTextView.setText(context.getString(R.string.history_group_player_results, NumberFormat.getInstance().format(pointsWinner), game.getDraws(), NumberFormat.getInstance().format(pointsLooser)));
         return convertView;
     }
 

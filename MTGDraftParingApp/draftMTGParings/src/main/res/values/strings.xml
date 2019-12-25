@@ -157,7 +157,7 @@
     <string name="validation_dialog_body">Please set all game results</string>
     <string name="validation_dialog_button_name" translatable="false">Ok</string>
     <!-- drop player res -->
-    <string name="drop_players_item">%1$s points: %2$f</string>
+    <string name="drop_players_item">%1$s points: %2$s</string>
     <string name="drop_player_info_text">To drop players select them and press \'save\'. This action cannot be overriten. Use with caution.</string>
     <!--Rate me option -->
     <string name="settings_rate_me">Please, rate this app</string>
@@ -191,7 +191,7 @@
     <string name="player_sittings_description">Sitting before 1rst round</string>
 
     <string name="shared_data_formatted_winner" translatable="false">Draft winner is: %1$s\n</string>
-    <string name="shared_data_formatted_player" translatable="false">%1$s scored: %2$f points\n</string>
+    <string name="shared_data_formatted_player" translatable="false">%1$s scored: %2$s points\n</string>
     <string name="shared_data_formatted_draft" translatable="false">Draft name:  %1$s\nDraft winner is: %2$s\nNumber of players: %3$d\nRounds:%4$d\n</string>
     <string name="shared_data_player_list" translatable="false">Player name: %1$s\nDraft played: %2$d\nWins: %3$d\n</string>
 
@@ -247,7 +247,7 @@
     <!-- more history -->
     <string name="history_group_round">Round: %1$d</string>
     <string name="history_group_players_name" translatable="false">%1$s vs %2$s</string>
-    <string name="history_group_player_results" translatable="false">%1$.1f-%2$d-%3$.1f</string>
+    <string name="history_group_player_results" translatable="false">%1$s-%2$d-%3$s</string>
     <string name="history_group_player_rivalisation_results" translatable="false">%1$d-%2$d-%3$d</string>
     <string name="history_player_rivalisation">Historical game results</string>
     <string name="history_pie_chart_title">Player %1$s win/draw/lose statistic for all games</string>
@@ -263,7 +263,7 @@
     <!-- dialog timer-->
     <string name="dialog_timer_title">What you want to do with timer?</string>
     <string name="dialog_timer_pause">Pause</string>
-    <string name="dialog_timer_cancel">@string/dialog_negative</string>
+    <string name="dialog_timer_cancel">Stop</string>
     <string name="settings_sittings_tournament" />
 
     <!--Change points for draw and winning -->

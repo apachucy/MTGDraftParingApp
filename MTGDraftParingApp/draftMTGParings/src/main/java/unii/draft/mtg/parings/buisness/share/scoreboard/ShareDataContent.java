@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import unii.draft.mtg.parings.R;
@@ -39,6 +40,7 @@ public class ShareDataContent implements IShareData {
     }
 
     private String playerToString(@NonNull Player player) {
-        return mContext.getString(R.string.shared_data_formatted_player, player.getPlayerName(), player.getMatchPoints());
+        return mContext.getString(R.string.shared_data_formatted_player, player.getPlayerName(),
+                NumberFormat.getInstance().format(player.getMatchPoints()));
     }
 }

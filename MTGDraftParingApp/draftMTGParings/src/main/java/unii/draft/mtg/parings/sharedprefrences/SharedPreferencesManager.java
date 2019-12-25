@@ -275,5 +275,10 @@ public class SharedPreferencesManager implements ISharedPreferences {
         return mSharedPreferences.getFloat(SettingsPreferencesConst.POINTS_MATCH_DRAW, BaseConfig.MATCH_DRAW);
     }
 
+    @Override
+    public void resetDrawMatchValue() {
+        mSharedPreferences.edit().remove(SettingsPreferencesConst.POINTS_MATCH_DRAW).apply();
+    }
+
 
 }

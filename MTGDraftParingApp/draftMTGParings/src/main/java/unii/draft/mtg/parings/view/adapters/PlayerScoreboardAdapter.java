@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -78,7 +79,7 @@ public class PlayerScoreboardAdapter extends RecyclerView.Adapter<RecyclerView.V
         viewHolder.playerTextView.setText(player
                 .getPlayerName());
         viewHolder.pointTextView.setText(""
-                + player.getMatchPoints());
+                + NumberFormat.getInstance().format(player.getMatchPoints()));
         viewHolder.pgwTextView.setText(String.format("%.2f",
                 player.getPlayerGamesOverallWin()));
         viewHolder.ogwTextView.setText(String.format("%.2f",

@@ -4,11 +4,13 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.text.SimpleDateFormat;
@@ -60,6 +63,8 @@ import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 import unii.draft.mtg.parings.view.widget.DraftWidgetProvider;
 import unii.draft.mtg.parings.view.widget.WidgetViewModel;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_DRAFT_SAVED_NAME;
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_LOAD_PREVIOUS_DRAFT;
 import static unii.draft.mtg.parings.view.widget.DraftWidgetProvider.BUNDLE_EXTRA;
@@ -91,6 +96,10 @@ public class ScoreBoardActivity extends BaseActivity {
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar mToolBar;
+
+    @Nullable
+    @BindView(R.id.paring_endGame)
+    FloatingActionButton mFloatingActionButton;
 
     @Inject
     AlgorithmChooser mAlgorithmChooser;
@@ -181,7 +190,7 @@ public class ScoreBoardActivity extends BaseActivity {
             // when there was last game change button name
             // show winner
             if (mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound() == mAlgorithmChooser.getCurrentAlgorithm().getMaxRound()) {
-                mWinnerTextView.setVisibility(View.VISIBLE);
+                mWinnerTextView.setVisibility(VISIBLE);
                 mWinnerTextView.setText(getString(R.string.text_winner) + " "
                         + mPlayerList.get(0).getPlayerName());
             } else {
@@ -222,7 +231,7 @@ public class ScoreBoardActivity extends BaseActivity {
         MenuItem menuAddPlayer = menu.getItem(4);
         MenuItem menuSave = menu.getItem(3);
         MenuItem menuChangeAlgorithm = menu.getItem(5);
-        dropPlayer.setVisibility(!isLastRound() ? View.VISIBLE : View.INVISIBLE);
+        dropPlayer.setVisibility(!isLastRound() ? VISIBLE : View.INVISIBLE);
         menuAddPlayer.setVisible(!isLastRound() && !isGameInTournamentMode());
         menuChangeAlgorithm.setVisible(mSharedPreferenceManager.getPairingType() == PairingMode.PAIRING_MANUAL);
         menuSave.setVisible(isLastRound());
@@ -315,6 +324,11 @@ public class ScoreBoardActivity extends BaseActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        if (mFloatingActionButton != null && isLastRound()) {
+            mFloatingActionButton.hide();
+        } else if (mFloatingActionButton != null) {
+            mFloatingActionButton.show();
+        }
     }
 
     @NonNull
@@ -348,12 +362,16 @@ public class ScoreBoardActivity extends BaseActivity {
 
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            Intent intent = new Intent(ScoreBoardActivity.this, RoundActivity.class);
-            intent.putExtra(BUNDLE_KEY_LOAD_PREVIOUS_DRAFT, true);
-            startActivity(intent);
-            finish();
+            editPreviousRound();
         }
     };
+
+    private void editPreviousRound() {
+        Intent intent = new Intent(ScoreBoardActivity.this, RoundActivity.class);
+        intent.putExtra(BUNDLE_KEY_LOAD_PREVIOUS_DRAFT, true);
+        startActivity(intent);
+        finish();
+    }
 
 
     private boolean isGameInTournamentMode() {

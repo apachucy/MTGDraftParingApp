@@ -2,9 +2,12 @@ package unii.draft.mtg.parings.view.activities.options;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.appcompat.widget.Toolbar;
 
 import butterknife.BindView;
@@ -62,5 +65,11 @@ public class SaveScoreBoardActivity extends BaseActivity {
     @Override
     protected void initView() {
         mScoreBoardTextInput.setHint(getString(R.string.activity_save_score_board_info_text));
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+        finish();
     }
 }

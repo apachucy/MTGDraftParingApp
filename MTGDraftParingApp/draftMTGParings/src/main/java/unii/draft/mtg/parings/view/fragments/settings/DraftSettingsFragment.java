@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.view.fragments.settings;
 
 
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,11 +142,17 @@ public class DraftSettingsFragment extends BaseFragment {
 
     @OnClick(R.id.settings_pointsMatchDrawButton)
     void onChangeMatchDrawPointClicked() {
+        float points = -1;
+        try {
+            points = mSharedPreferenceManager.getPointsForMatchDraws();
+        } catch (NumberFormatException e) {
+            points = 1;
+        }
         showEditTextDialogWithDecimalValues(getContext(),
                 getString(R.string.dialog_title_match_draw_points),
                 getString(R.string.dialog_title_match_draw_points),
                 getString(R.string.dialog_draw_points_hint),
-                Float.toString(mSharedPreferenceManager.getPointsForMatchDraws()),
+                Float.toString(points),
                 new UpdateData() {
                     @Override
                     public void updateView() {
@@ -155,6 +162,7 @@ public class DraftSettingsFragment extends BaseFragment {
 
                     @Override
                     public void updateSharedPreferences(String newData) {
+
                         float newValue = convertSafety(newData);
                         if (newValue != mSharedPreferenceManager.getPointsForMatchDraws()) {
                             mSharedPreferenceManager.setPointsForMatchDraws(newValue);
@@ -205,6 +213,7 @@ public class DraftSettingsFragment extends BaseFragment {
 
                     @Override
                     public void updateSharedPreferences(String newData) {
+
                         float newValue = convertSafety(newData);
                         if (newValue != mSharedPreferenceManager.getPointsForGameDraws()) {
                             mSharedPreferenceManager.setPointsForGameDraws(newValue);

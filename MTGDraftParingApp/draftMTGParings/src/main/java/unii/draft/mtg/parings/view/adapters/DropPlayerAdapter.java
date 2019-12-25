@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,7 +47,9 @@ public class DropPlayerAdapter extends RecyclerView.Adapter<DropPlayerAdapter.Vi
         }
         holder.playerNameCheckBox.setTextColor(textColor);
 
-        holder.playerNameCheckBox.setText(mContext.getString(R.string.drop_players_item, mNotDroppedPlayerList.get(position).getPlayerName(), mNotDroppedPlayerList.get(position).getMatchPoints()));
+        holder.playerNameCheckBox.setText(mContext.getString(R.string.drop_players_item,
+                mNotDroppedPlayerList.get(position).getPlayerName(),
+                NumberFormat.getInstance().format(mNotDroppedPlayerList.get(position).getMatchPoints())));
         holder.playerNameCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

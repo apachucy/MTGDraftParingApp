@@ -124,4 +124,5 @@ public class AddPlayerFragment extends BaseFragment {
         getActivity().setResult(RESULT_OK);
         getActivity().finish();
     }
+
 }
