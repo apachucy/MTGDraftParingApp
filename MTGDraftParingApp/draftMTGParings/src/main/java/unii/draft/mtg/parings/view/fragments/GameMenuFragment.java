@@ -199,6 +199,7 @@ public class GameMenuFragment extends BaseFragment {
                         mAdapter.notifyDataSetChanged();
                     }
                 }
+                changePlayerCount();
                 return true;
             }
         };
