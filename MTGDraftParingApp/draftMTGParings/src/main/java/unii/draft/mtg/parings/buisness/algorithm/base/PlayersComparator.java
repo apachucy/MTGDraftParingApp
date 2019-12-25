@@ -81,18 +81,43 @@ public class PlayersComparator implements Comparator<Player> {
         } else if (lhsSmallPoints < rhsSmallPoints) {
             return RIGHT;
         } else {
-            return playedBefore(lhs, rhs);
+            return compareOGW(lhs, rhs);
         }
     }
 
-    private int compareBye(boolean leftBye, boolean rightBye) {
-        if (leftBye && rightBye) {
+    private int compareOGW(@NonNull Player lhs, @NonNull Player rhs) {
+        float ogwLhs = lhs.getOponentsGamesOverallWin();
+        float ogwRhs = rhs.getOponentsGamesOverallWin();
+        if (ogwLhs > ogwRhs) {
+            return LEFT;
+        } else if (ogwRhs > ogwLhs) {
+            return RIGHT;
+        } else {
+            int value = playedBefore(lhs, rhs);
+            if (value == EQUAL) {
+                return compareBye(lhs, rhs);
+            } else {
+                return value;
+            }
+        }
+    }
+
+    private int compareBye(@NonNull Player lhs, @NonNull Player rhs) {
+        int leftBye = 0;
+        int rightBye = 0;
+        if (lhs.hasBye()) {
+            leftBye = lhs.getNumberOfGameWithBye() > 0 ? lhs.getNumberOfGameWithBye() : 1;
+        }
+        if (rhs.hasBye()) {
+            rightBye = rhs.getNumberOfGameWithBye() > 0 ? rhs.getNumberOfGameWithBye() : 1;
+        }
+        if (leftBye == rightBye) {
             return EQUAL;
-        } else if (leftBye) {
+        } else if (leftBye > rightBye) {
             // left has a bye
             // so right player is better
             return RIGHT;
-        } else if (rightBye) {
+        } else if (rightBye > leftBye) {
             return LEFT;
         }
         // sanity check
@@ -128,12 +153,14 @@ public class PlayersComparator implements Comparator<Player> {
             } else {
                 return RIGHT;
             }
-        } else {
+        } else if (compareWinGame == RIGHT) {
             if (playerA.getPlayerName().equals(g.getPlayerNameB())) {
                 return RIGHT;
             } else {
                 return LEFT;
             }
+        } else {
+            return EQUAL;
         }
 
     }
