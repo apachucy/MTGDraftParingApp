@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "unii.draft.mtg.parings"
-        versionCode 87
-        versionName "1.7.8-spanish-translations"
+        versionCode 88
+        versionName "1.8.0-italian-algorithm-pre-alpha"
         minSdkVersion 19
         targetSdkVersion 28
         generatedDensities = []
@@ -32,7 +32,6 @@ android {
 }
 
 ext {
-    supportLibVersion = "28.0.0"
     chartLibrary = "v3.0.3"
     lombokLibrary = "1.16.12"
     butterknifeLibrary = "10.1.0"
@@ -47,14 +46,14 @@ ext {
 
 dependencies {
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
 
 
-    implementation "com.github.PhilJay:MPAndroidChart:$chartLibrary"
+    implementation("com.github.PhilJay:MPAndroidChart:$chartLibrary")
 
     annotationProcessor "org.projectlombok:lombok:$lombokLibrary"
     compileOnly "org.projectlombok:lombok:$lombokLibrary"
@@ -67,7 +66,7 @@ dependencies {
         transitive = true;
     }
     implementation files('libs/greendao-2.1.0.jar')
-    implementation "com.afollestad.material-dialogs:commons:$materialDialogLibrary"
+    implementation("com.afollestad.material-dialogs:commons:$materialDialogLibrary")
 
     //dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
@@ -81,7 +80,7 @@ dependencies {
     implementation "com.googlecode.combinatoricslib:combinatoricslib:$permutationLibrary"
 
     //new toasts
-    implementation "com.github.Shashank02051997:FancyToast-Android:$fancyToastAndroid"
+    implementation("com.github.Shashank02051997:FancyToast-Android:$fancyToastAndroid")
 
     //tests
     testImplementation 'junit:junit:4.12'

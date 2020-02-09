@@ -1,6 +1,7 @@
 package unii.draft.mtg.parings.logic.dagger;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import javax.inject.Named;
@@ -12,6 +13,7 @@ import unii.draft.mtg.parings.buisness.algorithm.automatic.AutomaticParingAlgori
 import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.elimination.SuddenDeathAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.manual.ManualParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.roundrobin.ItalianRoundRobinRounds;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.buisness.share.scoreboard.ShareDataContent;
 import unii.draft.mtg.parings.buisness.sittings.ISittingGenerator;
@@ -27,6 +29,8 @@ public class ApplicationModule implements IApplicationModule {
     public static final String ALGORITHM_MANUAL = "algorithm_manual";
     public static final String ALGORITHM_AUTOMATIC = "algorithm_automatic";
     public static final String ALGORITHM_SUDDEN_DEATH = "algorithm_sudden_death";
+    public static final String ALGORITHM_ITALIAN_ROUND_ROBIN = "algorithm_italian_round_robin";
+
     private final Context mContext;
     private final HasComponent<ApplicationComponent> mHasApplicationComponent;
 
@@ -53,6 +57,14 @@ public class ApplicationModule implements IApplicationModule {
         return new ManualParingAlgorithm(mContext);
     }
 
+    @NonNull
+    @Provides
+    @Named(ALGORITHM_ITALIAN_ROUND_ROBIN)
+    @Singleton
+    @Override
+    public IParingAlgorithm provideItalianRoundRobinRounds() {
+        return new ItalianRoundRobinRounds(mContext);
+    }
 
     @NonNull
     @Provides

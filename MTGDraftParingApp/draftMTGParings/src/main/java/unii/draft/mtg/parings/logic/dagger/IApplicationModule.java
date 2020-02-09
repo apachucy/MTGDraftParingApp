@@ -21,6 +21,9 @@ interface IApplicationModule {
     IParingAlgorithm provideAutomaticAlgorithmManager();
 
     @NonNull
+    IParingAlgorithm provideItalianRoundRobinRounds();
+
+    @NonNull
     IParingAlgorithm provideSuddenDeathAlgorithmManager();
 
     @NonNull

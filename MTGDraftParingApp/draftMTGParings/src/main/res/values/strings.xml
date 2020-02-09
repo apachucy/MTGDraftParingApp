@@ -184,7 +184,7 @@
     <string name="settings_pairing_mode_round_robin">Round Robin - each contestant meets all other contestants in rounds</string>
     <string name="settings_pairing_mode_knock_out">Knock Out - when you lose a round you will be dropped for the game</string>
     <string name="settings_pairing_mode_automatic_with_repeats">Automatic with repeats - similar to tournament mode but you may play more than once with the same opponent, game master can add/remove player in the middle of game</string>
-
+    <string name="settings_pairing_italian_round_robin" translatable="false">Italian Round Robin - working on it</string>
     <string name="settings_pairing_mode_dialog_title">Choose Pairing Options:</string>
     <string name="settings_save_draft_result_dialog_title">Should draft results be saved:</string>
     <string name="player_sittings_position" translatable="false"> %1$d. %2$s</string>
@@ -302,4 +302,6 @@
     <string name="merge_player_dialog_title" translatable="false">Select player to merge</string>
     <string name="merge_player_dialog_body" translatable="false">It will merge both players achievements into one</string>
 
+    <!--Italian Round Robin algorithm -->
+    <string name="bye_player_when_odd_players" translatable="false">Bye</string>
 </resources>

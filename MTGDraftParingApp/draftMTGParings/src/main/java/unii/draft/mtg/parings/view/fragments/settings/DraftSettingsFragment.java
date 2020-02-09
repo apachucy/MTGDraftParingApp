@@ -2,7 +2,6 @@ package unii.draft.mtg.parings.view.fragments.settings;
 
 
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,6 +106,7 @@ public class DraftSettingsFragment extends BaseFragment {
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_tournament));
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_round_robin));
         pairingsOptionList.add(getString(R.string.settings_pairing_mode_knock_out));
+        pairingsOptionList.add(getString(R.string.settings_pairing_italian_round_robin));
         showRadioButtonListDialog(getActivity(), getString(R.string.settings_pairing_mode_dialog_title), pairingsOptionList,
                 getString(R.string.dialog_positive), getString(R.string.dialog_negative),
                 mSharedPreferenceManager.getPairingType(), mPairingTypeCallback);
@@ -297,6 +297,9 @@ public class DraftSettingsFragment extends BaseFragment {
             case PairingMode.PAIRING_ROUND_KNOCK_OUT:
                 pairingOptionName = getString(R.string.settings_pairing_mode_knock_out);
                 break;
+            case PairingMode.PAIRING_ROUND_ROBIN_ITALIAN:
+                pairingOptionName = getString(R.string.settings_pairing_italian_round_robin);
+                break;
             default:
                 pairingOptionName = getString(R.string.settings_pairing_mode_automatic_with_repeats);
                 break;
@@ -370,6 +373,9 @@ public class DraftSettingsFragment extends BaseFragment {
                     break;
                 case PairingMode.PAIRING_ROUND_KNOCK_OUT:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_ROUND_KNOCK_OUT);
+                    break;
+                case PairingMode.PAIRING_ROUND_ROBIN_ITALIAN:
+                    mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_ROUND_ROBIN_ITALIAN);
                     break;
                 default:
                     mSharedPreferenceManager.setPairingType(PairingMode.PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS);

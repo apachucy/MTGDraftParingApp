@@ -9,10 +9,12 @@ import static unii.draft.mtg.parings.buisness.algorithm.base.PairingMode.PAIRING
 import static unii.draft.mtg.parings.buisness.algorithm.base.PairingMode.PAIRING_MANUAL;
 import static unii.draft.mtg.parings.buisness.algorithm.base.PairingMode.PAIRING_ROUND_KNOCK_OUT;
 import static unii.draft.mtg.parings.buisness.algorithm.base.PairingMode.PAIRING_ROUND_ROBIN;
+import static unii.draft.mtg.parings.buisness.algorithm.base.PairingMode.PAIRING_ROUND_ROBIN_ITALIAN;
 import static unii.draft.mtg.parings.buisness.algorithm.base.PairingMode.PAIRING_TOURNAMENT;
 
 
-@IntDef({PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS, PAIRING_MANUAL, PAIRING_TOURNAMENT, PAIRING_ROUND_ROBIN, PAIRING_ROUND_KNOCK_OUT})
+@IntDef({PAIRING_AUTOMATIC_CAN_REPEAT_PAIRINGS, PAIRING_MANUAL, PAIRING_TOURNAMENT,
+        PAIRING_ROUND_ROBIN, PAIRING_ROUND_KNOCK_OUT, PAIRING_ROUND_ROBIN_ITALIAN})
 @Retention(RetentionPolicy.SOURCE)
 public @interface PairingModeNotation {
 }

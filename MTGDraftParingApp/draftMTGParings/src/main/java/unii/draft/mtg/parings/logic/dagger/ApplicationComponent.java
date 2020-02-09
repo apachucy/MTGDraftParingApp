@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import unii.draft.mtg.parings.buisness.algorithm.automatic.AutomaticParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.manual.ManualParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.roundrobin.ItalianRoundRobinRounds;
 import unii.draft.mtg.parings.database.model.DaoSession;
 import unii.draft.mtg.parings.sharedprefrences.SharedPreferencesManager;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
@@ -21,6 +22,8 @@ public interface ApplicationComponent {
     void inject(ManualParingAlgorithm provideManualParingAlgorithm);
 
     void inject(AutomaticParingAlgorithm provideAutomaticAlgorithmManager);
+
+    void inject(ItalianRoundRobinRounds provideItalianRoundRobinRounds);
 
     void inject(DaoSession provideDatabaseManager);
 

@@ -27,6 +27,10 @@ public class AlgorithmChooser {
     IParingAlgorithm mAlgorithmSuddenDeath;
 
     @Inject
+    @Named(ApplicationModule.ALGORITHM_ITALIAN_ROUND_ROBIN)
+    IParingAlgorithm mAlgorithmItalianRoundRobin;
+
+    @Inject
     ISharedPreferences mSharedPreferences;
 
     public AlgorithmChooser(@NonNull ApplicationComponent component) {
@@ -38,6 +42,9 @@ public class AlgorithmChooser {
             return mAlgorithmManual;
         } else if (mSharedPreferences.getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT) {
             return mAlgorithmSuddenDeath;
+        } else if (mSharedPreferences.getPairingType() == PairingMode.PAIRING_ROUND_ROBIN_ITALIAN) {
+            return mAlgorithmItalianRoundRobin;
+
         } else {
             return mAlgorithmAutomatic;
         }

@@ -8,21 +8,22 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.material.textfield.TextInputLayout;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.List;
@@ -163,7 +164,8 @@ public class GameMenuFragment extends BaseFragment {
                     rounds = Integer.parseInt(mRoundsTextInput.getEditText().getText().toString());
                 } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
                     int players = mPlayerNameList.getPlayerList().size();
-                    if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT) {
+                    if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT
+                            || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT) {
                         rounds = new TournamentRounds().getMaxRound(players);
                     } else {
                         rounds = new RoundRobinRounds().getMaxRound(players);
@@ -252,7 +254,8 @@ public class GameMenuFragment extends BaseFragment {
     private boolean isGameInTournamentMode() {
         return mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT
                 || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_ROBIN
-                || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT;
+                || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT
+                || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_ROBIN_ITALIAN;
     }
 
     private boolean isValidRoundEditText() {
@@ -274,7 +277,8 @@ public class GameMenuFragment extends BaseFragment {
             if (mRoundsTextInput.getVisibility() == View.VISIBLE && mRoundsTextInput != null && mRoundsTextInput.getEditText() != null) {
                 rounds = Integer.parseInt(mRoundsTextInput.getEditText().getText().toString());
             } else if (mRoundsTextInput.getVisibility() != View.VISIBLE) {
-                if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT) {
+                if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_TOURNAMENT
+                        || mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_KNOCK_OUT) {
                     rounds = new TournamentRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
                 } else {
                     rounds = new RoundRobinRounds().getMaxRound(mPlayerNameList.getPlayerList().size());
@@ -344,6 +348,7 @@ public class GameMenuFragment extends BaseFragment {
 
         playerCounts.setText(playersCountText);
     }
+
     @NonNull
     private MaterialDialog.SingleButtonCallback mDialogErrorButtonClickListener = new MaterialDialog.SingleButtonCallback() {
         @Override
