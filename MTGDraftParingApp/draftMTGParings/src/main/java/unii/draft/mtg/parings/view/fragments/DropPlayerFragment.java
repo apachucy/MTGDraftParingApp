@@ -1,13 +1,14 @@
 package unii.draft.mtg.parings.view.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -19,11 +20,15 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.roundrobin.ItalianRoundRobinRounds;
 import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.view.adapters.DropPlayerAdapter;
+import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
 
 import static android.app.Activity.RESULT_OK;
+import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER;
 
 
 public class DropPlayerFragment extends BaseFragment {
@@ -36,6 +41,9 @@ public class DropPlayerFragment extends BaseFragment {
 
     @Inject
     AlgorithmChooser mAlgorithmChooser;
+
+    @Inject
+    ISharedPreferences mSharedPreferenceManager;
 
     @Nullable
     @Override
@@ -58,8 +66,36 @@ public class DropPlayerFragment extends BaseFragment {
 
     @OnClick(R.id.save_dropPlayerButton)
     public void onSaveButtonClicked() {
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof ItalianRoundRobinRounds) {
+            operateItalianRoundRobinDropPlayer();
+        }
+
         getActivity().setResult(RESULT_OK);
         getActivity().finish();
+    }
+
+    private void operateItalianRoundRobinDropPlayer() {
+        for (Player player : mNotDroppedPlayerList) {
+            if (!player.isDropped()) {
+                continue;
+            }
+            //Add R as retire player
+            if (!player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
+                player.setPlayerName(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER + player.getPlayerName());
+            }
+        }
+        if (isRoundBeforeHalf(mAlgorithmChooser)) {
+            ParingDashboardLogic paringDashboardLogic = new ParingDashboardLogic(getContext(), mSharedPreferenceManager.getPointsForGameWinning(),
+                    mSharedPreferenceManager.getPointsForGameDraws(),
+                    mSharedPreferenceManager.getPointsForMatchWinning(), mSharedPreferenceManager.getPointsForMatchDraws(),
+                    mAlgorithmChooser.getCurrentAlgorithm() instanceof ItalianRoundRobinRounds);
+            paringDashboardLogic.updateAllPlayerList(mNotDroppedPlayerList);
+        }
+    }
+
+
+    private boolean isRoundBeforeHalf(@NonNull AlgorithmChooser algorithmChooser) {
+        return algorithmChooser.getCurrentAlgorithm().getCurrentRound() < algorithmChooser.getCurrentAlgorithm().getMaxRound() / 2.0f;
     }
 
     public void clearSelections() {

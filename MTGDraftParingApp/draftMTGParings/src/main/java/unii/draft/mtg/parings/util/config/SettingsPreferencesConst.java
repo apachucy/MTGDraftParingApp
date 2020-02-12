@@ -1,7 +1,6 @@
 package unii.draft.mtg.parings.util.config;
 
 public class SettingsPreferencesConst {
-
     public static final String SETTINGS_SHARED_PREFRENCES = SettingsPreferencesConst.class
             .getName() + "shsPref";
 

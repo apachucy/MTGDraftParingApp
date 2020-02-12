@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.util.config.BaseConfig;
 
 /**
  * TODO: change list to hash map?
@@ -152,7 +152,8 @@ public class StatisticCalculation implements IStatisticCalculation {
      */
     private Player findPlayer(String name) {
         for (Player p : mPlayerList) {
-            if (p.getPlayerName().equals(name)) {
+            if (p.getPlayerName().equals(name) ||
+                    p.getPlayerName().equals(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER + name)) {
                 return p;
             }
         }

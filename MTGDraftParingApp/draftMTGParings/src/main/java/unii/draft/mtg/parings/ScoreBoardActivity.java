@@ -4,19 +4,18 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -41,9 +40,12 @@ import tourguide.tourguide.Sequence;
 import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.base.PairingMode;
+import unii.draft.mtg.parings.buisness.algorithm.base.StatisticCalculation;
+import unii.draft.mtg.parings.buisness.algorithm.roundrobin.ItalianRoundRobinRounds;
 import unii.draft.mtg.parings.buisness.share.scoreboard.IShareData;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.logic.pojo.DraftDataProvider;
+import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.ItemHeader;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -63,12 +65,10 @@ import unii.draft.mtg.parings.view.adapters.PlayerScoreboardAdapter;
 import unii.draft.mtg.parings.view.widget.DraftWidgetProvider;
 import unii.draft.mtg.parings.view.widget.WidgetViewModel;
 
-import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_DRAFT_SAVED_NAME;
 import static unii.draft.mtg.parings.util.config.BundleConst.BUNDLE_KEY_LOAD_PREVIOUS_DRAFT;
 import static unii.draft.mtg.parings.view.widget.DraftWidgetProvider.BUNDLE_EXTRA;
-
 
 public class ScoreBoardActivity extends BaseActivity {
     private RecyclerView.Adapter mAdapter;
@@ -297,6 +297,8 @@ public class ScoreBoardActivity extends BaseActivity {
                 }
             } else if (requestCode == BaseConfig.DRAFT_PLAYERS_MODIFIED) {
                 if (mAdapter != null) {
+                    StatisticCalculation statisticCalculation = new StatisticCalculation(mAlgorithmChooser.getCurrentAlgorithm());
+                    statisticCalculation.calculateAll();
                     mAdapter.notifyDataSetChanged();
                 }
             }
@@ -387,10 +389,28 @@ public class ScoreBoardActivity extends BaseActivity {
         } else {
             tempDraftName = draftName;
         }
+        if (mAlgorithmChooser.getCurrentAlgorithm() instanceof ItalianRoundRobinRounds) {
+            removePrefixFromPlayerList(mPlayerList);
+        }
         mDatabaseHelper.get().saveDraft(mPlayerList, tempDraftName, currentDateAndTime, mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
         FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
     }
 
+    private void removePrefixFromPlayerList(@NonNull List<Player> playerList) {
+        for (Player player : playerList) {
+            if (player.getPlayerName().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
+                player.setPlayerName(player.getPlayerName().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER, ""));
+            }
+            for (Game game : player.getPlayedGame()) {
+                if (game.getPlayerNameA().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
+                    game.setPlayerNameA(game.getPlayerNameA().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER, ""));
+                }
+                if (game.getPlayerNameB().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
+                    game.setPlayerNameB(game.getPlayerNameB().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER, ""));
+                }
+            }
+        }
+    }
 
     private void setListGuideActions(
             @NonNull ImageView dropPlayerButton, @NonNull ImageView shareContent, @NonNull ImageView showRoundHistory) {

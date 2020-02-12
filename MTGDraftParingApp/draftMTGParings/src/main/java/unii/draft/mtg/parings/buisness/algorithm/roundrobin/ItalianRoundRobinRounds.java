@@ -46,6 +46,12 @@ public class ItalianRoundRobinRounds extends SemiAlgorithm {
 
     }
 
+    @NonNull
+    @Override
+    public List<Player> getSortedFilteredPlayerList(boolean dropped) {
+        return getDraftStartedPlayerList();
+    }
+
     @Override
     public List<Game> getParings(int sittingsMode) {
         /**
@@ -149,4 +155,5 @@ public class ItalianRoundRobinRounds extends SemiAlgorithm {
         return gameList;
 
     }
+
 }

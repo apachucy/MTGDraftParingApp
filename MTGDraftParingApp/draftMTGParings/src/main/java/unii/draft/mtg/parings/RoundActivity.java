@@ -2,19 +2,18 @@ package unii.draft.mtg.parings;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -35,6 +34,7 @@ import tourguide.tourguide.TourGuide;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.base.IStatisticCalculation;
 import unii.draft.mtg.parings.buisness.algorithm.base.StatisticCalculation;
+import unii.draft.mtg.parings.buisness.algorithm.roundrobin.ItalianRoundRobinRounds;
 import unii.draft.mtg.parings.logic.dagger.ActivityComponent;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
@@ -253,8 +253,10 @@ public class RoundActivity extends BaseActivity {
                 mCounterClass.start();
             }
         }
-        mParingDashboardLogic = new ParingDashboardLogic(this, mSharedPreferenceManager.getPointsForGameWinning(), mSharedPreferenceManager.getPointsForGameDraws(),
-                mSharedPreferenceManager.getPointsForMatchWinning(), mSharedPreferenceManager.getPointsForMatchDraws());
+        mParingDashboardLogic = new ParingDashboardLogic(this, mSharedPreferenceManager.getPointsForGameWinning(),
+                mSharedPreferenceManager.getPointsForGameDraws(),
+                mSharedPreferenceManager.getPointsForMatchWinning(), mSharedPreferenceManager.getPointsForMatchDraws(),
+                mAlgorithmChooser.getCurrentAlgorithm() instanceof ItalianRoundRobinRounds);
         mHourGlassActions = Arrays.asList(getString(R.string.dialog_timer_cancel), getString(R.string.dialog_timer_pause));
         return true;
     }
@@ -316,7 +318,7 @@ public class RoundActivity extends BaseActivity {
                 throw new NullPointerException("Game List should be populated");
             }
 
-            mAdapter = new PlayerMatchParingAdapter(this, mGameList);
+            mAdapter = new PlayerMatchParingAdapter(this, mGameList, mAlgorithmChooser.getCurrentAlgorithm() instanceof ItalianRoundRobinRounds);
             mRoundTextView.setText(getString(R.string.text_round) + " "
                     + mAlgorithmChooser.getCurrentAlgorithm().getCurrentRound());
             mRecyclerView.setAdapter(mAdapter);
@@ -327,8 +329,10 @@ public class RoundActivity extends BaseActivity {
         }
     }
 
+
     @Override
     protected void onPause() {
+        //TODO: move this part to onDestroy
         if (mCounterClass != null) {
             mTimerTimeTillEnd = mCounterClass.onPause();
         }
