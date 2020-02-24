@@ -28,7 +28,8 @@ import unii.draft.mtg.parings.view.adapters.DropPlayerAdapter;
 import unii.draft.mtg.parings.view.logic.ParingDashboardLogic;
 
 import static android.app.Activity.RESULT_OK;
-import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER;
+import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS;
+import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS;
 
 
 public class DropPlayerFragment extends BaseFragment {
@@ -80,8 +81,13 @@ public class DropPlayerFragment extends BaseFragment {
                 continue;
             }
             //Add R as retire player
-            if (!player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
-                player.setPlayerName(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER + player.getPlayerName());
+            if (!player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)
+                    && !player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)) {
+                if (isRoundBeforeHalf(mAlgorithmChooser)) {
+                    player.setPlayerName(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + player.getPlayerName());
+                } else {
+                    player.setPlayerName(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS + player.getPlayerName());
+                }
             }
         }
         if (isRoundBeforeHalf(mAlgorithmChooser)) {
@@ -129,6 +135,13 @@ public class DropPlayerFragment extends BaseFragment {
             //Nothing here
         }
 
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        BaseAlgorithm baseAlgorithm = (BaseAlgorithm) mAlgorithmChooser.getCurrentAlgorithm();
+        baseAlgorithm.cacheDraft();
     }
 
     private void injectDependencies() {

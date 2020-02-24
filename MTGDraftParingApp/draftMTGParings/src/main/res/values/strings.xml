@@ -304,4 +304,5 @@
 
     <!--Italian Round Robin algorithm -->
     <string name="bye_player_when_odd_players" translatable="false">Bye</string>
+    <string name="change_player_position" translatable="false">To change player order long press on player and move him up or down</string>
 </resources>

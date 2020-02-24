@@ -20,7 +20,8 @@ import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 import unii.draft.mtg.parings.view.custom.CustomOnCheckedChangeListener;
 
-import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER;
+import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS;
+import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS;
 
 
 public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -43,6 +44,19 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
 
     }
 
+    private boolean playerDroppedFromGameBeforeHalfRounds(@NonNull Game game) {
+        return playerDropped(game.getPlayerNameA(), PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS) ||
+                playerDropped(game.getPlayerNameB(), PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS);
+    }
+
+    private boolean playerDroppedFromGameAfterHalfRounds(@NonNull Game game) {
+        return playerDropped(game.getPlayerNameA(), PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS) ||
+                playerDropped(game.getPlayerNameB(), PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS);
+    }
+
+    private boolean playerDropped(@NonNull String playerName, @NonNull String prefix) {
+        return playerName.startsWith(prefix);
+    }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -51,14 +65,23 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
             return;
         }
         //lock View with "R " player as this point won't be appointed
-        if (lockView && (game.getPlayerNameA().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER) ||
-                game.getPlayerNameB().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER))) {
+        if (lockView &&
+                (playerDroppedFromGameAfterHalfRounds(game) || playerDroppedFromGameBeforeHalfRounds(game))) {
 
             setViewAndChildrenEnabled(((ViewHolder) holder).itemView, false);
-            if (game.getPlayerNameB().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
-                game.setPlayerAPoints(BaseConfig.GAME_WIN_DEFAULT);
-            }else{
-                game.setPlayerBPoints(BaseConfig.GAME_WIN_DEFAULT);
+
+            if (playerDropped(game.getPlayerNameB(), PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)) {
+                game.setPlayerAPoints(BaseConfig.GAME_WIN);
+            } else if (playerDropped(game.getPlayerNameA(), PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)) {
+                game.setPlayerBPoints(BaseConfig.GAME_WIN);
+            }
+
+            if (playerDropped(game.getPlayerNameB(), PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
+                game.setPlayerAPoints(BaseConfig.MATCH_DROPPED);
+                game.setWinner(BaseConfig.GAME_DROPPED_NAME);
+            } else if (playerDropped(game.getPlayerNameA(), PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
+                game.setPlayerBPoints(BaseConfig.MATCH_DROPPED);
+                game.setWinner(BaseConfig.GAME_DROPPED_NAME);
             }
         } else {
             setViewAndChildrenEnabled(((ViewHolder) holder).itemView, true);

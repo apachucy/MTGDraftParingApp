@@ -11,18 +11,15 @@ import java.util.List;
 
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
+import unii.draft.mtg.parings.buisness.algorithm.roundrobin.ItalianRoundRobinRounds;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.util.config.BaseConfig;
 
 import static unii.draft.mtg.parings.util.config.BaseConfig.GAME_DROPPED_NAME;
-import static unii.draft.mtg.parings.util.config.BaseConfig.GAME_DROPPED_POINTS;
 import static unii.draft.mtg.parings.util.config.BaseConfig.MATCH_DROPPED;
-import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER;
-
-/**
- * TODO: how many points should I add for winning a game with R_ player
- */
+import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS;
+import static unii.draft.mtg.parings.util.config.BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS;
 
 public class ParingDashboardLogic {
     private Context mContext;
@@ -73,6 +70,9 @@ public class ParingDashboardLogic {
             playedGames.remove(lastGame);
 
 
+            if (lastGame.getWinner().equals(GAME_DROPPED_NAME)) {
+                continue;
+            }
             // draw
             if (lastGame.getWinner().equals(BaseConfig.DRAW)) {
                 player.setMatchPoints(player.getMatchPoints()
@@ -99,15 +99,28 @@ public class ParingDashboardLogic {
         }
     }
 
-    public boolean validateDataSet(@NonNull List<Game> gameList) {
+    public boolean validateDataSet(@NonNull List<Game> gameList, @NonNull IParingAlgorithm paringAlgorithm) {
         boolean isAllGamePointsSet = true;
         for (Game game : gameList) {
+
+            if (isItalianAlgorithmWithDroppedPlayers(game, paringAlgorithm)) {
+                continue;
+            }
             //IF PLAYER HAS name check points value
-            if (!game.getPlayerNameA().equals(mContext.getString(R.string.dummy_player)) && !game.getPlayerNameB().equals(mContext.getString(R.string.dummy_player)) && game.getPlayerAPoints() == 0 && game.getPlayerBPoints() == 0 && game.getDraws() == 0) {
+            if (!game.getPlayerNameA().equals(mContext.getString(R.string.dummy_player)) && !game.getPlayerNameB().equals(mContext.getString(R.string.dummy_player))
+                    && game.getPlayerAPoints() == 0 && game.getPlayerBPoints() == 0 && game.getDraws() == 0
+            ) {
                 isAllGamePointsSet = false;
             }
         }
         return isAllGamePointsSet;
+    }
+
+    private boolean isItalianAlgorithmWithDroppedPlayers(@NonNull Game game, @NonNull IParingAlgorithm paringAlgorithm) {
+        return paringAlgorithm instanceof ItalianRoundRobinRounds && ((game.getPlayerNameA().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)
+                || game.getPlayerNameA().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)) ||
+                (game.getPlayerNameB().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)
+                        || game.getPlayerNameB().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)));
     }
 
     private void updateGameResults(@NonNull List<Game> gameList) {
@@ -116,6 +129,12 @@ public class ParingDashboardLogic {
                 g.setWinner(g.getPlayerNameA());
             } else if (g.getPlayerAPoints() < g.getPlayerBPoints()) {
                 g.setWinner(g.getPlayerNameB());
+            }
+            /* else if (isDroppedPlayer(g.getPlayerNameA()) || isDroppedPlayer(g.getPlayerNameB())) {
+                g.setWinner(GAME_DROPPED_NAME);
+            }*/
+            else if (g.getWinner().equals(GAME_DROPPED_NAME)) {
+                //DO nothing
             } else {
                 // it was a draw
                 g.setWinner(BaseConfig.DRAW);
@@ -124,20 +143,13 @@ public class ParingDashboardLogic {
         }
     }
 
-    private boolean playerLeftWinAsDefaultWithRightPlayer(@NonNull String playerLeft, @NonNull String playerRight) {
+  /*  private boolean playerLeftWinAsDefaultWithRightPlayer(@NonNull String playerLeft, @NonNull String playerRight) {
         return droppedPlayerLoseGame &&
-                playerRight.startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER) &&
-                !playerLeft.startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER);
-    }
+                playerRight.startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS) &&
+                !playerLeft.startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS);
+    }*/
 
-    /**
-     * TODO: what should be done when one of player is dropped,
-     * Two players are dropped,
-     * Not me but opponent dropped;
-     *
-     * @param paringAlgorithm
-     * @param gameList
-     */
+
     private void updatePlayerPoints(@NonNull IParingAlgorithm paringAlgorithm, @NonNull List<Game> gameList) {
         List<Player> playerList = paringAlgorithm.getSortedFilteredPlayerList(false);
 
@@ -158,9 +170,11 @@ public class ParingDashboardLogic {
                         || player.getPlayerName().equals(game.getPlayerNameB())) {
                     player.getPlayedGame().add(game);
                     // draw
+                    if (game.getWinner().equals(GAME_DROPPED_NAME)) {
+                        continue;
+                    }
                     if (game.getWinner().equals(BaseConfig.DRAW)) {
-                        if (!player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)
-                        ) {
+                        if (!isDroppedPlayer(player.getPlayerName())) {
                             player.setMatchPoints(player.getMatchPoints()
                                     + pointsForMatchDraw);
                         }
@@ -170,7 +184,7 @@ public class ParingDashboardLogic {
                                 + pointsForMatchWinning);
 
                     }
-                    if (player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
+                    if (isDroppedPlayer(player.getPlayerName())) {
                         continue;
                     }
                     // add "small" points for a player
@@ -224,41 +238,44 @@ public class ParingDashboardLogic {
         //THIS MONOLIT OF CODE IS FOR TESTING PURPOSE
         //TODO: clean this code after
 
-        if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER + game.getPlayerNameA())
+        if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + game.getPlayerNameA())
                 || resetPlayer.getPlayerName().equals(game.getPlayerNameA())) {
             resetPlayer.setGamePoints(resetPlayer.getGamePoints() - game.getPlayerAPoints());
+
             if (game.getWinner().equals(BaseConfig.DRAW)) {
                 resetPlayer.setMatchPoints(resetPlayer.getMatchPoints() - pointsForMatchDraw);
-            } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER + game.getWinner())
+            } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + game.getWinner())
                     || resetPlayer.getPlayerName().equals(game.getWinner())) {
                 resetPlayer.setMatchPoints(resetPlayer.getMatchPoints() - pointsForMatchWinning);
             }
-        } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER + game.getPlayerNameB())
+            game.setPlayerNameA(resetPlayer.getPlayerName());
+
+        } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + game.getPlayerNameB())
                 || resetPlayer.getPlayerName().equals(game.getPlayerNameB())) {
             resetPlayer.setGamePoints(resetPlayer.getGamePoints() - game.getPlayerBPoints());
             if (game.getWinner().equals(BaseConfig.DRAW)) {
                 resetPlayer.setMatchPoints(resetPlayer.getMatchPoints() - pointsForMatchDraw);
-            } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER + game.getWinner())
+            } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + game.getWinner())
                     || resetPlayer.getPlayerName().equals(game.getWinner())) {
                 resetPlayer.setMatchPoints(resetPlayer.getMatchPoints() - pointsForMatchWinning);
             }
+            game.setPlayerNameB(resetPlayer.getPlayerName());
+
         }
     }
 
     private void resetGame(@NonNull Game game) {
-        game.setPlayerAPoints(GAME_DROPPED_POINTS);
-        game.setGamesPlayed(MATCH_DROPPED);
-        game.setPlayerBPoints(GAME_DROPPED_POINTS);
-        game.setWinner(GAME_DROPPED_NAME);
         game.setPlayerAPoints(MATCH_DROPPED);
+        game.setGamesPlayed(MATCH_DROPPED);
         game.setPlayerBPoints(MATCH_DROPPED);
+        game.setWinner(GAME_DROPPED_NAME);
         game.setDraws(MATCH_DROPPED);
     }
 
     public void updateAllPlayerList(@NonNull List<Player> playerList) {
         for (Player player : playerList) {
             for (Game game : player.getPlayedGame()) {
-                if (player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
+                if (player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
                     resetPlayer(game, player);
                 }
             }
@@ -266,11 +283,16 @@ public class ParingDashboardLogic {
 
         for (Player player : playerList) {
             for (Game game : player.getPlayedGame()) {
-                if (player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
+                if (player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
                     resetGame(game);
                 }
             }
         }
 
+    }
+
+    public boolean isDroppedPlayer(@NonNull String playerName) {
+        return playerName.startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS) ||
+                playerName.startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS);
     }
 }

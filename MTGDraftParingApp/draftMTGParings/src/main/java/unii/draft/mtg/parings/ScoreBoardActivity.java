@@ -396,17 +396,31 @@ public class ScoreBoardActivity extends BaseActivity {
         FancyToast.makeText(ScoreBoardActivity.this, getString(R.string.message_score_board_saved), FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
     }
 
+    /**
+     * TODO: optimalize this monolith of code
+     *
+     * @param playerList
+     */
     private void removePrefixFromPlayerList(@NonNull List<Player> playerList) {
         for (Player player : playerList) {
-            if (player.getPlayerName().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
-                player.setPlayerName(player.getPlayerName().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER, ""));
+            if (player.getPlayerName().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
+                player.setPlayerName(player.getPlayerName().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS, ""));
+            }
+            if (player.getPlayerName().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)) {
+                player.setPlayerName(player.getPlayerName().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS, ""));
             }
             for (Game game : player.getPlayedGame()) {
-                if (game.getPlayerNameA().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
-                    game.setPlayerNameA(game.getPlayerNameA().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER, ""));
+                if (game.getPlayerNameA().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
+                    game.setPlayerNameA(game.getPlayerNameA().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS, ""));
                 }
-                if (game.getPlayerNameB().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER)) {
-                    game.setPlayerNameB(game.getPlayerNameB().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER, ""));
+                if (game.getPlayerNameA().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)) {
+                    game.setPlayerNameA(game.getPlayerNameA().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS, ""));
+                }
+                if (game.getPlayerNameB().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
+                    game.setPlayerNameB(game.getPlayerNameB().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS, ""));
+                }
+                if (game.getPlayerNameB().startsWith(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)) {
+                    game.setPlayerNameB(game.getPlayerNameB().replaceAll(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS, ""));
                 }
             }
         }

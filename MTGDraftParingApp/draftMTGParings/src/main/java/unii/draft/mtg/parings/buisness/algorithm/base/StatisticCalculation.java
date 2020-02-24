@@ -153,7 +153,8 @@ public class StatisticCalculation implements IStatisticCalculation {
     private Player findPlayer(String name) {
         for (Player p : mPlayerList) {
             if (p.getPlayerName().equals(name) ||
-                    p.getPlayerName().equals(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER + name)) {
+                    p.getPlayerName().equals(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + name)
+                    || p.getPlayerName().equals(BaseConfig.PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS + name)) {
                 return p;
             }
         }

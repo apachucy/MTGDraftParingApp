@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MTGDraftParingsApplication"
@@ -72,6 +72,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activities.DraftRoundHistoryActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activities.options.DragAndDropFirstRoundActivity"
             android:screenOrientation="portrait" />
 
         <receiver android:name=".view.widget.DraftWidgetProvider">

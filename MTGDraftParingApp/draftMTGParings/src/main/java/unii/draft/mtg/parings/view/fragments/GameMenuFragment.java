@@ -49,6 +49,7 @@ import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
 import unii.draft.mtg.parings.util.helper.IDatabaseHelper;
 import unii.draft.mtg.parings.util.validation.ValidationHelper;
+import unii.draft.mtg.parings.view.activities.options.DragAndDropFirstRoundActivity;
 import unii.draft.mtg.parings.view.activities.options.ManualPlayerPairingActivity;
 import unii.draft.mtg.parings.view.activities.options.SittingsActivity;
 import unii.draft.mtg.parings.view.adapters.AddPlayerAdapter;
@@ -300,6 +301,8 @@ public class GameMenuFragment extends BaseFragment {
                 //set started activity
                 if (mSharedPreferenceManager.get().getGeneratedSittingMode() != SittingsMode.NO_SITTINGS) {
                     intent = new Intent(mActivity, SittingsActivity.class);
+                } else if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_ROUND_ROBIN_ITALIAN) {
+                    intent = new Intent(mActivity, DragAndDropFirstRoundActivity.class);
                 } else if (mSharedPreferenceManager.get().getPairingType() == PairingMode.PAIRING_MANUAL) {
                     intent = new Intent(mActivity,
                             ManualPlayerPairingActivity.class);

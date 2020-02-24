@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
 
+    implementation "androidx.cardview:cardview:1.0.0"
 
     implementation("com.github.PhilJay:MPAndroidChart:$chartLibrary")
 
@@ -81,6 +82,9 @@ dependencies {
 
     //new toasts
     implementation("com.github.Shashank02051997:FancyToast-Android:$fancyToastAndroid")
+
+    //drag & drop library
+    implementation 'com.thesurix.gesturerecycler:gesture-recycler:1.10.0'
 
     //tests
     testImplementation 'junit:junit:4.12'

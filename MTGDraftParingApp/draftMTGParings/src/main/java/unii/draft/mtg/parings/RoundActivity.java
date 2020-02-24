@@ -92,7 +92,7 @@ public class RoundActivity extends BaseActivity {
     @OnClick(R.id.floating_action_button_next)
     void onEndRoundClicked() {
         //Validate Points
-        if (!mParingDashboardLogic.validateDataSet(mGameList)) {
+        if (!mParingDashboardLogic.validateDataSet(mGameList, mAlgorithmChooser.getCurrentAlgorithm())) {
             showInfoDialog(getString(R.string.validation_dialog_title), getString(R.string.validation_dialog_body), getString(R.string.validation_dialog_button_name));
         } else {
             moveToScoreBoard();

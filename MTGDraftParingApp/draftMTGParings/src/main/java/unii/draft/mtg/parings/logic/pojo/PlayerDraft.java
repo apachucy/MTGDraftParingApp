@@ -2,8 +2,7 @@ package unii.draft.mtg.parings.logic.pojo;
 
 
 public class PlayerDraft {
-    //TODO: Add banding - witch player
-    //id? or something else
+
     private int mPlace;
     private int mTotalPlayers;
     private String mDraftName;

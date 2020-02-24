@@ -63,7 +63,7 @@ public class ApplicationModule implements IApplicationModule {
     @Singleton
     @Override
     public IParingAlgorithm provideItalianRoundRobinRounds() {
-        return new ItalianRoundRobinRounds(mContext);
+        return new ItalianRoundRobinRounds(mContext, mHasApplicationComponent.getComponent());
     }
 
     @NonNull

@@ -25,7 +25,6 @@ public class TournamentRounds implements unii.draft.mtg.parings.buisness.algorit
         return MAX_ROUNDS;
     }
 
-    //todo: read from a file
     @NonNull
     public List<MaxRounds> createRounds() {
         List<MaxRounds> maxRoundsList = new ArrayList<>();

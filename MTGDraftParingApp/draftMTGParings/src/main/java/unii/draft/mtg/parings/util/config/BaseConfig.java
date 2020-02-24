@@ -6,7 +6,8 @@ public final class BaseConfig {
     private BaseConfig() {
     }
 
-    public static final String PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER = "R ";
+    public static final String PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS = "R ";
+    public static final String PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS = "R_";
     public static final int GAME_DROPPED_POINTS = -1;
     public static final String GAME_DROPPED_NAME = "GAME_DROPPED";
     // default time
@@ -35,6 +36,7 @@ public final class BaseConfig {
     public static final String DRAW = "";
     public static final float MATCH_DRAW = 1f;
     public static final int MATCH_WIN = 3;
+    public static final int GAME_WIN = 2;
     public static final int MATCH_DROPPED = 0;
     public static final int GAME_WIN_DEFAULT = 1;
 

@@ -8,6 +8,9 @@ import java.util.List;
 import unii.draft.mtg.parings.buisness.algorithm.base.PlayersComparator;
 import unii.draft.mtg.parings.logic.pojo.Player;
 
+/**
+ * TODO: create "ItalianComparator" for points
+ */
 public class PlayerNameWithPositionGenerator {
     private static Comparator<Player> sPlayerComparator = new PlayersComparator();
 
