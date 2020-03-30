@@ -21,6 +21,7 @@ import butterknife.Unbinder;
 import unii.draft.mtg.parings.R;
 import unii.draft.mtg.parings.buisness.algorithm.base.BaseAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.roundrobin.ItalianRoundRobinRounds;
+import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
 import unii.draft.mtg.parings.sharedprefrences.ISharedPreferences;
 import unii.draft.mtg.parings.util.AlgorithmChooser;
@@ -84,7 +85,19 @@ public class DropPlayerFragment extends BaseFragment {
             if (!player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)
                     && !player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS)) {
                 if (isRoundBeforeHalf(mAlgorithmChooser)) {
-                    player.setPlayerName(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + player.getPlayerName());
+                    String previousName = player.getPlayerName();
+                    String newName = PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + previousName;
+                    player.setPlayerName(newName);
+                    for (Player changeName : mNotDroppedPlayerList) {
+                        for (Game game :
+                                changeName.getPlayedGame()) {
+                            if (game.getPlayerNameA().equals(previousName)) {
+                                game.setPlayerNameA(newName);
+                            } else if (game.getPlayerNameB().equals(previousName)) {
+                                game.setPlayerNameB(newName);
+                            }
+                        }
+                    }
                 } else {
                     player.setPlayerName(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS + player.getPlayerName());
                 }
@@ -95,7 +108,7 @@ public class DropPlayerFragment extends BaseFragment {
                     mSharedPreferenceManager.getPointsForGameDraws(),
                     mSharedPreferenceManager.getPointsForMatchWinning(), mSharedPreferenceManager.getPointsForMatchDraws(),
                     mAlgorithmChooser.getCurrentAlgorithm() instanceof ItalianRoundRobinRounds);
-            paringDashboardLogic.updateAllPlayerList(mNotDroppedPlayerList);
+            paringDashboardLogic.updateAllPlayerList(mAlgorithmChooser.getCurrentAlgorithm() ,mNotDroppedPlayerList);
         }
     }
 

@@ -6,6 +6,7 @@
     <color name="black">#000000</color>
     <color name="grey_light">#847069</color>
     <color name="navy_blue_dark">#004F81</color>
+    <color name="blue_light">#1E88E5</color>
     <color name="red">#d74343</color>
 
     <!--Button colors -->

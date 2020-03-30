@@ -10,6 +10,7 @@ import unii.draft.mtg.parings.logic.pojo.Player;
 
 /**
  * TODO: create "ItalianComparator" for points
+ * TODO: add field in draft - what kind of game it was (what kind of algorithm it was used)
  */
 public class PlayerNameWithPositionGenerator {
     private static Comparator<Player> sPlayerComparator = new PlayersComparator();

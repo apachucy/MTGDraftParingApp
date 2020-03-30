@@ -86,6 +86,10 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
         } else {
             setViewAndChildrenEnabled(((ViewHolder) holder).itemView, true);
         }
+        if(lockView){
+            //disable draw in ItalianRoundRobin
+            setViewAndChildrenDisabledAtIndex(((ViewHolder) holder).itemView);
+        }
         // remove listeners
         ((ViewHolder) holder).playerLeftRadioGroup.setOnCheckedChangeListener(null);
         ((ViewHolder) holder).playerRightRadioGroup.setOnCheckedChangeListener(null);
@@ -119,6 +123,13 @@ public class PlayerMatchParingAdapter extends RecyclerView.Adapter<RecyclerView.
                 View child = viewGroup.getChildAt(i);
                 setViewAndChildrenEnabled(child, enabled);
             }
+        }
+    }
+
+    private static void setViewAndChildrenDisabledAtIndex(View view) {
+        if (view instanceof ViewGroup) {
+            View viewRadioGroup = view.findViewById(R.id.row_drawRadioGroup);
+            setViewAndChildrenEnabled(viewRadioGroup,false);
         }
     }
 

@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/row_drop_playerCheckBox"
-    style="@style/textView.item"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="New CheckBox" />
+    android:layout_margin="3dp"
+    android:orientation="vertical"
+    card_view:cardBackgroundColor="@color/accent"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardUseCompatPadding="true">
+
+    <CheckBox
+        android:id="@+id/row_drop_playerCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New CheckBox"
+        android:textColor="@drawable/my_compound_button_color_selector"
+        app:buttonTint="@drawable/my_compound_button_color_selector" />
+</androidx.cardview.widget.CardView>

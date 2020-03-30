@@ -1,146 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:orientation="vertical"
+    card_view:cardBackgroundColor="@color/accent"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/row_leftPlayerTextView"
-        style="@style/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/row_centerTextTextView"
-        android:ellipsize="end"
-        android:paddingLeft="@dimen/text_view_margin_normal"
-        android:paddingTop="@dimen/text_view_margin_normal" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/row_rightPlayerTextView"
-        style="@style/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:ellipsize="end"
-        android:paddingRight="@dimen/text_view_margin_normal"
-        android:paddingTop="@dimen/text_view_margin_normal" />
-
-    <TextView
-        android:id="@+id/row_centerTextTextView"
-        style="@style/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="@dimen/text_view_margin_normal"
-        android:text="@string/text_vs" />
-
-
-    <TextView
-        android:id="@+id/row_drawTextView"
-        style="@style/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/row_centerTextTextView"
-        android:layout_centerHorizontal="true"
-        android:text="@string/text_draw" />
-
-    <RadioGroup
-        android:id="@+id/row_rightPlayerRadioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/row_drawTextView"
-        android:layout_margin="@dimen/standard_margin"
-        android:paddingBottom="@dimen/text_view_margin_normal">
-
-        <RadioButton
-            android:id="@+id/row_rightPlayerRadio0"
+        <TextView
+            android:id="@+id/row_leftPlayerTextView"
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/text_0" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/row_centerTextTextView"
+            android:ellipsize="end"
+            android:paddingLeft="@dimen/text_view_margin_normal"
+            android:paddingTop="@dimen/text_view_margin_normal"
+            android:textColor="@color/white" />
 
-        <RadioButton
-            android:id="@+id/row_rightPlayerRadio1"
+        <TextView
+            android:id="@+id/row_rightPlayerTextView"
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_1" />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:ellipsize="end"
+            android:paddingTop="@dimen/text_view_margin_normal"
+            android:paddingRight="@dimen/text_view_margin_normal"
+            android:textColor="@color/white" />
 
-        <RadioButton
-            android:id="@+id/row_rightPlayerRadio2"
+        <TextView
+            android:id="@+id/row_centerTextTextView"
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_2" />
-    </RadioGroup>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="@dimen/text_view_margin_normal"
+            android:text="@string/text_vs"
+            android:textColor="@color/white" />
 
-    <RadioGroup
-        android:id="@+id/row_leftPlayerRadioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/row_drawTextView"
-        android:layout_margin="@dimen/standard_margin"
-        android:paddingBottom="@dimen/text_view_margin_normal">
 
-        <RadioButton
-            android:id="@+id/row_leftPlayerRadio0"
+        <TextView
+            android:id="@+id/row_drawTextView"
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/text_0" />
+            android:layout_below="@id/row_centerTextTextView"
+            android:layout_centerHorizontal="true"
+            android:text="@string/text_draw"
+            android:textColor="@color/white" />
 
-        <RadioButton
-            android:id="@+id/row_leftPlayerRadio1"
-            style="@style/textView"
+        <RadioGroup
+            android:id="@+id/row_rightPlayerRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_1" />
+            android:layout_below="@+id/row_drawTextView"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/standard_margin"
+            android:paddingBottom="@dimen/text_view_margin_normal"
+            android:textColor="@color/white">
 
-        <RadioButton
-            android:id="@+id/row_leftPlayerRadio2"
-            style="@style/textView"
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_rightPlayerRadio0"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/text_0"
+                android:textColor="@color/white"
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_rightPlayerRadio1"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_1"
+                android:textColor="@color/white"
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_rightPlayerRadio2"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_2"
+                android:textColor="@color/white"
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/row_leftPlayerRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_2" />
-    </RadioGroup>
+            android:layout_below="@+id/row_drawTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/standard_margin"
+            android:paddingBottom="@dimen/text_view_margin_normal"
+            android:textColor="@color/white">
 
-    <RadioGroup
-        android:id="@+id/row_drawRadioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/row_drawTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/standard_margin"
-        android:paddingBottom="@dimen/text_view_margin_normal">
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_leftPlayerRadio0"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/text_0"
+                android:textColor="@color/white"
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
 
-        <RadioButton
-            android:id="@+id/row_drawRadio0"
-            style="@style/textView"
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_leftPlayerRadio1"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_1"
+                android:textColor="@color/white"
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_leftPlayerRadio2"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_2"
+                android:textColor="@color/white"
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/row_drawRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/text_0" />
+            android:layout_below="@id/row_drawTextView"
+            android:layout_centerHorizontal="true"
 
-        <RadioButton
-            android:id="@+id/row_drawRadio1"
-            style="@style/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_1" />
+            android:layout_margin="@dimen/standard_margin"
+            android:paddingBottom="@dimen/text_view_margin_normal"
+            android:textColor="@color/white">
 
-        <RadioButton
-            android:id="@+id/row_drawRadio2"
-            style="@style/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_2" />
-    </RadioGroup>
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_drawRadio0"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/text_0"
+                android:textColor="@color/white"
+
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_drawRadio1"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_1"
+                android:textColor="@color/white"
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/row_drawRadio2"
+                style="@style/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_2"
+                android:textColor="@color/white"
+                app:buttonTint="@drawable/my_compound_button_color_selector" />
+        </RadioGroup>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

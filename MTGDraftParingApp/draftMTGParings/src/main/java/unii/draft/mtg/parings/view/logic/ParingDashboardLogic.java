@@ -3,10 +3,12 @@ package unii.draft.mtg.parings.view.logic;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import unii.draft.mtg.parings.R;
@@ -14,7 +16,9 @@ import unii.draft.mtg.parings.buisness.algorithm.base.IParingAlgorithm;
 import unii.draft.mtg.parings.buisness.algorithm.roundrobin.ItalianRoundRobinRounds;
 import unii.draft.mtg.parings.logic.pojo.Game;
 import unii.draft.mtg.parings.logic.pojo.Player;
+import unii.draft.mtg.parings.logic.pojo.Round;
 import unii.draft.mtg.parings.util.config.BaseConfig;
+import unii.draft.mtg.parings.util.converter.SparseArrayToArrayListConverter;
 
 import static unii.draft.mtg.parings.util.config.BaseConfig.GAME_DROPPED_NAME;
 import static unii.draft.mtg.parings.util.config.BaseConfig.MATCH_DROPPED;
@@ -133,7 +137,7 @@ public class ParingDashboardLogic {
             /* else if (isDroppedPlayer(g.getPlayerNameA()) || isDroppedPlayer(g.getPlayerNameB())) {
                 g.setWinner(GAME_DROPPED_NAME);
             }*/
-            else if (g.getWinner().equals(GAME_DROPPED_NAME)) {
+            else if (g.getWinner() != null && g.getWinner().equals(GAME_DROPPED_NAME)) {
                 //DO nothing
             } else {
                 // it was a draw
@@ -233,35 +237,15 @@ public class ParingDashboardLogic {
         }
     }
 
+    //@NonNull Game game,
+    private void resetPlayer(@NonNull Player resetPlayer) {
+        resetPlayer.setMatchPoints(0);
+        resetPlayer.setGamePoints(0);
+        resetPlayer.setPlayerGamesOverallWin(0);
+        resetPlayer.setPlayerMatchOverallWin(0);
+        resetPlayer.setOponentsGamesOverallWin(0);
+        resetPlayer.setOponentsMatchOveralWins(0);
 
-    private void resetPlayer(@NonNull Game game, @NonNull Player resetPlayer) {
-        //THIS MONOLIT OF CODE IS FOR TESTING PURPOSE
-        //TODO: clean this code after
-
-        if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + game.getPlayerNameA())
-                || resetPlayer.getPlayerName().equals(game.getPlayerNameA())) {
-            resetPlayer.setGamePoints(resetPlayer.getGamePoints() - game.getPlayerAPoints());
-
-            if (game.getWinner().equals(BaseConfig.DRAW)) {
-                resetPlayer.setMatchPoints(resetPlayer.getMatchPoints() - pointsForMatchDraw);
-            } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + game.getWinner())
-                    || resetPlayer.getPlayerName().equals(game.getWinner())) {
-                resetPlayer.setMatchPoints(resetPlayer.getMatchPoints() - pointsForMatchWinning);
-            }
-            game.setPlayerNameA(resetPlayer.getPlayerName());
-
-        } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + game.getPlayerNameB())
-                || resetPlayer.getPlayerName().equals(game.getPlayerNameB())) {
-            resetPlayer.setGamePoints(resetPlayer.getGamePoints() - game.getPlayerBPoints());
-            if (game.getWinner().equals(BaseConfig.DRAW)) {
-                resetPlayer.setMatchPoints(resetPlayer.getMatchPoints() - pointsForMatchDraw);
-            } else if (resetPlayer.getPlayerName().equals(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS + game.getWinner())
-                    || resetPlayer.getPlayerName().equals(game.getWinner())) {
-                resetPlayer.setMatchPoints(resetPlayer.getMatchPoints() - pointsForMatchWinning);
-            }
-            game.setPlayerNameB(resetPlayer.getPlayerName());
-
-        }
     }
 
     private void resetGame(@NonNull Game game) {
@@ -272,27 +256,66 @@ public class ParingDashboardLogic {
         game.setDraws(MATCH_DROPPED);
     }
 
-    public void updateAllPlayerList(@NonNull List<Player> playerList) {
+    //TODO: BUG - jeżeli zamkniesz turnije w trakcie (zapiszesz go) jego wyniki beda sie pozniej dublowały z nastepnym
+    //should not occure
+    public void updateAllPlayerList(@NonNull IParingAlgorithm paringAlgorithm, @NonNull List<Player> playerList) {
         for (Player player : playerList) {
-            for (Game game : player.getPlayedGame()) {
-                if (player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
-                    resetPlayer(game, player);
-                }
-            }
+            resetPlayer(player);
         }
 
         for (Player player : playerList) {
             for (Game game : player.getPlayedGame()) {
-                if (player.getPlayerName().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
+                if (game.getPlayerNameA().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS) ||
+                        game.getPlayerNameB().startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS)) {
                     resetGame(game);
                 }
             }
         }
+        List<Game> gameList = new ArrayList<>();
 
+        for (Player player : playerList) {
+            gameList.addAll(player.getPlayedGame());
+            player.setPlayedGame(new ArrayList<>());
+        }
+
+        List<Round> rounds = convertToRounds(gameList);
+        for (Round round : rounds) {
+            sortGameListAlphabeticallyByPlayerAName(round.getGameList());
+        }
+        for (Round round : rounds) {
+            updatePlayerPoints(paringAlgorithm, round.getGameList());
+        }
     }
 
     public boolean isDroppedPlayer(@NonNull String playerName) {
         return playerName.startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_AFTER_HALF_ROUNDS) ||
                 playerName.startsWith(PREFIX_ITALIAN_ROUND_ROBIN_DROPPED_PLAYER_BEFORE_HALF_ROUNDS);
+    }
+
+
+    private List<Round> convertToRounds(List<Game> playedGames) {
+        SparseArray<Round> roundList = new SparseArray<>();
+        for (Game game : playedGames) {
+            int currentRound = game.getRound();
+            if (roundList.get(currentRound) == null) {
+                List<Game> gameList = new ArrayList<>();
+                gameList.add(game);
+                Round round = new Round(currentRound, gameList);
+                roundList.put(currentRound, round);
+            } else {
+                Round savedRound = roundList.get(currentRound);
+                List<Game> savedGames = savedRound.getGameList();
+
+                if (!savedGames.contains(game)) {
+                    roundList.get(currentRound).getGameList().add(game);
+                }
+            }
+        }
+        return SparseArrayToArrayListConverter.asList(roundList);
+    }
+
+    private void sortGameListAlphabeticallyByPlayerAName(@NonNull List<Game> gameList) {
+
+        Collections.sort(gameList, (o1, o2) -> (o1.getPlayerNameA().compareTo(o2.getPlayerNameA())));
     }
 }

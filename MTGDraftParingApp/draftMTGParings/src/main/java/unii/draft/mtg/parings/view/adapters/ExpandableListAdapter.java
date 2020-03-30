@@ -118,7 +118,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         Game game = roundList.get(groupPosition).getGameList().get(childPosition);
         String winner = game.getWinner();
         String looser = null;
-        if (winner.equals(BaseConfig.DRAW)) {
+        if (winner.equals(BaseConfig.DRAW) || winner.equals(BaseConfig.GAME_DROPPED_NAME)) {
             winner = game.getPlayerNameA();
             looser = game.getPlayerNameB();
         } else {

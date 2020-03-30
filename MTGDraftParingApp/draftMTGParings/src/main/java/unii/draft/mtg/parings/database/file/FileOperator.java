@@ -4,9 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -23,6 +24,8 @@ import java.util.List;
 
 import unii.draft.mtg.parings.database.populate.DraftExporter;
 import unii.draft.mtg.parings.database.populate.Information;
+
+
 
 public class FileOperator {
     public static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
@@ -54,16 +57,17 @@ public class FileOperator {
     }
 
 
-    public Information checkPermission(@NonNull Activity context) {
+    public Information checkPermission(@NonNull Activity context, @NonNull Fragment fragment) {
 
 
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
             // Request for permission
-            ActivityCompat.requestPermissions(context,
+           fragment.requestPermissions(
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+            return Information.ERROR_NO_PERMISSION;
 
         }
         return Information.SUCCESS;

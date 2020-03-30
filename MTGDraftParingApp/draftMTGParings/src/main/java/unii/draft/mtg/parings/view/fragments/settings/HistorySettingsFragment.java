@@ -3,11 +3,12 @@ package unii.draft.mtg.parings.view.fragments.settings;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -100,11 +101,12 @@ public class HistorySettingsFragment extends BaseFragment {
 
     @OnClick(R.id.settings_saveScoreBoardsButton)
     void onSaveHistoryClicked() {
-        mFileOperator.checkPermission(getActivity());
-        saveFileAndShowDialog();
+        if (Information.SUCCESS == mFileOperator.checkPermission(getActivity(), this)) {
+            saveFileAndShowDialog();
+        }
     }
 
-    void saveFileAndShowDialog() {
+    private void saveFileAndShowDialog() {
         Information information = mFileOperator.saveToFile(mDatabaseHelper.get().exportDraftDatabase());
         String textBody = null;
         switch (information) {
@@ -176,8 +178,10 @@ public class HistorySettingsFragment extends BaseFragment {
                     showDialog(getContext(), getString(R.string.dialog_import_database), Information.ERROR_NO_PERMISSION.toString(), getString(R.string.dialog_positive));
                 }
                 return;
-            }
 
+            }
+            default:
+                break;
             // other 'case' lines to check for other
             // permissions this app might request.
         }

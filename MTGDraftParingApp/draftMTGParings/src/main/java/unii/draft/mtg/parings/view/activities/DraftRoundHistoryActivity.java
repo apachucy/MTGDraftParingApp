@@ -1,12 +1,15 @@
 package unii.draft.mtg.parings.view.activities;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.util.SparseArray;
 import android.widget.ExpandableListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -57,6 +60,9 @@ public class DraftRoundHistoryActivity extends BaseActivity {
         }
 
         List<Round> rounds = convertToRounds(gameList);
+        for (Round round : rounds) {
+            sortGameListAlfabeticallyByPlayerAName(round.getGameList());
+        }
         mExpandableRoundAdapter = new ExpandableListAdapter(rounds, this);
     }
 
@@ -100,4 +106,8 @@ public class DraftRoundHistoryActivity extends BaseActivity {
         return SparseArrayToArrayListConverter.asList(roundList);
     }
 
+    private void sortGameListAlfabeticallyByPlayerAName(@NonNull List<Game> gameList) {
+
+        Collections.sort(gameList, (o1, o2) -> (o1.getPlayerNameA().compareTo(o2.getPlayerNameA())));
+    }
 }

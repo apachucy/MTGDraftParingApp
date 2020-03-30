@@ -2,6 +2,7 @@ package unii.draft.mtg.parings.view.fragments.settings;
 
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,7 +163,9 @@ public class DraftSettingsFragment extends BaseFragment {
 
                     @Override
                     public void updateSharedPreferences(String newData) {
-
+                        if (TextUtils.isEmpty(newData)) {
+                            return;
+                        }
                         float newValue = convertSafety(newData);
                         if (newValue != mSharedPreferenceManager.getPointsForMatchDraws()) {
                             mSharedPreferenceManager.setPointsForMatchDraws(newValue);
@@ -214,6 +217,9 @@ public class DraftSettingsFragment extends BaseFragment {
                     @Override
                     public void updateSharedPreferences(String newData) {
 
+                        if (TextUtils.isEmpty(newData)) {
+                            return;
+                        }
                         float newValue = convertSafety(newData);
                         if (newValue != mSharedPreferenceManager.getPointsForGameDraws()) {
                             mSharedPreferenceManager.setPointsForGameDraws(newValue);
